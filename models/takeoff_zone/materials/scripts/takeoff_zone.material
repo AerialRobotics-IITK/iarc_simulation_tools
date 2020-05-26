@@ -1,0 +1,14 @@
+material takeoffZone/Circle
+{
+    recieve_shadows on
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture circle.png
+            }
+        }
+    }
+}
