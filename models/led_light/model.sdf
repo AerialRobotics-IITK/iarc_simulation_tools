@@ -6,7 +6,7 @@
        <collision name="collision">
         <geometry>
             <mesh>
-              <uri>model://led_light/meshes/led_top.dae</uri>
+              <uri>model://led_light/meshes/led_light.dae</uri>
               <scale>0.1 0.1 0.1</scale>
             </mesh>
         </geometry>
@@ -25,7 +25,7 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>model://led_light/meshes/led_top.dae</uri>
+              <uri>model://led_light/meshes/led_light.dae</uri>
               <scale>0.1 0.1 0.1</scale>
             </mesh>
           </geometry>

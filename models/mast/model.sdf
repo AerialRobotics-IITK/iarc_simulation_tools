@@ -6,7 +6,7 @@
        <collision name="collision">
         <geometry>
             <mesh>
-              <uri>model://mast/meshes/mast_no_led_new.dae</uri>
+              <uri>model://mast/meshes/mast.dae</uri>
               <scale>1 1 1</scale>
             </mesh>
         </geometry>
@@ -25,37 +25,8 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>model://mast/meshes/mast_no_led_new.dae</uri>
+              <uri>model://mast/meshes/mast.dae</uri>
               <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-        </visual>
-      </link>
-      <link name='link'>
-       <collision name="collision">
-        <geometry>
-            <mesh>
-              <uri>model://led_light/meshes/led_top.dae</uri>
-              <scale>0.1 0.1 0.1</scale>
-            </mesh>
-        </geometry>
-        <surface>
-          <contact>
-             <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://led_light/meshes/led_top.dae</uri>
-              <scale>0.1 0.1 0.1</scale>
             </mesh>
           </geometry>
         </visual>

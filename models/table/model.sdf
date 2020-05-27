@@ -207,7 +207,7 @@
         <pose relative_to='mast' />
         <geometry>
             <mesh>
-              <uri>model://mast/meshes/mast_no_led_new.dae</uri>
+              <uri>model://mast/meshes/mast.dae</uri>
               <scale>1 1 1</scale>
             </mesh>
         </geometry>
@@ -226,7 +226,7 @@
       <visual name='visual'>
         <geometry>
           <mesh>
-            <uri>model://mast/meshes/mast_no_led_new.dae</uri>
+            <uri>model://mast/meshes/mast.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -238,7 +238,7 @@
       <collision name="collision">
         <geometry>
           <mesh>
-            <uri>model://led_light/meshes/led_top.dae</uri>
+            <uri>model://led_light/meshes/led_light.dae</uri>
             <scale>0.1 0.1 0.1</scale>
           </mesh>
         </geometry>
@@ -257,7 +257,7 @@
       <visual name='visual'>
         <geometry>
           <mesh>
-            <uri>model://led_light/meshes/led_top.dae</uri>
+            <uri>model://led_light/meshes/led_light.dae</uri>
             <scale>0.1 0.1 0.1</scale>
           </mesh>
         </geometry>
@@ -269,7 +269,7 @@
       <collision name="collision">
         <geometry>
           <mesh>
-            <uri>model://led_light/meshes/led_top.dae</uri>
+            <uri>model://led_light/meshes/led_light.dae</uri>
             <scale>0.1 0.1 0.1</scale>
           </mesh>
         </geometry>
@@ -288,7 +288,7 @@
       <visual name='visual'>
         <geometry>
           <mesh>
-            <uri>model://led_light/meshes/led_top.dae</uri>
+            <uri>model://led_light/meshes/led_light.dae</uri>
             <scale>0.1 0.1 0.1</scale>
           </mesh>
         </geometry>
