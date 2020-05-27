@@ -5,4 +5,4 @@ find_package(catkin_simple REQUIRED)
 catkin_simple(ALL_DEPS_REQUIRED)
 
 cs_install()
-cs_export(0)
+cs_export()
