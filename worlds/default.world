@@ -89,7 +89,7 @@
     <state world_name='default'>
       <sim_time>12066 281000000</sim_time>
       <real_time>0 0</real_time>
-      <wall_time>1590636773 277218663</wall_time>
+      <wall_time>1590736463 164167354</wall_time>
       <iterations>0</iterations>
       <model name='dish'>
         <pose>-5 0 0 0 -0 0</pose>
@@ -213,7 +213,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>-12.053 -14.4148 11.531 0 0.437798 1.20588</pose>
+        <pose>3.29312 5.35727 4.0496 0 0.621532 -1.63395</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
@@ -413,6 +413,48 @@
       <static>0</static>
       <allow_auto_disable>1</allow_auto_disable>
       <pose>0.006448 6.32948 0 0 -0 0</pose>
+    </model>
+    <model name='dish'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://takeoff_zone/meshes/takeoff_zone.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://takeoff_zone/meshes/takeoff_zone.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-5.54188 -0.280313 0 0 -0 0</pose>
     </model>
     <model name='table'>
       <static>1</static>
@@ -621,7 +663,7 @@
           <pose>-0 -0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://mast/meshes/mast.dae</uri>
+              <uri>model://mast/meshes/mast_with_comm_block.dae</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -658,7 +700,7 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>model://mast/meshes/mast.dae</uri>
+              <uri>model://mast/meshes/mast_with_comm_block.dae</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -979,49 +1021,7 @@
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>
       </link>
-      <pose>4.28791 0.065415 0 0 -0 0</pose>
-    </model>
-    <model name='dish'>
-      <static>1</static>
-      <link name='link'>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>model://takeoff_zone/meshes/takeoff_zone.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <collide_bitmask>65535</collide_bitmask>
-              <ode/>
-            </contact>
-            <friction>
-              <ode>
-                <mu>100</mu>
-                <mu2>50</mu2>
-              </ode>
-              <torsional>
-                <ode/>
-              </torsional>
-            </friction>
-            <bounce/>
-          </surface>
-          <max_contacts>10</max_contacts>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://takeoff_zone/meshes/takeoff_zone.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-      <pose>-5.54188 -0.280313 0 0 -0 0</pose>
+      <pose>4.81188 -0.174841 0 0 -0 0</pose>
     </model>
   </world>
 </sdf>

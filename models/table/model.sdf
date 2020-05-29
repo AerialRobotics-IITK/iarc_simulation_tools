@@ -207,7 +207,7 @@
         <pose relative_to='mast' />
         <geometry>
             <mesh>
-              <uri>model://mast/meshes/mast.dae</uri>
+              <uri>model://mast/meshes/mast_with_comm_block.dae</uri>
               <scale>1 1 1</scale>
             </mesh>
         </geometry>
@@ -226,7 +226,7 @@
       <visual name='visual'>
         <geometry>
           <mesh>
-            <uri>model://mast/meshes/mast.dae</uri>
+            <uri>model://mast/meshes/mast_with_comm_block.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
