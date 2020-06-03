@@ -3,7 +3,7 @@
 #include "gazebo/common/Events.hh"
 #include "gazebo/sensors/Noise.hh"
 #include <functional>
-#include "plugins/wind_plugin.hh"
+#include "iarc_simulation_tools/wind_plugin.hh"
 
 class gazebo::WindPluginPrivate
 {
