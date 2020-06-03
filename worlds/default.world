@@ -1,27 +1,5 @@
-<sdf version='1.6'>
+<sdf version='1.7'>
   <world name='default'>
-    <!-- Only one ROS interface plugin is required per world, as any other plugin can connect a Gazebo
-         topic to a ROS topic (or vise versa). -->
-    <plugin name="ros_interface_plugin" filename="librotors_gazebo_ros_interface_plugin.so"/>
-
-    <light name='sun' type='directional'>
-      <cast_shadows>1</cast_shadows>
-      <pose>0 0 10 0 -0 0</pose>
-      <diffuse>0.8 0.8 0.8 1</diffuse>
-      <specular>0.2 0.2 0.2 1</specular>
-      <attenuation>
-        <range>1000</range>
-        <constant>0.9</constant>
-        <linear>0.01</linear>
-        <quadratic>0.001</quadratic>
-      </attenuation>
-      <direction>-0.5 0.1 -0.9</direction>
-      <spot>
-        <inner_angle>0</inner_angle>
-        <outer_angle>0</outer_angle>
-        <falloff>0</falloff>
-      </spot>
-    </light>
     <model name='ground_plane'>
       <static>1</static>
       <link name='link'>
@@ -91,10 +69,20 @@
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
     <state world_name='default'>
-      <sim_time>12066 281000000</sim_time>
+      <sim_time>12109 150000000</sim_time>
       <real_time>0 0</real_time>
-      <wall_time>1590736463 164167354</wall_time>
+      <wall_time>1591166560 422855226</wall_time>
       <iterations>0</iterations>
+      <model name='communications_module'>
+        <pose>4.28044 0.239674 1.78249 0.00305 -0.002061 1.58435</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>4.28044 0.239674 1.78249 0.00305 -0.002061 1.58435</pose>
+          <velocity>-7.3e-05 0.000899 0.003 -0.106269 -0.001985 0.014544</velocity>
+          <acceleration>0 0 0 2.3e-05 -0.001483 -5.6e-05</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
       <model name='dish'>
         <pose>-5 0 0 0 -0 0</pose>
         <scale>1 1 1</scale>
@@ -136,76 +124,76 @@
         </link>
       </model>
       <model name='table'>
-        <pose>5 0 0.375 0 -0 3.14</pose>
+        <pose>4.2756 0.063046 0.375 0 -0 3.14</pose>
         <scale>1 1 1</scale>
         <link name='dish_left'>
-          <pose>3 0.003185 0.75 0 -0 -1.57319</pose>
+          <pose>2.2756 0.066231 0.75 0 0 -1.57319</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='dish_right'>
-          <pose>7 -0.003185 0.75 0 -0 1.57</pose>
+          <pose>6.2756 0.059861 0.75 0 -0 1.57</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='flag'>
-          <pose>4.25 0.001194 0.75 0 -0 3.14</pose>
+          <pose>3.5256 0.06424 0.75 0 -0 3.14</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='gun_back_left'>
-          <pose>3.99881 -0.748406 0.75 0 -0 -2.35778</pose>
+          <pose>3.27441 -0.68536 0.75 0 0 -2.35778</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='gun_back_right'>
-          <pose>5.9988 -0.751592 0.75 0 -0 -0.786985</pose>
+          <pose>5.2744 -0.688546 0.75 0 0 -0.786985</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='gun_front_left'>
-          <pose>4.0012 0.751592 0.75 0 -0 2.3546</pose>
+          <pose>3.2768 0.814638 0.75 0 -0 2.3546</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='gun_front_right'>
-          <pose>6.00119 0.748406 0.75 0 -0 0.78382</pose>
+          <pose>5.27679 0.811452 0.75 0 -0 0.78382</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='led_light_green'>
-          <pose>5.49023 0.044438 2.0125 0 -0 1.57</pose>
+          <pose>4.76583 0.107484 2.0125 0 -0 1.57</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='led_light_red'>
-          <pose>4.56023 0.045178 2.0125 0 -0 1.57</pose>
+          <pose>3.83583 0.108224 2.0125 0 -0 1.57</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='mast'>
-          <pose>5.21539 0.244657 0.75 0 -0 1.57</pose>
+          <pose>4.49099 0.307703 0.75 0 -0 1.57</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='radar'>
-          <pose>5.0067 -0.505011 2.3 0 -0 3.14</pose>
+          <pose>4.2823 -0.441965 2.3 0 -0 3.14</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='table'>
-          <pose>5 0 0.375 0 -0 3.14</pose>
+          <pose>4.2756 0.063046 0.375 0 -0 3.14</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -217,7 +205,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>3.29312 5.35727 4.0496 0 0.621532 -1.63395</pose>
+        <pose>-16.4541 -3.50272 16.9641 0 0.564189 0.224202</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
@@ -667,7 +655,7 @@
           <pose>-0 -0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://mast/meshes/mast_with_comm_block.dae</uri>
+              <uri>model://mast/meshes/mast.dae</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -704,7 +692,7 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>model://mast/meshes/mast_with_comm_block.dae</uri>
+              <uri>model://mast/meshes/mast.dae</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -741,6 +729,9 @@
           <max_contacts>10</max_contacts>
         </collision>
         <visual name='visual'>
+          <plugin name='lights' filename='libiarc_simulation_tools_light_plugin.so'>
+            <led_color>0 1 0 0</led_color>
+          </plugin>
           <geometry>
             <mesh>
               <uri>model://led_light/meshes/led_light.dae</uri>
@@ -780,6 +771,9 @@
           <max_contacts>10</max_contacts>
         </collision>
         <visual name='visual'>
+          <plugin name='lights' filename='libiarc_simulation_tools_light_plugin.so'>
+            <led_color>1 0 0 0</led_color>
+          </plugin>
           <geometry>
             <mesh>
               <uri>model://led_light/meshes/led_light.dae</uri>
@@ -1025,7 +1019,79 @@
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>
       </link>
-      <pose>4.81188 -0.174841 0 0 -0 0</pose>
+      <pose>5.07637 0.334534 0 0 -0 0</pose>
     </model>
+    <model name='communications_module'>
+      <static>0</static>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0728462</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.002197</iyy>
+            <iyz>0</iyz>
+            <izz>0.0736416</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://communications_module/meshes/communications_module.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://communications_module/meshes/communications_module.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>7.12136 2.78494 0 0 -0 0</pose>
+    </model>
+    <light name='sun' type='directional'>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>0.4864 0.3039 -0.819</direction>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>1</cast_shadows>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
   </world>
 </sdf>
