@@ -234,7 +234,7 @@
     </link>
 
     <link name='led_light_green'>
-    <pose relative_to='mast'>-0.2 -0.275 1.2625 0 0 0</pose>
+      <pose relative_to='mast'>-0.2 -0.275 1.2625 0 0 0</pose>
       <collision name="collision">
         <geometry>
           <mesh>
@@ -255,6 +255,9 @@
         </surface>
       </collision>
       <visual name='visual'>
+      <plugin name='lights' filename='libiarc_simulation_tools_light_plugin.so'>
+        <led_color>0 1 0 0</led_color>
+      </plugin>
         <geometry>
           <mesh>
             <uri>model://led_light/meshes/led_light.dae</uri>
@@ -286,6 +289,9 @@
         </surface>
       </collision>
       <visual name='visual'>
+        <plugin name='lights' filename='libiarc_simulation_tools_light_plugin.so'>
+          <led_color>1 0 0 0</led_color>
+        </plugin>
         <geometry>
           <mesh>
             <uri>model://led_light/meshes/led_light.dae</uri>
