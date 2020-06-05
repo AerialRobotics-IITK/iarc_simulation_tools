@@ -623,6 +623,17 @@
               <collide_bitmask>65535</collide_bitmask>
               <ode/>
             </contact>
+    private: double characteristicTimeForWindRise = 1;
+    
+    private: double magnitudeSinAmplitudePercent = 0;
+    
+    private: double magnitudeSinPeriod = 1;
+    
+    private: double characteristicTimeForWindOrientationChange = 1;
+    
+    private: double orientationSinAmplitude = 0;
+    
+    private: double or
             <friction>
               <ode>
                 <mu>100</mu>
