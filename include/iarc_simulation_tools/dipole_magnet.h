@@ -18,9 +18,6 @@
 
 
 #pragma once
-// #ifndef INCLUDE_MAC_GAZEBO_DIPOLE_MAGNET_DIPOLE_MAGNET_H_
-// #define INCLUDE_MAC_GAZEBO_DIPOLE_MAGNET_DIPOLE_MAGNET_H_
-
 
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
@@ -124,4 +121,3 @@ class DipoleMagnet : public ModelPlugin {
 };
 
 }
-// #endif  // INCLUDE_MAC_GAZEBO_DIPOLE_MAGNET_DIPOLE_MAGNET_H_

@@ -17,8 +17,6 @@
 //  */
 
 #pragma once 
-// #ifndef INCLUDE_MAC_GAZEBO_DIPOLE_MAGNET_DIPOLE_MAGNET_CONTAINER_H_
-// #define INCLUDE_MAC_GAZEBO_DIPOLE_MAGNET_DIPOLE_MAGNET_CONTAINER_H_
 
 #include <iostream>
 #include <vector>
@@ -65,4 +63,3 @@ class DipoleMagnetContainer {
 };
 }  // namespace gazebo
 
-// #endif  // INCLUDE_MAC_GAZEBO_DIPOLE_MAGNET_DIPOLE_MAGNET_CONTAINER_H_

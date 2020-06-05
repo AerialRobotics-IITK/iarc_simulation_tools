@@ -122,8 +122,7 @@ void DipoleMagnet::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf) {
     if (!ros::isInitialized())
     {
       gzerr << "A ROS node for Gazebo has not been initialized, unable to load "
-        "plugin. Load the Gazebo system plugin 'libgazebo_ros_api_plugin.so' in "
-        "the gazebo_ros package. If you want to use this plugin without ROS, "
+        "plugin. If you want to use this plugin without ROS, "
         "set <shouldPublish> to false" << std::endl;
       return;
     }
