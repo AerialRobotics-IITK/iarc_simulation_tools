@@ -70,28 +70,18 @@
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
     <state world_name='default'>
-      <sim_time>12109 150000000</sim_time>
-      <real_time>0 0</real_time>
-      <wall_time>1591166560 422855226</wall_time>
-      <iterations>0</iterations>
+      <sim_time>12189 13000000</sim_time>
+      <real_time>160 143553424</real_time>
+      <wall_time>1591367900 160752193</wall_time>
+      <iterations>79863</iterations>
       <model name='communications_module'>
-        <pose>4.28044 0.239674 1.78249 0.00305 -0.002061 1.58435</pose>
+        <pose>4.28046 0.238514 1.78248 0.003031 -0.002054 1.58457</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>4.28044 0.239674 1.78249 0.00305 -0.002061 1.58435</pose>
-          <velocity>-7.3e-05 0.000899 0.003 -0.106269 -0.001985 0.014544</velocity>
-          <acceleration>0 0 0 2.3e-05 -0.001483 -5.6e-05</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='dish'>
-        <pose>-5 0 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose>-5 0 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
+          <pose>4.28046 0.238514 1.78248 0.003031 -0.002054 1.58457</pose>
+          <velocity>8e-06 0.000103 -0.009782 -0.012372 0.000617 0.002968</velocity>
+          <acceleration>0 0 -9.8 -1e-06 -7.1e-05 1.9e-05</acceleration>
+          <wrench>0 0 -19.6 0 -0 0</wrench>
         </link>
       </model>
       <model name='ground_plane'>
@@ -200,13 +190,23 @@
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
+      <model name='takeoff_zone'>
+        <pose>-5 0 -1e-06 1e-06 4e-06 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-5 0 -1e-06 1e-06 4e-06 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>8.9e-05 -2e-06 9.5774 1.325 -1.53721 4.3e-05</acceleration>
+          <wrench>0.000178 -5e-06 19.1548 0 -0 0</wrench>
+        </link>
+      </model>
       <light name='sun'>
         <pose>0 0 10 0 -0 0</pose>
       </light>
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>-16.4541 -3.50272 16.9641 0 0.564189 0.224202</pose>
+        <pose>3.96763 0.162096 2.03427 0 0.5378 -0.082796</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
@@ -407,9 +407,21 @@
       <allow_auto_disable>1</allow_auto_disable>
       <pose>0.006448 6.32948 0 0 -0 0</pose>
     </model>
-    <model name='dish'>
-      <static>1</static>
+    <model name='takeoff_zone'>
+      <static>0</static>
       <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0728462</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.002197</iyy>
+            <iyz>0</iyz>
+            <izz>0.0736416</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
         <collision name='collision'>
           <geometry>
             <mesh>
