@@ -462,6 +462,9 @@
       <pose>-5.54188 -0.280313 0 0 -0 0</pose>
     </model>
     <model name='table'>
+      <plugin name="link_states" filename="libiarc_simulation_tools_link_plugin.so">
+        <link_name>mast</link_name>
+      </plugin>
       <static>1</static>
       <link name='table'>
         <inertial>
@@ -1035,6 +1038,9 @@
       <pose>5.07637 0.334534 0 0 -0 0</pose>
     </model>
     <model name='communications_module'>
+      <plugin name="link_states" filename="libiarc_simulation_tools_link_plugin.so">
+        <link_name>link</link_name>
+      </plugin>
       <static>0</static>
       <link name='link'>
         <inertial>

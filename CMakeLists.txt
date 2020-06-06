@@ -12,5 +12,8 @@ list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
 add_library(${PROJECT_NAME}_light_plugin SHARED src/light_plugin.cpp)
 target_link_libraries(${PROJECT_NAME}_light_plugin ${GAZEBO_LIBRARIES})
 
+add_library(${PROJECT_NAME}_link_plugin SHARED src/link_state_publisher.cpp)
+target_link_libraries(${PROJECT_NAME}_link_plugin ${GAZEBO_LIBRARIES})
+
 cs_install()
 cs_export()
