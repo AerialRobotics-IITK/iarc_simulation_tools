@@ -256,7 +256,7 @@
       </collision>
       <visual name='visual'>
       <plugin name='lights' filename='libiarc_simulation_tools_light_plugin.so'>
-        <led_color>0 1 0 0</led_color>
+        <led_color>Red</led_color>
       </plugin>
         <geometry>
           <mesh>
@@ -290,7 +290,7 @@
       </collision>
       <visual name='visual'>
         <plugin name='lights' filename='libiarc_simulation_tools_light_plugin.so'>
-          <led_color>1 0 0 0</led_color>
+          <led_color>Green</led_color>
         </plugin>
         <geometry>
           <mesh>

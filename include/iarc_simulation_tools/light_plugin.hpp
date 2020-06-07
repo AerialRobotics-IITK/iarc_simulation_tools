@@ -25,7 +25,8 @@ class GZ_PLUGIN_VISIBLE ModelLight : public VisualPlugin{
         event::ConnectionPtr updateConnection;
         int size_;
         std::string *pose_names_ = NULL;
-        ignition::math::Color led_color_;
+        std::string led_color_;
+        // ignition::math::Color led_color_;
         Eigen::Vector3d mast_position_;
         Eigen::Vector3d comm_block_position_;
         Eigen::Vector3d comm_wrt_mast_position_; // in mast frame

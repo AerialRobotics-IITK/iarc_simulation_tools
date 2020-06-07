@@ -2,10 +2,14 @@
 
 namespace gazebo {
 
-void ModelLight::Load(rendering::VisualPtr visual_, sdf::ElementPtr sdf_) {
-    if (sdf_->HasElement("led_color")) led_color_ = sdf_->Get<ignition::math::Color>("led_color");
-    else led_color_ = ignition::math::Color(1,0,0,0);
-    model_visual_ = visual_;
+void ModelLight::Load(rendering::VisualPtr visual, sdf::ElementPtr sdf) {
+    if (sdf->HasElement("led_color")) {
+        led_color_ = sdf->GetElement("led_color")->Get<std::string>();
+    } else {
+        gzerr << "<led_color> tag missing. Aborting.";
+        return;
+    }
+    model_visual_ = visual;
     std::cout << "Plugin Loaded" << std::endl;
     node_ = transport::NodePtr(new transport::Node);
     node_->Init();
