@@ -75,10 +75,10 @@
       <wall_time>1591367900 160752193</wall_time>
       <iterations>79863</iterations>
       <model name='communications_module'>
-        <pose>4.28046 0.238514 1.78248 0.003031 -0.002054 1.58457</pose>
+        <pose>4.280454 0.239433 1.782488 -0.003418 0.002042 -1.556979</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>4.28046 0.238514 1.78248 0.003031 -0.002054 1.58457</pose>
+          <pose>4.280454 0.239433 1.782488 -0.003418 0.002042 -1.556979</pose>
           <velocity>8e-06 0.000103 -0.009782 -0.012372 0.000617 0.002968</velocity>
           <acceleration>0 0 -9.8 -1e-06 -7.1e-05 1.9e-05</acceleration>
           <wrench>0 0 -19.6 0 -0 0</wrench>
@@ -159,13 +159,13 @@
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
-        <link name='led_light_green'>
+        <link name='led_light_red'>
           <pose>4.76583 0.107484 2.0125 0 -0 1.57</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
-        <link name='led_light_red'>
+        <link name='led_light_green'>
           <pose>3.83583 0.108224 2.0125 0 -0 1.57</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
@@ -717,7 +717,7 @@
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>
       </link>
-      <link name='led_light_green'>
+      <link name='led_light_red'>
         <pose>-0.490159 -0.045219 1.6375 0 0 -1.57</pose>
         <collision name='collision'>
           <geometry>
@@ -759,7 +759,7 @@
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>
       </link>
-      <link name='led_light_red'>
+      <link name='led_light_green'>
         <pose>0.439841 -0.044478 1.6375 0 0 -1.57</pose>
         <collision name='collision'>
           <geometry>

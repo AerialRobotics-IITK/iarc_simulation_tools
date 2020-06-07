@@ -233,7 +233,7 @@
       </visual>
     </link>
 
-    <link name='led_light_green'>
+    <link name='led_light_red'>
       <pose relative_to='mast'>-0.2 -0.275 1.2625 0 0 0</pose>
       <collision name="collision">
         <geometry>
@@ -267,7 +267,7 @@
       </visual>
     </link>
 
-    <link name='led_light_red'>
+    <link name='led_light_green'>
       <pose relative_to='mast'>-0.2 0.655 1.2625 0 0 0</pose>
       <collision name="collision">
         <geometry>
