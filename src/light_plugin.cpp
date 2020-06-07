@@ -20,7 +20,26 @@ void ModelLight::Load(rendering::VisualPtr visual, sdf::ElementPtr sdf) {
 }
 
 void ModelLight::OnUpdate() {
-    model_visual_->SetEmissive(led_color_);
+    comm_wrt_mast_position_ = mast_orientation_.inverse().toRotationMatrix() * (comm_block_position_  - mast_position_);
+
+    comm_wrt_mast_orientation_ = mast_orientation_.inverse() * comm_block_orientation_;
+
+    // std::cout << "x:" << comm_wrt_mast_position_[0] << " y:" << comm_wrt_mast_position_[1] << " z:" << comm_wrt_mast_position_[2] << std::endl;
+    // std::cout << "x:" << comm_wrt_mast_orientation_.x() << " y:" << comm_wrt_mast_orientation_.y() << " z:" << comm_wrt_mast_orientation_.z() << " w:" << comm_wrt_mast_orientation_.w() << std::endl << std::endl;
+
+    // bool position_match = fabs(comm_wrt_mast_position_[0] - (-0.069)) < 0.001 && fabs(comm_wrt_mast_position_[1] - (0.21)) < 0.001 && fabs(comm_wrt_mast_position_[2] - (1.032)) < 0.001;
+    // bool orientation_match = fabs(comm_wrt_mast_orientation_.x() - (0.001)) < 0.001 && fabs(comm_wrt_mast_orientation_.y() - (0.001)) < 0.001 && fabs(comm_wrt_mast_orientation_.z() - (0.007)) < 0.001 && fabs(comm_wrt_mast_orientation_.z() - (0.999)) < 0.001;
+    bool orientation_match = fabs(comm_wrt_mast_orientation_.angularDistance(Eigen::Quaterniond(0,0,0,1))) < 0.02;
+    bool position_match = (comm_wrt_mast_position_ - Eigen::Vector3d(-0.069, 0.21, 1.032)).norm() < 0.001;
+
+    std::cout << "correct_position: " << position_match << " Distance: " << (comm_wrt_mast_position_ - Eigen::Vector3d(-0.069, 0.21, 1.032)).norm() <<  std::endl;
+    std::cout << "correct_orientation: " << orientation_match << " Angular Distance:" << comm_wrt_mast_orientation_.angularDistance(Eigen::Quaterniond(0,0,0,1)) <<std::endl;
+
+    // comm_wrt_mast_orientatio
+    // std::cout << comm_wrt_mast_position_[0] << " " << comm_wrt_mast_position_[1] << " " << comm_wrt_mast_position_[2] << std::endl;
+
+    if (orientation_match && position_match) model_visual_->SetMaterial("Gazebo/" + led_color_ + "Glow");
+    else model_visual_->SetMaterial("Gazebo/" + led_color_ + "Transparent");
 }
 
 void ModelLight::commPoseCallback(ConstPoseStampedPtr &msg) {
