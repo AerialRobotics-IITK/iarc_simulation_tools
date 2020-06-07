@@ -2,19 +2,6 @@
 
 namespace gazebo {
 
-// LinkStatePublisher::LinkStatePublisher() {
-//     link_states_sub_ = nh_.subscribe("gazebo/link_states", 1, &LinkStatePublisher::linkStatesCallback, this);
-
-// }
-
-// void LinkStatePublisher::run() {
-//     if (link_states_.name.size() != 0) std::cout << link_states_.name[0] << std::endl;
-// }
-
-// void LinkStatePublisher::linkStatesCallback(const gazebo_msgs::LinkStates &link_states) {
-//     link_states_ = link_states;
-// }
-
 void LinkStatePublisher::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
     model_ = parent;
     sdf_ = sdf;
@@ -26,7 +13,7 @@ void LinkStatePublisher::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
         return;
     }
 
-    std::cout << "Link plugin loaded for " << model_->GetName() << std::endl << std::endl;
+    std::cout << "Link plugin loaded for " << model_->GetName() << std::endl;
 
     node_ = transport::NodePtr(new transport::Node);
     node_->Init();
@@ -38,23 +25,27 @@ void LinkStatePublisher::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
 
 void LinkStatePublisher::onUpdate() {
     link_ = model_->GetLink(model_->GetName() + "::" + link_name_);
+
     ignition::math::v6::Pose3d link_pose;
     link_pose = link_->WorldPose();
-    // model_->DirtyPose
+
     gazebo::common::Time current_time = common::Time::GetWallTime();
     gazebo::msgs::PoseStamped link_pose_msg;
+
     link_pose_msg.mutable_pose()->mutable_position()->set_x(link_pose.Pos()[0]);
     link_pose_msg.mutable_pose()->mutable_position()->set_y(link_pose.Pos()[1]);
     link_pose_msg.mutable_pose()->mutable_position()->set_z(link_pose.Pos()[2]);
+
     link_pose_msg.mutable_pose()->mutable_orientation()->set_x(link_pose.Rot().X());
-    link_pose_msg.mutable_pose()->mutable_orientation()->set_y(link_pose.Rot().Y());;
+    link_pose_msg.mutable_pose()->mutable_orientation()->set_y(link_pose.Rot().Y());
+    ;
     link_pose_msg.mutable_pose()->mutable_orientation()->set_z(link_pose.Rot().Z());
     link_pose_msg.mutable_pose()->mutable_orientation()->set_w(link_pose.Rot().W());
+
     link_pose_msg.mutable_time()->set_sec(current_time.sec);
     link_pose_msg.mutable_time()->set_nsec(current_time.nsec);
+
     pose_pub_->Publish(link_pose_msg);
-
-    // std::cout << link_pose.Pos() << std::endl;
-
 }
-}
+
+} // namespace gazebo
