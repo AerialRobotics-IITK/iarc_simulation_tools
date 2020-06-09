@@ -38,7 +38,6 @@ void LinkStatePublisher::onUpdate() {
 
     link_pose_msg.mutable_pose()->mutable_orientation()->set_x(link_pose.Rot().X());
     link_pose_msg.mutable_pose()->mutable_orientation()->set_y(link_pose.Rot().Y());
-    ;
     link_pose_msg.mutable_pose()->mutable_orientation()->set_z(link_pose.Rot().Z());
     link_pose_msg.mutable_pose()->mutable_orientation()->set_w(link_pose.Rot().W());
 
