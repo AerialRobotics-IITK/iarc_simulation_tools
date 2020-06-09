@@ -12,9 +12,6 @@ class GZ_PLUGIN_VISIBLE ModelLight : public VisualPlugin {
     public:
         void Load(rendering::VisualPtr parent, sdf::ElementPtr sdf) override;
         void OnUpdate();
-        transport::NodePtr node_;
-        transport::SubscriberPtr mast_pose_sub_;
-        transport::SubscriberPtr comm_pose_sub_;
 
     private:
         void commPoseCallback(ConstPoseStampedPtr& msg);
@@ -22,6 +19,10 @@ class GZ_PLUGIN_VISIBLE ModelLight : public VisualPlugin {
 
         rendering::VisualPtr model_visual_;
         event::ConnectionPtr updateConnection;
+
+        transport::NodePtr node_;
+        transport::SubscriberPtr mast_pose_sub_;
+        transport::SubscriberPtr comm_pose_sub_;
 
         std::string led_color_;
 
