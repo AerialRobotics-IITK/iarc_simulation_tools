@@ -84,7 +84,7 @@
     <model name='Big box'>
       <pose frame=''>0.67016 -2.3261 0.75 0 -0 0</pose>
        <plugin name="Magnetic_force_plugin" filename="libiarc_simulation_tools_dipole_moment.so">
-        <bodyName>magnet</bodyName>
+        <bodyName>link</bodyName>
         <dipole_moment>200 0 0</dipole_moment>
         <shouldPublish>false</shouldPublish>
         <topicNs>communications_module/magnetic_force_0</topicNs>
@@ -141,6 +141,13 @@
     </model>
     <model name='Big box_0'>
       <pose frame=''>1.06609 -0.683219 0.75 0 -0 0</pose>
+       <plugin name="Magnetic_force_plugin" filename="libiarc_simulation_tools_dipole_moment.so">
+        <bodyName>link</bodyName>
+        <dipole_moment>5000000000 10000 2000000</dipole_moment>
+        <shouldPublish>false</shouldPublish>
+        <topicNs>communications_module/magnetic_force</topicNs>
+        <updateRate>100</updateRate>
+      </plugin>
       <static>0</static>
       <link name='link'>
         <inertial>
@@ -183,13 +190,6 @@
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>
       </link>
-       <plugin name="Magnetic_force_plugin" filename="libiarc_simulation_tools_dipole_moment.so">
-        <bodyName>magnet</bodyName>
-        <dipole_moment>500 0 0</dipole_moment>
-        <shouldPublish>false</shouldPublish>
-        <topicNs>communications_module/magnetic_force</topicNs>
-        <updateRate>100</updateRate>
-      </plugin>
     </model>
     <state world_name='default'>
       <sim_time>53 139000000</sim_time>

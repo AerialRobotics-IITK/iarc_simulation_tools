@@ -1,21 +1,3 @@
-/*
- * Copyright (c) 2016, Vanderbilt University
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Author: Addisu Z. Taddese
- */
-
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
 #include <boost/thread/mutex.hpp>
@@ -34,11 +16,11 @@ namespace gazebo {
 
 DipoleMagnet::DipoleMagnet(): ModelPlugin() {
   this->connect_count = 0;
-  ROS_INFO("yo , feel the magnetism ");
+  gzmsg <<"connection_count : " << this->connect_count <<std::endl;
+  gzmsg << "Dipole Moment plugin has been setup . Now feel the magnetism" << std::endl;
 }
 
 DipoleMagnet::~DipoleMagnet() {
-  // event::Events::DisconnectWorldUpdateBegin(this->update_connection);
   this->update_connection.reset();
   if (this->should_publish) {
     this->queue.clear();
@@ -57,7 +39,6 @@ void DipoleMagnet::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf) {
   this->model = _parent;
   this->world = _parent->GetWorld();
   gzdbg << "Loading DipoleMagnet plugin" << std::endl;
-  ROS_INFO("loading a dipole moment plugin");
 
   this->mag = std::make_shared<DipoleMagnetContainer::Magnet>();
 
@@ -67,19 +48,22 @@ void DipoleMagnet::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf) {
     this->robot_namespace = _sdf->GetElement("robotNamespace")->Get<std::string>() + "/";
 
   if(!_sdf->HasElement("bodyName")) {
-    gzerr << "DipoleMagnet plugin missing <bodyName>, cannot proceed" << std::endl;
+    gzerr << "DipoleMagnet plugin missing <bodyName>, cannot proceed fordward. Please, fix this !!" << std::endl;
+    gzerr << "DipoleMagnet plugin exited with above error !!" <<std::endl;
     return;
-  }else {
-    this->link_name = _sdf->GetElement("bodyName")->Get<std::string>();
-    ROS_INFO("Added magnetic plugin in model %s ",_sdf->GetElement("bodyName")->Get<std::string>());
   }
-
+  else {
+    this->link_name = _sdf->GetElement("bodyName")->Get<std::string>();
+    std::cout << "body_name "<< _sdf->GetElement("bodyName")->Get<std::string>()<<std::endl;
+    std::cout<< _sdf->HasElement("dipole_moment")<<std::endl;
+    std::cout<<"dipole moment :"<< _sdf->GetElement("dipole_moment")->Get<ignition::math::Vector3d>()<<std::endl;
+  }
   this->link = this->model->GetLink(this->link_name);
   if(!this->link){
-    gzerr << "Error: link named " << this->link_name << " does not exist" << std::endl;
+    gzerr << "Error: link named " << this->link_name << " does not exist. Please, fix this to proceed fordward !!" << std::endl;
+    gzerr << "DipoleMagnet plugin exited with above error !!" <<std::endl;
     return;
   }
-
   this->should_publish = false;
   if (_sdf->HasElement("shouldPublish"))
   {
@@ -102,10 +86,14 @@ void DipoleMagnet::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf) {
 
   if (_sdf->HasElement("dipole_moment")){
     this->mag->moment = _sdf->Get<ignition::math::Vector3d>("dipole_moment");
+    gzmsg << "dipole moment :"<< _sdf->GetElement("dipole_moment")->Get<ignition::math::Vector3d>()<<std::endl;
   }
+  else 
+    std::cout << "please provide dipole moment values"<<std::endl;
 
   if (_sdf->HasElement("xyzOffset")){
     this->mag->offset.Pos() = _sdf->Get<ignition::math::Vector3d>("xyzOffset");
+    gzmsg << "offset value : " <<_sdf->GetElement("xyzOffset")->Get<ignition::math::Vector3d>()<<std::endl;
   }
 
   if (_sdf->HasElement("rpyOffset")){
@@ -273,9 +261,10 @@ void DipoleMagnet::GetForceTorque(const ignition::math::Pose3d& p_self,
     ignition::math::Vector3d& force,
     ignition::math::Vector3d& torque) {
 
-  bool debug = true;
+  bool debug = false;
   ignition::math::Vector3d p = p_self.Pos() - p_other.Pos();
   ignition::math::Vector3d p_unit = p/p.Length();
+
 
   ignition::math::Vector3d m1 = m_other;
   ignition::math::Vector3d m2 = m_self;
