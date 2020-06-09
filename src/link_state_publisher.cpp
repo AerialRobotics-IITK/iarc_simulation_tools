@@ -26,7 +26,7 @@ void LinkStatePublisher::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
 void LinkStatePublisher::onUpdate() {
     link_ = model_->GetLink(model_->GetName() + "::" + link_name_);
 
-    ignition::math::v6::Pose3d link_pose;
+    ignition::math::IGNITION_MATH_VERSION_NAMESPACE::Pose3d link_pose;
     link_pose = link_->WorldPose();
 
     gazebo::common::Time current_time = common::Time::GetWallTime();

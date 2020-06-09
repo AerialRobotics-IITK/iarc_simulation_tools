@@ -16,7 +16,7 @@ class LinkStatePublisher : public ModelPlugin {
         sdf::ElementPtr sdf_;
         event::ConnectionPtr updateConnection_;
         physics::LinkPtr link_;
-        
+
         std::string link_name_;
 
         transport::NodePtr node_;
@@ -24,4 +24,5 @@ class LinkStatePublisher : public ModelPlugin {
 };
 
 GZ_REGISTER_MODEL_PLUGIN(LinkStatePublisher);
+
 } // namespace gazebo
