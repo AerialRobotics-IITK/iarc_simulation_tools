@@ -1,6 +1,6 @@
 <sdf version='1.6'>
   <world name='default'>
-    <plugin name="ros_interface_plugin" filename="librotors_gazebo_ros_interface_plugin.so"/>
+    <!-- <plugin name="ros_interface_plugin" filename="librotors_gazebo_ros_interface_plugin.so"/> -->
     <model name='ground_plane'>
       <static>1</static>
       <link name='link'>
@@ -747,6 +747,7 @@
         <visual name='visual'>
           <plugin name='lights' filename='libiarc_simulation_tools_light_plugin.so'>
             <led_color>Red</led_color>
+            <desired_relative_pose>-0.069 0.21 1.032 0 0 3.1415927</desired_relative_pose>
           </plugin>
           <geometry>
             <mesh>
@@ -789,6 +790,7 @@
         <visual name='visual'>
           <plugin name='lights' filename='libiarc_simulation_tools_light_plugin.so'>
             <led_color>Green</led_color>
+            <desired_relative_pose>-0.069 0.21 1.032 0 0 3.1415927</desired_relative_pose>
           </plugin>
           <geometry>
             <mesh>

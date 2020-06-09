@@ -26,13 +26,17 @@ class GZ_PLUGIN_VISIBLE ModelLight : public VisualPlugin {
 
         std::string led_color_;
 
+        ignition::math::Pose3d desired_relative_pose_;
+
         Eigen::Vector3d mast_position_;
         Eigen::Vector3d comm_block_position_;
         Eigen::Vector3d comm_wrt_mast_position_;
+        Eigen::Vector3d desired_relative_position_;
 
         Eigen::Quaterniond mast_orientation_;
         Eigen::Quaterniond comm_block_orientation_;
         Eigen::Quaterniond comm_wrt_mast_orientation_;
+        Eigen::Quaterniond desired_relative_orientation_;
 };
 
 } // namespace gazebo
