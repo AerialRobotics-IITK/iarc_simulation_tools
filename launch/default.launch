@@ -7,7 +7,7 @@
 	<arg name="gui" default="true"/>
 	<arg name="paused" default="true"/>
 
-	<arg name="world_name" default="default"/>
+	<arg name="world_name" default="dipole_magnet"/>
 	<arg name="enable_logging" default="false" />
 	<arg name="enable_ground_truth" default="true" />
 	<arg name="log_file" default="$(arg mav_name)" />

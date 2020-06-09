@@ -34,10 +34,12 @@ namespace gazebo {
 
 DipoleMagnet::DipoleMagnet(): ModelPlugin() {
   this->connect_count = 0;
+  ROS_INFO("yo , feel the magnetism ");
 }
 
 DipoleMagnet::~DipoleMagnet() {
   // event::Events::DisconnectWorldUpdateBegin(this->update_connection);
+  this->update_connection.reset();
   if (this->should_publish) {
     this->queue.clear();
     this->queue.disable();
@@ -55,6 +57,7 @@ void DipoleMagnet::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf) {
   this->model = _parent;
   this->world = _parent->GetWorld();
   gzdbg << "Loading DipoleMagnet plugin" << std::endl;
+  ROS_INFO("loading a dipole moment plugin");
 
   this->mag = std::make_shared<DipoleMagnetContainer::Magnet>();
 
@@ -68,6 +71,7 @@ void DipoleMagnet::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf) {
     return;
   }else {
     this->link_name = _sdf->GetElement("bodyName")->Get<std::string>();
+    ROS_INFO("Added magnetic plugin in model %s ",_sdf->GetElement("bodyName")->Get<std::string>());
   }
 
   this->link = this->model->GetLink(this->link_name);
@@ -269,7 +273,7 @@ void DipoleMagnet::GetForceTorque(const ignition::math::Pose3d& p_self,
     ignition::math::Vector3d& force,
     ignition::math::Vector3d& torque) {
 
-  bool debug = false;
+  bool debug = true;
   ignition::math::Vector3d p = p_self.Pos() - p_other.Pos();
   ignition::math::Vector3d p_unit = p/p.Length();
 
