@@ -13,7 +13,7 @@ void LinkStatePublisher::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
         return;
     }
 
-    std::cout << "Link plugin loaded for " << model_->GetName() << std::endl;
+    gzmsg << "Link plugin loaded for " << model_->GetName() << std::endl;
 
     node_ = transport::NodePtr(new transport::Node);
     node_->Init();

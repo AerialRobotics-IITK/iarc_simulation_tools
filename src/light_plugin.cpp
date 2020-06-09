@@ -10,7 +10,7 @@ void ModelLight::Load(rendering::VisualPtr visual, sdf::ElementPtr sdf) {
         return;
     }
 
-    std::cout << "Light plugin loaded for " << led_color_ << " light" << std::endl;
+    gzmsg << "Light plugin loaded for " << led_color_ << " light" << std::endl;
 
     model_visual_ = visual;
 
@@ -30,9 +30,9 @@ void ModelLight::OnUpdate() {
     bool position_match = (comm_wrt_mast_position_ - Eigen::Vector3d(-0.069, 0.21, 1.032)).norm() < 0.001;
 
     // Debug message. Uncomment for mast and comm block relative pose and match
-    // std::cout << "correct_position: " << position_match << " Distance: " << (comm_wrt_mast_position_ - Eigen::Vector3d(-0.069, 0.21, 1.032)).norm()
+    // gzmsg << "correct_position: " << position_match << " Distance: " << (comm_wrt_mast_position_ - Eigen::Vector3d(-0.069, 0.21, 1.032)).norm()
     //           << std::endl;
-    // std::cout << "correct_orientation: " << orientation_match
+    // gzmsg << "correct_orientation: " << orientation_match
     //           << " Angular Distance:" << comm_wrt_mast_orientation_.angularDistance(Eigen::Quaterniond(0, 0, 0, 1)) << std::endl;
 
     if (orientation_match && position_match)
