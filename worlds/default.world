@@ -623,17 +623,6 @@
               <collide_bitmask>65535</collide_bitmask>
               <ode/>
             </contact>
-    private: double characteristicTimeForWindRise = 1;
-    
-    private: double magnitudeSinAmplitudePercent = 0;
-    
-    private: double magnitudeSinPeriod = 1;
-    
-    private: double characteristicTimeForWindOrientationChange = 1;
-    
-    private: double orientationSinAmplitude = 0;
-    
-    private: double or
             <friction>
               <ode>
                 <mu>100</mu>
@@ -1085,14 +1074,7 @@
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>
       </link>
-      <pose>7.12136 2.78494 0 0 -0 0</pose>
-      <plugin name="Magnetic_force_plugin" filename="libiarc_simulation_tools_dipole_moment.so">
-        <bodyName>magnet</bodyName>
-        <dipole_moment>0 0 1.26</dipole_moment>
-        <shouldPublish>true</shouldPublish>
-        <topicNs>communications_module/magnetic_force</topicNs>
-        <updateRate>100</updateRate>
-      </plugin>
+      <pose>7.12136 2.78494 0 0 -0 0</pose
     </model>
     <light name='sun' type='directional'>
       <pose>0 0 10 0 0 0</pose>
