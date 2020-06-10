@@ -94,7 +94,7 @@
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='magnet'>
+      <!-- <model name='magnet'>
         <pose frame= 'communications_module_centre'>-0.0381 0 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
@@ -103,7 +103,7 @@
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
-      </model>
+      </model> -->
       <model name='pylon'>
         <pose>0 408.66 1.2192 0 -0 0</pose>
         <scale>1 1 1</scale>
@@ -1056,7 +1056,114 @@
       <plugin name="link_states" filename="libiarc_simulation_tools_link_plugin.so">
         <link_name>link</link_name>
       </plugin>
-      <static>0</static>
+      <plugin name="dipole_magnet" filename="libiarc_simulation_tools_dipole_moment.so">
+        <bodyName>magnet</bodyName>
+        <dipole_moment>0.739859 0 0</dipole_moment>
+        <!-- Set to false if not using ROS -->
+        <shouldPublish>false</shouldPublish>
+        <topicNs>magnetic_force/mast</topicNs>
+        <updateRate>100</updateRate>
+      </plugin>
+      <static>1</static>
+      <link name='magnet'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+        <pose>0.02921 0 0 0 -1.57 0</pose>
+        <gravity>1</gravity>
+        <visual name='visual'>
+          <geometry>
+            <cylinder>
+              <radius>0.003968</radius>
+              <length>0.0127</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+            <shader type='pixel'>
+              <normal_map>__default__</normal_map>
+            </shader>
+            <ambient>0.3 0.3 0.3 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+            <specular>0.01 0.01 0.01 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <pose>0 0 0 0 -0 0</pose>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.003968</radius>
+              <length>0.0127</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
       <link name='link'>
         <inertial>
           <mass>2</mass>
@@ -1107,9 +1214,13 @@
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>
       </link>
+      <joint name='magnet_joint' type='fixed'>
+        <parent>link</parent>
+        <child>magnet</child>
+      </joint>
       <pose>7.12136 2.78494 0 0 -0 0</pose>
     </model>
-    <model name='magnet'>
+    <!-- <model name='magnet'>
       <link name='link'>
         <inertial>
           <mass>1</mass>
@@ -1214,13 +1325,13 @@
       <pose frame ='communications_module_centre'>-0.0381 0 0 0 -0 0</pose>
       <plugin name="dipole_magnet" filename="libiarc_simulation_tools_dipole_moment.so">
         <bodyName>link</bodyName>
-        <dipole_moment>0.739859 0 0</dipole_moment>
+        <dipole_moment>0.739859 0 0</dipole_moment> -->
         <!-- Set to false if not using ROS -->
-        <shouldPublish>false</shouldPublish>
+        <!-- <shouldPublish>false</shouldPublish>
         <topicNs>magnetic_force/mast</topicNs>
         <updateRate>100</updateRate>
       </plugin>
-    </model>
+    </model> -->
     <light name='sun' type='directional'>
       <pose>0 0 10 0 0 0</pose>
       <diffuse>0.8 0.8 0.8 1</diffuse>
