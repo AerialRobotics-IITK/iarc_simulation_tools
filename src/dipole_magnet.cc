@@ -49,7 +49,7 @@ void DipoleMagnet::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf) {
 
   if(!_sdf->HasElement("bodyName")) {
     gzerr << "DipoleMagnet plugin missing <bodyName>, cannot proceed fordward. Please, fix this !!" << std::endl;
-    gzerr << "DipoleMagnet plugin exited with above error !!" <<std::endl;
+    gzerr << "DipoleMagnet plugin exited due to above error !!" <<std::endl;
     return;
   }
   else {
@@ -61,7 +61,7 @@ void DipoleMagnet::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf) {
   this->link = this->model->GetLink(this->link_name);
   if(!this->link){
     gzerr << "Error: link named " << this->link_name << " does not exist. Please, fix this to proceed fordward !!" << std::endl;
-    gzerr << "DipoleMagnet plugin exited with above error !!" <<std::endl;
+    gzerr << "DipoleMagnet plugin exited due to above error !!" <<std::endl;
     return;
   }
   this->should_publish = false;
