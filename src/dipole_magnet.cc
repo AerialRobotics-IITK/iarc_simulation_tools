@@ -101,6 +101,10 @@ void DipoleMagnet::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf) {
     this->mag->offset.Rot() = ignition::math::Quaternion<double>(rpy_offset);
   }
 
+  if (_sdf->HasElement("Id")) {
+    this->mag->model_id = _sdf->Get<int>("Id"); 
+  }
+
   if (this->should_publish) {
     if (!_sdf->HasElement("topicNs"))
     {
@@ -135,7 +139,7 @@ void DipoleMagnet::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf) {
     this->callback_queue_thread = boost::thread( boost::bind( &DipoleMagnet::QueueThread,this ) );
   }
 
-  this->mag->model_id = this->model->GetId();
+  // this->mag->model_id = this->model->GetId();
 
   gzmsg << "Loaded Gazebo dipole magnet plugin on " << this->model->GetName() << std::endl;
 
