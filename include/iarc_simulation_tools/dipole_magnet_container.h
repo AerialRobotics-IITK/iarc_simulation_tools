@@ -6,6 +6,15 @@
 #include <cstdint>
 
 #include <gazebo/common/common.hh>
+#include <gazebo/gazebo.hh>
+
+#include <boost/bind.hpp>
+#include <boost/thread.hpp>
+#include <boost/thread/mutex.hpp>
+
+#include <ros/callback_queue.h>
+#include <ros/advertise_options.h>
+#include <ros/ros.h>
 
 namespace gazebo {
 
@@ -20,28 +29,29 @@ class DipoleMagnetContainer {
   }
 
   struct Magnet {
-    bool calculate;
-    ignition::math::Vector3d moment;
-    ignition::math::Pose3d offset;
-    ignition::math::Pose3d pose;
-    std::uint32_t model_id;
+    bool calculate_;
+    ignition::math::Vector3d moment_;
+    ignition::math::Pose3d offset_;
+    ignition::math::Pose3d pose_;
+    std::uint32_t model_id_;
   };
 
   typedef std::shared_ptr<Magnet> MagnetPtr ;
   typedef std::vector<MagnetPtr> MagnetPtrV ;
 
   void Add(MagnetPtr mag) {
-    std::cout << "Adding mag id:" << mag->model_id << std::endl;
-    this->magnets.push_back(mag);
-    std::cout << "Total: " << this->magnets.size() << " magnets" << std::endl;
+    gzmsg << "Adding mag id:" << mag->model_id_ << std::endl;
+    this->magnets_.push_back(mag);
+    gzmsg << "Total: " << this->magnets_.size() << " magnets" << std::endl;
   }
   void Remove(MagnetPtr mag) {
-    std::cout << "Removing mag id:" << mag->model_id << std::endl;
-    this->magnets.erase(std::remove(this->magnets.begin(), this->magnets.end(), mag), this->magnets.end());
-    std::cout << "Total: " << this->magnets.size() << " magnets" << std::endl;
+    gzmsg << "Removing mag id:" << mag->model_id_ << std::endl;
+    this->magnets_.erase(std::remove(this->magnets_.begin(), this->magnets_.end(), mag), this->magnets_.end());
+    gzmsg << "Total: " << this->magnets_.size() << " magnets" << std::endl;
   }
 
-  MagnetPtrV magnets;
+  MagnetPtrV magnets_;
 };
+
 }  // namespace gazebo
 

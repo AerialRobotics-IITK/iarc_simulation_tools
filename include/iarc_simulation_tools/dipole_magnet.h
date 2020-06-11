@@ -21,7 +21,7 @@ class DipoleMagnet : public ModelPlugin {
   ~DipoleMagnet();
 
   /// \brief Loads the plugin
-  void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf);
+  void Load(physics::ModelPtr parent_, sdf::ElementPtr sdf_);
 
   /// \brief Callback for when subscribers connect
   void Connect();
@@ -40,7 +40,7 @@ class DipoleMagnet : public ModelPlugin {
   /// \pram[in] force A vector of force that makes up the wrench to be published
   /// \pram[in] torque A vector of torque that makes up the wrench to be published
   /// \pram[in] mfs A vector of magnetic field data
-  void PublishData(
+  void publishData(
       const ignition::math::Vector3d& force, 
       const ignition::math::Vector3d& torque,
       const ignition::math::Vector3d& mfs);
@@ -52,7 +52,7 @@ class DipoleMagnet : public ModelPlugin {
   /// \parama[in] m_other Dipole moment of the second magnet on which the force is calculated
   /// \param[out] force Calculated force vector
   /// \param[out] torque Calculated torque vector
-  void GetForceTorque(const ignition::math::Pose3d& p_self,  const ignition::math::Vector3d& m_self,
+  void getForceTorque(const ignition::math::Pose3d& p_self,  const ignition::math::Vector3d& m_self,
       const ignition::math::Pose3d& p_other, const ignition::math::Vector3d& m_other,
       ignition::math::Vector3d& force, ignition::math::Vector3d& torque);
 
@@ -61,42 +61,42 @@ class DipoleMagnet : public ModelPlugin {
   /// \parama[in] p_other Pose of the second magnet
   /// \parama[in] m_other Dipole moment of the second magnet
   /// \param[out] mfs magnetic field sensors
-  void GetMFS(const ignition::math::Pose3d& p_self,
+  void getMFS(const ignition::math::Pose3d& p_self,
       const ignition::math::Pose3d& p_other,
       const ignition::math::Vector3d& m_other,
       ignition::math::Vector3d& mfs);
 
   // Pointer to the model
  private:
-  physics::ModelPtr model;
-  physics::LinkPtr link;
-  physics::WorldPtr world;
+  physics::ModelPtr model_;
+  physics::LinkPtr link_;
+  physics::WorldPtr world_;
 
   std::shared_ptr<DipoleMagnetContainer::Magnet> mag;
 
-  std::string link_name;
-  std::string robot_namespace;
+  std::string link_name_;
+  std::string robot_namespace_;
   std::string topic_ns;
 
-  bool should_publish;
-  ros::NodeHandle* rosnode;
-  ros::Publisher wrench_pub;
-  ros::Publisher mfs_pub;
+  bool should_publish_;
+  ros::NodeHandle* rosnode_;
+  ros::Publisher wrench_pub_;
+  ros::Publisher mfs_pub_;
 
-  geometry_msgs::WrenchStamped wrench_msg;
-  sensor_msgs::MagneticField mfs_msg;
+  geometry_msgs::WrenchStamped wrench_msg_;
+  sensor_msgs::MagneticField mfs_msg_;
 
-  private: boost::mutex lock;
-  int connect_count;
+  private: boost::mutex lock_;
+  int connect_count_;
 
   // Custom Callback Queue
-  ros::CallbackQueue queue;
-  boost::thread callback_queue_thread;
+  ros::CallbackQueue queue_;
+  boost::thread callback_queue_thread_;
 
-  common::Time last_time;
-  double update_rate;
+  common::Time last_time_;
+  double update_rate_;
   // Pointer to the update event connection
-  event::ConnectionPtr update_connection;
+  event::ConnectionPtr update_connection_;
 };
 
 } //namespace gazebo
