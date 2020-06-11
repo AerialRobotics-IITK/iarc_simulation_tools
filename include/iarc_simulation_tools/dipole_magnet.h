@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include <gazebo/gazebo.hh>
@@ -100,4 +99,4 @@ class DipoleMagnet : public ModelPlugin {
   event::ConnectionPtr update_connection;
 };
 
-}
+} //namespace gazebo
