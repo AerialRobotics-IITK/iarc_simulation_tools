@@ -599,7 +599,7 @@
         <self_collide>0</self_collide>
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>
-        <pose>-0.004854 -0.123046 1.407488 0.003418 -1.572042 -4.696979</pose>
+        <pose>-0.004854 -0.116651 1.407488 0.003418 -1.572042 -4.696979</pose>
         <gravity>1</gravity>
         <visual name='visual'>
           <geometry>

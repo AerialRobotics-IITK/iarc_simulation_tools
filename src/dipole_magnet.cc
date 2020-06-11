@@ -105,6 +105,10 @@ void DipoleMagnet::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf) {
     this->mag->model_id = _sdf->Get<int>("Id"); 
   }
 
+  else {
+    this->mag->model_id = this->model->GetId();
+  }
+
   if (this->should_publish) {
     if (!_sdf->HasElement("topicNs"))
     {
@@ -138,8 +142,6 @@ void DipoleMagnet::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf) {
     // Custom Callback Queue
     this->callback_queue_thread = boost::thread( boost::bind( &DipoleMagnet::QueueThread,this ) );
   }
-
-  // this->mag->model_id = this->model->GetId();
 
   gzmsg << "Loaded Gazebo dipole magnet plugin on " << this->model->GetName() << std::endl;
 
@@ -272,8 +274,9 @@ void DipoleMagnet::GetForceTorque(const ignition::math::Pose3d& p_self,
 
   ignition::math::Vector3d m1 = m_other;
   ignition::math::Vector3d m2 = m_self;
-  if (debug)
-    std::cout << "p: " << p << " m1: " << m1 << " m2: " << m2 << std::endl;
+  if (debug) {
+    gzmsg << "p: " << p << " m1: " << m1 << " m2: " << m2 << std::endl;
+  }
 
   double K = 3.0*1e-7/pow(p.Length(), 4);
   force = K * (m2 * (m1.Dot(p_unit)) +  m1 * (m2.Dot(p_unit)) +
@@ -282,8 +285,9 @@ void DipoleMagnet::GetForceTorque(const ignition::math::Pose3d& p_self,
   double Ktorque = 1e-7/pow(p.Length(), 3);
   ignition::math::Vector3d B1 = Ktorque*(3*(m1.Dot(p_unit))*p_unit - m1);
   torque = m2.Cross(B1);
-  if (debug)
-    std::cout << "B: " << B1 << " K: " << Ktorque << " t: " << torque << std::endl;
+  if (debug) {
+    gzmsg << "B: " << B1 << " K: " << Ktorque << " t: " << torque << std::endl;
+  }
 }
 
 void DipoleMagnet::GetMFS(const ignition::math::Pose3d& p_self,
