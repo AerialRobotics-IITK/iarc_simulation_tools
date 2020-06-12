@@ -10,8 +10,8 @@
     <buildtool_depend>catkin</buildtool_depend>
     <buildtool_depend>catkin_simple</buildtool_depend>
     <depend>gazebo_ros</depend>
-    <depend>Eigen</depend>
-    <!-- <depend>protobuf-dev</depend> -->
+    <depend>eigen_conversions</depend>
+    <depend>protobuf-dev</depend>
 
     <export>
         <gazebo_ros gazebo_model_path="${prefix}/models"/>
