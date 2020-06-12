@@ -24,8 +24,7 @@ foreach(ITR ${GAZEBO_INCLUDE_DIRS})
 endforeach()
 message(STATUS "PROTOBUF_IMPORT_DIRS = " ${PROTOBUF_IMPORT_DIRS})
 
-# protobuf required for publishing/subscribing to Gazebo
-# messages
+# protobuf required for publishing/subscribing to Gazebo messages
 # WARNING: THIS MUST BE RUN AFTER PROTOBUF_IMPORT_DIRS IS SETUP
 find_package(Protobuf REQUIRED)
 pkg_check_modules(PROTOBUF protobuf)
@@ -45,6 +44,8 @@ foreach(ITR ${GAZEBO_INCLUDE_DIRS})
   endif()
 endforeach()
 
+include_directories(${GAZEBO_MSG_INCLUDE_DIRS})
+
 # Get lists of all .proto files in the msgs directory
 file(GLOB msgs msgs/*.proto)
 
@@ -52,7 +53,7 @@ file(GLOB msgs msgs/*.proto)
 PROTOBUF_GENERATE_CPP(PROTO_SRCS PROTO_HDRS ${msgs})
 
 # Create a shared library of protobuf messages (.so extension on Linux platforms)
-add_library(mav_msgs SHARED ${PROTO_SRCS})
+cs_add_library(mav_msgs SHARED ${PROTO_SRCS})
 target_link_libraries(mav_msgs ${PROTOBUF_LIBRARY} gazebo_msgs)
 
 # This causes mav_msgs to be linked with every created library in this file from this
@@ -60,16 +61,13 @@ target_link_libraries(mav_msgs ${PROTOBUF_LIBRARY} gazebo_msgs)
 # NOTE: This is deprecated, should be using target_link_libraries instead
 link_libraries(mav_msgs)
 
-# Protobuf version check
-if ("${PROTOBUF_VERSION}" VERSION_LESS "2.5.0")
-  message(FATAL_ERROR "protobuf version: ${PROTOBUF_VERSION} not compatible, must be >= 2.5.0")
-endif()
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 # ============================================== #
 # =================== PROTOBUF ================= #
 # ============================================== #
 
-add_library(wind_plugin SHARED src/wind_plugin.cpp)
+cs_add_library(wind_plugin SHARED src/wind_plugin.cpp)
 target_link_libraries(wind_plugin ${GAZEBO_LIBRARIES})
 
 cs_install()

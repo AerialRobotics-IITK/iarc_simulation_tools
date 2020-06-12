@@ -29,8 +29,7 @@
 // #endif
 
 
-#ifndef ROTORS_GAZEBO_PLUGINS_GAZEBO_WIND_PLUGIN_H
-#define ROTORS_GAZEBO_PLUGINS_GAZEBO_WIND_PLUGIN_H
+#pragma once
 
 #include <string>
 
@@ -161,43 +160,43 @@ class GazeboWindPlugin : public ModelPlugin {
   std::vector<float> u_;
   std::vector<float> v_;
   std::vector<float> w_;
-  
+
   /// \brief  Reads wind data from a text file and saves it.
   /// \param[in] custom_wind_field_path Path to the wind field from ~/.ros.
   void ReadCustomWindField(std::string& custom_wind_field_path);
-  
+
   /// \brief  Functions for trilinear interpolation of wind field at aircraft position.
-  
+
   /// \brief  Linear interpolation
   /// \param[in]  position y-coordinate of the target point.
   ///             values Pointer to an array of size 2 containing the wind values
   ///                    of the two points to interpolate from (12 and 13).
-  ///             points Pointer to an array of size 2 containing the y-coordinate 
+  ///             points Pointer to an array of size 2 containing the y-coordinate
   ///                    of the two points to interpolate from.
   ignition::math::Vector3d LinearInterpolation(double position, ignition::math::Vector3d * values, double* points) const;
-  
+
   /// \brief  Bilinear interpolation
-  /// \param[in]  position Pointer to an array of size 2 containing the x- and 
+  /// \param[in]  position Pointer to an array of size 2 containing the x- and
   ///                      y-coordinates of the target point.
-  ///             values Pointer to an array of size 4 containing the wind values 
+  ///             values Pointer to an array of size 4 containing the wind values
   ///                    of the four points to interpolate from (8, 9, 10 and 11).
   ///             points Pointer to an array of size 14 containing the z-coordinate
-  ///                    of the eight points to interpolate from, the x-coordinate 
-  ///                    of the four intermediate points (8, 9, 10 and 11), and the 
+  ///                    of the eight points to interpolate from, the x-coordinate
+  ///                    of the four intermediate points (8, 9, 10 and 11), and the
   ///                    y-coordinate of the last two intermediate points (12 and 13).
   ignition::math::Vector3d BilinearInterpolation(double* position, ignition::math::Vector3d * values, double* points) const;
-  
+
   /// \brief  Trilinear interpolation
   /// \param[in]  link_position Vector3 containing the x, y and z-coordinates
   ///                           of the target point.
-  ///             values Pointer to an array of size 8 containing the wind values of the 
+  ///             values Pointer to an array of size 8 containing the wind values of the
   ///                    eight points to interpolate from (0, 1, 2, 3, 4, 5, 6 and 7).
-  ///             points Pointer to an array of size 14 containing the z-coordinate          
-  ///                    of the eight points to interpolate from, the x-coordinate 
-  ///                    of the four intermediate points (8, 9, 10 and 11), and the 
+  ///             points Pointer to an array of size 14 containing the z-coordinate
+  ///                    of the eight points to interpolate from, the x-coordinate
+  ///                    of the four intermediate points (8, 9, 10 and 11), and the
   ///                    y-coordinate of the last two intermediate points (12 and 13).
   ignition::math::Vector3d TrilinearInterpolation(ignition::math::Vector3d link_position, ignition::math::Vector3d * values, double* points) const;
-  
+
   gazebo::transport::PublisherPtr wind_force_pub_;
   gazebo::transport::PublisherPtr wind_speed_pub_;
 
@@ -213,6 +212,5 @@ class GazeboWindPlugin : public ModelPlugin {
   ///           everytime a wind speed message needs to be sent, increasing performance.
   gz_mav_msgs::WindSpeed wind_speed_msg_;
 };
-}
 
-#endif // ROTORS_GAZEBO_PLUGINS_GAZEBO_WIND_PLUGIN_H
+}

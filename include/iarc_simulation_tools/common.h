@@ -19,8 +19,7 @@
  * limitations under the License.
  */
 
-#ifndef ROTORS_GAZEBO_PLUGINS_COMMON_H_
-#define ROTORS_GAZEBO_PLUGINS_COMMON_H_
+#pragma once
 
 #include <eigen3/Eigen/Dense>
 #include <gazebo/gazebo.hh>
@@ -206,5 +205,3 @@ void copyPosition(const In& in, Out* out) {
   out->y = in.y;
   out->z = in.z;
 }
-
-#endif /* ROTORS_GAZEBO_PLUGINS_COMMON_H_ */
