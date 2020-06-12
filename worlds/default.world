@@ -1371,6 +1371,7 @@
           </surface>
         </collision>
       </link>
+      <static>0</static>
       <link name='link'>
         <inertial>
           <mass>2</mass>
