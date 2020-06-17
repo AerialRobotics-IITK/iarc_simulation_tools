@@ -1,0 +1,230 @@
+<sdf version="1.6">
+  <world name="waves">
+  
+    <model name="ocean_waves">
+      <static>true</static>
+      <plugin filename="libWavefieldModelPlugin.so" name="wavefield_plugin">
+        <static>false</static>
+        <update_rate>30</update_rate>
+        <size>1000 1000</size>
+        <cell_count>50 50</cell_count>
+        <wave>
+          <model>PMS</model>
+          <period>5</period>
+          <number>3</number>
+          <scale>1.5</scale>
+          <gain>0.5</gain>
+          <direction>1.0 0.0</direction>
+          <angle>0.4</angle>
+          <tau>2.0</tau>
+          <amplitude>0.0</amplitude>
+          <!-- No effect for the PMS model -->
+          <steepness>0.0</steepness>
+        </wave>
+      </plugin>
+      <link name="ocean_waves_link">
+        <visual name="ocean_waves_visual">
+          <plugin filename="libWavefieldVisualPlugin.so" name="ocean_waves_visual_plugin">
+            <enableRtt>true</enableRtt>
+            <rttNoise>0.1</rttNoise>
+            <refractOpacity>0.2</refractOpacity>
+            <reflectOpacity>0.2</reflectOpacity>
+            <wave>
+              <model>PMS</model>
+              <period>5</period>
+              <number>3</number>
+              <scale>1.5</scale>
+              <gain>0.5</gain>
+              <direction>1.0 0.0</direction>
+              <angle>0.4</angle>
+              <tau>2.0</tau>
+              <amplitude>0.0</amplitude>
+              <!-- No effect for the PMS model -->
+              <steepness>0.0</steepness>
+            </wave>
+          </plugin>
+          <geometry>
+            <mesh>
+              <uri>model://ocean_waves/meshes/mesh.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://ocean_waves/materials/scripts/waves.material</uri>
+              <name>WaveSim/GerstnerWaves</name>
+            </script>
+          </material>
+          <laser_retro>-1</laser_retro>
+        </visual>
+        <visual name="ocean_waves_below_visual">
+          <pose>0 0 -0.05 0 0 0</pose>
+          <!-- Offset to prevent rendering conflict -->
+          <geometry>
+            <mesh>
+              <uri>model://ocean_waves/meshes/mesh_below.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://ocean_waves/materials/scripts/waves.material</uri>
+              <name>WaveSim/GerstnerWaves</name>
+            </script>
+          </material>
+          <laser_retro>-1</laser_retro>
+        </visual>
+      </link>
+    </model>
+
+    <scene>
+      <sky>
+        <time>10</time>
+        <sunrise>6</sunrise>
+        <sunset>18</sunset>
+        <clouds>
+          <speed>12</speed>
+          <direction>1.57079</direction>
+        </clouds>
+      </sky>
+      <grid>false</grid>
+      <origin_visual>false</origin_visual>
+    </scene>
+    <model name="1_box">
+      <pose>0.1 0 10 0 0 0</pose>
+      <static>False</static>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.171 0.171 0.171</size>
+            </box>
+          </geometry>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.171 0.171 0.171</size>
+            </box>
+          </geometry>
+        </collision>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.009708012</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.009708012</iyy>
+            <iyz>0</iyz>
+            <izz>0.009708012</izz>
+          </inertia>
+        </inertial>
+      </link>
+      <plugin filename="libbuoyancy_gazebo_plugin.so" name="BuoyancyPlugin">
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>10.0</linear_drag>
+        <angular_drag>4.0</angular_drag>
+        <buoyancy name="buoyancy">
+          <link_name>link</link_name>
+          <geometry>
+            <box>
+              <size>0.171 0.171 0.171</size>
+            </box>
+          </geometry>
+        </buoyancy>
+      </plugin>
+    </model>
+    <model name="1_sphere">
+      <pose>0.4 0 10 0 0 0</pose>
+      <static>False</static>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>0.106</radius>
+            </sphere>
+          </geometry>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.106</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0089888</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0089888</iyy>
+            <iyz>0</iyz>
+            <izz>0.0089888</izz>
+          </inertia>
+        </inertial>
+      </link>
+      <plugin filename="libbuoyancy_gazebo_plugin.so" name="BuoyancyPlugin">
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>10.0</linear_drag>
+        <angular_drag>4.0</angular_drag>
+        <buoyancy name="buoyancy">
+          <link_name>link</link_name>
+          <geometry>
+            <sphere>
+              <radius>0.106</radius>
+            </sphere>
+          </geometry>
+        </buoyancy>
+      </plugin>
+    </model>
+    <model name="1_cylinder">
+      <pose>0.7 0 10 0 0 0</pose>
+      <static>False</static>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.159</length>
+            </cylinder>
+          </geometry>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.159</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0092134963146</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0092134963146</iyy>
+            <iyz>0</iyz>
+            <izz>0.01</izz>
+          </inertia>
+        </inertial>
+      </link>
+      <plugin filename="libbuoyancy_gazebo_plugin.so" name="BuoyancyPlugin">
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>10.0</linear_drag>
+        <angular_drag>4.0</angular_drag>
+        <buoyancy name="buoyancy">
+          <link_name>link</link_name>
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.159</length>
+            </cylinder>
+          </geometry>
+        </buoyancy>
+      </plugin>
+    </model>
+  </world>
+</sdf>
