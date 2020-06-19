@@ -12,6 +12,8 @@ GazeboWindPlugin::~GazeboWindPlugin() {
 }
 
 void GazeboWindPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
+
+  std::cout << "Wind pLUGIN IS WORKING KINDA SORT OFF" << std::endl;
   if (kPrintOnPluginLoad) {
     gzdbg << __FUNCTION__ << "() called." << std::endl;
   }
@@ -49,6 +51,8 @@ void GazeboWindPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
                            wind_speed_pub_topic_);
   getSdfParam<std::string>(_sdf, "frameId", frame_id_, frame_id_);
   getSdfParam<std::string>(_sdf, "linkName", link_name_, link_name_);
+
+  std::cout << link_name_ <<std::endl;
   // Get the wind speed params from SDF.
   getSdfParam<double>(_sdf, "windSpeedMean", wind_speed_mean_,
                       wind_speed_mean_);
@@ -81,6 +85,7 @@ void GazeboWindPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
     wind_gust_direction_.Normalize();
     wind_gust_start_ = common::Time(wind_gust_start);
     wind_gust_end_ = common::Time(wind_gust_start + wind_gust_duration);
+    std::cout << wind_gust_start_ << "  " << wind_gust_end_ << std::endl;
   } else {
     gzdbg << "[gazebo_wind_plugin] Using custom wind field from text file.\n";
     // Get the wind field text file path, read it and save data.
@@ -104,7 +109,8 @@ void GazeboWindPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
 // This gets called by the world update start event.
 void GazeboWindPlugin::OnUpdate(const common::UpdateInfo& _info) {
 
-  std::cout << "Wind pLUGIN IS WORKING KINDA SORT OFF" << std::endl;
+  // std::cout << "updating" <<std::endl;
+
   if (kPrintOnUpdates) {
     gzdbg << __FUNCTION__ << "() called." << std::endl;
   }
@@ -117,7 +123,7 @@ void GazeboWindPlugin::OnUpdate(const common::UpdateInfo& _info) {
   // Get the current simulation time.
   common::Time now = world_->SimTime();
   
-  ignition::math::Vector3d wind_velocity(0.0, 0.0, 0.0);
+  ignition::math::Vector3d wind_velocity(5.0, 0.0, 0.0);
 
   // Choose user-specified method for calculating wind velocity.
   if (!use_custom_static_wind_field_) {
@@ -125,14 +131,18 @@ void GazeboWindPlugin::OnUpdate(const common::UpdateInfo& _info) {
     double wind_strength = wind_force_mean_;
     ignition::math::Vector3d wind = wind_strength * wind_direction_;
     // Apply a force from the constant wind to the link.
+    // std::cout << "Force is calc: " << wind << std::endl;
     link_->AddForceAtRelativePosition(wind, xyz_offset_);
 
     ignition::math::Vector3d wind_gust(0.0, 0.0, 0.0);
     // Calculate the wind gust force.
+
+    // std::cout << "time right now is  " << now << std::endl;
     if (now >= wind_gust_start_ && now < wind_gust_end_) {
       double wind_gust_strength = wind_gust_force_mean_;
       wind_gust = wind_gust_strength * wind_gust_direction_;
       // Apply a force from the wind gust to the link.
+      std::cout << wind_gust <<std::endl;
       link_->AddForceAtRelativePosition(wind_gust, xyz_offset_);
     }
 
@@ -147,9 +157,10 @@ void GazeboWindPlugin::OnUpdate(const common::UpdateInfo& _info) {
     wrench_stamped_msg_.mutable_wrench()->mutable_force()->set_z(wind.Z() +
                                                                  wind_gust.Z());
 
+    // std::cout << wrench_stamped_msg_.mutable_wrench()->mutable_force() <<std::endl;
     // No torque due to wind, set x,y and z to 0.
-    wrench_stamped_msg_.mutable_wrench()->mutable_torque()->set_x(0);
-    wrench_stamped_msg_.mutable_wrench()->mutable_torque()->set_y(0);
+    wrench_stamped_msg_.mutable_wrench()->mutable_torque()->set_x(3);
+    wrench_stamped_msg_.mutable_wrench()->mutable_torque()->set_y(3);
     wrench_stamped_msg_.mutable_wrench()->mutable_torque()->set_z(0);
 
     wind_force_pub_->Publish(wrench_stamped_msg_);

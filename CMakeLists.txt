@@ -63,6 +63,8 @@ link_libraries(mav_msgs)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
+include_directories(include ${catkin_INCLUDE_DIRS} ${GAZEBO_MSG_INCLUDE_DIRS})
+
 # ============================================== #
 # =================== PROTOBUF ================= #
 # ============================================== #
