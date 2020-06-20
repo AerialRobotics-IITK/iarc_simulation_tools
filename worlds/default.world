@@ -465,6 +465,10 @@
       <plugin name="link_states" filename="libiarc_simulation_tools_link_plugin.so">
         <link_name>mast</link_name>
       </plugin>
+      <plugin name='joint_plugin' filename='libiarc_simulation_tools_joint_plugin.so' >
+        <joint_name>radar_mast</joint_name>
+        <angular_speed>1</angular_speed>
+      </plugin>
       <static>0</static>
       <link name='table'>
         <inertial>

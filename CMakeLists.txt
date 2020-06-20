@@ -15,5 +15,8 @@ target_link_libraries(${PROJECT_NAME}_light_plugin ${GAZEBO_LIBRARIES})
 add_library(${PROJECT_NAME}_link_plugin SHARED src/link_state_publisher.cpp)
 target_link_libraries(${PROJECT_NAME}_link_plugin ${GAZEBO_LIBRARIES})
 
+add_library(${PROJECT_NAME}_joint_plugin SHARED src/revolute_joint_rotator_plugin.cpp)
+target_link_libraries(${PROJECT_NAME}_joint_plugin ${GAZEBO_LIBRARIES})
+
 cs_install()
 cs_export()
