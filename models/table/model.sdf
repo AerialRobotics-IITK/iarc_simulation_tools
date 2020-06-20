@@ -3,6 +3,7 @@
   <model name='table'>
     <plugin name='joint_plugin' filename='libiarc_simulation_tools_joint_plugin.so' >
       <joint_name>radar_mast</joint_name>
+      <angular_Speed>1</angular_Speed>
     </plugin>
     <static>0</static>
     <link name='table'>

@@ -16,7 +16,7 @@ void JointRotator::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
     }
 
     if (sdf->HasElement("angular_speed")) {
-        angular_speed_ = sdf->GetElement("joint_name")->Get<double>();
+        angular_speed_ = sdf->GetElement("angular_speed")->Get<double>();
     } else {
         gzwarn << "Element <angular_speed> is not specified. Using default value of 1 rad/s.";
         angular_speed_ = 1.0;
