@@ -22,9 +22,10 @@
 <robot name="$(arg mav_name)" xmlns:xacro="http://ros.org/wiki/xacro">
   <!-- Instantiate the mav with a generic odometry sensor. -->
   <xacro:include filename="$(find rotors_description)/urdf/mav_generic_odometry_sensor.gazebo" />
-  <xacro:include filename="$(find iarc_simulation_tools)/urdf/rgbd_camera.xacro"/>
+  <!-- <xacro:include filename="$(find iarc_simulation_tools)/urdf/rgbd_camera.xacro"/> -->
+  <xacro:include filename="$(find iarc_simulation_tools)/urdf/realsense.xacro" />
 
-  <xacro:rgbd_sensor_depth_macro
+  <!-- <xacro:rgbd_sensor_depth_macro
     namespace="${namespace}" parent_link="${namespace}/base_link"
     camera_suffix="depth"
     frame_rate="30.0"
@@ -35,6 +36,12 @@
     max_range="50.0"
     min_range="0.195">
     <origin xyz="0.2 0.0 -0.05" rpy="0 0.1 0" />
-  </xacro:rgbd_sensor_depth_macro>
+  </xacro:rgbd_sensor_depth_macro> -->
+
+  <xacro:realsense_camera_macro 
+    namespace="${namespace}" parent_link="${namespace}/base_link"
+    camera_suffix="realsense">
+    <origin xyz="0.2 0.0 -0.05" rpy="0 0.1 0" />
+  </xacro:realsense_camera_macro>
 
 </robot>

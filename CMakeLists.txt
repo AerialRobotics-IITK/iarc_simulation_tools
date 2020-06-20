@@ -20,5 +20,8 @@ target_link_libraries(${PROJECT_NAME}_link_plugin ${GAZEBO_LIBRARIES})
 add_library(${PROJECT_NAME}_dipole_moment SHARED src/dipole_magnet.cc)
 target_link_libraries(${PROJECT_NAME}_dipole_moment ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
+add_library(${PROJECT_NAME}_realsense_plugin SHARED src/realsense_plugin.cpp)
+target_link_libraries(${PROJECT_NAME}_realsense_plugin ${GAZEBO_LIBRARIES})
+
 cs_install()
 cs_export()
