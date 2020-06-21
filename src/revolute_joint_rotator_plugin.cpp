@@ -28,6 +28,7 @@ void JointRotator::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
 
     if (joint_type_ != msgs::Joint::Type::Joint_Type_REVOLUTE) {
         gzerr << "The specified joint is not a revolute joint. Aborting.";
+        return;
     }
 
     updateConnection_ = event::Events::ConnectWorldUpdateBegin(std::bind(&JointRotator::onUpdate, this));
