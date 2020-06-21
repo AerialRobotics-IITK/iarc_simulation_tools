@@ -1290,7 +1290,7 @@
       <joint name='flag_table' type='fixed' >
         <parent>table</parent>
         <child>flag</child>
-      </joint>how to make a link static in a model
+      </joint>
 
       <joint name='gun_back_left_table' type='fixed' >
         <parent>table</parent>
