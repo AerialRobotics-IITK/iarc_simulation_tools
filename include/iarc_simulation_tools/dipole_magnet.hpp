@@ -10,7 +10,7 @@
 #include <ignition/math/Vector3.hh>
 #include <memory>                          
 
-#include "iarc_simulation_tools/dipole_magnet_container.h"
+#include "iarc_simulation_tools/dipole_magnet_container.hpp"
 
 namespace gazebo {
 
