@@ -1,5 +1,5 @@
 
-#include "iarc_simulation_tools/dipole_magnet.h"
+#include "iarc_simulation_tools/dipole_magnet.hpp"
 
 namespace gazebo {
 
