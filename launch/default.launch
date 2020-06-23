@@ -59,5 +59,19 @@
 
 		<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 		<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+
+		<node pkg="nodelet" type="nodelet" name="standalone_nodelet" args="manager" />
+
+		<node pkg="nodelet" type="nodelet" name="convert_metric" args="load depth_image_proc/convert_metric standalone_nodelet" >
+			<remap from="image_raw" to="/firefly/camera_depth/depth/image_raw" />
+
+			<remap from="image" to="/firefly/camera_depth/depth/image_raw_out" />
+		</node>
+
+		<node pkg="nodelet" type="nodelet" name="point_cloud_xyz" args="load depth_image_proc/point_cloud_xyz standalone_nodelet" >
+			<remap from="image_rect" to="/firefly/camera_depth/depth/image_raw_out" />
+			<remap from="camera_info" to="/firefly/camera_rgb/camera_info"/>
+		</node>
+
 	</group>
-  </launch>
+</launch>
