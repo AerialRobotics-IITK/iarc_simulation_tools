@@ -1260,7 +1260,6 @@
     </model>
     <model name='communications_module'>
       <plugin name="wind_plugin" filename="libwind_plugin.so">  
-        <customWindFieldPath>wind_field_hemicyl.txt</customWindFieldPath>
         <windForcePubTopic>wind_force_pub</windForcePubTopic>
         <windSpeedPubTopic>wind_speed_pub</windSpeedPubTopic>
         <robotNamespace>firefly</robotNamespace>
