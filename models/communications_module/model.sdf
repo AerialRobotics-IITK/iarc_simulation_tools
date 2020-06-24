@@ -1,8 +1,20 @@
 <?xml version="1.0" ?>
 <sdf version="1.5">
   <model name="communications_module">
-      <static>true</static>
+      <static>0</static>
       <link name='link'>
+      <inertial>
+        <mass>2</mass>
+        <inertia>
+          <ixx>0.07284621567</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00219699777</iyy>
+          <iyz>0</iyz>
+          <izz>0.07364161484</izz>
+        </inertia>
+        <pose />
+      </inertial>
        <collision name="collision">
         <geometry>
             <mesh>
