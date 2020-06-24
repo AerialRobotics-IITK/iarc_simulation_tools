@@ -69,8 +69,8 @@ include_directories(include ${catkin_INCLUDE_DIRS} ${GAZEBO_MSG_INCLUDE_DIRS})
 # =================== PROTOBUF ================= #
 # ============================================== #
 
-cs_add_library(wind_plugin SHARED src/wind_plugin.cpp)
-target_link_libraries(wind_plugin ${GAZEBO_LIBRARIES})
+cs_add_library(${PROJECT_NAME}_wind_plugin SHARED src/wind_plugin.cpp)
+target_link_libraries(${PROJECT_NAME}_wind_plugin ${GAZEBO_LIBRARIES})
 
 cs_install()
 cs_export()
