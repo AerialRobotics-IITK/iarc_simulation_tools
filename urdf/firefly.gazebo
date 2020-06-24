@@ -22,7 +22,7 @@
 <robot name="$(arg mav_name)" xmlns:xacro="http://ros.org/wiki/xacro">
   <!-- Instantiate the mav with a generic odometry sensor. -->
   <xacro:include filename="$(find rotors_description)/urdf/mav_generic_odometry_sensor.gazebo" />
-  <xacro:include filename="$(find iarc_simulation_tools)/urdf/firefly_wind.xacro" />
+  <!-- <xacro:include filename="$(find iarc_simulation_tools)/urdf/firefly_wind.xacro" /> -->
 
   <xacro:vi_sensor_macro
     namespace="${namespace}/vi_sensor"
@@ -32,6 +32,21 @@
     enable_ground_truth="true">
     <origin xyz="0.2 0.0 -0.04" rpy="0.0 0.1 0.0" />
   </xacro:vi_sensor_macro>
+  
+
+  <xacro:wind_plugin_macro
+    namespace="${namespace}"
+    xyz_offset="0 0 0"
+    wind_direction="0 1 0"
+    wind_force_mean="0.0"
+    wind_gust_direction="0 1 0"
+    wind_gust_duration="0.0"
+    wind_gust_start="0.0"
+    wind_gust_force_mean="0.0"
+    wind_speed_mean="10.0"
+    use_custom_static_wind_field="true"
+    custom_wind_field_path="$(find rotors_gazebo)/models/hemicyl/wind_field_hemicyl.txt">
+  </xacro:wind_plugin_macro>
 
   <xacro:camera_macro
   namespace="${namespace}"
