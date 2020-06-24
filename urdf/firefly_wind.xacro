@@ -2,10 +2,10 @@
 
 <robot name="firefly" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:include filename="$(find rotors_description)/urdf/firefly_base.xacro" />
-  <xacro:include filename="$(find iarc_simulation_tools)/urdfcustom_wind.xacro" />
+  <xacro:include filename="$(find iarc_simulation_tools)/urdf/custom_wind.xacro" />
 
   <xacro:custom_wind_field_macro
-    namespace="${namespace}"
+    namespace="firefly"
     xyz_offset="0 0 0"
     wind_direction="1 0 0"
     wind_force_mean="0.0"
