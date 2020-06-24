@@ -49,8 +49,8 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 include_directories(include ${catkin_INCLUDE_DIRS} ${GAZEBO_MSG_INCLUDE_DIRS})
 
-cs_add_library(wind_plugin SHARED src/wind_plugin.cpp)
-target_link_libraries(wind_plugin ${GAZEBO_LIBRARIES})
+cs_add_library(${PROJECT_NAME}_wind_plugin SHARED src/wind_plugin.cpp)
+target_link_libraries(${PROJECT_NAME}_wind_plugin ${GAZEBO_LIBRARIES})
 
 find_package(gazebo REQUIRED)
 find_package(Boost REQUIRED COMPONENTS thread)
