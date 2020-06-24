@@ -1264,7 +1264,7 @@
       <pose>5.07637 0.334534 0 0 -0 0</pose>
     </model>
     <model name='communications_module'>
-      <plugin name="wind_plugin" filename="libwind_plugin.so">  
+      <plugin name="wind_plugin" filename="libiarc_simulation_tools_wind_plugin.so">  
         <windForcePubTopic>wind_force_pub</windForcePubTopic>
         <windSpeedPubTopic>wind_speed_pub</windSpeedPubTopic>
         <robotNamespace>firefly</robotNamespace>
