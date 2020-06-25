@@ -1,0 +1,34 @@
+version: 2
+jobs:
+  prepare_ros_workspace:
+    docker:
+      - image: kshitijkabeer/ros-sim:1.0.1
+    steps:
+      - run: cd ../ && mkdir -p test_ws/src/$CIRCLE_PROJECT_REPONAME
+      - checkout:
+        - path: /root/test_ws/src/$CIRCLE_PROJECT_REPONAME
+      - run: cd ../test_ws/ && wstool init src src/$CIRCLE_PROJECT_REPONAME/install_https.rosinstall && wstool update -t src
+      - run: cd ../test_ws/ && source /opt/ros/melodic/setup.bash && catkin build
+      - persist_to_workspace:
+        root: /root
+        paths:
+          - test_ws/*
+
+
+  catkin_build:
+    docker:
+      - image: kshitijkabeer/ros-sim:1.0.1
+    steps:
+      - attach_workspace:
+          at: /root
+      - run: cd ../test_ws/ && source /opt/ros/melodic/setup.bash && catkin build
+
+workflows:
+  version: 2
+  build_test:
+    jobs:
+      - prepare_ros_workspace
+      - catkin_build:
+          requires:
+            - prepare_ros_workspace
+
