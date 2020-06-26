@@ -3,12 +3,11 @@ cmake_minimum_required(VERSION 2.8.3)
 
 find_package(Eigen3 REQUIRED)
 include_directories(${Eigen3_INCLUDE_DIRS})
-
+find_package(Boost REQUIRED COMPONENTS thread)
 find_package(gazebo REQUIRED)
 include_directories(${GAZEBO_INCLUDE_DIRS})
 link_directories(${GAZEBO_LIBRARY_DIRS})
 list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
-
 find_package(catkin_simple REQUIRED)
 catkin_simple(ALL_DEPS_REQUIRED)
 
@@ -40,19 +39,16 @@ file(GLOB msgs msgs/*.proto)
 
 PROTOBUF_GENERATE_CPP(PROTO_SRCS PROTO_HDRS ${msgs})
 
-cs_add_library(mav_msgs SHARED ${PROTO_SRCS})
-target_link_libraries(mav_msgs ${PROTOBUF_LIBRARY} gazebo_msgs)
-
 link_libraries(mav_msgs)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
-
 include_directories(include ${catkin_INCLUDE_DIRS} ${GAZEBO_MSG_INCLUDE_DIRS})
+
+cs_add_library(mav_msgs SHARED ${PROTO_SRCS})
+target_link_libraries(mav_msgs ${PROTOBUF_LIBRARY} gazebo_msgs)
 
 cs_add_library(${PROJECT_NAME}_wind_plugin SHARED src/wind_plugin.cpp)
 target_link_libraries(${PROJECT_NAME}_wind_plugin ${GAZEBO_LIBRARIES})
-
-find_package(Boost REQUIRED COMPONENTS thread)
 
 add_library(${PROJECT_NAME}_light_plugin SHARED src/light_plugin.cpp)
 target_link_libraries(${PROJECT_NAME}_light_plugin ${GAZEBO_LIBRARIES})

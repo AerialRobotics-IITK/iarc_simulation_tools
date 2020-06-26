@@ -3,7 +3,7 @@
 	<arg name="mav_name" default="firefly"/>
 
 	<arg name="debug" default="false"/>
-	<arg name="verbose" default="true"/>
+	<arg name="verbose" default="false"/>
 	<arg name="gui" default="true"/>
 	<arg name="paused" default="true"/>
 

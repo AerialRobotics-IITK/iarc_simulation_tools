@@ -1,13 +1,13 @@
 #pragma once
-#include <string>
-#include <gazebo/common/common.hh>
+#include "WindSpeed.pb.h"     // Wind speed message
+#include "WrenchStamped.pb.h" // Wind force message
+#include "iarc_simulation_tools/common.h"
 #include <gazebo/common/Plugin.hh>
+#include <gazebo/common/common.hh>
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
-#include <mav_msgs/default_topics.h> 
-#include "iarc_simulation_tools/common.h"
-#include "WindSpeed.pb.h"             // Wind speed message
-#include "WrenchStamped.pb.h"         // Wind force message
+#include <mav_msgs/default_topics.h>
+#include <string>
 
 namespace gazebo {
 
@@ -26,16 +26,17 @@ static constexpr double kDefaultWindGustDuration = 0.0;
 static constexpr double kDefaultWindSpeedMean = 0.0;
 static constexpr double kDefaultWindSpeedVariance = 0.0;
 
-static const ignition::math::Vector3d kDefaultWindDirection = ignition::math::Vector3d (1, 0, 0);
-static const ignition::math::Vector3d kDefaultWindGustDirection = ignition::math::Vector3d (0, 1, 0);
+static const ignition::math::Vector3d kDefaultWindDirection =
+    ignition::math::Vector3d(1, 0, 0);
+static const ignition::math::Vector3d kDefaultWindGustDirection =
+    ignition::math::Vector3d(0, 1, 0);
 
 static constexpr bool kDefaultUseCustomStaticWindField = false;
 
 class GazeboWindPlugin : public ModelPlugin {
- public:
+public:
   GazeboWindPlugin()
-      : ModelPlugin(),
-        namespace_(kDefaultNamespace),
+      : ModelPlugin(), namespace_(kDefaultNamespace),
         wind_force_pub_topic_(mav_msgs::default_topics::EXTERNAL_FORCE),
         wind_speed_pub_topic_(mav_msgs::default_topics::WIND_SPEED),
         wind_force_mean_(kDefaultWindForceMean),
@@ -47,20 +48,16 @@ class GazeboWindPlugin : public ModelPlugin {
         wind_direction_(kDefaultWindDirection),
         wind_gust_direction_(kDefaultWindGustDirection),
         use_custom_static_wind_field_(kDefaultUseCustomStaticWindField),
-        frame_id_(kDefaultFrameId),
-        link_name_(kDefaultLinkName),
-        node_handle_(nullptr),
-        pubs_and_subs_created_(false) {}
+        frame_id_(kDefaultFrameId), link_name_(kDefaultLinkName),
+        node_handle_(nullptr), pubs_and_subs_created_(false) {}
 
   virtual ~GazeboWindPlugin();
 
- protected:
-
+protected:
   void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf);
-  void OnUpdate(const common::UpdateInfo& /*_info*/);
+  void OnUpdate(const common::UpdateInfo & /*_info*/);
 
- private:
-
+private:
   bool pubs_and_subs_created_;
   void CreatePubsAndSubs();
   event::ConnectionPtr update_connection_;
@@ -101,10 +98,17 @@ class GazeboWindPlugin : public ModelPlugin {
   std::vector<float> v_;
   std::vector<float> w_;
 
-  void ReadCustomWindField(std::string& custom_wind_field_path);
-  ignition::math::Vector3d LinearInterpolation(double position, ignition::math::Vector3d * values, double* points) const;
-  ignition::math::Vector3d BilinearInterpolation(double* position, ignition::math::Vector3d * values, double* points) const;
-  ignition::math::Vector3d TrilinearInterpolation(ignition::math::Vector3d link_position, ignition::math::Vector3d * values, double* points) const;
+  void ReadCustomWindField(std::string &custom_wind_field_path);
+  ignition::math::Vector3d LinearInterpolation(double position,
+                                               ignition::math::Vector3d *values,
+                                               double *points) const;
+  ignition::math::Vector3d
+  BilinearInterpolation(double *position, ignition::math::Vector3d *values,
+                        double *points) const;
+  ignition::math::Vector3d
+  TrilinearInterpolation(ignition::math::Vector3d link_position,
+                         ignition::math::Vector3d *values,
+                         double *points) const;
 
   gazebo::transport::PublisherPtr wind_force_pub_;
   gazebo::transport::PublisherPtr wind_speed_pub_;
@@ -113,4 +117,4 @@ class GazeboWindPlugin : public ModelPlugin {
   gz_geometry_msgs::WrenchStamped wrench_stamped_msg_;
   gz_mav_msgs::WindSpeed wind_speed_msg_;
 };
-}
+} // namespace gazebo
