@@ -2,7 +2,7 @@ version: 2
 jobs:
   prepare_ros_workspace:
     docker:
-      - image: kshitijkabeer/ros-sim:1.0.1
+      - image: kshitijkabeer/ros-sim:1.0.2
     steps:
       - run: |
           cd ../
@@ -19,7 +19,7 @@ jobs:
 
   catkin_build:
     docker:
-      - image: kshitijkabeer/ros-sim:1.0.1
+      - image: kshitijkabeer/ros-sim:1.0.2
     steps:
       - attach_workspace:
           at: /root
