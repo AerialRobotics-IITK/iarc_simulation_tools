@@ -1,7 +1,7 @@
 #include <iarc_simulation_tools/variable_load_plugin.hpp>
 
-#include "ConnectGazeboToRosTopic.pb.h"
-#include "ConnectRosToGazeboTopic.pb.h"
+// #include "ConnectGazeboToRosTopic.pb.h"
+// #include "ConnectRosToGazeboTopic.pb.h"
 #include <iostream>
 #include <math.h>
 
@@ -19,7 +19,7 @@ void GazeboVarForcePlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) 
     // else
     //     gzerr << "[gazebo_wind_plugin] Please specify a robotNamespace.\n";
 
-    node_handle_ = gazebo::transport::NodePtr(new transport::Node());
+    node_handle_ = gazebo::transport::NodePtr(new transport::Node);
     node_handle_->Init();
 
     // getSdfParam<std::string>(_sdf, "frameId", frame_id_, frame_id_);
@@ -30,7 +30,7 @@ void GazeboVarForcePlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) 
     //     gzthrow("[gazebo_wind_plugin] Couldn't find specified link \"" << link_name_
     //                                                                << "\".");
     
-    params_sub_ = node_handle_->Subscribe("var_force_topic",10, &GazeboVarForcePlugin::cb);
+    params_sub_ = node_handle_->Subscribe("var_force_topic", &GazeboVarForcePlugin::cb, this);
 
     update_connection_ = event::Events::ConnectWorldUpdateBegin(
       boost::bind(&GazeboVarForcePlugin::OnUpdate, this, _1));
