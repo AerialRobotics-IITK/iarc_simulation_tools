@@ -1,3 +1,5 @@
+#pragma once
+
 #include <gazebo/common/common.hh>
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
@@ -5,11 +7,11 @@
 namespace gazebo {
 
 class JointRotator : public ModelPlugin {
-    public:
+  public:
     void Load(physics::ModelPtr parent, sdf::ElementPtr sdf);
     void onUpdate();
 
-    private:
+  private:
     physics::ModelPtr model_;
     sdf::ElementPtr sdf_;
     event::ConnectionPtr updateConnection_;
