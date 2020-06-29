@@ -1,7 +1,11 @@
 <?xml version='1.0'?>
 <sdf version='1.7'>
   <model name='table'>
-    <static>1</static>
+    <plugin name='joint_plugin' filename='libiarc_simulation_tools_joint_plugin.so' >
+      <joint_name>radar_mast</joint_name>
+      <angular_Speed>1</angular_Speed>
+    </plugin>
+    <static>0</static>
     <link name='table'>
       <inertial>
         <mass>1</mass>
@@ -17,7 +21,7 @@
       </inertial>
       <self_collide>0</self_collide>
       <enable_wind>0</enable_wind>
-      <kinematic>0</kinematic>
+      <kinematic>1</kinematic>
       <pose>0 0 0 0 -0 0</pose>
       <visual name='visual'>
         <geometry>
@@ -489,6 +493,65 @@
       </visual>
     </link>
 
+    <joint name='radar_mast' type='revolute' >
+      <parent>mast</parent>
+      <child>radar</child>
+
+      <pose relative_to='top_surface'>-0.0075 0.005 1.55</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <joint name='mast_table' type='fixed' >
+      <parent>table</parent>
+      <child>mast</child>
+    </joint>
+
+    <joint name='dish_left_table' type='fixed' >
+      <parent>table</parent>
+      <child>dish_left</child>
+    </joint>
+
+    <joint name='dish_right_table' type='fixed' >
+      <parent>table</parent>
+      <child>dish_right</child>
+    </joint>
+
+    <joint name='flag_table' type='fixed' >
+      <parent>table</parent>
+      <child>flag</child>
+    </joint>
+
+    <joint name='gun_back_left_table' type='fixed' >
+      <parent>table</parent>
+      <child>gun_back_left</child>
+    </joint>
+
+    <joint name='gun_back_right_table' type='fixed' >
+      <parent>table</parent>
+      <child>gun_back_right</child>
+    </joint>
+
+    <joint name='gun_front_left_table' type='fixed' >
+      <parent>table</parent>
+      <child>gun_front_left</child>
+    </joint>
+
+    <joint name='gun_front_right_table' type='fixed' >
+      <parent>table</parent>
+      <child>gun_front_right</child>
+    </joint>
+
+    <joint name='led_light_red_mast' type='fixed' >
+      <parent>mast</parent>
+      <child>led_light_red</child>
+    </joint>
+
+    <joint name='led_light_green_mast' type='fixed' >
+      <parent>mast</parent>
+      <child>led_light_green</child>
+    </joint>
   </model>
 
 </sdf>

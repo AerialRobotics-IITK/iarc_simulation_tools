@@ -1,14 +1,12 @@
 #pragma once
 
-#include <functional>
 #include <gazebo/common/common.hh>
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
-#include <ignition/math/Vector3.hh>
 
 namespace gazebo {
 
-class LinkStatePublisher : public ModelPlugin {
+class JointRotator : public ModelPlugin {
   public:
     void Load(physics::ModelPtr parent, sdf::ElementPtr sdf);
     void onUpdate();
@@ -17,14 +15,14 @@ class LinkStatePublisher : public ModelPlugin {
     physics::ModelPtr model_;
     sdf::ElementPtr sdf_;
     event::ConnectionPtr updateConnection_;
-    physics::LinkPtr link_;
 
-    std::string link_name_;
+    physics::JointPtr joint_;
+    msgs::Joint::Type joint_type_;
+    std::string joint_name_;
 
-    transport::NodePtr node_;
-    transport::PublisherPtr pose_pub_;
+    double angular_speed_;
 };
 
-GZ_REGISTER_MODEL_PLUGIN(LinkStatePublisher);
+GZ_REGISTER_MODEL_PLUGIN(JointRotator);
 
 }  // namespace gazebo
