@@ -18,7 +18,8 @@ void ModelLight::Load(rendering::VisualPtr visual, sdf::ElementPtr sdf) {
     }
 
     desired_relative_position_ = Eigen::Vector3d(desired_relative_pose_.Pos().X(), desired_relative_pose_.Pos().Y(), desired_relative_pose_.Pos().Z());
-    desired_relative_orientation_ = Eigen::Quaterniond(desired_relative_pose_.Rot().W(),desired_relative_pose_.Rot().X(),desired_relative_pose_.Rot().Y(),desired_relative_pose_.Rot().Z());
+    desired_relative_orientation_ = Eigen::Quaterniond(
+        desired_relative_pose_.Rot().W(), desired_relative_pose_.Rot().X(), desired_relative_pose_.Rot().Y(), desired_relative_pose_.Rot().Z());
 
     gzmsg << "Light plugin loaded for " << led_color_ << " light" << std::endl;
 
@@ -65,4 +66,4 @@ void ModelLight::mastPoseCallback(ConstPoseStampedPtr& msg) {
 
 GZ_REGISTER_VISUAL_PLUGIN(ModelLight)
 
-} // namespace gazebo
+}  // namespace gazebo

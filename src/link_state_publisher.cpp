@@ -47,4 +47,4 @@ void LinkStatePublisher::onUpdate() {
     pose_pub_->Publish(link_pose_msg);
 }
 
-} // namespace gazebo
+}  // namespace gazebo
