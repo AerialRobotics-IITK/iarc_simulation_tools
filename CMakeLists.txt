@@ -20,5 +20,32 @@ target_link_libraries(${PROJECT_NAME}_link_plugin ${GAZEBO_LIBRARIES})
 add_library(${PROJECT_NAME}_dipole_moment SHARED src/dipole_magnet.cc)
 target_link_libraries(${PROJECT_NAME}_dipole_moment ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
+cs_add_executable(check src/check.cpp)
+target_link_libraries(check ${catkin_LIBRARIES})
+
+#find_package(catkin REQUIRED COMPONENTS
+#  roscpp
+#  rospy
+#)
+
+#catkin_package(
+#  INCLUDE_DIRS include
+#  LIBRARIES gui_rosos
+#  CATKIN_DEPENDS roscpp rospy
+#  DEPENDS system_lib
+#)
+
+
+#include_directories(
+# include
+#  ${catkin_INCLUDE_DIRS}
+#)
+
+catkin_install_python(PROGRAMS
+   src/plot.py
+   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+
 cs_install()
 cs_export()

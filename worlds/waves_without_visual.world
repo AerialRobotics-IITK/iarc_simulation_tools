@@ -23,7 +23,7 @@
 	  </markers>
 	</plugin>
       <link name="ocean_waves_link">
-        <visual name="ocean_waves_visual">
+        <!-- <visual name="ocean_waves_visual">
           <plugin name="wavefield_visual" filename="libWavefieldVisualPlugin.so">
 		  <static>false</static>
 		  <wave>
@@ -35,7 +35,7 @@
 		    <period>8.0</period>
 		    <direction>1 1</direction>
 		  </wave>
-	 </plugin>
+	 </plugin> -->
           <geometry>
             <mesh>
               <uri>model://ocean_waves/meshes/mesh.dae</uri>
