@@ -1,5 +1,5 @@
 <?xml version='1.0'?>
-<sdf version='1.7'>
+<sdf version='1.6'>
   <model name='table'>
     <plugin name='joint_plugin' filename='libiarc_simulation_tools_joint_plugin.so' >
       <joint_name>radar_mast</joint_name>
@@ -97,8 +97,8 @@
       </collision>
     </link>
 
-    <frame name='top_surface' attached_to='table'>
-      <pose relative_to='table'>0 0 0.375 0 0 0</pose>
+    <frame name='top_surface'>
+      <pose frame='table'>0 0 0.375 0 -0 0</pose>
     </frame>
 
     <link name='dish_left'>

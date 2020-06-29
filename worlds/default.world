@@ -777,11 +777,8 @@
           </surface>
         </collision>
       </link>
-      <!-- <frame name='communications_module_centre' attached_to='table'> -->
-        <!-- <pose relative_to='table'>-0.004854 -0.176386 1.407488 0.003418 -0.002042 -4.696979</pose> -->
-      <!-- </frame> -->
-      <frame name='top_surface' attached_to='table'>
-        <pose relative_to='table'>0 0 0.375 0 -0 0</pose>
+      <frame name='top_surface'>
+        <pose frame='table'>0 0 0.375 0 -0 0</pose>
       </frame>
       <link name='dish_left'>
         <self_collide>0</self_collide>
@@ -891,6 +888,18 @@
       <allow_auto_disable>1</allow_auto_disable>
       <link name='mast'>
         <pose>-0.215 -0.245 0.375 0 0 -1.57</pose>
+        <inertial>
+          <mass>5</mass>
+          <inertia>
+            <ixx>0.166667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.166667</iyy>
+            <iyz>0</iyz>
+            <izz>0.166667</izz>
+          </inertia>
+          <pose>0 0 0 0 0 0</pose>
+        </inertial>
         <collision name='collision'>
           <pose>-0 -0 0 0 -0 0</pose>
           <geometry>
@@ -916,18 +925,6 @@
             <bounce/>
           </surface>
           <max_contacts>10</max_contacts>
-          <inertial>
-            <mass>5</mass>
-            <inertia>
-              <ixx>0.166667</ixx>
-              <ixy>0</ixy>
-              <ixz>0</ixz>
-              <iyy>0.166667</iyy>
-              <iyz>0</iyz>
-              <izz>0.166667</izz>
-            </inertia>
-            <pose/>
-          </inertial>
         </collision>
         <visual name='visual'>
           <geometry>
