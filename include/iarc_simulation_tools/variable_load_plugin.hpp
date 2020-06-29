@@ -13,6 +13,12 @@
 #include <string>
 #include <iarc_simulation_tools/var_load.h>
 #include <glog/logging.h>
+#include <thread>
+// #include "ros/ros.h"
+#include "ros/callback_queue.h"
+#include "ros/subscribe_options.h"
+#include "std_msgs/Float32MultiArray.h"
+#include "std_msgs/Float32.h"
 
 #include <gazebo/common/Plugin.hh>
 
@@ -34,7 +40,10 @@ public:
 protected:
   void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf);
   void OnUpdate(const common::UpdateInfo & /*_info*/);
-  void cb(const boost::shared_ptr<const iarc_simulation_tools::var_load>& msg);
+  // void cb(const boost::shared_ptr<const iarc_simulation_tools::var_load>& msg);
+  void OnRosMsg(const std_msgs::Float32MultiArrayConstPtr &_msg);
+  void QueueThread();
+
 
 private:
   // iarc_simulation_tools::var_load& var_load_;
@@ -47,8 +56,13 @@ private:
   std::string link_name_;
   ignition::math::Vector3d xyz_offset_;
   ignition::math::Vector3d force_direction_;
-  gazebo::transport::SubscriberPtr params_sub_;
-  gazebo::transport::NodePtr node_handle_;
+  // gazebo::transport::SubscriberPtr params_sub_;
+  // gazebo::transport::NodePtr node_handle_;
+  std::unique_ptr<ros::NodeHandle> rosNode;
+  ros::Subscriber rosSub;
+  ros::CallbackQueue rosQueue;
+  std::thread rosQueueThread;
+  
 
 };
 }
