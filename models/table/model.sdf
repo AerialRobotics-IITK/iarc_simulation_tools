@@ -97,10 +97,6 @@
       </collision>
     </link>
 
-    <frame name='top_surface'>
-      <pose frame='table'>0 0 0.375 0 -0 0</pose>
-    </frame>
-
     <link name='dish_left'>
       <self_collide>0</self_collide>
       <inertial>
@@ -142,7 +138,7 @@
           </mesh>
         </geometry>
       </visual>
-    <pose relative_to='top_surface'>2 0 0 0 0 1.57</pose>
+    <pose>2 0 0.375 0 0 1.57</pose>
     </link>
     <static>0</static>
     <allow_auto_disable>1</allow_auto_disable>
@@ -188,27 +184,27 @@
           </mesh>
         </geometry>
       </visual>
-    <pose relative_to='top_surface'>-2 0 0 0 0 -1.57</pose>
+    <pose>-2 0 0.375 0 0 -1.57</pose>
     </link>
     <static>0</static>
     <allow_auto_disable>1</allow_auto_disable>
     
     <link name='mast'>
-    <pose relative_to='top_surface'>-0.215 -0.245 0 0 0 -1.57</pose>
+      <pose>-0.215 -0.245 0.375 0 0 -1.57</pose>
+      <inertial>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.166667</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.166667</iyy>
+          <iyz>0</iyz>
+          <izz>0.166667</izz>
+        </inertia>
+        <pose>0 0 0 0 0 0</pose>
+      </inertial>
       <collision name="collision">
-        <inertial>
-          <mass>5</mass>
-          <inertia>
-            <ixx>0.166667</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.166667</iyy>
-            <iyz>0</iyz>
-            <izz>0.166667</izz>
-          </inertia>
-          <pose />
-        </inertial>
-        <pose relative_to='mast' />
+        <pose>0 0 0 0 0 0</pose>
         <geometry>
             <mesh>
               <uri>model://mast/meshes/mast_with_comm_block.dae</uri>
@@ -238,7 +234,7 @@
     </link>
 
     <link name='led_light_red'>
-      <pose relative_to='mast'>-0.2 -0.275 1.2625 0 0 0</pose>
+      <pose>-0.490159 -0.045219 1.6375 0 0 -1.57</pose>
       <collision name="collision">
         <geometry>
           <mesh>
@@ -273,8 +269,8 @@
     </link>
 
     <link name='led_light_green'>
-      <pose relative_to='mast'>-0.2 0.655 1.2625 0 0 0</pose>
-      <collision name="collision">
+        <pose>0.439841 -0.044478 1.6375 0 0 -1.57</pose>
+        <collision name="collision">
         <geometry>
           <mesh>
             <uri>model://led_light/meshes/led_light.dae</uri>
@@ -308,7 +304,7 @@
     </link>
 
     <link name='gun_back_left'>
-      <pose relative_to='top_surface'>1 0.75 0 0 0 0.7854</pose>
+      <pose>1 0.75 0.375 0 0 0.7854</pose>
       <collision name="collision">
       <geometry>
           <mesh>
@@ -339,7 +335,7 @@
     </link>
 
     <link name='gun_front_left'>
-      <pose relative_to='top_surface'>1 -0.75 0 0 0 -0.7854</pose>
+      <pose>1 -0.75 0.375 0 0 -0.7854</pose>
       <collision name="collision">
       <geometry>
           <mesh>
@@ -370,7 +366,7 @@
     </link>
 
     <link name='gun_back_right'>
-      <pose relative_to='top_surface'>-1 0.75 0 0 0 2.3562</pose>
+      <pose>-1 0.75 0.375 0 0 2.3562</pose>
       <collision name="collision">
       <geometry>
           <mesh>
@@ -401,7 +397,7 @@
     </link>
 
     <link name='gun_front_right'>
-      <pose relative_to='top_surface'>-1 -0.75 0 0 0 3.927</pose>
+      <pose>-1 -0.75 0.375 0 0 3.927</pose>
       <collision name="collision">
       <geometry>
           <mesh>
@@ -432,7 +428,7 @@
     </link>
 
     <link name='flag'>
-      <pose relative_to='top_surface'>0.75 0 0 0 0 0</pose>
+      <pose>0.75 0 0.375 0 0 0</pose>
       <collision name="collision">
       <geometry>
           <mesh>
@@ -463,7 +459,7 @@
     </link>
 
     <link name='radar'>
-      <pose relative_to='top_surface'>-0.0075 0.505 1.55</pose>
+      <pose>-0.0075 0.505 1.925 0 -0 0</pose>
       <collision name="collision">
       <geometry>
           <mesh>
@@ -496,8 +492,7 @@
     <joint name='radar_mast' type='revolute' >
       <parent>mast</parent>
       <child>radar</child>
-
-      <pose relative_to='top_surface'>-0.0075 0.005 1.55</pose>
+      <pose>0 -0.500 0 0 0 0</pose>
       <axis>
         <xyz>0 0 1</xyz>
       </axis>
