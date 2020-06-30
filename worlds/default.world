@@ -1320,7 +1320,7 @@
       </joint>
     </model>
     <model name='communications_module'>
-      <plugin name = "variable_force" filename="libiarc_simulation_tools_variable_load_plugin.so"/>
+      
       <plugin name="link_states" filename="libiarc_simulation_tools_link_plugin.so">
         <link_name>link</link_name>
       </plugin>
