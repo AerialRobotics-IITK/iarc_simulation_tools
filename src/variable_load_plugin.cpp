@@ -11,24 +11,24 @@ GazeboVarForcePlugin::~GazeboVarForcePlugin() {}
 
 void GazeboVarForcePlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
     
-    // model_ = _model;
-    // world_ = model_->GetWorld();
+    this->model_ = _model;
+    world_ = model_->GetWorld();
 
-    // if (_sdf->HasElement("robotNamespace"))
-    //     namespace_ = _sdf->GetElement("robotNamespace")->Get<std::string>();
-    // else
-    //     gzerr << "[gazebo_wind_plugin] Please specify a robotNamespace.\n";
+    if (_sdf->HasElement("robotNamespace"))
+        namespace_ = _sdf->GetElement("robotNamespace")->Get<std::string>();
+    else
+        gzerr << "[gazebo_wind_plugin] Please specify a robotNamespace.\n";
 
     // node_handle_ = gazebo::transport::NodePtr(new transport::Node);
     // node_handle_->Init();
 
-    // // getSdfParam<std::string>(_sdf, "frameId", frame_id_, frame_id_);
-    // // getSdfParam<std::string>(_sdf, "linkName", link_name_, link_name_);
+    // getSdfParam<std::string>(_sdf, "frameId", frame_id_, frame_id_);
+    // getSdfParam<std::string>(_sdf, "linkName", link_name_, link_name_);
 
-    // // link_ = model_->GetLink(link_name_);
-    // // if (link_ == NULL)
-    // //     gzthrow("[gazebo_wind_plugin] Couldn't find specified link \"" << link_name_
-    // //                                                                << "\".");
+    // link_ = model_->GetLink(link_name_);
+    // if (link_ == NULL)
+    //     gzthrow("[gazebo_wind_plugin] Couldn't find specified link \"" << link_name_
+    //                                                                << "\".");
     
     // params_sub_ = node_handle_->Subscribe("var_force_topic", &GazeboVarForcePlugin::cb, this);
     
@@ -45,8 +45,8 @@ void GazeboVarForcePlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) 
 
     ros::SubscribeOptions so =
         ros::SubscribeOptions::create<std_msgs::Float32MultiArray>(
-            // "/" + this->model_->GetName() + "/vel_cmd",
-            "/testing_ros_topic",
+            "/" + this->model_->GetName() + "/vel_cmd",
+            // "/testing_ros_topic",
             1,
             boost::bind(&GazeboVarForcePlugin::OnRosMsg, this, _1),
             ros::VoidPtr(), &this->rosQueue);
@@ -82,6 +82,7 @@ void  GazeboVarForcePlugin::QueueThread()
 void GazeboVarForcePlugin::OnUpdate(const common::UpdateInfo &_info){
 
     common::Time now = world_->SimTime();
+    // std::cout << "THE VARLOAD PLUGIN IS INCLUDED PROPERLY" << std::endl;
 
     // while(true){
     //     gazebo::common::Time::MSleep(10);
