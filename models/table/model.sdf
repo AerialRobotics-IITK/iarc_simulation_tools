@@ -3,7 +3,7 @@
   <model name='table'>
     <plugin name='joint_plugin' filename='libiarc_simulation_tools_joint_plugin.so' >
       <joint_name>radar_mast</joint_name>
-      <angular_speed>10</angular_speed>
+      <angular_speed>1</angular_speed>
     </plugin>
     <plugin name="dipole_magnet_1" filename="libiarc_simulation_tools_magnet_plugin.so">
       <bodyName>magnet_1</bodyName>
@@ -205,401 +205,70 @@
       </collision>
     </link>
 
-    <link name='dish_left'>
-      <self_collide>0</self_collide>
-      <inertial>
-        <mass>1</mass>
-        <inertia>
-          <ixx>0.166667</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.166667</iyy>
-          <iyz>0</iyz>
-          <izz>0.166667</izz>
-        </inertia>
-        <pose>0 0 0 0 -0 0.0</pose>
-      </inertial>
-      <collision name="collision">
-        <geometry>
-            <mesh>
-              <uri>model://dish/meshes/dish.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-        </geometry>
-        <surface>
-          <contact>
-             <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='visual'>
-        <geometry>
-          <mesh>
-            <uri>model://dish/meshes/dish.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    <pose>2 0 0.375 0 0 1.57</pose>
-    </link>
-    <static>0</static>
-    <allow_auto_disable>1</allow_auto_disable>
-
-    <link name='dish_right'>
-      <self_collide>0</self_collide>
-      <inertial>
-        <mass>1</mass>
-        <inertia>
-          <ixx>0.166667</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.166667</iyy>
-          <iyz>0</iyz>
-          <izz>0.166667</izz>
-        </inertia>
-        <pose>0 0 0 0 -0 0.0</pose>
-      </inertial>
-      <collision name="collision">
-        <geometry>
-            <mesh>
-              <uri>model://dish/meshes/dish.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-        </geometry>
-        <surface>
-          <contact>
-             <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='visual'>
-        <geometry>
-          <mesh>
-            <uri>model://dish/meshes/dish.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    <pose>-2 0 0.375 0 0 -1.57</pose>
-    </link>
-    <static>0</static>
-    <allow_auto_disable>1</allow_auto_disable>
-    
-    <link name='mast'>
+    <include>
+      <uri>model://mast</uri>
       <pose>-0.215 -0.245 0.375 0 0 -1.57</pose>
-      <inertial>
-        <mass>5</mass>
-        <inertia>
-          <ixx>0.166667</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.166667</iyy>
-          <iyz>0</iyz>
-          <izz>0.166667</izz>
-        </inertia>
-        <pose>0 0 0 0 0 0</pose>
-      </inertial>
-      <collision name="collision">
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-            <mesh>
-              <uri>model://mast/meshes/mast.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-        </geometry>
-        <surface>
-          <contact>
-              <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='visual'>
-        <geometry>
-          <mesh>
-            <uri>model://mast/meshes/mast.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
+    </include>
 
-    <link name='led_light_red'>
-      <pose>-0.490159 -0.045219 1.6375 0 0 -1.57</pose>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://led_light/meshes/led_light.dae</uri>
-            <scale>0.1 0.1 0.1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-              <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='visual'>
-      <plugin name='lights' filename='libiarc_simulation_tools_light_plugin.so'>
-        <led_color>Red</led_color>
-        <desired_relative_pose>-0.069 0.21 1.032 0 0 3.1415927</desired_relative_pose>
-      </plugin>
-        <geometry>
-          <mesh>
-            <uri>model://led_light/meshes/led_light.dae</uri>
-            <scale>0.1 0.1 0.1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
+    <include>
+      <uri>model://gun</uri>
+      <pose>1 0.75 0.375 0 -0 0.7854</pose>
+      <name>gun_back_left</name>
+    </include>
 
-    <link name='led_light_green'>
-        <pose>0.439841 -0.044478 1.6375 0 0 -1.57</pose>
-        <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://led_light/meshes/led_light.dae</uri>
-            <scale>0.1 0.1 0.1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-              <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='visual'>
-        <plugin name='lights' filename='libiarc_simulation_tools_light_plugin.so'>
-          <led_color>Green</led_color>
-          <desired_relative_pose>-0.069 0.21 1.032 0 0 3.1415927</desired_relative_pose>
-        </plugin>
-        <geometry>
-          <mesh>
-            <uri>model://led_light/meshes/led_light.dae</uri>
-            <scale>0.1 0.1 0.1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
+    <include>
+      <uri>model://gun</uri>
+      <pose>-1 0.75 0.375 0 -0 2.3562</pose>
+      <name>gun_back_right</name>
+    </include>
 
-    <link name='gun_back_left'>
-      <pose>1 0.75 0.375 0 0 0.7854</pose>
-      <collision name="collision">
-      <geometry>
-          <mesh>
-            <uri>model://gun/meshes/gun.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-      </geometry>
-      <surface>
-        <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-        </contact>
-        <friction>
-          <ode>
-            <mu>100</mu>
-            <mu2>50</mu2>
-          </ode>
-        </friction>
-      </surface>
-    </collision>
-      <visual name='visual'>
-        <geometry>
-          <mesh>
-            <uri>model://gun/meshes/gun.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-
-    <link name='gun_front_left'>
+    <include>
+      <uri>model://gun</uri>
       <pose>1 -0.75 0.375 0 0 -0.7854</pose>
-      <collision name="collision">
-      <geometry>
-          <mesh>
-            <uri>model://gun/meshes/gun.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-      </geometry>
-      <surface>
-        <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-        </contact>
-        <friction>
-          <ode>
-            <mu>100</mu>
-            <mu2>50</mu2>
-          </ode>
-        </friction>
-      </surface>
-    </collision>
-      <visual name='visual'>
-        <geometry>
-          <mesh>
-            <uri>model://gun/meshes/gun.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
+      <name>gun_front_left</name>
+    </include>
 
-    <link name='gun_back_right'>
-      <pose>-1 0.75 0.375 0 0 2.3562</pose>
-      <collision name="collision">
-      <geometry>
-          <mesh>
-            <uri>model://gun/meshes/gun.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-      </geometry>
-      <surface>
-        <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-        </contact>
-        <friction>
-          <ode>
-            <mu>100</mu>
-            <mu2>50</mu2>
-          </ode>
-        </friction>
-      </surface>
-    </collision>
-      <visual name='visual'>
-        <geometry>
-          <mesh>
-            <uri>model://gun/meshes/gun.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
+    <include>
+      <uri>model://gun</uri>
+      <pose>-1 -0.75 0.375 0 -0 -2.35618</pose>
+      <name>gun_front_right</name>
+    </include>
 
-    <link name='gun_front_right'>
-      <pose>-1 -0.75 0.375 0 0 3.927</pose>
-      <collision name="collision">
-      <geometry>
-          <mesh>
-            <uri>model://gun/meshes/gun.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-      </geometry>
-      <surface>
-        <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-        </contact>
-        <friction>
-          <ode>
-            <mu>100</mu>
-            <mu2>50</mu2>
-          </ode>
-        </friction>
-      </surface>
-    </collision>
-      <visual name='visual'>
-        <geometry>
-          <mesh>
-            <uri>model://gun/meshes/gun.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
+    <include>
+      <uri>model://dish</uri>
+      <pose>2 0 0.375 0 -0 1.57</pose>
+      <name>dish_left</name>
+    </include>
 
-    <link name='flag'>
-      <pose>0.75 0 0.375 0 0 0</pose>
-      <collision name="collision">
-      <geometry>
-          <mesh>
-            <uri>model://flag/meshes/flag.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-      </geometry>
-      <surface>
-        <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-        </contact>
-        <friction>
-          <ode>
-            <mu>100</mu>
-            <mu2>50</mu2>
-          </ode>
-        </friction>
-      </surface>
-    </collision>
-      <visual name='visual'>
-        <geometry>
-          <mesh>
-            <uri>model://flag/meshes/flag.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
+    <include>
+      <uri>model://dish</uri>
+      <pose>-2 0 0.375 0 -0 -1.57</pose>
+      <name>dish_right</name>
+    </include>
 
-    <link name='radar'>
+    <include>
+      <uri>model://led_light_green</uri>
+      <pose>0.439841 -0.044478 1.6375 0 0 -1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://led_light_red</uri>
+      <pose>-0.490159 -0.045219 1.6375 0 0 -1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://flag</uri>
+      <pose>0.75 0 0.375 0 -0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://radar</uri>
       <pose>-0.0075 0.505 1.925 0 -0 0</pose>
-      <collision name="collision">
-      <geometry>
-          <mesh>
-            <uri>model://radar/meshes/radar.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-      </geometry>
-      <surface>
-        <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-        </contact>
-        <friction>
-          <ode>
-            <mu>100</mu>
-            <mu2>50</mu2>
-          </ode>
-        </friction>
-      </surface>
-    </collision>
-      <visual name='visual'>
-        <geometry>
-          <mesh>
-            <uri>model://radar/meshes/radar.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
+    </include>
 
     <joint name='radar_mast' type='revolute' >
-      <parent>mast</parent>
-      <child>radar</child>
+      <parent>mast::link</parent>
+      <child>radar::link</child>
       <pose>0 -0.500 0 0 0 0</pose>
       <axis>
         <xyz>0 0 1</xyz>
@@ -608,53 +277,54 @@
 
     <joint name='mast_table' type='fixed' >
       <parent>table</parent>
-      <child>mast</child>
+      <child>mast::link</child>
     </joint>
 
     <joint name='dish_left_table' type='fixed' >
       <parent>table</parent>
-      <child>dish_left</child>
+      <child>dish_left::link</child>
     </joint>
 
     <joint name='dish_right_table' type='fixed' >
       <parent>table</parent>
-      <child>dish_right</child>
+      <child>dish_right::link</child>
     </joint>
 
     <joint name='flag_table' type='fixed' >
       <parent>table</parent>
-      <child>flag</child>
+      <child>flag::link</child>
     </joint>
 
     <joint name='gun_back_left_table' type='fixed' >
       <parent>table</parent>
-      <child>gun_back_left</child>
+      <child>gun_back_left::link</child>
     </joint>
 
     <joint name='gun_back_right_table' type='fixed' >
       <parent>table</parent>
-      <child>gun_back_right</child>
+      <child>gun_back_right::link</child>
     </joint>
 
     <joint name='gun_front_left_table' type='fixed' >
       <parent>table</parent>
-      <child>gun_front_left</child>
+      <child>gun_front_left::link</child>
     </joint>
 
     <joint name='gun_front_right_table' type='fixed' >
       <parent>table</parent>
-      <child>gun_front_right</child>
+      <child>gun_front_right::link</child>
     </joint>
 
-    <joint name='led_light_red_mast' type='fixed' >
-      <parent>mast</parent>
-      <child>led_light_red</child>
+    <joint name='led_light_red_table' type='fixed' >
+      <parent>table</parent>
+      <child>led_light_red::link</child>
     </joint>
 
-    <joint name='led_light_green_mast' type='fixed' >
-      <parent>mast</parent>
-      <child>led_light_green</child>
+    <joint name='led_light_green_table' type='fixed' >
+      <parent>table</parent>
+      <child>led_light_green::link</child>
     </joint>
+
   </model>
 
 </sdf>
