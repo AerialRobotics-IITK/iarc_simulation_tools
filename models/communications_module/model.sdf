@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<sdf version="1.5">
+<sdf version="1.6">
   <model name="communications_module">
       <static>0</static>
       <link name='link'>
