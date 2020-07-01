@@ -17,9 +17,15 @@ void ModelLight::Load(rendering::VisualPtr visual, sdf::ElementPtr sdf) {
         return;
     }
 
+    mast_position_ = Eigen::Vector3d(0,0,0);
+    mast_orientation_ = Eigen::Quaterniond(1,0,0,0);
+
     desired_relative_position_ = Eigen::Vector3d(desired_relative_pose_.Pos().X(), desired_relative_pose_.Pos().Y(), desired_relative_pose_.Pos().Z());
     desired_relative_orientation_ = Eigen::Quaterniond(
         desired_relative_pose_.Rot().W(), desired_relative_pose_.Rot().X(), desired_relative_pose_.Rot().Y(), desired_relative_pose_.Rot().Z());
+
+    comm_block_position_ = desired_relative_position_;
+    comm_block_orientation_ = desired_relative_orientation_;
 
     gzmsg << "Light plugin loaded for " << led_color_ << " light" << std::endl;
 
@@ -28,7 +34,7 @@ void ModelLight::Load(rendering::VisualPtr visual, sdf::ElementPtr sdf) {
     node_ = transport::NodePtr(new transport::Node);
     node_->Init();
     comm_pose_sub_ = node_->Subscribe("~/communications_module/link/pose/info", &ModelLight::commPoseCallback, this);
-    mast_pose_sub_ = node_->Subscribe("~/table/mast/pose/info", &ModelLight::mastPoseCallback, this);
+    mast_pose_sub_ = node_->Subscribe("~/table/mast::link/pose/info", &ModelLight::mastPoseCallback, this);
 
     updateConnection = event::Events::ConnectPreRender(std::bind(&ModelLight::OnUpdate, this));
 }
@@ -38,7 +44,7 @@ void ModelLight::OnUpdate() {
     comm_wrt_mast_orientation_ = mast_orientation_.inverse() * comm_block_orientation_;
 
     bool orientation_match = fabs(comm_wrt_mast_orientation_.angularDistance(desired_relative_orientation_)) < 0.02;
-    bool position_match = (comm_wrt_mast_position_ - desired_relative_position_).norm() < 0.001;
+    bool position_match = (comm_wrt_mast_position_ - desired_relative_position_).norm() < 0.01;
 
     // Debug message. Uncomment for mast and comm block relative pose and match
     // gzmsg << "correct_position: " << position_match << " Distance: " << (comm_wrt_mast_position_ - desired_relative_position_).norm()
