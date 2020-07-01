@@ -27,7 +27,7 @@ public:
   virtual ~GazeboVarForcePlugin();
 
 protected:
-  void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf);
+  void Load(physics::ModelPtr model, sdf::ElementPtr sdf);
   void OnUpdate(const common::UpdateInfo & /*_info*/);
   void OnRosMsg(const iarc_simulation_tools::LoadParamsConstPtr &_msg);
   void QueueThread();
@@ -45,6 +45,6 @@ private:
   ros::CallbackQueue rosQueue;
   std::thread rosQueueThread;
 
-  double mass;
+  double mass_;
 };
 } // namespace gazebo

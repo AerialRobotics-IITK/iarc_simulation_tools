@@ -5,17 +5,17 @@ namespace gazebo {
 
 GazeboVarForcePlugin::~GazeboVarForcePlugin() {}
 
-void GazeboVarForcePlugin::Load(physics::ModelPtr _model,
-                                sdf::ElementPtr _sdf) {
+void GazeboVarForcePlugin::Load(physics::ModelPtr model,
+                                sdf::ElementPtr sdf) {
 
-  this->model_ = _model;
+  this->model_ = model;
 
-  if (_sdf->HasElement("robotNamespace"))
-    namespace_ = _sdf->GetElement("robotNamespace")->Get<std::string>();
+  if (sdf->HasElement("robotNamespace"))
+    namespace_ = sdf->GetElement("robotNamespace")->Get<std::string>();
   else
     gzerr << "[gazebo_var_load_plugin] Please specify a robotNamespace.\n";
 
-  getSdfParam<std::string>(_sdf, "linkName", link_name_, link_name_);
+  getSdfParam<std::string>(sdf, "linkName", link_name_, link_name_);
 
   link_ = model_->GetLink(link_name_);
   if (link_ == NULL)
@@ -49,7 +49,7 @@ void GazeboVarForcePlugin::Load(physics::ModelPtr _model,
 void GazeboVarForcePlugin::OnRosMsg(
     const iarc_simulation_tools::LoadParamsConstPtr &_msg) {
   xyz_offset_.Set(_msg->x, _msg->y, _msg->z);
-  mass = _msg->mass;
+  mass_ = _msg->mass;
 }
 
 void GazeboVarForcePlugin::QueueThread() {
@@ -60,7 +60,7 @@ void GazeboVarForcePlugin::QueueThread() {
 }
 void GazeboVarForcePlugin::OnUpdate(const common::UpdateInfo &_info) {
 
-  link_->AddForceAtRelativePosition(mass * force_direction_, xyz_offset_);
+  link_->AddForceAtRelativePosition(mass_ * force_direction_, xyz_offset_);
 }
 GZ_REGISTER_MODEL_PLUGIN(GazeboVarForcePlugin);
 } // namespace gazebo
