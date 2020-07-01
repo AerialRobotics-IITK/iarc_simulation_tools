@@ -1,7 +1,5 @@
-// #include <fstream>
 #include <iarc_simulation_tools/variable_load_plugin.hpp>
 #include <iostream>
-// #include <math.h>s
 
 namespace gazebo {
 
