@@ -1,7 +1,7 @@
-#include <fstream>
+// #include <fstream>
 #include <iarc_simulation_tools/variable_load_plugin.hpp>
 #include <iostream>
-#include <math.h>
+// #include <math.h>s
 
 namespace gazebo {
 
@@ -11,7 +11,6 @@ void GazeboVarForcePlugin::Load(physics::ModelPtr _model,
                                 sdf::ElementPtr _sdf) {
 
   this->model_ = _model;
-  world_ = model_->GetWorld();
 
   if (_sdf->HasElement("robotNamespace"))
     namespace_ = _sdf->GetElement("robotNamespace")->Get<std::string>();
@@ -37,9 +36,8 @@ void GazeboVarForcePlugin::Load(physics::ModelPtr _model,
 
   ros::SubscribeOptions so =
       ros::SubscribeOptions::create<iarc_simulation_tools::LoadParams>(
-          "/" + this->model_->GetName() + "/variable_force",
-          // "/testing_ros_topic",
-          1, boost::bind(&GazeboVarForcePlugin::OnRosMsg, this, _1),
+          "/" + this->model_->GetName() + "/variable_force", 1,
+          boost::bind(&GazeboVarForcePlugin::OnRosMsg, this, _1),
           ros::VoidPtr(), &this->rosQueue);
   this->rosSub = this->rosNode->subscribe(so);
 

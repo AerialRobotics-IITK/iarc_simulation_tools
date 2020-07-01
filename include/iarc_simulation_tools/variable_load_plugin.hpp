@@ -2,20 +2,15 @@
 
 #include "ros/callback_queue.h"
 #include "ros/subscribe_options.h"
-#include "std_msgs/Float32MultiArray.h"
+#include <gazebo/common/Plugin.hh>
 #include <gazebo/common/common.hh>
 #include <gazebo/gazebo.hh>
-#include <gazebo/msgs/msgs.hh>
 #include <gazebo/physics/physics.hh>
-#include <iarc_simulation_tools/common.h>
 #include <iarc_simulation_tools/LoadParams.h>
-#include <ignition/math/Vector3.hh>
+#include <iarc_simulation_tools/common.h>
 #include <ros/ros.h>
 #include <string>
 #include <thread>
-#include <vector>
-
-#include <gazebo/common/Plugin.hh>
 
 namespace gazebo {
 
@@ -39,7 +34,6 @@ protected:
 
 private:
   event::ConnectionPtr update_connection_;
-  physics::WorldPtr world_;
   physics::ModelPtr model_;
   physics::LinkPtr link_;
   std::string namespace_;
