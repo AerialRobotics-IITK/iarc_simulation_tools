@@ -36,7 +36,7 @@ void GazeboVarForcePlugin::Load(physics::ModelPtr _model,
   this->rosNode.reset(new ros::NodeHandle("gazebo_client"));
 
   ros::SubscribeOptions so =
-      ros::SubscribeOptions::create<std_msgs::Float32MultiArray>(
+      ros::SubscribeOptions::create<iarc_simulation_tools::LoadParams>(
           "/" + this->model_->GetName() + "/variable_force",
           // "/testing_ros_topic",
           1, boost::bind(&GazeboVarForcePlugin::OnRosMsg, this, _1),
@@ -51,10 +51,9 @@ void GazeboVarForcePlugin::Load(physics::ModelPtr _model,
 }
 
 void GazeboVarForcePlugin::OnRosMsg(
-    const std_msgs::Float32MultiArrayConstPtr &_msg) {
-  std::cout << "ros message : " << _msg->data[0] << std::endl;
-  xyz_offset_.Set(_msg->data[0], _msg->data[1], _msg->data[2]);
-  mass = _msg->data[3];
+    const iarc_simulation_tools::LoadParamsConstPtr &_msg) {
+  xyz_offset_.Set(_msg->x, _msg->y, _msg->z);
+  mass = _msg->mass;
 }
 
 void GazeboVarForcePlugin::QueueThread() {

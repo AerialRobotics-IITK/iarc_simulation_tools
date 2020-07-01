@@ -8,7 +8,7 @@
 #include <gazebo/msgs/msgs.hh>
 #include <gazebo/physics/physics.hh>
 #include <iarc_simulation_tools/common.h>
-#include <iarc_simulation_tools/var_load.h>
+#include <iarc_simulation_tools/LoadParams.h>
 #include <ignition/math/Vector3.hh>
 #include <ros/ros.h>
 #include <string>
@@ -34,7 +34,7 @@ public:
 protected:
   void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf);
   void OnUpdate(const common::UpdateInfo & /*_info*/);
-  void OnRosMsg(const std_msgs::Float32MultiArrayConstPtr &_msg);
+  void OnRosMsg(const iarc_simulation_tools::LoadParamsConstPtr &_msg);
   void QueueThread();
 
 private:
