@@ -53,7 +53,7 @@
     </include>
 
     <include>
-      <uri>model://table</uri>
+      <uri>model://table_with_comm_block</uri>
       <pose>4.2756 0.063046 0.375 0 -0 3.14</pose>
     </include>
 
@@ -62,10 +62,15 @@
       <pose>-5 0 0 0 0 0</pose>
     </include>
 
-    <include>
+    <!-- <include>
       <uri>model://communications_module</uri>
-      <pose>4.280454 0.23 1.782488 0.0 0.0 -1.57079632679</pose>
-    </include>
+        <pose>4.280454 0.23 1.782488 0.0 0.0 -1.57079632679</pose>
+    </include> -->
+
+    <!-- <joint name='mast_comm_block' type='fixed'>
+      <parent>table::mast</parent>
+      <child>communications_module::link</child>
+    </joint> -->
 
     <light name='sun' type='directional'>
       <pose>0 0 10 0 0 0</pose>
