@@ -1,119 +1,12 @@
-<?xml version='1.0'?>
-<sdf version='1.6'>
-  <model name='table'>
+<?xml version="1.0" ?>
+<sdf version="1.6">
+
+  <model name="table_with_comm_block">
     <plugin name='joint_plugin' filename='libiarc_simulation_tools_joint_plugin.so' >
       <joint_name>radar_mast</joint_name>
       <angular_speed>1</angular_speed>
     </plugin>
-    <plugin name="dipole_magnet_1" filename="libiarc_simulation_tools_magnet_plugin.so">
-      <bodyName>magnet_1</bodyName>
-      <Id>1</Id>
-      <dipole_moment>0 0 0.739859</dipole_moment>
-      <!-- Set to false if not using ROS -->
-      <shouldPublish>true</shouldPublish>
-      <topicNs>magnetic_force/mast/magnet_1</topicNs>
-      <updateRate>100</updateRate>
-    </plugin>
-    <plugin name="dipole_magnet_2" filename="libiarc_simulation_tools_magnet_plugin.so">
-      <bodyName>magnet_2</bodyName>
-      <Id>2</Id>
-      <dipole_moment>0 0 0.739859</dipole_moment>
-      <!-- Set to false if not using ROS -->
-      <shouldPublish>true</shouldPublish>
-      <topicNs>magnetic_force/mast/magnet_2</topicNs>
-      <updateRate>100</updateRate>
-    </plugin>
-    <link name='magnet_1'>
-      <inertial>
-        <mass>1</mass>
-        <inertia>
-          <ixx>0.145833</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.145833</iyy>
-          <iyz>0</iyz>
-          <izz>0.125</izz>
-        </inertia>
-        <pose>0 0 0 0 -0 0</pose>
-      </inertial>
-      <self_collide>0</self_collide>
-      <enable_wind>0</enable_wind>
-      <kinematic>0</kinematic>
-      <pose >-0.004854 -0.129396 1.407488 0.003418 -1.572042 -4.696979</pose>
-      <gravity>1</gravity>
-      <visual name='visual'>
-        <geometry>
-          <cylinder>
-            <radius>0.003968</radius>
-            <length>0.0127</length>
-          </cylinder>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Grey</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
-        <pose>0 0 0 0 -0 0</pose>
-        <transparency>0</transparency>
-        <cast_shadows>1</cast_shadows>
-      </visual>
-      <collision name='collision'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <cylinder>
-            <radius>0.003968</radius>
-            <length>0.0127</length>
-          </cylinder>
-        </geometry>
-      </collision>
-    </link>
-    <link name='magnet_2'>
-      <inertial>
-        <mass>1</mass>
-        <inertia>
-          <ixx>0.145833</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.145833</iyy>
-          <iyz>0</iyz>
-          <izz>0.125</izz>
-        </inertia>
-        <pose>0 0 0 0 -0 0</pose>
-      </inertial>
-      <self_collide>0</self_collide>
-      <enable_wind>0</enable_wind>
-      <kinematic>0</kinematic>
-      <pose>-0.004854 -0.116651 1.407488 0.003418 -1.572042 -4.696979</pose>
-      <gravity>1</gravity>
-      <visual name='visual'>
-        <geometry>
-          <cylinder>
-            <radius>0.003968</radius>
-            <length>0.0127</length>
-          </cylinder>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Grey</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
-        <pose>0 0 0 0 -0 0</pose>
-        <transparency>0</transparency>
-        <cast_shadows>1</cast_shadows>
-      </visual>
-      <collision name='collision'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <cylinder>
-            <radius>0.003968</radius>
-            <length>0.0127</length>
-          </cylinder>
-        </geometry>
-      </collision>
-    </link>
-    <static>1</static>
+    <static>0</static>    
     <link name='table'>
       <inertial>
         <mass>1</mass>
@@ -206,14 +99,19 @@
     </link>
 
     <include>
+      <uri>model://communications_module</uri>
+      <pose>-0.004854 -0.176387 1.407088 0 0 1.57</pose>
+    </include>
+
+    <include>
       <uri>model://mast</uri>
       <pose>-0.215 -0.245 0.375 0 0 -1.57</pose>
     </include>
 
     <include>
       <uri>model://gun</uri>
-      <pose>1 0.75 0.375 0 -0 0.7854</pose>
-      <name>gun_back_left</name>
+        <pose>1 0.75 0.375 0 -0 0.7854</pose>
+        <name>gun_back_left</name>
     </include>
 
     <include>
@@ -269,10 +167,17 @@
     <joint name='radar_mast' type='revolute' >
       <parent>mast::link</parent>
       <child>radar::link</child>
+
       <pose>0 -0.500 0 0 0 0</pose>
       <axis>
         <xyz>0 0 1</xyz>
       </axis>
+    </joint>
+
+
+    <joint name='comm_block_table' type='fixed'>
+      <parent>table</parent>
+      <child>communications_module::link</child>
     </joint>
 
     <joint name='mast_table' type='fixed' >
