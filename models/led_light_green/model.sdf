@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
-<sdf version="1.5">
-  <model name="led_light">
+<sdf version="1.6">
+  <model name="led_light_green">
       <static>true</static>
       <link name='link'>
        <collision name="collision">
         <geometry>
             <mesh>
-              <uri>model://led_light/meshes/led_light.dae</uri>
+              <uri>model://led_light_green/meshes/led_light.dae</uri>
               <scale>0.1 0.1 0.1</scale>
             </mesh>
         </geometry>
@@ -23,9 +23,13 @@
         </surface>
       </collision>
         <visual name='visual'>
+          <plugin name='lights' filename='libiarc_simulation_tools_light_plugin.so'>
+            <led_color>Green</led_color>
+            <desired_relative_pose>-0.069 0.21 1.032 0 0 3.1415927</desired_relative_pose>
+          </plugin>
           <geometry>
             <mesh>
-              <uri>model://led_light/meshes/led_light.dae</uri>
+              <uri>model://led_light_green/meshes/led_light.dae</uri>
               <scale>0.1 0.1 0.1</scale>
             </mesh>
           </geometry>

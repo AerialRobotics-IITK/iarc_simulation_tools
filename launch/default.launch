@@ -9,7 +9,7 @@
 	<arg name="extra_gazebo_args" default=""/>
 
 
-	<arg name="world_name" default="default"/>
+	<arg name="world_name" default="static_comm_block"/>
 	<arg name="enable_logging" default="false" />
 	<arg name="enable_ground_truth" default="true" />
 	<arg name="log_file" default="$(arg mav_name)" />
@@ -32,7 +32,7 @@
 	<group ns="$(arg mav_name)">
 		<include file="$(find rotors_gazebo)/launch/spawn_mav.launch">
 			<arg name="mav_name" value="$(arg mav_name)" />
-			<arg name="model" value="$(find iarc_simulation_tools)/urdf/firefly.gazebo" />
+			<arg name="model" value="$(find iarc_simulation_tools)/urdf/mav.xacro" />
 			<arg name="enable_logging" value="$(arg enable_logging)" />
 			<arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
 			<arg name="log_file" value="$(arg log_file)"/>

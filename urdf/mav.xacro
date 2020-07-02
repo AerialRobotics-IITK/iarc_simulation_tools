@@ -23,6 +23,7 @@
   <!-- Instantiate the mav with a generic odometry sensor. -->
   <xacro:include filename="$(find rotors_description)/urdf/mav_generic_odometry_sensor.gazebo" />  
   <xacro:include filename="$(find iarc_simulation_tools)/urdf/rgbd_camera.xacro"/>
+  <xacro:include filename="$(find iarc_simulation_tools)/urdf/variable_load.xacro" />
 
   <xacro:wind_plugin_macro
     namespace="${namespace}"
@@ -37,6 +38,10 @@
     use_custom_static_wind_field="true"
     custom_wind_field_path="$(find rotors_gazebo)/models/hemicyl/wind_field_hemicyl.txt">
   </xacro:wind_plugin_macro>
+
+  <xacro:variable_load_macro
+    robot_namespace="${namespace}">
+  </xacro:variable_load_macro>
   
   <xacro:rgbd_sensor_depth_macro
     namespace="${namespace}" parent_link="${namespace}/base_link"
