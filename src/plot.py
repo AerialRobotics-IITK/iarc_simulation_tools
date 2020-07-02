@@ -9,7 +9,7 @@ def plot_x(msg):
     if counter % 10 == 0:
         stamp = msg.header.stamp
         time = stamp.secs + stamp.nsecs * 1e-9
-        plt.plot(time ,msg.pose.position.y, '*')
+        plt.plot(time ,msg.pose.position.x, '*')
 	plt.xlabel("time")
 	plt.ylabel("value")
 	plt.ylim(-0.1 , 0.1)

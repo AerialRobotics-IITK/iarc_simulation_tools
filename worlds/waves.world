@@ -222,7 +222,7 @@
     <model name="box">        
     <static>false</static>
 
-    <plugin name="hydrodynamics" filename="libHydrodynamicsPlugin.so">
+    <plugin name="hydrodynamics" filename="libHydrodynamicsPlugin.so"> -->
       <!-- Wave Model -->
       <wave_model>ocean_waves</wave_model>
 
@@ -230,6 +230,20 @@
       <damping_on>true</damping_on>
       <viscous_drag_on>true</viscous_drag_on>
       <pressure_drag_on>true</pressure_drag_on>
+
+      <cDampL1>1.0E-6</cDampL1>
+      <cDampL2>1.0E-6</cDampL2>
+      <cDampR1>1.0E-6</cDampR1>
+      <cDampR2>1.0E-6</cDampR2>
+
+      <!-- 'Pressure' Drag -->
+      <cPDrag1>1.0E+2</cPDrag1>
+      <cPDrag2>1.0E+2</cPDrag2>
+      <fPDrag>0.4</fPDrag>
+      <cSDrag1>1.0E+2</cSDrag1>
+      <cSDrag2>1.0E+2</cSDrag2>
+      <fSDrag>0.4</fSDrag>
+      <vRDrag>1.0</vRDrag>
 
       <!-- Markers -->
       <markers>

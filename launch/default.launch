@@ -5,7 +5,7 @@
 	<arg name="debug" default="false"/>
 	<arg name="verbose" default="false"/>
 	<arg name="gui" default="true"/>
-	<arg name="paused" default="true"/>
+	<arg name="paused" default="false"/>
 	<arg name="extra_gazebo_args" default=""/>
 
 
@@ -63,7 +63,5 @@
 		<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 		<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
 	</group>
-
-	<!-- <node pkg="iarc_simulation_tools" type="check" name="check" output="screen" /> -->
 
   </launch>

@@ -65,23 +65,7 @@ target_link_libraries(${PROJECT_NAME}_magnet_plugin ${GAZEBO_LIBRARIES} ${catkin
 cs_add_executable(check src/check.cpp)
 target_link_libraries(check ${catkin_LIBRARIES})
 
-#find_package(catkin REQUIRED COMPONENTS
-#  roscpp
-#  rospy
-#)
-
-#catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES gui_rosos
-#  CATKIN_DEPENDS roscpp rospy
-#  DEPENDS system_lib
-#)
-
-
-#include_directories(
-# include
-#  ${catkin_INCLUDE_DIRS}
-#)
+cs_add_executable(ros_bridge src/ros_bridge.cpp)
 
 catkin_install_python(PROGRAMS
    src/plot.py
