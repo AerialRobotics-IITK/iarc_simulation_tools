@@ -12,13 +12,21 @@ class SeaState {
     }
     ~SeaState() {   
     }
+    
+    struct Vector {
+        int x;
+        int y;
+        int z;
+    };
+
+    typedef struct Vector vector;
 
     struct Params {
-        std::string  number = "3";
-        std::string steepness = "0.0";
-        std::string scale = "1.5";
-        std::string angle = "0.4";
-        std::string direction = "1 1";
+        int number = 3;
+        double steepness = 0.0;
+        double scale = 1.5;
+        double angle = 0.4;
+        vector direction  = {1, 1, 0};
         double period = 8.0;
         double amplitude = 0.4;
     };

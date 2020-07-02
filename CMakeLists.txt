@@ -8,6 +8,7 @@ find_package(gazebo REQUIRED)
 find_package(Boost REQUIRED COMPONENTS thread)
 
 include_directories(${GAZEBO_INCLUDE_DIRS})
+include_directories(${GAZEBO_MSG_INCLUDE_DIRS})
 link_directories(${GAZEBO_LIBRARY_DIRS})
 list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
 
@@ -29,7 +30,9 @@ target_link_libraries(${PROJECT_NAME}_magnet_plugin ${GAZEBO_LIBRARIES} ${catkin
 cs_add_executable(check src/check.cpp)
 target_link_libraries(check ${catkin_LIBRARIES})
 
-cs_add_executable(ros_bridge src/ros_bridge.cpp)
+cs_add_executable(${PROJECT_NAME}_sea_state_node src/ros_sea_state_subscriber_node.cpp)
+cs_add_library(${PROJECT_NAME}_sea_state src/ros_sea_state_subscriber)
+target_link_libraries(${PROJECT_NAME}_sea_state_node ${PROJECT_NAME}_sea_state ${GAZEBO_LIBRARIES})
 
 catkin_install_python(PROGRAMS
    src/plot.py

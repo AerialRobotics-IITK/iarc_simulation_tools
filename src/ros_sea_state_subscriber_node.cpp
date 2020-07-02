@@ -1,4 +1,4 @@
-#include <iarc_simulation_tools/ros_bridge.hpp>
+#include <iarc_simulation_tools/ros_sea_state_subscriber.hpp>
 
 using namespace iarc_simulation_tools;
 
