@@ -33,6 +33,7 @@ target_link_libraries(check ${catkin_LIBRARIES})
 cs_add_executable(${PROJECT_NAME}_sea_state_node src/ros_sea_state_subscriber_node.cpp)
 cs_add_library(${PROJECT_NAME}_sea_state src/ros_sea_state_subscriber)
 target_link_libraries(${PROJECT_NAME}_sea_state_node ${PROJECT_NAME}_sea_state ${GAZEBO_LIBRARIES})
+add_dependencies(${PROJECT_NAME}_sea_state_node ${catkin_EXPORTED_TARGETS})
 
 catkin_install_python(PROGRAMS
    src/plot.py

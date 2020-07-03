@@ -9,10 +9,12 @@ void RosBridge::init(ros::NodeHandle& nh) {
     node_ = gazebo::transport::NodePtr(new gazebo::transport::Node());
     node_->Init();
     current_sea_state_.data = 12;
+    direction_.z = 0; 
 
     sea_state_sub_ = nh.subscribe("/sea_state", 10, &RosBridge::getSeaState, this );
-    wave_pub_ = node_->Advertise<gazebo::msgs::Param_V>("~/wave");    
+    wave_pub_ = node_->Advertise<gazebo::msgs::Param_V>("~/wave");      
 }
+
 void RosBridge::getSeaState(const std_msgs::Int32& msg) {
 
     if(current_sea_state_.data != msg.data) {
@@ -21,6 +23,17 @@ void RosBridge::getSeaState(const std_msgs::Int32& msg) {
     }
 
 }
+
+void RosBridge::getWindDirection(const rotors_comm::WindSpeed& msg) {
+    double x = msg.velocity.x;
+    double y = msg.velocity.y;
+
+    double norm = sqrt(pow(x, 2) + pow(y, 2));
+
+    direction_.x = x / norm;
+    direction_.y = y / norm;
+}
+
 void RosBridge::publishWaveState() {
 
     auto v_param = states_.v_param_[current_sea_state_.data];
@@ -54,9 +67,9 @@ void RosBridge::publishWaveState() {
     nextParam = waveMsg.add_param();
     nextParam->set_name("direction");
     nextParam->mutable_value()->set_type(gazebo::msgs::Any::VECTOR3D);
-    nextParam->mutable_value()->mutable_vector3d_value()->set_x(v_param.direction.x);
-    nextParam->mutable_value()->mutable_vector3d_value()->set_y(v_param.direction.y);
-    nextParam->mutable_value()->mutable_vector3d_value()->set_z(0);
+    nextParam->mutable_value()->mutable_vector3d_value()->set_x(direction_.x);
+    nextParam->mutable_value()->mutable_vector3d_value()->set_y(direction_.y);
+    nextParam->mutable_value()->mutable_vector3d_value()->set_z(direction_.z);
 
     wave_pub_->WaitForConnection(gazebo::common::Time(1, 0));
 
