@@ -7,10 +7,11 @@ void RosBridge::init(ros::NodeHandle& nh) {
     gazebo::transport::run();
     node_ = gazebo::transport::NodePtr(new gazebo::transport::Node());
     node_->Init();
-    current_sea_state_.data = 12;
+    current_sea_state_.data = 3;
     direction_.z = 0;
 
     sea_state_sub_ = nh.subscribe("/sea_state", 10, &RosBridge::getSeaState, this);
+    sea_direction_sub_ = nh.subscribe("/sea_direction", 10, &RosBridge::getSeaDirection, this);
     wave_pub_ = node_->Advertise<gazebo::msgs::Param_V>("~/wave");
 }
 
@@ -21,6 +22,12 @@ void RosBridge::getSeaState(const std_msgs::Int32& msg) {
     }
 }
 
+void RosBridge::getSeaDirection(const geometry_msgs::Point& msg) {
+    if (current_sea_direction_ != msg) {
+        direction_.x = msg.x;
+        direction_.y = msg.y;
+        RosBridge::publishWaveState();
+    }
 }
 
 void RosBridge::getWindDirection(const rotors_comm::WindSpeed& msg) {
