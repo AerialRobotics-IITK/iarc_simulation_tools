@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>iarc_simulation_tools</name>
+    <version>0.0.1</version>
+    <description>Simulation environment for IARC Mission 9</description>
+    <maintainer email="aerialroboticsiitk@gmail.com">aerial-robotics-iitk-bot</maintainer>
+
+    <license>TODO</license>
+
+    <buildtool_depend>catkin</buildtool_depend>
+    <buildtool_depend>catkin_simple</buildtool_depend>
+
+    <depend>iarc_magnet_plugin</depend>
+    <depend>iarc_sim_test_tools</depend>
+    <depend>iarc_simulation_msgs</depend>
+    <depend>iarc_state_plugins</depend>
+    <depend>iarc_wave_sim_gazebo</depend>
+    <depend>iarc_wave_sim_gazebo_plugins</depend>
+
+    <export>
+        <gazebo_ros gazebo_model_path="${prefix}/models"/>
+        <gazebo_ros gazebo_resource_path="${prefix}/models"/>
+	    <gazebo_ros gazebo_plugin_path="${prefix}/lib" gazebo_media_path="${prefix}"/>
+    </export>
+</package>
