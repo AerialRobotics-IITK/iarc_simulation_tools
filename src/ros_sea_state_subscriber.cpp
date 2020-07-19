@@ -3,24 +3,23 @@
 namespace iarc_simulation_tools {
 
 void RosBridge::init(ros::NodeHandle& nh) {
-
     gazebo::transport::init();
     gazebo::transport::run();
     node_ = gazebo::transport::NodePtr(new gazebo::transport::Node());
     node_->Init();
     current_sea_state_.data = 12;
-    direction_.z = 0; 
+    direction_.z = 0;
 
-    sea_state_sub_ = nh.subscribe("/sea_state", 10, &RosBridge::getSeaState, this );
-    wave_pub_ = node_->Advertise<gazebo::msgs::Param_V>("~/wave");      
+    sea_state_sub_ = nh.subscribe("/sea_state", 10, &RosBridge::getSeaState, this);
+    wave_pub_ = node_->Advertise<gazebo::msgs::Param_V>("~/wave");
 }
 
 void RosBridge::getSeaState(const std_msgs::Int32& msg) {
-
-    if(current_sea_state_.data != msg.data) {
+    if (current_sea_state_.data != msg.data) {
         current_sea_state_.data = msg.data;
         RosBridge::publishWaveState();
     }
+}
 
 }
 
@@ -35,10 +34,9 @@ void RosBridge::getWindDirection(const rotors_comm::WindSpeed& msg) {
 }
 
 void RosBridge::publishWaveState() {
-
     auto v_param = states_.v_param_[current_sea_state_.data];
     gazebo::msgs::Param_V waveMsg;
-    gazebo::msgs::Param*  nextParam = waveMsg.add_param();
+    gazebo::msgs::Param* nextParam = waveMsg.add_param();
 
     nextParam->set_name("number");
     nextParam->mutable_value()->set_type(gazebo::msgs::Any::INT32);
@@ -69,7 +67,6 @@ void RosBridge::publishWaveState() {
     nextParam->mutable_value()->set_type(gazebo::msgs::Any::VECTOR3D);
     nextParam->mutable_value()->mutable_vector3d_value()->set_x(direction_.x);
     nextParam->mutable_value()->mutable_vector3d_value()->set_y(direction_.y);
-    nextParam->mutable_value()->mutable_vector3d_value()->set_z(direction_.z);
 
     wave_pub_->WaitForConnection(gazebo::common::Time(1, 0));
 
@@ -77,6 +74,6 @@ void RosBridge::publishWaveState() {
 
     std::cout << "Publishing on topic [" << wave_pub_->GetTopic() << "]" << std::endl;
     std::cout << waveMsg.DebugString() << std::endl;
-
 }
-} //namespace iarc_simulation_tools
+
+}  // namespace iarc_simulation_tools

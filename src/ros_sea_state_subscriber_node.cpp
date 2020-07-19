@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
 
     bridge_.init(nh_);
 
-    while(ros::ok()) {
+    while (ros::ok()) {
         ros::spinOnce();
         rate.sleep();
     }
