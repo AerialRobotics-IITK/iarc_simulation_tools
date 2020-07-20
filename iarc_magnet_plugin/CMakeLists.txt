@@ -12,8 +12,8 @@ include_directories(${GAZEBO_MSG_INCLUDE_DIRS})
 link_directories(${GAZEBO_LIBRARY_DIRS})
 list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
 
-add_library(${PROJECT_NAME}_magnet_plugin SHARED src/dipole_magnet.cpp)
-target_link_libraries(${PROJECT_NAME}_magnet_plugin ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_library(${PROJECT_NAME} SHARED src/dipole_magnet.cpp)
+target_link_libraries(${PROJECT_NAME} ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 cs_install()
 cs_export()

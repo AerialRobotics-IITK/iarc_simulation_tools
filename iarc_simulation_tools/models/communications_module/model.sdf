@@ -1,11 +1,11 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
   <model name="communications_module">
-      <plugin name="link_states" filename="libiarc_simulation_tools_link_plugin.so">
+      <plugin name="link_states" filename="libiarc_state_plugins_link_plugin.so">
         <link_name>link</link_name>
       </plugin>
       <static>0</static>
-      <plugin name="dipole_magnet" filename="libiarc_simulation_tools_magnet_plugin.so">
+      <plugin name="dipole_magnet" filename="libiarc_magnet_plugin.so">
         <bodyName>magnet</bodyName>
         <Id>3</Id>
         <dipole_moment>0 0 0.739859</dipole_moment>

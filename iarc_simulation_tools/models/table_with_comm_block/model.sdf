@@ -2,7 +2,7 @@
 <sdf version="1.6">
 
   <model name="table_with_comm_block">
-    <plugin name='joint_plugin' filename='libiarc_simulation_tools_joint_plugin.so' >
+    <plugin name='joint_plugin' filename='libiarc_state_plugins_joint_plugin.so' >
       <joint_name>radar_mast</joint_name>
       <angular_speed>1</angular_speed>
     </plugin>

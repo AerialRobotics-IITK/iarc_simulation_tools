@@ -1,11 +1,11 @@
 <?xml version='1.0'?>
 <sdf version='1.6'>
   <model name='table'>
-    <plugin name='joint_plugin' filename='libiarc_simulation_tools_joint_plugin.so' >
+    <plugin name='joint_plugin' filename='libiarc_state_plugins_joint_plugin.so' >
       <joint_name>radar_mast</joint_name>
       <angular_speed>1</angular_speed>
     </plugin>
-    <plugin name="dipole_magnet_1" filename="libiarc_simulation_tools_magnet_plugin.so">
+    <plugin name="dipole_magnet_1" filename="libiarc_magnet_plugin.so">
       <bodyName>magnet_1</bodyName>
       <Id>1</Id>
       <dipole_moment>0 0 0.739859</dipole_moment>
@@ -14,7 +14,7 @@
       <topicNs>magnetic_force/mast/magnet_1</topicNs>
       <updateRate>100</updateRate>
     </plugin>
-    <plugin name="dipole_magnet_2" filename="libiarc_simulation_tools_magnet_plugin.so">
+    <plugin name="dipole_magnet_2" filename="libiarc_magnet_plugin.so">
       <bodyName>magnet_2</bodyName>
       <Id>2</Id>
       <dipole_moment>0 0 0.739859</dipole_moment>

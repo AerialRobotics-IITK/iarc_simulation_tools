@@ -9,7 +9,9 @@
 
     <buildtool_depend>catkin</buildtool_depend>
     <buildtool_depend>catkin_simple</buildtool_depend>
+    
     <depend>geometry_msgs</depend>
+    <depend>roscpp</depend>
 
     <!-- <export>
         <gazebo_ros gazebo_model_path="${prefix}/models"/>

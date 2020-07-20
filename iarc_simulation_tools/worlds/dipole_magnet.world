@@ -94,7 +94,7 @@
           </material>
         </visual>
       </link>
-      <plugin name="dipole_magnet" filename="libiarc_simulation_tools_magnet_plugin.so">
+      <plugin name="dipole_magnet" filename="libiarc_magnet_plugin.so">
           <bodyName>magnet</bodyName>
           <dipole_moment>0 0 970</dipole_moment>
           <shouldPublish>false</shouldPublish>
@@ -136,7 +136,7 @@
         </visual>
       </link>
 
-      <plugin name="dipole_magnet" filename="libiarc_simulation_tools_magnet_plugin.so">
+      <plugin name="dipole_magnet" filename="libiarc_magnet_plugin.so">
         <bodyName>magnet</bodyName>
         <dipole_moment>0 0 1.26</dipole_moment>
         <!-- Set to false if not using ROS -->
