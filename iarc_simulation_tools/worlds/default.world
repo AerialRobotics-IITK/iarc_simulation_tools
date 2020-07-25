@@ -68,7 +68,7 @@
     </include>
 
     <include>
-      <uri>model:://gripper</uri>
+      <uri>model://gripper</uri>
       <name>gripper</name>
       <pose>5 5 5 0 0 0</pose>
     </include>
