@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <sdf version="1.6">
   <model name='gripper'>
+    <static>False</static>
     <link name='left_long_joint'>
       <pose>0 0.2517 0.019 -1.57 0 0</pose>
       <collision name="collision">
@@ -242,6 +243,127 @@
       </visual>
     </link>
 
+    <link name='flat_plate5'>
+      <pose>0.0456 0.2565 -0.007 1.57 0 -1.132</pose>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x03</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name='flat_plate6'>
+      <pose>-0.1289 -0.02 -0.007 1.57 0 -1.132</pose>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x03</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name='flat_plate7'>
+      <pose>-0.1515 0.031 -0.007 1.57 0 1.132</pose>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x03</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name='flat_plate8'>
+      <pose>0.022 -0.245 -0.007 1.57 0 1.132</pose>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x03</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
     <link name='screw_rod'>
       <pose> 0 -0.32 0.017 0 0 1.57</pose>
       <collision name="collision">
@@ -272,6 +394,200 @@
         </geometry>
       </visual>
     </link>
+
+    <joint name="j1" type="revolute">
+      <pose> 0 0 0.01 0 0 0</pose>
+      <child>flat_plate1</child>
+      <parent>left_short_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j2" type="revolute">
+      <pose> 0.25 0 0.01 0 0 0</pose>
+      <child>flat_plate1</child>
+      <parent>left_long_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j3" type="revolute">
+      <pose> 0 0 0.01 0 0 0</pose>
+      <child>flat_plate2</child>
+      <parent>right_short_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j4" type="revolute">
+      <pose> 0.25 0 0.01 0 0 0</pose>
+      <child>flat_plate2</child>
+      <parent>right_long_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j5" type="revolute">
+      <pose> 0 0 0.01 0 0 0</pose>
+      <child>flat_plate3</child>
+      <parent>right_short_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j6" type="revolute">
+      <pose> 0.25 0 0.01 0 0 0</pose>
+      <child>flat_plate3</child>
+      <parent>left_long_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j7" type="revolute">
+      <pose> 0 0 0.01 0 0 0</pose>
+      <child>flat_plate4</child>
+      <parent>left_short_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j8" type="revolute">
+      <pose> 0.25 0 0.01 0 0 0</pose>
+      <child>flat_plate4</child>
+      <parent>right_long_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+
+    <joint name="j9" type="revolute">
+      <pose> 0 0 0.01 0 0 0</pose>
+      <child>flat_plate5</child>
+      <parent>left_short_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit>
+        <xyz>0 -1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j10" type="revolute">
+      <pose> 0.25 0 0.01 0 0 0</pose>
+      <child>flat_plate5</child>
+      <parent>left_long_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit>
+        <xyz>0 -1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j11" type="revolute">
+      <pose> 0 0 0.01 0 0 0</pose>
+      <child>flat_plate6</child>
+      <parent>right_short_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit>
+        <xyz>0 -1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j12" type="revolute">
+      <pose> 0.25 0 0.01 0 0 0</pose>
+      <child>flat_plate6</child>
+      <parent>right_long_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit>
+        <xyz>0 -1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j13" type="revolute">
+      <pose> 0 0 0.01 0 0 0</pose>
+      <child>flat_plate7</child>
+      <parent>right_short_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit>
+        <xyz>0 -1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j14" type="revolute">
+      <pose> 0.25 0 0.01 0 0 0</pose>
+      <child>flat_plate7</child>
+      <parent>left_long_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit>
+        <xyz>0 -1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j15" type="revolute">
+      <pose> 0 0 0.01 0 0 0</pose>
+      <child>flat_plate8</child>
+      <parent>left_short_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit>
+        <xyz>0 -1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j16" type="revolute">
+      <pose> 0.25 0 0.01 0 0 0</pose>
+      <child>flat_plate8</child>
+      <parent>right_long_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit>
+        <xyz>0 -1 0</xyz>
+      </axis>
+    </joint>
   </model>
   </sdf>
      
