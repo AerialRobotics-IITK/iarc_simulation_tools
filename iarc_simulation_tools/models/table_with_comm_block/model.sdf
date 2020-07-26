@@ -6,7 +6,7 @@
       <joint_name>radar_mast</joint_name>
       <angular_speed>1</angular_speed>
     </plugin>
-    <static>0</static>    
+    <static>0</static>
     <link name='table'>
       <inertial>
         <mass>1</mass>
@@ -110,8 +110,8 @@
 
     <include>
       <uri>model://gun</uri>
-        <pose>1 0.75 0.375 0 -0 0.7854</pose>
-        <name>gun_back_left</name>
+      <pose>1 0.75 0.375 0 -0 0.7854</pose>
+      <name>gun_back_left</name>
     </include>
 
     <include>

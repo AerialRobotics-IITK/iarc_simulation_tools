@@ -1,41 +1,41 @@
 <sdf version="1.6">
   <world name="waves">
-  
+
     <model name="ocean_waves">
       <static>true</static>
       <plugin name="wavefield" filename="libWavefieldModelPlugin.so">
-	  <static>false</static>
-	  <update_rate>30</update_rate>
-	  <size>1000 1000</size>
-	  <cell_count>50 50</cell_count>
-	  <wave>
-	    <number>3</number>
-	    <scale>1.5</scale>
-	    <angle>0.4</angle>
-	    <steepness>0.0</steepness>
-	    <amplitude>0.4</amplitude>
-	    <period>8.0</period>
-	    <direction>1 1</direction>
-	  </wave>
-	  <markers>
-	    <wave_patch>false</wave_patch>
-	    <wave_patch_size>4 4</wave_patch_size>
-	  </markers>
-	</plugin>
+        <static>false</static>
+        <update_rate>30</update_rate>
+        <size>1000 1000</size>
+        <cell_count>50 50</cell_count>
+        <wave>
+          <number>3</number>
+          <scale>1.5</scale>
+          <angle>0.4</angle>
+          <steepness>0.0</steepness>
+          <amplitude>0.4</amplitude>
+          <period>8.0</period>
+          <direction>1 1</direction>
+        </wave>
+        <markers>
+          <wave_patch>false</wave_patch>
+          <wave_patch_size>4 4</wave_patch_size>
+        </markers>
+      </plugin>
       <link name="ocean_waves_link">
         <visual name="ocean_waves_visual">
           <plugin name="wavefield_visual" filename="libWavefieldVisualPlugin.so">
-		  <static>false</static>
-		  <wave>
-		    <number>3</number>
-		    <scale>1.5</scale>
-		    <angle>0.4</angle>
-		    <steepness>0.0</steepness>
-		    <amplitude>0.4</amplitude>
-		    <period>8.0</period>
-		    <direction>1 1</direction>
-		  </wave>
-	 </plugin>
+            <static>false</static>
+            <wave>
+              <number>3</number>
+              <scale>1.5</scale>
+              <angle>0.4</angle>
+              <steepness>0.0</steepness>
+              <amplitude>0.4</amplitude>
+              <period>8.0</period>
+              <direction>1 1</direction>
+            </wave>
+          </plugin>
           <geometry>
             <mesh>
               <uri>model://ocean_waves/meshes/mesh.dae</uri>
@@ -219,73 +219,73 @@
         </buoyancy>
       </plugin> -->
     </model>
-    <model name="box">        
-    <static>false</static>
+    <model name="box">
+      <static>false</static>
 
-    <plugin name="hydrodynamics" filename="libHydrodynamicsPlugin.so"> -->
-      <!-- Wave Model -->
-      <wave_model>ocean_waves</wave_model>
+      <plugin name="hydrodynamics" filename="libHydrodynamicsPlugin.so"> -->
+        <!-- Wave Model -->
+        <wave_model>ocean_waves</wave_model>
 
-      <!-- Hydrodynamics -->
-      <damping_on>true</damping_on>
-      <viscous_drag_on>true</viscous_drag_on>
-      <pressure_drag_on>true</pressure_drag_on>
+        <!-- Hydrodynamics -->
+        <damping_on>true</damping_on>
+        <viscous_drag_on>true</viscous_drag_on>
+        <pressure_drag_on>true</pressure_drag_on>
 
-      <cDampL1>1.0E-6</cDampL1>
-      <cDampL2>1.0E-6</cDampL2>
-      <cDampR1>1.0E-6</cDampR1>
-      <cDampR2>1.0E-6</cDampR2>
+        <cDampL1>1.0E-6</cDampL1>
+        <cDampL2>1.0E-6</cDampL2>
+        <cDampR1>1.0E-6</cDampR1>
+        <cDampR2>1.0E-6</cDampR2>
 
-      <!-- 'Pressure' Drag -->
-      <cPDrag1>1.0E+2</cPDrag1>
-      <cPDrag2>1.0E+2</cPDrag2>
-      <fPDrag>0.4</fPDrag>
-      <cSDrag1>1.0E+2</cSDrag1>
-      <cSDrag2>1.0E+2</cSDrag2>
-      <fSDrag>0.4</fSDrag>
-      <vRDrag>1.0</vRDrag>
+        <!-- 'Pressure' Drag -->
+        <cPDrag1>1.0E+2</cPDrag1>
+        <cPDrag2>1.0E+2</cPDrag2>
+        <fPDrag>0.4</fPDrag>
+        <cSDrag1>1.0E+2</cSDrag1>
+        <cSDrag2>1.0E+2</cSDrag2>
+        <fSDrag>0.4</fSDrag>
+        <vRDrag>1.0</vRDrag>
 
-      <!-- Markers -->
-      <markers>
-        <update_rate>30</update_rate>
-        <water_patch>false</water_patch>
-        <waterline>false</waterline>
-        <underwater_surface>false</underwater_surface>
-      </markers>
-    </plugin>
+        <!-- Markers -->
+        <markers>
+          <update_rate>30</update_rate>
+          <water_patch>false</water_patch>
+          <waterline>false</waterline>
+          <underwater_surface>false</underwater_surface>
+        </markers>
+      </plugin>
 
-    <link name="base_link">
-      <visual name="base_visual">
-        <geometry>
-          <box>
-            <size>10 4 2</size>
-          </box>
-        </geometry>
-      </visual>
+      <link name="base_link">
+        <visual name="base_visual">
+          <geometry>
+            <box>
+              <size>10 4 2</size>
+            </box>
+          </geometry>
+        </visual>
 
-      <collision name="base_collision">
-        <geometry>
-          <box>
-            <size>10 4 2</size>
-          </box>
-        </geometry>
-      </collision>
+        <collision name="base_collision">
+          <geometry>
+            <box>
+              <size>10 4 2</size>
+            </box>
+          </geometry>
+        </collision>
 
-      <!-- Mass and inertial assume volume is 0.25 densitity of water -->
-      <inertial>
-        <pose>0 0 0 0 0 0</pose>
-        <mass>20000</mass>
-        <inertia>
-          <ixx>33333</ixx>
-          <ixy>0.0</ixy>
-          <ixz>0.0</ixz>
-          <iyy>173333</iyy>
-          <iyz>0.0</iyz>
-          <izz>193333</izz>
-        </inertia>
-      </inertial>
+        <!-- Mass and inertial assume volume is 0.25 densitity of water -->
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>20000</mass>
+          <inertia>
+            <ixx>33333</ixx>
+            <ixy>0.0</ixy>
+            <ixz>0.0</ixz>
+            <iyy>173333</iyy>
+            <iyz>0.0</iyz>
+            <izz>193333</izz>
+          </inertia>
+        </inertial>
 
-    </link>
-  </model>
+      </link>
+    </model>
   </world>
 </sdf>

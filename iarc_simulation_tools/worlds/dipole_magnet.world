@@ -1,4 +1,4 @@
-<?xml version="1.0"?> 
+<?xml version="1.0"?>
 <sdf version="1.4">
   <world name="default">
 
@@ -95,13 +95,13 @@
         </visual>
       </link>
       <plugin name="dipole_magnet" filename="libiarc_magnet_plugin.so">
-          <bodyName>magnet</bodyName>
-          <dipole_moment>0 0 970</dipole_moment>
-          <shouldPublish>false</shouldPublish>
-          <topicNs>magnetic_moment_dipole</topicNs>
-          <xyzOffset>0 0 0</xyzOffset>
+        <bodyName>magnet</bodyName>
+        <dipole_moment>0 0 970</dipole_moment>
+        <shouldPublish>false</shouldPublish>
+        <topicNs>magnetic_moment_dipole</topicNs>
+        <xyzOffset>0 0 0</xyzOffset>
       </plugin>
-    </model>        
+    </model>
 
     <model name="capsule_magnet">
       <pose>0.08 0 0.925 0 0 0</pose>

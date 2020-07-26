@@ -1,4 +1,4 @@
-<sdf version='1.6'> 
+<sdf version='1.6'>
   <world name='default'>
     <plugin name="ros_interface_plugin" filename="librotors_gazebo_ros_interface_plugin.so"/>
     <!-- <model name='ground_plane'>
@@ -778,7 +778,7 @@
         </collision>
       </link>
       <!-- <frame name='communications_module_centre' attached_to='table'> -->
-        <!-- <pose relative_to='table'>-0.004854 -0.176386 1.407488 0.003418 -0.002042 -4.696979</pose> -->
+      <!-- <pose relative_to='table'>-0.004854 -0.176386 1.407488 0.003418 -0.002042 -4.696979</pose> -->
       <!-- </frame> -->
       <frame name='top_surface' attached_to='table'>
         <pose relative_to='table'>0 0 0.375 0 -0 0</pose>
@@ -1695,24 +1695,24 @@
           <period>8.0</period>
           <direction>1 1</direction>
         </wave>
-	      <markers>
-	        <wave_patch>false</wave_patch>
-	        <wave_patch_size>4 4</wave_patch_size>
-	      </markers> 
+        <markers>
+          <wave_patch>false</wave_patch>
+          <wave_patch_size>4 4</wave_patch_size>
+        </markers>
       </plugin>
       <link name="ocean_waves_link">
         <visual name="ocean_waves_visual">
           <plugin filename="libWavefieldVisualPlugin.so" name="ocean_waves_visual_plugin">
             <static>false</static>
-		        <wave>
-            <number>3</number>
-            <scale>1.5</scale>
-            <angle>0.4</angle>
-            <steepness>0.0</steepness>
-            <amplitude>0.4</amplitude>
-            <period>8.0</period>
-            <direction>1 1</direction>
-          </wave>
+            <wave>
+              <number>3</number>
+              <scale>1.5</scale>
+              <angle>0.4</angle>
+              <steepness>0.0</steepness>
+              <amplitude>0.4</amplitude>
+              <period>8.0</period>
+              <direction>1 1</direction>
+            </wave>
           </plugin>
           <geometry>
             <mesh>
@@ -1759,7 +1759,7 @@
       <grid>false</grid>
       <origin_visual>false</origin_visual>
     </scene>
-    
+
   </world>
 </sdf>
 

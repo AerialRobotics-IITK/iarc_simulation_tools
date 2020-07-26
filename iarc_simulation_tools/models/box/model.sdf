@@ -16,7 +16,7 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 <sdf version="1.6">
-  <model name="box">        
+  <model name="box">
     <static>false</static>
 
     <plugin name="hydrodynamics" filename="libHydrodynamicsPlugin.so">
