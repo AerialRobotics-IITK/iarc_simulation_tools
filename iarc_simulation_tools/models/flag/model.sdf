@@ -1,35 +1,36 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
   <model name="flag">
-      <static>true</static>
-      <link name='link'>
-       <collision name="collision">
+    <static>0</static>
+    <link name='link'>
+      <inertial>
+        <mass>2.843</mass>
+        <inertia>
+          <ixx>0.5257</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.5257</iyy>
+          <iyz>0</iyz>
+          <izz>0.0003</izz>
+        </inertia>
+        <pose>0 0 0.74475 0 0 0</pose>
+      </inertial>
+      <collision name="collision">
         <geometry>
-            <mesh>
-              <uri>model://flag/meshes/flag.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
+          <mesh>
+            <uri>model://flag/meshes/flag.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
         </geometry>
-        <surface>
-          <contact>
-             <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
       </collision>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://flag/meshes/flag.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-        </visual>
-      </link>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://flag/meshes/flag.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
   </model>
 </sdf>
