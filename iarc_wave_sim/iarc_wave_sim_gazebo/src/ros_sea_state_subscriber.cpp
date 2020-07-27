@@ -74,7 +74,8 @@ void RosBridge::publishWaveState() {
     nextParam->mutable_value()->set_type(gazebo::msgs::Any::VECTOR3D);
     nextParam->mutable_value()->mutable_vector3d_value()->set_x(direction_.x);
     nextParam->mutable_value()->mutable_vector3d_value()->set_y(direction_.y);
-
+    nextParam->mutable_value()->mutable_vector3d_value()->set_z(0);
+    
     wave_pub_->WaitForConnection(gazebo::common::Time(1, 0));
 
     wave_pub_->Publish(waveMsg, true);

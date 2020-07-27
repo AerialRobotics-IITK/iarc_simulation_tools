@@ -56,6 +56,7 @@ namespace iarc
   /// \param[out] _meshes   A vector of vectors containing a surface mesh for each collision in a link.
   void CreateCollisionMeshes(
     physics::ModelPtr _model,
+    sdf::ElementPtr _sdf,
     std::vector<physics::LinkPtr>& _links,
     std::vector<std::vector<std::shared_ptr<Mesh>>>& _meshes)
   {
@@ -65,156 +66,160 @@ namespace iarc
     GZ_ASSERT(_model != nullptr, "Invalid parameter _model");
     std::string modelName(_model->GetName());
 
+    GZ_ASSERT(_sdf->HasElement("link_name"), "Link name must be specified");
+    GZ_ASSERT(_model->HasLinkState(_sdf->GetElement("link_name")->Get<std::string>()), "Link name must be valid");
+
+    physics::LinkPtr hydrodynamic_link = _model->GetLink(_sdf->GetElement("link_name")->Get<std::string>());
+
     // Links
-    for (auto&& link : _model->GetLinks())
+    // for (auto&& link : _model->GetLinks())
+    // {
+    GZ_ASSERT(hydrodynamic_link != nullptr, "Link must be valid");
+    _links.push_back(hydrodynamic_link);
+    std::string linkName(hydrodynamic_link->GetName());
+    std::vector<std::shared_ptr<Mesh>> linkMeshes;
+      
+    // Collisions
+    for (auto&& collision : hydrodynamic_link->GetCollisions())
     {
-      GZ_ASSERT(link != nullptr, "Link must be valid");
-      _links.push_back(link);
-      std::string linkName(link->GetName());
-      std::vector<std::shared_ptr<Mesh>> linkMeshes;
-      
-      // Collisions
-      for (auto&& collision : link->GetCollisions())
+      GZ_ASSERT(collision != nullptr, "Collision must be valid");
+      std::string collisionName(collision->GetName());
+
+      // Shape
+      physics::ShapePtr shape = collision->GetShape();
+      GZ_ASSERT(shape != nullptr, "Shape must be valid");
+      gzmsg << "Shape:      " << shape->TypeStr() << std::endl;
+      gzmsg << "Scale:      " << shape->Scale() << std::endl;
+      gzmsg << "Type:       " << std::hex << shape->GetType() << std::dec << std::endl;
+
+      if (shape->HasType(physics::Base::EntityType::BOX_SHAPE))
       {
-        GZ_ASSERT(collision != nullptr, "Collision must be valid");
-        std::string collisionName(collision->GetName());
-  
-        // Shape
-        physics::ShapePtr shape = collision->GetShape();
-        GZ_ASSERT(shape != nullptr, "Shape must be valid");
-        gzmsg << "Shape:      " << shape->TypeStr() << std::endl;
-        gzmsg << "Scale:      " << shape->Scale() << std::endl;
-        gzmsg << "Type:       " << std::hex << shape->GetType() << std::dec << std::endl;
+        // BoxShape
+        gzmsg << "Type:       " << "BOX_SHAPE" << std::endl;
+        physics::BoxShapePtr box = boost::dynamic_pointer_cast<physics::BoxShape>(shape);
+        GZ_ASSERT(box != nullptr, "Failed to cast Shape to BoxShape");
+        gzmsg << "Size:       " << box->Size() << std::endl;
 
-        if (shape->HasType(physics::Base::EntityType::BOX_SHAPE))
-        {
-          // BoxShape
-          gzmsg << "Type:       " << "BOX_SHAPE" << std::endl;
-          physics::BoxShapePtr box = boost::dynamic_pointer_cast<physics::BoxShape>(shape);
-          GZ_ASSERT(box != nullptr, "Failed to cast Shape to BoxShape");
-          gzmsg << "Size:       " << box->Size() << std::endl;
+        // Mesh
+        std::string meshName = std::string(modelName)
+          .append(".").append(linkName)
+          .append(".").append(collisionName)
+          .append(".box");
+        common::MeshManager::Instance()->CreateBox(
+          meshName,
+          box->Size(),
+          ignition::math::Vector2d(1, 1));          
+        GZ_ASSERT(common::MeshManager::Instance()->HasMesh(meshName),
+          "Failed to create Mesh for BoxShape");
 
-          // Mesh
-          std::string meshName = std::string(modelName)
-            .append(".").append(linkName)
-            .append(".").append(collisionName)
-            .append(".box");
-          common::MeshManager::Instance()->CreateBox(
-            meshName,
-            box->Size(),
-            ignition::math::Vector2d(1, 1));          
-          GZ_ASSERT(common::MeshManager::Instance()->HasMesh(meshName),
-            "Failed to create Mesh for BoxShape");
+        std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
+        MeshTools::MakeSurfaceMesh(
+          *common::MeshManager::Instance()->GetMesh(meshName), *mesh);
+        GZ_ASSERT(mesh != nullptr, "Invalid Suface Mesh");
+        linkMeshes.push_back(mesh);
+        
+        // gzmsg << "Mesh:       " << mesh->GetName() << std::endl;
+        gzmsg << "Vertex:     " << mesh->number_of_vertices() << std::endl;
+      }
+    
+      if (shape->HasType(physics::Base::EntityType::CYLINDER_SHAPE))
+      {
+        // CylinderShape
+        gzmsg << "Type:       " << "CYLINDER_SHAPE" << std::endl;
+        physics::CylinderShapePtr cylinder = boost::dynamic_pointer_cast<physics::CylinderShape>(shape);
+        GZ_ASSERT(cylinder != nullptr, "Failed to cast Shape to CylinderShape");
+        gzmsg << "Radius:     " << cylinder->GetRadius() << std::endl;
+        gzmsg << "Length:     " << cylinder->GetLength() << std::endl;
 
-          std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
-          MeshTools::MakeSurfaceMesh(
-            *common::MeshManager::Instance()->GetMesh(meshName), *mesh);
-          GZ_ASSERT(mesh != nullptr, "Invalid Suface Mesh");
-          linkMeshes.push_back(mesh);
-          
-          // gzmsg << "Mesh:       " << mesh->GetName() << std::endl;
-          gzmsg << "Vertex:     " << mesh->number_of_vertices() << std::endl;
-        }
-      
-        if (shape->HasType(physics::Base::EntityType::CYLINDER_SHAPE))
-        {
-          // CylinderShape
-          gzmsg << "Type:       " << "CYLINDER_SHAPE" << std::endl;
-          physics::CylinderShapePtr cylinder = boost::dynamic_pointer_cast<physics::CylinderShape>(shape);
-          GZ_ASSERT(cylinder != nullptr, "Failed to cast Shape to CylinderShape");
-          gzmsg << "Radius:     " << cylinder->GetRadius() << std::endl;
-          gzmsg << "Length:     " << cylinder->GetLength() << std::endl;
+        // Mesh
+        std::string meshName = std::string(modelName)
+          .append("::").append(linkName)
+          .append("::").append(collisionName)
+          .append("::cylinder");
+        common::MeshManager::Instance()->CreateCylinder(
+          meshName,
+          cylinder->GetRadius(),  // radius
+          cylinder->GetLength(),  // length,
+          1,                      // rings
+          32);                    // segments
+        GZ_ASSERT(common::MeshManager::Instance()->HasMesh(meshName),
+          "Failed to create Mesh for Cylinder");
 
-          // Mesh
-          std::string meshName = std::string(modelName)
-            .append("::").append(linkName)
-            .append("::").append(collisionName)
-            .append("::cylinder");
-          common::MeshManager::Instance()->CreateCylinder(
-            meshName,
-            cylinder->GetRadius(),  // radius
-            cylinder->GetLength(),  // length,
-            1,                      // rings
-            32);                    // segments
-          GZ_ASSERT(common::MeshManager::Instance()->HasMesh(meshName),
-            "Failed to create Mesh for Cylinder");
+        std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
+        MeshTools::MakeSurfaceMesh(
+          *common::MeshManager::Instance()->GetMesh(meshName), *mesh);
+        GZ_ASSERT(mesh != nullptr, "Invalid Suface Mesh");
+        linkMeshes.push_back(mesh);
 
-          std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
-          MeshTools::MakeSurfaceMesh(
-            *common::MeshManager::Instance()->GetMesh(meshName), *mesh);
-          GZ_ASSERT(mesh != nullptr, "Invalid Suface Mesh");
-          linkMeshes.push_back(mesh);
+        gzmsg << "Mesh:       " << meshName << std::endl;
+        gzmsg << "Vertex:     " << mesh->number_of_vertices() << std::endl;
+      }      
 
-          gzmsg << "Mesh:       " << meshName << std::endl;
-          gzmsg << "Vertex:     " << mesh->number_of_vertices() << std::endl;
-        }      
+      if (shape->HasType(physics::Base::EntityType::SPHERE_SHAPE))
+      {
+        // SphereShape
+        gzmsg << "Type:       " << "SPHERE_SHAPE" << std::endl;
+        physics::SphereShapePtr sphere = boost::dynamic_pointer_cast<physics::SphereShape>(shape);
+        GZ_ASSERT(sphere != nullptr, "Failed to cast Shape to SphereShape");
+        gzmsg << "Radius:     " << sphere->GetRadius() << std::endl;
 
-        if (shape->HasType(physics::Base::EntityType::SPHERE_SHAPE))
-        {
-          // SphereShape
-          gzmsg << "Type:       " << "SPHERE_SHAPE" << std::endl;
-          physics::SphereShapePtr sphere = boost::dynamic_pointer_cast<physics::SphereShape>(shape);
-          GZ_ASSERT(sphere != nullptr, "Failed to cast Shape to SphereShape");
-          gzmsg << "Radius:     " << sphere->GetRadius() << std::endl;
+        // Mesh
+        std::string meshName = std::string(modelName)
+          .append(".").append(linkName)
+          .append(".").append(collisionName)
+          .append(".cylinder");
+        common::MeshManager::Instance()->CreateSphere(
+          meshName,
+          sphere->GetRadius(),    // radius
+          8,                      // rings
+          8);                     // segments
+        GZ_ASSERT(common::MeshManager::Instance()->HasMesh(meshName),
+          "Failed to create Mesh for Cylinder");
 
-          // Mesh
-          std::string meshName = std::string(modelName)
-            .append(".").append(linkName)
-            .append(".").append(collisionName)
-            .append(".cylinder");
-          common::MeshManager::Instance()->CreateSphere(
-            meshName,
-            sphere->GetRadius(),    // radius
-            8,                      // rings
-            8);                     // segments
-          GZ_ASSERT(common::MeshManager::Instance()->HasMesh(meshName),
-            "Failed to create Mesh for Cylinder");
+        std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
+        MeshTools::MakeSurfaceMesh(
+          *common::MeshManager::Instance()->GetMesh(meshName), *mesh);
+        GZ_ASSERT(mesh != nullptr, "Invalid Suface Mesh");
+        linkMeshes.push_back(mesh);
 
-          std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
-          MeshTools::MakeSurfaceMesh(
-            *common::MeshManager::Instance()->GetMesh(meshName), *mesh);
-          GZ_ASSERT(mesh != nullptr, "Invalid Suface Mesh");
-          linkMeshes.push_back(mesh);
-
-          gzmsg << "Mesh:       " << meshName << std::endl;
-          gzmsg << "Vertex:     " << mesh->number_of_vertices() << std::endl;
-        }
-
-        if (shape->HasType(physics::Base::EntityType::MESH_SHAPE))
-        {
-          // MeshShape
-          gzmsg << "Type:       " << "MESH_SHAPE" << std::endl;
-          physics::MeshShapePtr meshShape = boost::dynamic_pointer_cast<physics::MeshShape>(shape);
-          GZ_ASSERT(meshShape != nullptr, "Failed to cast Shape to MeshShape");
-
-          std::string meshUri = meshShape->GetMeshURI();
-          std::string meshStr = common::find_file(meshUri);
-          gzmsg << "MeshURI:    " << meshUri << std::endl;
-          gzmsg << "MeshStr:    " << meshStr << std::endl;
-
-          // Mesh
-          if (!common::MeshManager::Instance()->HasMesh(meshStr))
-          {
-            gzerr << "Mesh: " << meshStr << " was not loaded"<< std::endl;
-            return;
-          } 
-
-          std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
-          MeshTools::MakeSurfaceMesh(
-            *common::MeshManager::Instance()->GetMesh(meshStr), *mesh);
-          GZ_ASSERT(mesh != nullptr, "Invalid Suface Mesh");
-          linkMeshes.push_back(mesh);
-
-          gzmsg << "Mesh:       " << meshStr << std::endl;
-          gzmsg << "Vertex:     " << mesh->number_of_vertices() << std::endl;
-        }
-
+        gzmsg << "Mesh:       " << meshName << std::endl;
+        gzmsg << "Vertex:     " << mesh->number_of_vertices() << std::endl;
       }
 
-      // Add meshes for this link
-      _meshes.push_back(linkMeshes);
+      if (shape->HasType(physics::Base::EntityType::MESH_SHAPE))
+      {
+        // MeshShape
+        gzmsg << "Type:       " << "MESH_SHAPE" << std::endl;
+        physics::MeshShapePtr meshShape = boost::dynamic_pointer_cast<physics::MeshShape>(shape);
+        GZ_ASSERT(meshShape != nullptr, "Failed to cast Shape to MeshShape");
+
+        std::string meshUri = meshShape->GetMeshURI();
+        std::string meshStr = common::find_file(meshUri);
+        gzmsg << "MeshURI:    " << meshUri << std::endl;
+        gzmsg << "MeshStr:    " << meshStr << std::endl;
+
+        // Mesh
+        if (!common::MeshManager::Instance()->HasMesh(meshStr))
+        {
+          gzerr << "Mesh: " << meshStr << " was not loaded"<< std::endl;
+          return;
+        } 
+
+        std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
+        MeshTools::MakeSurfaceMesh(
+          *common::MeshManager::Instance()->GetMesh(meshStr), *mesh);
+        GZ_ASSERT(mesh != nullptr, "Invalid Suface Mesh");
+        linkMeshes.push_back(mesh);
+
+        gzmsg << "Mesh:       " << meshStr << std::endl;
+        gzmsg << "Vertex:     " << mesh->number_of_vertices() << std::endl;
+      }
+
     }
-    
+
+    // Add meshes for this link
+    _meshes.push_back(linkMeshes);
+    // }
   } 
 
   /// \brief Transform a meshes vertex points in the world frame according to a Pose.
@@ -324,6 +329,9 @@ namespace iarc
     /// \brief Model pointer.
     public: physics::ModelPtr model;
 
+    /// \brief SDF element pointer.
+    public: sdf::ElementPtr sdf;
+
     /// \brief Pointer to the World wavefield.
     public: std::shared_ptr<const Wavefield> wavefield;
 
@@ -388,6 +396,7 @@ namespace iarc
 
     // Capture the Model & World pointers
     this->data->model = _model;
+    this->data->sdf = _sdf;
     this->data->world = _model->GetWorld();
     GZ_ASSERT(this->data->world != nullptr, "Model has invalid World");
 
@@ -619,7 +628,7 @@ namespace iarc
     // Populate link meshes
     std::vector<physics::LinkPtr> links;
     std::vector<std::vector<std::shared_ptr<Mesh>>> meshes;
-    CreateCollisionMeshes(this->data->model, links, meshes);
+    CreateCollisionMeshes(this->data->model, this->data->sdf, links, meshes);
     gzmsg << "links:  " << links.size() << std::endl;
     gzmsg << "meshes: " << meshes.size() << std::endl;
 
