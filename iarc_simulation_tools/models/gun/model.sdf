@@ -3,6 +3,18 @@
   <model name="gun">
     <static>0</static>
     <link name='link'>
+      <inertial>
+        <mass>119.36</mass>
+        <inertia>
+          <ixx>3.3143</ixx>
+          <ixy>0</ixy>
+          <ixz>-0.0108</ixz>
+          <iyy>3.3577</iyy>
+          <iyz>0.0027</iyz>
+          <izz>2.3398</izz>
+        </inertia>
+        <pose>0.000864 -0.000094 0.181589 0 0 0</pose>
+      </inertial>
       <collision name="collision">
         <geometry>
           <mesh>
