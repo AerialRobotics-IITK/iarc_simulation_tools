@@ -4,6 +4,18 @@
     <static>False</static>
     <link name='left_long_joint'>
       <pose>0 0.2517 0.019 -1.57 0 0</pose>
+      <inertial>
+        <pose>-0.000104 -0.000077 -0.0 0 0 0</pose>
+        <mass>0.000118</mass>
+        <inertia>
+          <ixx>2.940e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.2488e-07</iyy>
+          <iyz>0</iyz>
+          <izz>1.2648e-07</izz>
+        </inertia>
+      </inertial>
       <collision name="collision">
         <geometry>
           <mesh>
@@ -13,7 +25,7 @@
         </geometry>
         <surface>
           <contact>
-            <collide_bitmask>0x01</collide_bitmask>
+            <collide_bitmask>0xffff</collide_bitmask>
           </contact>
           <friction>
             <ode>
@@ -43,7 +55,7 @@
         </geometry>
         <surface>
           <contact>
-            <collide_bitmask>0x01</collide_bitmask>
+            <collide_bitmask>0xffff</collide_bitmask>
           </contact>
           <friction>
             <ode>
@@ -61,6 +73,18 @@
           </mesh>
         </geometry>
       </visual>
+      <inertial>
+        <pose>-0.000104 -0.000077 -0.0 0 0 0</pose>
+        <mass>0.000118</mass>
+        <inertia>
+          <ixx>2.940e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.2488e-07</iyy>
+          <iyz>0</iyz>
+          <izz>1.2648e-07</izz>
+        </inertia>
+      </inertial>
     </link>
     <link name='left_short_joint'>
       <pose>0.14 0 0 1.57 0 1.57</pose>
@@ -73,7 +97,7 @@
         </geometry>
         <surface>
           <contact>
-            <collide_bitmask>0x02</collide_bitmask>
+            <collide_bitmask>0xffff</collide_bitmask>
           </contact>
           <friction>
             <ode>
@@ -91,6 +115,18 @@
           </mesh>
         </geometry>
       </visual>
+      <inertial>
+        <pose>0.0 0.01896 -0.000157 0 0 0</pose>
+        <mass>0.000056</mass>
+        <inertia>
+          <ixx>9.96e-09</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.480e-08</iyy>
+          <iyz>0</iyz>
+          <izz>2.867e-08</izz>
+        </inertia>
+      </inertial>
     </link>
     <link name='right_short_joint'>
       <pose>-0.14 0 0 1.57 0 1.57</pose>
@@ -103,7 +139,7 @@
         </geometry>
         <surface>
           <contact>
-            <collide_bitmask>0x02</collide_bitmask>
+            <collide_bitmask>0xffff</collide_bitmask>
           </contact>
           <friction>
             <ode>
@@ -121,6 +157,18 @@
           </mesh>
         </geometry>
       </visual>
+      <inertial>
+        <pose>0.0 0.01896 -0.000157 0 0 0</pose>
+        <mass>0.000056</mass>
+        <inertia>
+          <ixx>9.96e-09</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.480e-08</iyy>
+          <iyz>0</iyz>
+          <izz>2.867e-08</izz>
+        </inertia>
+      </inertial>
     </link>
     <link name='flat_plate1'>
       <pose>0.0456 0.2565 0.038 1.57 0 -1.132</pose>
@@ -133,7 +181,7 @@
         </geometry>
         <surface>
           <contact>
-            <collide_bitmask>0x03</collide_bitmask>
+            <collide_bitmask>0xffff</collide_bitmask>
           </contact>
           <friction>
             <ode>
@@ -151,6 +199,18 @@
           </mesh>
         </geometry>
       </visual>
+      <inertial>
+        <pose>0.125 0.00325 0.012500 0 0 0</pose>
+        <mass>0.000042</mass>
+        <inertia>
+          <ixx>2.38e-09</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.4499e-07</iyy>
+          <iyz>0</iyz>
+          <izz>2.4291e-07</izz>
+        </inertia>
+      </inertial>
     </link>
     <link name='flat_plate2'>
       <pose>-0.1289 -0.02 0.038 1.57 0 -1.132</pose>
@@ -163,7 +223,7 @@
         </geometry>
         <surface>
           <contact>
-            <collide_bitmask>0x03</collide_bitmask>
+            <collide_bitmask>0xffff</collide_bitmask>
           </contact>
           <friction>
             <ode>
@@ -181,6 +241,18 @@
           </mesh>
         </geometry>
       </visual>
+      <inertial>
+        <pose>0.125 0.00325 0.012500 0 0 0</pose>
+        <mass>0.000042</mass>
+        <inertia>
+          <ixx>2.38e-09</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.4499e-07</iyy>
+          <iyz>0</iyz>
+          <izz>2.4291e-07</izz>
+        </inertia>
+      </inertial>
     </link>
     <link name='flat_plate3'>
       <pose>-0.1515 0.031 0.038 1.57 0 1.132</pose>
@@ -193,7 +265,7 @@
         </geometry>
         <surface>
           <contact>
-            <collide_bitmask>0x03</collide_bitmask>
+            <collide_bitmask>0xffff</collide_bitmask>
           </contact>
           <friction>
             <ode>
@@ -211,6 +283,18 @@
           </mesh>
         </geometry>
       </visual>
+      <inertial>
+        <pose>0.125 0.00325 0.012500 0 0 0</pose>
+        <mass>0.000042</mass>
+        <inertia>
+          <ixx>2.38e-09</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.4499e-07</iyy>
+          <iyz>0</iyz>
+          <izz>2.4291e-07</izz>
+        </inertia>
+      </inertial>
     </link>
     <link name='flat_plate4'>
       <pose>0.022 -0.245 0.038 1.57 0 1.132</pose>
@@ -223,7 +307,7 @@
         </geometry>
         <surface>
           <contact>
-            <collide_bitmask>0x03</collide_bitmask>
+            <collide_bitmask>0xffff</collide_bitmask>
           </contact>
           <friction>
             <ode>
@@ -241,6 +325,18 @@
           </mesh>
         </geometry>
       </visual>
+      <inertial>
+        <pose>0.125 0.00325 0.012500 0 0 0</pose>
+        <mass>0.000042</mass>
+        <inertia>
+          <ixx>2.38e-09</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.4499e-07</iyy>
+          <iyz>0</iyz>
+          <izz>2.4291e-07</izz>
+        </inertia>
+      </inertial>
     </link>
 
     <link name='flat_plate5'>
@@ -254,7 +350,7 @@
         </geometry>
         <surface>
           <contact>
-            <collide_bitmask>0x03</collide_bitmask>
+            <collide_bitmask>0xffff</collide_bitmask>
           </contact>
           <friction>
             <ode>
@@ -272,6 +368,18 @@
           </mesh>
         </geometry>
       </visual>
+      <inertial>
+        <pose>0.125 0.00325 0.012500 0 0 0</pose>
+        <mass>0.000042</mass>
+        <inertia>
+          <ixx>2.38e-09</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.4499e-07</iyy>
+          <iyz>0</iyz>
+          <izz>2.4291e-07</izz>
+        </inertia>
+      </inertial>
     </link>
     <link name='flat_plate6'>
       <pose>-0.1289 -0.02 -0.007 1.57 0 -1.132</pose>
@@ -284,7 +392,7 @@
         </geometry>
         <surface>
           <contact>
-            <collide_bitmask>0x03</collide_bitmask>
+            <collide_bitmask>0xffff</collide_bitmask>
           </contact>
           <friction>
             <ode>
@@ -302,6 +410,18 @@
           </mesh>
         </geometry>
       </visual>
+      <inertial>
+        <pose>0.125 0.00325 0.012500 0 0 0</pose>
+        <mass>0.000042</mass>
+        <inertia>
+          <ixx>2.38e-09</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.4499e-07</iyy>
+          <iyz>0</iyz>
+          <izz>2.4291e-07</izz>
+        </inertia>
+      </inertial>
     </link>
     <link name='flat_plate7'>
       <pose>-0.1515 0.031 -0.007 1.57 0 1.132</pose>
@@ -314,7 +434,7 @@
         </geometry>
         <surface>
           <contact>
-            <collide_bitmask>0x03</collide_bitmask>
+            <collide_bitmask>0xffff</collide_bitmask>
           </contact>
           <friction>
             <ode>
@@ -332,6 +452,18 @@
           </mesh>
         </geometry>
       </visual>
+      <inertial>
+        <pose>0.125 0.00325 0.012500 0 0 0</pose>
+        <mass>0.000042</mass>
+        <inertia>
+          <ixx>2.38e-09</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.4499e-07</iyy>
+          <iyz>0</iyz>
+          <izz>2.4291e-07</izz>
+        </inertia>
+      </inertial>
     </link>
     <link name='flat_plate8'>
       <pose>0.022 -0.245 -0.007 1.57 0 1.132</pose>
@@ -344,7 +476,7 @@
         </geometry>
         <surface>
           <contact>
-            <collide_bitmask>0x03</collide_bitmask>
+            <collide_bitmask>0xffff</collide_bitmask>
           </contact>
           <friction>
             <ode>
@@ -362,6 +494,18 @@
           </mesh>
         </geometry>
       </visual>
+      <inertial>
+        <pose>0.125 0.00325 0.012500 0 0 0</pose>
+        <mass>0.000042</mass>
+        <inertia>
+          <ixx>2.38e-09</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.4499e-07</iyy>
+          <iyz>0</iyz>
+          <izz>2.4291e-07</izz>
+        </inertia>
+      </inertial>
     </link>
 
     <link name='screw_rod'>
@@ -375,7 +519,7 @@
         </geometry>
         <surface>
           <contact>
-            <collide_bitmask>0x03</collide_bitmask>
+            <collide_bitmask>0xffff</collide_bitmask>
           </contact>
           <friction>
             <ode>
@@ -393,10 +537,22 @@
           </mesh>
         </geometry>
       </visual>
+      <inertial>
+        <pose>0.224910 -0.0 0.0 0 0 0</pose>
+        <mass>0.000340</mass>
+        <inertia>
+          <ixx>4.835e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>1.067221e-05</iyy>
+          <iyz>0</iyz>
+          <izz>1.067335e-05</izz>
+        </inertia>
+      </inertial>
     </link>
 
     <joint name="j1" type="revolute">
-      <pose> 0 0 0.01 0 0 0</pose>
+      <pose> 0.25 0 0.01 0 0 0</pose>
       <child>flat_plate1</child>
       <parent>left_short_joint</parent>
       <axis>
@@ -408,7 +564,7 @@
       </axis>
     </joint>
     <joint name="j2" type="revolute">
-      <pose> 0.25 0 0.01 0 0 0</pose>
+      <pose> 0 0 0.01 0 0 0</pose>
       <child>flat_plate1</child>
       <parent>left_long_joint</parent>
       <axis>
@@ -468,7 +624,7 @@
       </axis>
     </joint>
     <joint name="j7" type="revolute">
-      <pose> 0 0 0.01 0 0 0</pose>
+      <pose> 0.25 0 0.01 0 0 0</pose>
       <child>flat_plate4</child>
       <parent>left_short_joint</parent>
       <axis>
@@ -480,7 +636,7 @@
       </axis>
     </joint>
     <joint name="j8" type="revolute">
-      <pose> 0.25 0 0.01 0 0 0</pose>
+      <pose> 0 0 0.01 0 0 0</pose>
       <child>flat_plate4</child>
       <parent>right_long_joint</parent>
       <axis>
@@ -493,7 +649,7 @@
     </joint>
 
     <joint name="j9" type="revolute">
-      <pose> 0 0 0.01 0 0 0</pose>
+      <pose> 0.25 0 0.01 0 0 0</pose>
       <child>flat_plate5</child>
       <parent>left_short_joint</parent>
       <axis>
@@ -505,7 +661,7 @@
       </axis>
     </joint>
     <joint name="j10" type="revolute">
-      <pose> 0.25 0 0.01 0 0 0</pose>
+      <pose> 0 0 0.01 0 0 0</pose>
       <child>flat_plate5</child>
       <parent>left_long_joint</parent>
       <axis>
@@ -565,7 +721,7 @@
       </axis>
     </joint>
     <joint name="j15" type="revolute">
-      <pose> 0 0 0.01 0 0 0</pose>
+      <pose> 0.25 0 0.01 0 0 0</pose>
       <child>flat_plate8</child>
       <parent>left_short_joint</parent>
       <axis>
@@ -577,7 +733,7 @@
       </axis>
     </joint>
     <joint name="j16" type="revolute">
-      <pose> 0.25 0 0.01 0 0 0</pose>
+      <pose> 0 0 0.01 0 0 0</pose>
       <child>flat_plate8</child>
       <parent>right_long_joint</parent>
       <axis>
