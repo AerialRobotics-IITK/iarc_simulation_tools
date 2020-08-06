@@ -509,7 +509,7 @@
     </link>
 
     <link name='screw_rod'>
-      <pose> 0 -0.32 0.017 0 1.57 1.57</pose>
+       <pose> 0 -0.12 0.017 0 1.57 1.57 </pose>
         <collision name="collision">
           <geometry>
             <cylinder>
@@ -526,6 +526,7 @@
             </cylinder>
           </geometry>
         </visual>
+      <!-- <pose> 0 -0.32 0.017 0 1.57 1.57</pose> -->
       <!-- <collision name="collision">
         <geometry>
           <mesh>
@@ -760,8 +761,17 @@
         <xyz>0 -1 0</xyz>
       </axis>
     </joint>
+    <joint name="piston_joint" type ="screw">
+      <parent>screw_rod</parent>
+      <child>right_long_joint</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+      <thread_pitch>3141.6</thread_pitch>
+    </joint>
 
     <plugin name="gripper_plugin" filename="libiarc_gripper_plugin.so">
+      <namespace>firefly</namespace>    
       <link_name1>left_long_joint</link_name1>
       <link_name2>right_long_joint</link_name2>
       <force_magnitude>0.01</force_magnitude>>

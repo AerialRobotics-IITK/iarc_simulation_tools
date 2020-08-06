@@ -6,6 +6,9 @@
 #include <gazebo/physics/physics.hh>
 #include <string>
 #include <thread>
+#include <iarc_gripper_plugin/GripperCmd.h>
+#include <ros/ros.h>
+#include <std_srvs/Trigger.h>
 
 namespace gazebo{
 
@@ -13,6 +16,8 @@ class GripperPlugin:public ModelPlugin{
     public:
         void Load(physics::ModelPtr parent, sdf::ElementPtr sdf);
         void onUpdate(const common::UpdateInfo& /*_info*/);
+        // bool serverCallback(std_srvs::Trigger::Request &req, std_srvs::Trigger::Response &resp);
+        bool serverCallback(iarc_gripper_plugin::GripperCmd::Request &req, iarc_gripper_plugin::GripperCmd::Response &res);
 
     private:
 
@@ -27,9 +32,10 @@ class GripperPlugin:public ModelPlugin{
     std::string namespace_;
     ignition::math::Vector3d force_direction_;
     ignition::math::Vector3d xyz_offset_;
+    ros::NodeHandle* rosnode_;
 
     double force_magnitude_;
-    int flag;
+    bool flag_ = true;
     
 };
 
