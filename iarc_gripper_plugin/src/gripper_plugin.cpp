@@ -40,12 +40,25 @@ void GripperPlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf){
     xyz_offset_.Set(0,0,0);
 
     ros::NodeHandle rosnode_;
-    ros::ServiceClient gripper_cmd_client = rosnode_->serviceClient<iarc_gripper_plugin::G
+    ros::ServiceClient gripper_cmd_client = rosnode_->serviceClient<iarc_gripper_plugin::GripperCmd>("gripper_cmd");
+
 
     updateConnection_ = event::Events::ConnectWorldUpdateBegin(boost::bind(&GripperPlugin::onUpdate, this, _1));
 }
 
 void GripperPlugin::onUpdate(const common::UpdateInfo& _info) {
+
+    iarc_gripper_plugin::GripperCmd srv;
+    srv.request.flag = 1;
+    if (client.call(srv)){
+        if (srv.request.flag ==0){
+            force_direction_ = force_direction_*(-1);
+            std::cout << "Expanding gripper");
+        }
+        else{
+            std::cout <<"Contracting gripper");
+        }
+    }
 
 
     link1_->AddForceAtRelativePosition(force_magnitude_ * force_direction_, xyz_offset_);
