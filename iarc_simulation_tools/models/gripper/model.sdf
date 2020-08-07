@@ -6,14 +6,14 @@
       <pose>0 0.25 0.019 -1.57 0 0</pose>
       <inertial>
         <pose>-0.000104 -0.000077 -0.0 0 0 0</pose>
-        <mass>0.000118</mass>
+        <mass>0.3186</mass>
         <inertia>
-          <ixx>2.940e-08</ixx>
+          <ixx>7.938e-05</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>1.2488e-07</iyy>
+          <iyy>3.3715e-04</iyy>
           <iyz>0</iyz>
-          <izz>1.2648e-07</izz>
+          <izz>3.3664e-04</izz>
         </inertia>
       </inertial>
       <collision name="collision">
@@ -75,14 +75,14 @@
       </visual>
       <inertial>
         <pose>-0.000104 -0.000077 -0.0 0 0 0</pose>
-        <mass>0.000118</mass>
+        <mass>0.3186</mass>
         <inertia>
-          <ixx>2.940e-08</ixx>
+          <ixx>7.938e-05</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>1.2488e-07</iyy>
+          <iyy>3.3715e-04</iyy>
           <iyz>0</iyz>
-          <izz>1.2648e-07</izz>
+          <izz>3.3664e-04</izz>
         </inertia>
       </inertial>
     </link>
@@ -117,14 +117,14 @@
       </visual>
       <inertial>
         <pose>0.0 0.01896 -0.000157 0 0 0</pose>
-        <mass>0.000056</mass>
+        <mass>0.1512</mass>
         <inertia>
-          <ixx>9.96e-09</ixx>
+          <ixx>2.689e-05</ixx>
           <ixy>-0</ixy>
           <ixz>-0</ixz>
-          <iyy>2.480e-08</iyy>
+          <iyy>6.696e-05</iyy>
           <iyz>0</iyz>
-          <izz>2.867e-08</izz>
+          <izz>7.741e-05</izz>
         </inertia>
       </inertial>
     </link>
@@ -159,14 +159,14 @@
       </visual>
       <inertial>
         <pose>0.0 0.01896 -0.000157 0 0 0</pose>
-        <mass>0.000056</mass>
+        <mass>0.1512</mass>
         <inertia>
-          <ixx>9.96e-09</ixx>
+          <ixx>2.689e-05</ixx>
           <ixy>-0</ixy>
           <ixz>-0</ixz>
-          <iyy>2.480e-08</iyy>
+          <iyy>6.696e-05</iyy>
           <iyz>0</iyz>
-          <izz>2.867e-08</izz>
+          <izz>7.741e-05</izz>
         </inertia>
       </inertial>
     </link>
@@ -201,14 +201,14 @@
       </visual>
       <inertial>
         <pose>0.125 0.00325 0.012500 0 0 0</pose>
-        <mass>0.000042</mass>
+        <mass>0.0651</mass>
         <inertia>
-          <ixx>2.38e-09</ixx>
+          <ixx>3.689e-06</ixx>
           <ixy>-0</ixy>
           <ixz>-0</ixz>
-          <iyy>2.4499e-07</iyy>
+          <iyy>3.797e-04</iyy>
           <iyz>0</iyz>
-          <izz>2.4291e-07</izz>
+          <izz>3.764e-04</izz>
         </inertia>
       </inertial>
     </link>
@@ -243,14 +243,14 @@
       </visual>
       <inertial>
         <pose>0.125 0.00325 0.012500 0 0 0</pose>
-        <mass>0.000042</mass>
+        <mass>0.0651</mass>
         <inertia>
-          <ixx>2.38e-09</ixx>
+          <ixx>3.689e-06</ixx>
           <ixy>-0</ixy>
           <ixz>-0</ixz>
-          <iyy>2.4499e-07</iyy>
+          <iyy>3.797e-04</iyy>
           <iyz>0</iyz>
-          <izz>2.4291e-07</izz>
+          <izz>3.764e-04</izz>
         </inertia>
       </inertial>
     </link>
@@ -285,14 +285,14 @@
       </visual>
       <inertial>
         <pose>0.125 0.00325 0.012500 0 0 0</pose>
-        <mass>0.000042</mass>
+        <mass>0.0651</mass>
         <inertia>
-          <ixx>2.38e-09</ixx>
+          <ixx>3.689e-06</ixx>
           <ixy>-0</ixy>
           <ixz>-0</ixz>
-          <iyy>2.4499e-07</iyy>
+          <iyy>3.797e-04</iyy>
           <iyz>0</iyz>
-          <izz>2.4291e-07</izz>
+          <izz>3.764e-04</izz>
         </inertia>
       </inertial>
     </link>
@@ -327,14 +327,14 @@
       </visual>
       <inertial>
         <pose>0.125 0.00325 0.012500 0 0 0</pose>
-        <mass>0.000042</mass>
+        <mass>0.0651</mass>
         <inertia>
-          <ixx>2.38e-09</ixx>
+          <ixx>3.689e-06</ixx>
           <ixy>-0</ixy>
           <ixz>-0</ixz>
-          <iyy>2.4499e-07</iyy>
+          <iyy>3.797e-04</iyy>
           <iyz>0</iyz>
-          <izz>2.4291e-07</izz>
+          <izz>3.764e-04</izz>
         </inertia>
       </inertial>
     </link>
@@ -370,14 +370,14 @@
       </visual>
       <inertial>
         <pose>0.125 0.00325 0.012500 0 0 0</pose>
-        <mass>0.000042</mass>
+        <mass>0.0651</mass>
         <inertia>
-          <ixx>2.38e-09</ixx>
+          <ixx>3.689e-06</ixx>
           <ixy>-0</ixy>
           <ixz>-0</ixz>
-          <iyy>2.4499e-07</iyy>
+          <iyy>3.797e-04</iyy>
           <iyz>0</iyz>
-          <izz>2.4291e-07</izz>
+          <izz>3.764e-04</izz>
         </inertia>
       </inertial>
     </link>
@@ -412,14 +412,14 @@
       </visual>
       <inertial>
         <pose>0.125 0.00325 0.012500 0 0 0</pose>
-        <mass>0.000042</mass>
+        <mass>0.0651</mass>
         <inertia>
-          <ixx>2.38e-09</ixx>
+          <ixx>3.689e-06</ixx>
           <ixy>-0</ixy>
           <ixz>-0</ixz>
-          <iyy>2.4499e-07</iyy>
+          <iyy>3.797e-04</iyy>
           <iyz>0</iyz>
-          <izz>2.4291e-07</izz>
+          <izz>3.764e-04</izz>
         </inertia>
       </inertial>
     </link>
@@ -454,14 +454,14 @@
       </visual>
       <inertial>
         <pose>0.125 0.00325 0.012500 0 0 0</pose>
-        <mass>0.000042</mass>
+        <mass>0.0651</mass>
         <inertia>
-          <ixx>2.38e-09</ixx>
+          <ixx>3.689e-06</ixx>
           <ixy>-0</ixy>
           <ixz>-0</ixz>
-          <iyy>2.4499e-07</iyy>
+          <iyy>3.797e-04</iyy>
           <iyz>0</iyz>
-          <izz>2.4291e-07</izz>
+          <izz>3.764e-04</izz>
         </inertia>
       </inertial>
     </link>
@@ -496,20 +496,20 @@
       </visual>
       <inertial>
         <pose>0.125 0.00325 0.012500 0 0 0</pose>
-        <mass>0.000042</mass>
+        <mass>0.0651</mass>
         <inertia>
-          <ixx>2.38e-09</ixx>
+          <ixx>3.689e-06</ixx>
           <ixy>-0</ixy>
           <ixz>-0</ixz>
-          <iyy>2.4499e-07</iyy>
+          <iyy>3.797e-04</iyy>
           <iyz>0</iyz>
-          <izz>2.4291e-07</izz>
+          <izz>3.764e-04</izz>
         </inertia>
       </inertial>
     </link>
 
     <link name='screw_rod'>
-       <pose>-0.0003 -0.12 0.0155 0 1.57 1.57 </pose>
+       <pose>-0.00015 -0.12 0.0153 0 1.57 1.57 </pose>
         <collision name="collision">
           <geometry>
             <cylinder>
@@ -563,14 +563,14 @@
       </visual> -->
       <inertial>
         <pose>0 0 0 0 1.57 0</pose>
-        <mass>0.000340</mass>
+        <mass>0.918</mass>
         <inertia>
-          <ixx>4.835e-08</ixx>
+          <ixx>1.3054e-04</ixx>
           <ixy>-0</ixy>
           <ixz>-0</ixz>
-          <iyy>1.067221e-05</iyy>
+          <iyy>2.8815e-02</iyy>
           <iyz>0</iyz>
-          <izz>1.067335e-05</izz>
+          <izz>2.8818e-02</izz>
         </inertia>
       </inertial>
     </link>
@@ -581,8 +581,8 @@
       <parent>left_short_joint</parent>
       <axis>
         <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
         </limit>
         <xyz>0 1 0</xyz>
       </axis>
@@ -593,8 +593,8 @@
       <parent>left_long_joint</parent>
       <axis>
         <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
         </limit>
         <xyz>0 1 0</xyz>
       </axis>
@@ -605,8 +605,8 @@
       <parent>right_short_joint</parent>
       <axis>
         <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
         </limit>
         <xyz>0 1 0</xyz>
       </axis>
@@ -617,8 +617,8 @@
       <parent>right_long_joint</parent>
       <axis>
         <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
         </limit>
         <xyz>0 1 0</xyz>
       </axis>
@@ -629,8 +629,8 @@
       <parent>right_short_joint</parent>
       <axis>
         <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
         </limit>
         <xyz>0 1 0</xyz>
       </axis>
@@ -641,8 +641,8 @@
       <parent>left_long_joint</parent>
       <axis>
         <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
         </limit>
         <xyz>0 1 0</xyz>
       </axis>
@@ -653,8 +653,8 @@
       <parent>left_short_joint</parent>
       <axis>
         <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
         </limit>
         <xyz>0 1 0</xyz>
       </axis>
@@ -665,8 +665,8 @@
       <parent>right_long_joint</parent>
       <axis>
         <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
         </limit>
         <xyz>0 1 0</xyz>
       </axis>
@@ -678,8 +678,8 @@
       <parent>left_short_joint</parent>
       <axis>
         <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
         </limit>
         <xyz>0 -1 0</xyz>
       </axis>
@@ -690,8 +690,8 @@
       <parent>left_long_joint</parent>
       <axis>
         <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
         </limit>
         <xyz>0 -1 0</xyz>
       </axis>
@@ -702,8 +702,8 @@
       <parent>right_short_joint</parent>
       <axis>
         <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
         </limit>
         <xyz>0 -1 0</xyz>
       </axis>
@@ -714,8 +714,8 @@
       <parent>right_long_joint</parent>
       <axis>
         <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
         </limit>
         <xyz>0 -1 0</xyz>
       </axis>
@@ -726,8 +726,8 @@
       <parent>right_short_joint</parent>
       <axis>
         <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
         </limit>
         <xyz>0 -1 0</xyz>
       </axis>
@@ -738,8 +738,8 @@
       <parent>left_long_joint</parent>
       <axis>
         <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
         </limit>
         <xyz>0 -1 0</xyz>
       </axis>
@@ -750,8 +750,8 @@
       <parent>left_short_joint</parent>
       <axis>
         <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
         </limit>
         <xyz>0 -1 0</xyz>
       </axis>
@@ -762,8 +762,8 @@
       <parent>right_long_joint</parent>
       <axis>
         <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
         </limit>
         <xyz>0 -1 0</xyz>
       </axis>
@@ -775,7 +775,7 @@
       <axis>
         <xyz>0 1 0</xyz>
       </axis>
-      <thread_pitch>3141.6</thread_pitch>
+      <thread_pitch>100</thread_pitch>
     </joint>
 
     <joint name="piston_joint_2" type ="screw">
@@ -785,15 +785,14 @@
       <axis>
         <xyz>0 1 0</xyz>
       </axis>
-      <thread_pitch>-3141.6</thread_pitch>
+      <thread_pitch>-100</thread_pitch>
     </joint>
 
-    <!-- <plugin name="gripper_plugin" filename="libiarc_gripper_plugin.so">
+    <plugin name="gripper_plugin" filename="libiarc_gripper_plugin.so">
       <namespace>firefly</namespace>    
-      <link_name1>piston_joint_1</link_name1>
-      <link_name2>right_long_joint</link_name2>
-      <force_magnitude>0.01</force_magnitude>>
-    </plugin> -->
+      <link_name>screw_rod</link_name>
+      <force_magnitude>2</force_magnitude>>
+    </plugin>
   </model>
 </sdf>
      
