@@ -3,7 +3,7 @@
   <model name='gripper'>
     <static>False</static>
     <link name='left_long_joint'>
-      <pose>0 0.2517 0.019 -1.57 0 0</pose>
+      <pose>0 0.25 0.019 -1.57 0 0</pose>
       <inertial>
         <pose>-0.000104 -0.000077 -0.0 0 0 0</pose>
         <mass>0.000118</mass>
@@ -509,23 +509,30 @@
     </link>
 
     <link name='screw_rod'>
-       <pose> 0 -0.12 0.017 0 1.57 1.57 </pose>
+       <pose>-0.0003 -0.12 0.0155 0 1.57 1.57 </pose>
         <collision name="collision">
           <geometry>
             <cylinder>
-              <radius>.0125</radius>
-              <length>.5</length>
-            </cylinder>
-          </geometry>
-        </collision>
-        <visual name="visual">
-          <geometry>
-            <cylinder>
-              <radius>.0125</radius>
-              <length>.5</length>
-            </cylinder>
-          </geometry>
-        </visual>
+            <radius>0.012</radius>
+            <length>1</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <material>
+          <script>
+            <name>Gazebo/Red</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <shader type='pixel'/>
+        </material>
+        <geometry>
+          <cylinder>
+            <radius>0.012</radius>
+            <length>1</length>
+          </cylinder>
+        </geometry>
+      </visual>
       <!-- <pose> 0 -0.32 0.017 0 1.57 1.57</pose> -->
       <!-- <collision name="collision">
         <geometry>
@@ -555,7 +562,7 @@
         </geometry>
       </visual> -->
       <inertial>
-        <pose>0.224910 -0.0 0.0 0 0 0</pose>
+        <pose>0 0 0 0 1.57 0</pose>
         <mass>0.000340</mass>
         <inertia>
           <ixx>4.835e-08</ixx>
@@ -567,7 +574,7 @@
         </inertia>
       </inertial>
     </link>
-    
+
     <joint name="j1" type="revolute">
       <pose> 0.25 0 0.01 0 0 0</pose>
       <child>flat_plate1</child>
@@ -761,7 +768,8 @@
         <xyz>0 -1 0</xyz>
       </axis>
     </joint>
-    <joint name="piston_joint" type ="screw">
+    <joint name="piston_joint_1" type ="screw">
+      <pose>0 0 0 0 0 0</pose>
       <parent>screw_rod</parent>
       <child>right_long_joint</child>
       <axis>
@@ -770,12 +778,22 @@
       <thread_pitch>3141.6</thread_pitch>
     </joint>
 
-    <plugin name="gripper_plugin" filename="libiarc_gripper_plugin.so">
+    <joint name="piston_joint_2" type ="screw">
+      <pose>0 0 0 0 0 0</pose>
+      <parent>screw_rod</parent>
+      <child>left_long_joint</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+      <thread_pitch>-3141.6</thread_pitch>
+    </joint>
+
+    <!-- <plugin name="gripper_plugin" filename="libiarc_gripper_plugin.so">
       <namespace>firefly</namespace>    
-      <link_name1>left_long_joint</link_name1>
+      <link_name1>piston_joint_1</link_name1>
       <link_name2>right_long_joint</link_name2>
       <force_magnitude>0.01</force_magnitude>>
-    </plugin>
+    </plugin> -->
   </model>
-  </sdf>
+</sdf>
      
