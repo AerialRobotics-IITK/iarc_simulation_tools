@@ -26,15 +26,15 @@ void GripperPlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
     return;
   }
 
-  if (sdf->HasElement("force_magnitude")) {
-    force_magnitude_ = sdf->GetElement("force_magnitude")->Get<double>();
+  if (sdf->HasElement("torque_magnitude")) {
+    torque_magnitude_ = sdf->GetElement("torque_magnitude")->Get<double>();
   } else {
-    force_magnitude_ = 1.0;
+    torque_magnitude_ = 1.0;
   }
 
   link_ = model_->GetLink(parent->GetName() + "::" + link_name_);
 
-  force_direction_.Set(0, 0, 0);
+  torque_direction_.Set(0, 0, 0);
   xyz_offset_.Set(0, 0, 0);
 
   if (!ros::isInitialized()) {
@@ -60,13 +60,13 @@ bool GripperPlugin::serverCallback(
   boost::mutex::scoped_lock scoped_lock(lock_);
 
   if (req.flag == 1) {
-    force_direction_.Set(0, 0, -1);
+    torque_direction_.Set(0, 0, -1);
     res.message = "Expanding gripper";
   } else if (req.flag == 2) {
-    force_direction_.Set(0, 0, 0);
+    torque_direction_.Set(0, 0, 0);
     res.message = "Pausing gripper";
   } else if (req.flag == 0) {
-    force_direction_.Set(0, 0, 1);
+    torque_direction_.Set(0, 0, 1);
     res.message = "Retracting gripper";
   } else {
     res.message = "Choose from 0 to retract, 1 to expand or 2 to pause";
@@ -76,7 +76,7 @@ bool GripperPlugin::serverCallback(
 
 void GripperPlugin::onUpdate(const common::UpdateInfo &_info) {
 
-  link_->AddRelativeTorque(force_direction_ * force_magnitude_);
+  link_->AddRelativeTorque(torque_direction_ * torque_magnitude_);
 }
 
 GZ_REGISTER_MODEL_PLUGIN(GripperPlugin);

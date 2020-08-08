@@ -28,11 +28,11 @@ private:
 
   std::string link_name_;
   std::string namespace_;
-  ignition::math::Vector3d force_direction_;
+  ignition::math::Vector3d torque_direction_;
   ignition::math::Vector3d xyz_offset_;
   ros::NodeHandle *rosnode_;
 
-  double force_magnitude_;
+  double torque_magnitude_;
   bool flag_ = true;
 
   ros::ServiceServer cmd_server_;

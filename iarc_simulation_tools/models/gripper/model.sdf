@@ -791,7 +791,7 @@
     <plugin name="gripper_plugin" filename="libiarc_gripper_plugin.so">
       <namespace>firefly</namespace>    
       <link_name>screw_rod</link_name>
-      <force_magnitude>2</force_magnitude>>
+      <torque_magnitude>2</torque_magnitude>>
     </plugin>
   </model>
 </sdf>
