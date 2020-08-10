@@ -37,7 +37,7 @@
       <collision name="collision">
         <geometry>
           <mesh>
-            <uri>model://quadrotor/meshes/baSE_plate.dae</uri>
+            <uri>model://quadrotor/meshes/plate.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -56,14 +56,14 @@
       <visual name="visual">
         <geometry>
           <mesh>
-            <uri>model://quadrotor/meshes/baSE_plate.dae</uri>
+            <uri>model://quadrotor/meshes/plate.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
       </visual>
     </link>
     <link name ='battery'>
-      <pose>0.5 0 0 0 0 0</pose>
+      <pose>0.5 1 0 0 0 0</pose>
       <collision name="collision">
         <geometry>
           <mesh>
