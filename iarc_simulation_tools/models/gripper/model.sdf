@@ -509,7 +509,7 @@
     </link>
 
     <link name='screw_rod'>
-       <pose>-0.00015 -0.12 0.0153 0 1.57 1.57 </pose>
+       <pose>-0.00015 -0.02 0.0153 0 1.57 1.57 </pose>
         <collision name="collision">
           <geometry>
             <cylinder>
@@ -529,15 +529,15 @@
         <geometry>
           <cylinder>
             <radius>0.012</radius>
-            <length>1</length>
+            <length>0.7</length>
           </cylinder>
         </geometry>
       </visual>
-      <!-- <pose> 0 -0.32 0.017 0 1.57 1.57</pose> -->
-      <!-- <collision name="collision">
+      <!-- <pose> 0.0005 -0.409 0.015 0 0 1.57</pose>
+      <collision name="collision">
         <geometry>
           <mesh>
-            <uri>model://gripper/meshes/screwrod.dae</uri>
+            <uri>model://gripper/meshes/new_rodV2.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -556,21 +556,22 @@
       <visual name='visual'>
         <geometry>
           <mesh>
-            <uri>model://gripper/meshes/screwrod.dae</uri>
+            <uri>model://gripper/meshes/new_rodV2.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
       </visual> -->
       <inertial>
-        <pose>0 0 0 0 1.57 0</pose>
-        <mass>0.918</mass>
+        <pose>0 0 0.32263 0 1.57 0</pose>
+        <!-- <pose>0.322633 0 0 0 0 0</pose> -->
+        <mass>1.29</mass>
         <inertia>
-          <ixx>1.3054e-04</ixx>
+          <ixx>1.8357e-04</ixx>
           <ixy>-0</ixy>
           <ixz>-0</ixz>
-          <iyy>2.8815e-02</iyy>
+          <iyy>8.006e-02</iyy>
           <iyz>0</iyz>
-          <izz>2.8818e-02</izz>
+          <izz>8.006e-02</izz>
         </inertia>
       </inertial>
     </link>
@@ -791,7 +792,7 @@
     <plugin name="gripper_plugin" filename="libiarc_gripper_plugin.so">
       <namespace>firefly</namespace>    
       <link_name>screw_rod</link_name>
-      <torque_magnitude>2</torque_magnitude>>
+      <torque_magnitude>1.75</torque_magnitude>>
     </plugin>
   </model>
 </sdf>

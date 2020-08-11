@@ -25,6 +25,7 @@ private:
   sdf::ElementPtr sdf_;
   event::ConnectionPtr updateConnection_;
   physics::LinkPtr link_;
+  physics::JointPtr joint_;
 
   std::string link_name_;
   std::string namespace_;
@@ -33,6 +34,7 @@ private:
   ros::NodeHandle *rosnode_;
 
   double torque_magnitude_;
+  double joint_angle_;
   bool flag_ = true;
 
   ros::ServiceServer cmd_server_;

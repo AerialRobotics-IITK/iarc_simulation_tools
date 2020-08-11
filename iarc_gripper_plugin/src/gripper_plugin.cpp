@@ -33,6 +33,9 @@ void GripperPlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
   }
 
   link_ = model_->GetLink(parent->GetName() + "::" + link_name_);
+  joint_ = model_->GetJoint(parent->GetName() + "::" + "j1");
+
+  joint_angle_ = joint_->Position(0);
 
   torque_direction_.Set(0, 0, 0);
   xyz_offset_.Set(0, 0, 0);
@@ -61,13 +64,13 @@ bool GripperPlugin::serverCallback(
 
   if (req.flag == 1) {
     torque_direction_.Set(0, 0, -1);
-    res.message = "Expanding gripper";
+    res.message = "Opening gripper";
   } else if (req.flag == 2) {
     torque_direction_.Set(0, 0, 0);
     res.message = "Pausing gripper";
   } else if (req.flag == 0) {
     torque_direction_.Set(0, 0, 1);
-    res.message = "Retracting gripper";
+    res.message = "Closing gripper";
   } else {
     res.message = "Choose from 0 to retract, 1 to expand or 2 to pause";
   }
@@ -77,6 +80,8 @@ bool GripperPlugin::serverCallback(
 void GripperPlugin::onUpdate(const common::UpdateInfo &_info) {
 
   link_->AddRelativeTorque(torque_direction_ * torque_magnitude_);
+  // std::cout << joint_->GetName() << std::endl;
+  // std::cout<< "Angle is : " << joint_angle_ << std::endl;
 }
 
 GZ_REGISTER_MODEL_PLUGIN(GripperPlugin);
