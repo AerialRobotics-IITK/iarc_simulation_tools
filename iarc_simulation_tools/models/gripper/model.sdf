@@ -509,8 +509,9 @@
     </link>
 
     <link name='screw_rod'>
-       <pose>-0.00015 -0.02 0.0153 0 1.57 1.57 </pose>
-        <collision name="collision">
+       <!-- <pose>-0.00015 -0.02 0.0153 0 1.57 1.57 </pose> -->
+       <pose>0 -0.425 0.015 0 0 1.57</pose>
+       <!-- <collision name="collision">
           <geometry>
             <cylinder>
             <radius>0.012</radius>
@@ -532,8 +533,7 @@
             <length>0.7</length>
           </cylinder>
         </geometry>
-      </visual>
-      <!-- <pose> 0.0005 -0.409 0.015 0 0 1.57</pose>
+      </visual> -->
       <collision name="collision">
         <geometry>
           <mesh>
@@ -545,12 +545,12 @@
           <contact>
             <collide_bitmask>0xffff</collide_bitmask>
           </contact>
-          <friction>
+          <!-- <friction>
             <ode>
               <mu>100</mu>
               <mu2>50</mu2>
             </ode>
-          </friction>
+          </friction> -->
         </surface>
       </collision>
       <visual name='visual'>
@@ -560,10 +560,10 @@
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
-      </visual> -->
+      </visual>
       <inertial>
-        <pose>0 0 0.32263 0 1.57 0</pose>
-        <!-- <pose>0.322633 0 0 0 0 0</pose> -->
+        <!-- <pose>0 0 0.32263 0 1.57 0</pose> -->
+        <pose>0.224910 -0.0 0.0 0 0 0</pose>
         <mass>1.29</mass>
         <inertia>
           <ixx>1.8357e-04</ixx>
@@ -792,7 +792,7 @@
     <plugin name="gripper_plugin" filename="libiarc_gripper_plugin.so">
       <namespace>firefly</namespace>    
       <link_name>screw_rod</link_name>
-      <torque_magnitude>1.5</torque_magnitude>>
+      <torque_magnitude>6.5</torque_magnitude>
     </plugin>
   </model>
 </sdf>
