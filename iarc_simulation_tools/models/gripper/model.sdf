@@ -770,7 +770,7 @@
       </axis>
     </joint>
     <joint name="piston_joint_1" type ="screw">
-      <pose>0 0 0 0 0 0</pose>
+      <pose>0 0.004 0 0 0 0</pose>
       <parent>screw_rod</parent>
       <child>right_long_joint</child>
       <axis>
@@ -780,7 +780,7 @@
     </joint>
 
     <joint name="piston_joint_2" type ="screw">
-      <pose>0 0 0 0 0 0</pose>
+      <pose>0 0.004 0 0 0 0</pose>
       <parent>screw_rod</parent>
       <child>left_long_joint</child>
       <axis>
@@ -792,7 +792,7 @@
     <plugin name="gripper_plugin" filename="libiarc_gripper_plugin.so">
       <namespace>firefly</namespace>    
       <link_name>screw_rod</link_name>
-      <torque_magnitude>1.75</torque_magnitude>>
+      <torque_magnitude>1.5</torque_magnitude>>
     </plugin>
   </model>
 </sdf>
