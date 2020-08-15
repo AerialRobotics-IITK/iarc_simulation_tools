@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="variable_load_macro" params="robot_namespace">
+    <gazebo>
+      <plugin name="variable_load_plugin" filename="libiarc_sim_test_tools_variable_load_plugin.so">
+        <robotNamespace>${robot_namespace}</robotNamespace>
+        <linkName>${robot_namespace}/base_link</linkName>
+      </plugin>
+    </gazebo>
+  </xacro:macro>
+
+</robot>

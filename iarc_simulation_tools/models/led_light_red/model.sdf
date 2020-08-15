@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="led_light_red">
+      <static>true</static>
+      <link name='link'>
+       <collision name="collision">
+        <geometry>
+            <mesh>
+              <uri>model://led_light_red/meshes/led_light.dae</uri>
+              <scale>0.1 0.1 0.1</scale>
+            </mesh>
+        </geometry>
+        <surface>
+          <contact>
+             <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+        <visual name='visual'>
+          <plugin name='lights' filename='libiarc_state_plugins_light_plugin.so'>
+            <led_color>Red</led_color>
+            <desired_relative_pose>-0.069 0.21 1.032 0 0 3.1415927</desired_relative_pose>
+          </plugin>
+          <geometry>
+            <mesh>
+              <uri>model://led_light_red/meshes/led_light.dae</uri>
+              <scale>0.1 0.1 0.1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+  </model>
+</sdf>

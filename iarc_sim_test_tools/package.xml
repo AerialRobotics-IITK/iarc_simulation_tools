@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>iarc_sim_test_tools</name>
+    <version>0.0.1</version>
+    <description>For testing of simulation environment for IARC Mission 9</description>
+    <maintainer email="aerialroboticsiitk@gmail.com">aerial-robotics-iitk-bot</maintainer>
+
+    <license>TODO</license>
+
+    <buildtool_depend>catkin</buildtool_depend>
+    <buildtool_depend>catkin_simple</buildtool_depend>
+    <depend>roscpp</depend>
+    <depend>iarc_simulation_msgs</depend>
+    <!-- <depend>gazebo_ros</depend>
+    <depend>eigen_conversions</depend>
+    <depend>geometry_msgs</depend>
+    <depend>sensor_msgs</depend>
+    <depend>xacro</depend>
+    <depend>gazebo_msgs</depend>
+    <depend>tf</depend>
+    <depend>rospy</depend> -->
+    <!-- <depend>message_generation</depend>
+    <depend>message_runtime</depend> -->
+    <!-- <depend>std_msgs</depend>
+    <depend>octomap_msgs</depend>
+    <depend>rotors_comm</depend> -->
+
+    <!-- <export>
+        <gazebo_ros gazebo_model_path="${prefix}/models"/>
+        <gazebo_ros gazebo_resource_path="${prefix}/models"/>
+	      <gazebo_ros gazebo_plugin_path="${prefix}/lib" gazebo_media_path="${prefix}"/>
+    </export> -->
+</package>

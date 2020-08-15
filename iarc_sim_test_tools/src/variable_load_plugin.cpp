@@ -1,0 +1,57 @@
+#include <iarc_sim_test_tools/variable_load_plugin.hpp>
+#include <iostream>
+
+namespace gazebo {
+
+GazeboVarForcePlugin::~GazeboVarForcePlugin() {
+}
+
+void GazeboVarForcePlugin::Load(physics::ModelPtr model, sdf::ElementPtr sdf) {
+    this->model_ = model;
+
+    if (sdf->HasElement("robotNamespace"))
+        namespace_ = sdf->GetElement("robotNamespace")->Get<std::string>();
+    else
+        gzerr << "[gazebo_var_load_plugin] Please specify a robotNamespace.\n";
+
+    getSdfParam<std::string>(sdf, "linkName", link_name_, link_name_);
+
+    link_ = model_->GetLink(link_name_);
+    if (link_ == NULL)
+        gzthrow("[gazebo_var_load_plugin] Couldn't find specified link \"" << link_name_ << "\".");
+
+    force_direction_.Set(0, 0, -1);
+
+    if (!ros::isInitialized()) {
+        int argc = 0;
+        char** argv = NULL;
+        ros::init(argc, argv, "gazebo_client", ros::init_options::NoSigintHandler);
+    }
+
+    this->rosNode.reset(new ros::NodeHandle("gazebo_client"));
+
+    ros::SubscribeOptions so = ros::SubscribeOptions::create<iarc_simulation_msgs::LoadParams>(
+        "/" + this->model_->GetName() + "/variable_force", 1, boost::bind(&GazeboVarForcePlugin::OnRosMsg, this, _1), ros::VoidPtr(), &this->rosQueue);
+    this->rosSub = this->rosNode->subscribe(so);
+
+    this->rosQueueThread = std::thread(std::bind(&GazeboVarForcePlugin::QueueThread, this));
+
+    update_connection_ = event::Events::ConnectWorldUpdateBegin(boost::bind(&GazeboVarForcePlugin::OnUpdate, this, _1));
+}
+
+void GazeboVarForcePlugin::OnRosMsg(const iarc_simulation_msgs::LoadParamsConstPtr& _msg) {
+    xyz_offset_.Set(_msg->x, _msg->y, _msg->z);
+    mass_ = _msg->mass;
+}
+
+void GazeboVarForcePlugin::QueueThread() {
+    static const double timeout = 0.01;
+    while (this->rosNode->ok()) {
+        this->rosQueue.callAvailable(ros::WallDuration(timeout));
+    }
+}
+void GazeboVarForcePlugin::OnUpdate(const common::UpdateInfo& _info) {
+    link_->AddForceAtRelativePosition(mass_ * force_direction_, xyz_offset_);
+}
+GZ_REGISTER_MODEL_PLUGIN(GazeboVarForcePlugin);
+}  // namespace gazebo

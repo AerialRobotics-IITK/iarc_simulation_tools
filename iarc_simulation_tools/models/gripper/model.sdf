@@ -1,0 +1,792 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name='gripper'>
+    <static>False</static>
+    <link name='left_long_joint'>
+      <pose>0 0.25 0.019 -1.57 0 0</pose>
+      <inertial>
+        <pose>-0.000104 -0.000077 -0.0 0 0 0</pose>
+        <mass>0.3186</mass>
+        <inertia>
+          <ixx>7.938e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>3.3715e-04</iyy>
+          <iyz>0</iyz>
+          <izz>3.3664e-04</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/joint_long.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/joint_long.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name='right_long_joint'>
+      <pose>0 -0.25 0.019 -1.57 0 0</pose>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/joint_long.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/joint_long.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <inertial>
+        <pose>-0.000104 -0.000077 -0.0 0 0 0</pose>
+        <mass>0.3186</mass>
+        <inertia>
+          <ixx>7.938e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>3.3715e-04</iyy>
+          <iyz>0</iyz>
+          <izz>3.3664e-04</izz>
+        </inertia>
+      </inertial>
+    </link>
+    <link name='left_short_joint'>
+      <pose>0.14 0 0 1.57 0 1.57</pose>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/joint_short.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/joint_short.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <inertial>
+        <pose>0.0 0.01896 -0.000157 0 0 0</pose>
+        <mass>0.1512</mass>
+        <inertia>
+          <ixx>2.689e-05</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>6.696e-05</iyy>
+          <iyz>0</iyz>
+          <izz>7.741e-05</izz>
+        </inertia>
+      </inertial>
+    </link>
+    <link name='right_short_joint'>
+      <pose>-0.14 0 0 1.57 0 1.57</pose>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/joint_short.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/joint_short.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <inertial>
+        <pose>0.0 0.01896 -0.000157 0 0 0</pose>
+        <mass>0.1512</mass>
+        <inertia>
+          <ixx>2.689e-05</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>6.696e-05</iyy>
+          <iyz>0</iyz>
+          <izz>7.741e-05</izz>
+        </inertia>
+      </inertial>
+    </link>
+    <link name='flat_plate1'>
+      <pose>0.0456 0.2565 0.038 1.57 0 -1.132</pose>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <inertial>
+        <pose>0.125 0.00325 0.012500 0 0 0</pose>
+        <mass>0.0651</mass>
+        <inertia>
+          <ixx>3.689e-06</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>3.797e-04</iyy>
+          <iyz>0</iyz>
+          <izz>3.764e-04</izz>
+        </inertia>
+      </inertial>
+    </link>
+    <link name='flat_plate2'>
+      <pose>-0.1289 -0.02 0.038 1.57 0 -1.132</pose>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <inertial>
+        <pose>0.125 0.00325 0.012500 0 0 0</pose>
+        <mass>0.0651</mass>
+        <inertia>
+          <ixx>3.689e-06</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>3.797e-04</iyy>
+          <iyz>0</iyz>
+          <izz>3.764e-04</izz>
+        </inertia>
+      </inertial>
+    </link>
+    <link name='flat_plate3'>
+      <pose>-0.1515 0.031 0.038 1.57 0 1.132</pose>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <inertial>
+        <pose>0.125 0.00325 0.012500 0 0 0</pose>
+        <mass>0.0651</mass>
+        <inertia>
+          <ixx>3.689e-06</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>3.797e-04</iyy>
+          <iyz>0</iyz>
+          <izz>3.764e-04</izz>
+        </inertia>
+      </inertial>
+    </link>
+    <link name='flat_plate4'>
+      <pose>0.022 -0.245 0.038 1.57 0 1.132</pose>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <inertial>
+        <pose>0.125 0.00325 0.012500 0 0 0</pose>
+        <mass>0.0651</mass>
+        <inertia>
+          <ixx>3.689e-06</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>3.797e-04</iyy>
+          <iyz>0</iyz>
+          <izz>3.764e-04</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <link name='flat_plate5'>
+      <pose>0.0456 0.2565 -0.007 1.57 0 -1.132</pose>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <inertial>
+        <pose>0.125 0.00325 0.012500 0 0 0</pose>
+        <mass>0.0651</mass>
+        <inertia>
+          <ixx>3.689e-06</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>3.797e-04</iyy>
+          <iyz>0</iyz>
+          <izz>3.764e-04</izz>
+        </inertia>
+      </inertial>
+    </link>
+    <link name='flat_plate6'>
+      <pose>-0.1289 -0.02 -0.007 1.57 0 -1.132</pose>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <inertial>
+        <pose>0.125 0.00325 0.012500 0 0 0</pose>
+        <mass>0.0651</mass>
+        <inertia>
+          <ixx>3.689e-06</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>3.797e-04</iyy>
+          <iyz>0</iyz>
+          <izz>3.764e-04</izz>
+        </inertia>
+      </inertial>
+    </link>
+    <link name='flat_plate7'>
+      <pose>-0.1515 0.031 -0.007 1.57 0 1.132</pose>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <inertial>
+        <pose>0.125 0.00325 0.012500 0 0 0</pose>
+        <mass>0.0651</mass>
+        <inertia>
+          <ixx>3.689e-06</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>3.797e-04</iyy>
+          <iyz>0</iyz>
+          <izz>3.764e-04</izz>
+        </inertia>
+      </inertial>
+    </link>
+    <link name='flat_plate8'>
+      <pose>0.022 -0.245 -0.007 1.57 0 1.132</pose>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/flat_plate.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <inertial>
+        <pose>0.125 0.00325 0.012500 0 0 0</pose>
+        <mass>0.0651</mass>
+        <inertia>
+          <ixx>3.689e-06</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>3.797e-04</iyy>
+          <iyz>0</iyz>
+          <izz>3.764e-04</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <link name='screw_rod'>
+      <pose>-0.00015 -0.02 0.0153 0 1.57 1.57 </pose>
+      <!-- <pose>0 -0.425 0.015 0 0 1.57</pose> -->
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>0.012</radius>
+            <length>1</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <material>
+          <script>
+            <name>Gazebo/Red</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <shader type='pixel'/>
+        </material>
+        <geometry>
+          <cylinder>
+            <radius>0.012</radius>
+            <length>0.7</length>
+          </cylinder>
+        </geometry>
+      </visual>
+      <!-- <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/new_rodV2.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://gripper/meshes/new_rodV2.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry> 
+      </visual> -->
+      <inertial>
+        <pose>0 0 0.32263 0 1.57 0</pose>
+        <!-- <pose>0.224910 -0.0 0.0 0 0 0</pose> -->
+        <mass>1.29</mass>
+        <inertia>
+          <ixx>1.8357e-04</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>8.006e-02</iyy>
+          <iyz>0</iyz>
+          <izz>8.006e-02</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <joint name="j1" type="revolute">
+      <pose> 0.25 0 0.01 0 0 0</pose>
+      <child>flat_plate1</child>
+      <parent>left_short_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
+        </limit>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j2" type="revolute">
+      <pose> 0 0 0.01 0 0 0</pose>
+      <child>flat_plate1</child>
+      <parent>left_long_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
+        </limit>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j3" type="revolute">
+      <pose> 0 0 0.01 0 0 0</pose>
+      <child>flat_plate2</child>
+      <parent>right_short_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
+        </limit>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j4" type="revolute">
+      <pose> 0.25 0 0.01 0 0 0</pose>
+      <child>flat_plate2</child>
+      <parent>right_long_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
+        </limit>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j5" type="revolute">
+      <pose> 0 0 0.01 0 0 0</pose>
+      <child>flat_plate3</child>
+      <parent>right_short_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
+        </limit>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j6" type="revolute">
+      <pose> 0.25 0 0.01 0 0 0</pose>
+      <child>flat_plate3</child>
+      <parent>left_long_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
+        </limit>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j7" type="revolute">
+      <pose> 0.25 0 0.01 0 0 0</pose>
+      <child>flat_plate4</child>
+      <parent>left_short_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
+        </limit>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j8" type="revolute">
+      <pose> 0 0 0.01 0 0 0</pose>
+      <child>flat_plate4</child>
+      <parent>right_long_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
+        </limit>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+
+    <joint name="j9" type="revolute">
+      <pose> 0.25 0 0.01 0 0 0</pose>
+      <child>flat_plate5</child>
+      <parent>left_short_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
+        </limit>
+        <xyz>0 -1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j10" type="revolute">
+      <pose> 0 0 0.01 0 0 0</pose>
+      <child>flat_plate5</child>
+      <parent>left_long_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
+        </limit>
+        <xyz>0 -1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j11" type="revolute">
+      <pose> 0 0 0.01 0 0 0</pose>
+      <child>flat_plate6</child>
+      <parent>right_short_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
+        </limit>
+        <xyz>0 -1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j12" type="revolute">
+      <pose> 0.25 0 0.01 0 0 0</pose>
+      <child>flat_plate6</child>
+      <parent>right_long_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
+        </limit>
+        <xyz>0 -1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j13" type="revolute">
+      <pose> 0 0 0.01 0 0 0</pose>
+      <child>flat_plate7</child>
+      <parent>right_short_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
+        </limit>
+        <xyz>0 -1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j14" type="revolute">
+      <pose> 0.25 0 0.01 0 0 0</pose>
+      <child>flat_plate7</child>
+      <parent>left_long_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
+        </limit>
+        <xyz>0 -1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j15" type="revolute">
+      <pose> 0.25 0 0.01 0 0 0</pose>
+      <child>flat_plate8</child>
+      <parent>left_short_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
+        </limit>
+        <xyz>0 -1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="j16" type="revolute">
+      <pose> 0 0 0.01 0 0 0</pose>
+      <child>flat_plate8</child>
+      <parent>right_long_joint</parent>
+      <axis>
+        <limit>
+          <lower>-0.5</lower>
+          <upper>0.1</upper>
+        </limit>
+        <xyz>0 -1 0</xyz>
+      </axis>
+    </joint>
+    <joint name="piston_joint_1" type ="screw">
+      <pose>0 0.004 0 0 0 0</pose>
+      <parent>screw_rod</parent>
+      <child>right_long_joint</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+      <thread_pitch>100</thread_pitch>
+    </joint>
+
+    <joint name="piston_joint_2" type ="screw">
+      <pose>0 0.004 0 0 0 0</pose>
+      <parent>screw_rod</parent>
+      <child>left_long_joint</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+      <thread_pitch>-100</thread_pitch>
+    </joint>
+
+    <plugin name="gripper_plugin" filename="libiarc_gripper_plugin.so">
+      <namespace>firefly</namespace>
+      <link_name>screw_rod</link_name>
+      <torque_magnitude>1.5</torque_magnitude>
+    </plugin>
+  </model>
+</sdf>
