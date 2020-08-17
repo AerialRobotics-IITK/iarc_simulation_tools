@@ -14,16 +14,16 @@ namespace gazebo{
 static const std::string kDefualFrameId = "world";
 static const std::string kDefaultLinkName = "base_link";
 
-class GazeboWindPlugin : public ModelPlugin {
+class CustomWindPlugin : public ModelPlugin {
     public:
-      GazeboWindPlugin()
+      CustomWindPlugin()
         : ModelPlugin()
         , namespace_(kDefaultNamespace)
         , link_name_(kDefaultLinkName) {
         
       }
 
-      virtual ~GazeboWindPlugin();
+      virtual ~CustomWindPlugin();
 
     protected:
         void Load(physics::ModelPtr model, sdf::ElementPtr sdf);

@@ -11,5 +11,8 @@
   <buildtool_depend>catkin</buildtool_depend>
   <buildtool_depend>catkin_sample</buildtool_depend>
   <depend>iarc_sim_test_tools</depend>
+  <depend>gazebo</depend>
+  <depend>xacro</depend>
+  <depend>roscpp</depend>
 
 </package>

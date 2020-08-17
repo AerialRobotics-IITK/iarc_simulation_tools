@@ -5,7 +5,7 @@
 
 namespace gazebo {
 
-void GazeboWindPlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
+void CustomWindPlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
   model_ = parent;
   sdf_ = sdf;
 
@@ -44,14 +44,14 @@ void GazeboWindPlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
 
   force_direction_.Set(cos(wind_angle_), sin(wind_angle_), 0);
 
-  update_connection_ = event::Events::ConnectWorldUpdateBegin(boost::bind(&GazeboWindPlugin::onUpdate, this, _1));
+  update_connection_ = event::Events::ConnectWorldUpdateBegin(boost::bind(&CustomWindPlugin::onUpdate, this, _1));
 
 }
 
-void GazeboWindPlugin::onUpdate(const common::UpdateInfo& _info){
+void CustomWindPlugin::onUpdate(const common::UpdateInfo& _info){
     link_->AddForce(windspeed_ * force_direction_);
 }
 
-GZ_REGISTER_MODEL_PLUGIN(GazeboWindPlugin);
+GZ_REGISTER_MODEL_PLUGIN(CustomWindPlugin);
 
 } //namespace gazbeo
