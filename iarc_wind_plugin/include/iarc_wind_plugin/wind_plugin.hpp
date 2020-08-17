@@ -23,7 +23,7 @@ class CustomWindPlugin : public ModelPlugin {
         
       }
 
-      virtual ~CustomWindPlugin();
+      virtual ~CustomWindPlugin(){};
 
     protected:
         void Load(physics::ModelPtr model, sdf::ElementPtr sdf);
