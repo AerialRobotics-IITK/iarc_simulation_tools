@@ -1,8 +1,42 @@
-# IARC Wave Simulator
+# ASV Wave Simulator
 
 This package contains plugins that support the simulation of waves and surface vessels in Gazebo.  
 
-![Wave Simulation](https://github.com/srmainwaring/iarc_wave_sim/wiki/images/ocean_waves_rs750.jpg)
+![Wave Simulation](https://github.com/srmainwaring/asv_wave_sim/wiki/images/ocean_waves_rs750_fft.jpg)
+
+## Notes
+
+This is a prototype branch `feature/fft_waves` which contains an updated wave engine
+that uses FFTs to generate the wavefield physics and visuals.
+
+There are changes in the way that the wave parameters need to be set, and it may
+not be possible to avoid breaking the existing interface used to specify trochoidal waves.
+This is still work in progress, and the current version has a fixed set of wave parameters.
+
+The library has additional dependencies on two FFT libraries:
+
+- [clMathLibraries/clFFT](https://github.com/clMathLibraries/clFFT)
+- [fftw](http://www.fftw.org/)
+
+These can be installed on linux with:
+
+```bash
+sudo apt-get update && apt-get install fftw clfft
+```
+
+And on macOS with:
+
+```bash
+brew fftw3 libclfft-dev libfftw3-dev
+```
+
+Aside from adding the option to use a FFT generated wavefield, the major change is
+in the way that the visuals are generated. Previously the wave displacements for visuals
+were generated in the shader code, the visual plugin was used to update shader parameters for wave amplitudes and frequency. Now the entire mesh for the visual is dynamically
+updated in the the library then pushed into the rendering engine. This means there is no
+need to maintain various sized meshes in the media files, however it does require working
+around Gazebos requirement for static meshes and there is a custom Visual that implements
+this. The OpenCL FFT library allows this work to be offloaded to the GPU when configured.
 
 ## Dependencies
 
@@ -47,8 +81,8 @@ source /usr/local/share/gazebo-9/setup.bash
 Create a catkin workspace:
 
 ```bash
-mkdir -p iarc_ws/src
-cd iarc_ws
+mkdir -p asv_ws/src
+cd asv_ws
 catkin init
 ```
 
@@ -60,11 +94,11 @@ catkin config --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo
 
 ### Clone and build the package
 
-Clone the `iarc_wave_sim` repository:
+Clone the `asv_wave_sim` repository:
 
 ```bash
 cd src
-git clone https://github.com/srmainwaring/iarc_wave_sim.git
+git clone https://github.com/srmainwaring/asv_wave_sim.git
 ```
 
 Compile the packages:
@@ -83,36 +117,36 @@ catkin build --catkin-make-args run_tests
 
 The wiki has details about how to configure and use the plugins:
 
-- [WavefieldPlugin](https://github.com/srmainwaring/iarc_wave_sim/wiki/WavefieldPlugin)
-- [WavefieldVisualPlugin](https://github.com/srmainwaring/iarc_wave_sim/wiki/WavefieldVisualPlugin)
-- [HydrodynamicsPlugin](https://github.com/srmainwaring/iarc_wave_sim/wiki/HydrodynamicsPlugin)
+- [WavefieldPlugin](https://github.com/srmainwaring/asv_wave_sim/wiki/WavefieldPlugin)
+- [WavefieldVisualPlugin](https://github.com/srmainwaring/asv_wave_sim/wiki/WavefieldVisualPlugin)
+- [HydrodynamicsPlugin](https://github.com/srmainwaring/asv_wave_sim/wiki/HydrodynamicsPlugin)
 
 ## Tests
 
 Manually run the tests:
 
 ```bash
-./devel/lib/iarc_wave_sim_gazebo_plugins/UNIT_Algorithm_TEST
-./devel/lib/iarc_wave_sim_gazebo_plugins/UNIT_Geometry_TEST
-./devel/lib/iarc_wave_sim_gazebo_plugins/UNIT_Grid_TEST
-./devel/lib/iarc_wave_sim_gazebo_plugins/UNIT_Physics_TEST
-./devel/lib/iarc_wave_sim_gazebo_plugins/UNIT_Wavefield_TEST
+./devel/lib/asv_wave_sim_gazebo_plugins/UNIT_Algorithm_TEST
+./devel/lib/asv_wave_sim_gazebo_plugins/UNIT_Geometry_TEST
+./devel/lib/asv_wave_sim_gazebo_plugins/UNIT_Grid_TEST
+./devel/lib/asv_wave_sim_gazebo_plugins/UNIT_Physics_TEST
+./devel/lib/asv_wave_sim_gazebo_plugins/UNIT_Wavefield_TEST
 ```
 
 ## Examples
 
-![Wave Simulation](https://github.com/srmainwaring/iarc_wave_sim/wiki/images/ocean_waves_box_example.gif)
+![Wave Simulation](https://github.com/srmainwaring/asv_wave_sim/wiki/images/ocean_waves_box_example.gif)
 
 Launch a Gazebo session with `roslaunch`:
 
 ```bash
-roslaunch iarc_wave_gazebo ocean_world.launch verbose:=true
+roslaunch asv_wave_gazebo ocean_world.launch verbose:=true
 ```
 
 Publish a wave parameters message:
 
 ```bash
-./devel/lib/iarc_wave_sim_gazebo_plugins/WaveMsgPublisher \
+./devel/lib/asv_wave_sim_gazebo_plugins/WaveMsgPublisher \
   --number 3 \
   --amplitude 1 \
   --period 7 \
@@ -125,7 +159,7 @@ Publish a wave parameters message:
 Publish a hydrodynamics parameters message:
 
 ```bash
-./devel/lib/iarc_wave_sim_gazebo_plugins/HydrodynamicsMsgPublisher \
+./devel/lib/asv_wave_sim_gazebo_plugins/HydrodynamicsMsgPublisher \
   --model box \
   --damping_on true \
   --viscous_drag_on true \
@@ -136,7 +170,7 @@ Publish a hydrodynamics parameters message:
   --cDampR2 1
 ```
 
-For more detail see the [Example](https://github.com/srmainwaring/iarc_wave_sim/wiki/Example) page in the wiki.
+For more detail see the [Example](https://github.com/srmainwaring/asv_wave_sim/wiki/Example) page in the wiki.
 
 ## Build Status
 
@@ -144,14 +178,15 @@ For more detail see the [Example](https://github.com/srmainwaring/iarc_wave_sim/
 
 |    | Melodic |
 |--- |--- |
-| iarc_wave_sim | [![Build Status](https://travis-ci.org/srmainwaring/iarc_wave_sim.svg?branch=feature%2Ffft_waves)](https://travis-ci.org/srmainwaring/iarc_wave_sim) |
+| asv_wave_sim | [![Build Status](https://travis-ci.org/srmainwaring/asv_wave_sim.svg?branch=feature%2Ffft_waves)](https://travis-ci.org/srmainwaring/asv_wave_sim) |
 
 
 ### Release Job Status
 
 |    | Melodic |
 |--- |--- |
-| iarc_wave_sim | [![Build Status](https://travis-ci.org/srmainwaring/iarc_wave_sim.svg?branch=master)](https://travis-ci.org/srmainwaring/iarc_wave_sim) |
+| asv_wave_sim | [![Build Status](https://travis-ci.org/srmainwaring/asv_wave_sim.svg?branch=master)](https://travis-ci.org/srmainwaring/asv_wave_sim) |
+
 
 ## License
 

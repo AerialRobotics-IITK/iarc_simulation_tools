@@ -29,6 +29,37 @@ find_package(gazebo REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(TBB REQUIRED)
 
+###############################################################################
+# Find FFTW3 (double-precision) (GPL) as FFT library.
+
+find_path(FFTW3-3_INCLUDE_DIR
+  NAMES fftw3.h
+  HINTS $ENV{FFTW3_DIR}/include
+  PATHS /usr/local/include
+        /usr/include
+)
+
+find_library(FFTW3-3_LIBRARY
+  NAMES fftw3 libfftw3
+  HINTS $ENV{FFTW3_DIR}/lib
+  PATHS /usr/local/lib
+        /usr/lib
+)
+
+add_definitions(-DUSE_FFTW3)
+set(FFT_INCLUDE_DIRS ${FFTW3-3_INCLUDE_DIR})
+set(FFT_LIBRARIES ${FFTW3-3_LIBRARY})
+
+###############################################################################
+# Find OpenCL
+
+find_package (OpenCL REQUIRED)
+
+###############################################################################
+# Find clFFT
+
+find_package (clFFT REQUIRED)
+
 ############################################################################### 
 # Catkin...
 
@@ -55,7 +86,10 @@ include_directories(
   ${IGNITION-MATHS_INCLUDE_DIRS}
   ${IGNITION-MSGS_INCLUDE_DIRS}
   ${TBB_INCLUDE_DIRS}
-  )
+  ${FFT_INCLUDE_DIRS}
+  ${OpenCL_INCLUDE_DIRS}
+  ${CLFFT_INCLUDE_DIRS}
+)
 
 link_directories(
   ${GAZEBO_LIBRARY_DIRS}
@@ -77,11 +111,21 @@ add_library(Hydrodynamics
     src/Geometry.cc
     src/Grid.cc
     src/MeshTools.cc
+    src/OceanTile.cc
     src/PhysicalConstants.cc
     src/Physics.cc
+    src/TriangulatedGrid.cc
     src/Utilities.cc
     src/Wavefield.cc
     src/WavefieldEntity.cc
+    src/WavefieldSampler.cc
+    src/WaveParameters.cc
+    src/WaveSimulation.cc
+    src/WaveSimulationFFTW.cc
+    src/WaveSimulationOpenCL.cc
+    src/WaveSimulationSinusoid.cc
+    src/WaveSimulationTrochoid.cc
+    src/WaveSpectrum.cc
 )
 
 target_link_libraries(Hydrodynamics
@@ -89,11 +133,14 @@ target_link_libraries(Hydrodynamics
   ${catkin_LIBRARIES}
   ${GAZEBO_LIBRARIES}
   ${TBB_LIBRARIES}
+  ${FFT_LIBRARIES}
+  ${OpenCL_LIBRARIES}
+  ${CLFFT_LIBRARIES}
 )
 
 target_compile_options(Hydrodynamics PRIVATE "-Wno-unknown-pragmas")
 
-list(APPEND IARC_WAVE_GAZEBO_LIBRARIES_LIST Hydrodynamics)
+list(APPEND ASV_WAVE_GAZEBO_LIBRARIES_LIST Hydrodynamics)
 
 ############################################################################### 
 # Plugins...
@@ -108,12 +155,12 @@ target_link_libraries(HydrodynamicsPlugin
   ${Boost_LIBRARIES}
   ${catkin_LIBRARIES}
   ${GAZEBO_LIBRARIES}
-  ${IARC_WAVE_GAZEBO_LIBRARIES_LIST}
+  ${ASV_WAVE_GAZEBO_LIBRARIES_LIST}
 )
 
-target_compile_options(HydrodynamicsPlugin PRIVATE "-Wno-unknown-pragmas")
+target_compile_options(HydrodynamicsPlugin PRIVATE "-Wno-unknown-pragmas -Wdeprecated-declarations")
 
-list(APPEND IARC_WAVE_GAZEBO_PLUGINS_LIST HydrodynamicsPlugin)
+list(APPEND ASV_WAVE_GAZEBO_PLUGINS_LIST HydrodynamicsPlugin)
 
 # WavefieldModelPlugin
 add_library(WavefieldModelPlugin
@@ -125,12 +172,12 @@ target_link_libraries(WavefieldModelPlugin
   ${Boost_LIBRARIES}
   ${catkin_LIBRARIES}
   ${GAZEBO_LIBRARIES}
-  ${IARC_WAVE_GAZEBO_LIBRARIES_LIST}
+  ${ASV_WAVE_GAZEBO_LIBRARIES_LIST}
 )
 
-target_compile_options(WavefieldModelPlugin PRIVATE "-Wno-unknown-pragmas")
+target_compile_options(WavefieldModelPlugin PRIVATE "-Wno-unknown-pragmas" "-Wno-deprecated-declarations")
 
-list(APPEND IARC_WAVE_GAZEBO_PLUGINS_LIST WavefieldModelPlugin)
+list(APPEND ASV_WAVE_GAZEBO_PLUGINS_LIST WavefieldModelPlugin)
 
 # WavefieldVisualPlugin
 add_library(WavefieldVisualPlugin
@@ -142,12 +189,30 @@ target_link_libraries(WavefieldVisualPlugin
   ${Boost_LIBRARIES}
   ${catkin_LIBRARIES}
   ${GAZEBO_LIBRARIES}
-  ${IARC_WAVE_GAZEBO_LIBRARIES_LIST}
+  ${ASV_WAVE_GAZEBO_LIBRARIES_LIST}
 )
 
-target_compile_options(WavefieldVisualPlugin PRIVATE "-Wno-unknown-pragmas")
+target_compile_options(WavefieldVisualPlugin PRIVATE "-Wno-unknown-pragmas" "-Wno-deprecated-declarations")
 
-list(APPEND IARC_WAVE_GAZEBO_PLUGINS_LIST WavefieldVisualPlugin)
+list(APPEND ASV_WAVE_GAZEBO_PLUGINS_LIST WavefieldVisualPlugin)
+
+# OceanVisualPlugin
+add_library(OceanVisualPlugin
+  SHARED
+    src/OceanVisual.cc
+    src/OceanVisualPlugin.cc
+)
+
+target_link_libraries(OceanVisualPlugin
+  ${Boost_LIBRARIES}
+  ${catkin_LIBRARIES}
+  ${GAZEBO_LIBRARIES}
+  ${ASV_WAVE_GAZEBO_LIBRARIES_LIST}
+)
+
+target_compile_options(OceanVisualPlugin PRIVATE "-Wno-unknown-pragmas" "-Wno-deprecated-declarations")
+
+list(APPEND ASV_WAVE_GAZEBO_PLUGINS_LIST OceanVisualPlugin)
 
 ############################################################################### 
 # Executables...
@@ -162,13 +227,12 @@ link_directories(
 
 add_executable(TestRunner
   src/TestRunner.cc
-  src/CGAL_TEST.cc
   src/MeshTools_TEST.cc
 )
 
 target_link_libraries(TestRunner  
   ${GAZEBO_LIBRARIES}
-  ${IARC_WAVE_GAZEBO_LIBRARIES_LIST}
+  ${ASV_WAVE_GAZEBO_LIBRARIES_LIST}
   ${CGAL_LIBRARIES}
   ${CGAL_3RD_PARTY_LIBRARIES}
   ${TBB_LIBRARIES}
@@ -176,7 +240,7 @@ target_link_libraries(TestRunner
 
 target_compile_options(TestRunner PRIVATE "-Wno-unknown-pragmas")
 
-list(APPEND IARC_WAVE_GAZEBO_EXECUTABLES_LIST TestRunner)
+list(APPEND ASV_WAVE_GAZEBO_EXECUTABLES_LIST TestRunner)
 
 add_executable(GzTestRunner
   src/GzTestRunner.cc
@@ -185,13 +249,13 @@ add_executable(GzTestRunner
 
 target_link_libraries(GzTestRunner  
   ${GAZEBO_LIBRARIES}
-  ${IARC_WAVE_GAZEBO_LIBRARIES_LIST}
+  ${ASV_WAVE_GAZEBO_LIBRARIES_LIST}
   pthread
 )
 
 target_compile_options(GzTestRunner PRIVATE "-Wno-unknown-pragmas")
 
-list(APPEND IARC_WAVE_GAZEBO_EXECUTABLES_LIST GzTestRunner)
+list(APPEND ASV_WAVE_GAZEBO_EXECUTABLES_LIST GzTestRunner)
 
 add_executable(HydrodynamicsMsgPublisher
   src/HydrodynamicsMsgPublisher.cc
@@ -199,16 +263,16 @@ add_executable(HydrodynamicsMsgPublisher
 
 target_link_libraries(HydrodynamicsMsgPublisher  
   ${GAZEBO_LIBRARIES}
-  ${IARC_WAVE_GAZEBO_LIBRARIES_LIST}
+  ${ASV_WAVE_GAZEBO_LIBRARIES_LIST}
 )
 
 target_compile_options(HydrodynamicsMsgPublisher PRIVATE "-Wno-unknown-pragmas")
 
 add_dependencies(HydrodynamicsMsgPublisher
-  ${IARC_WAVE_GAZEBO_LIBRARIES_LIST}
+  ${ASV_WAVE_GAZEBO_LIBRARIES_LIST}
 )
 
-list(APPEND IARC_WAVE_GAZEBO_EXECUTABLES_LIST HydrodynamicsMsgPublisher)
+list(APPEND ASV_WAVE_GAZEBO_EXECUTABLES_LIST HydrodynamicsMsgPublisher)
 
 add_executable(HydrodynamicsMsgSubscriber
   src/HydrodynamicsMsgSubscriber.cc
@@ -216,16 +280,16 @@ add_executable(HydrodynamicsMsgSubscriber
 
 target_link_libraries(HydrodynamicsMsgSubscriber  
   ${GAZEBO_LIBRARIES}
-  ${IARC_WAVE_GAZEBO_LIBRARIES_LIST}
+  ${ASV_WAVE_GAZEBO_LIBRARIES_LIST}
 )
 
 target_compile_options(HydrodynamicsMsgSubscriber PRIVATE "-Wno-unknown-pragmas")
 
 add_dependencies(HydrodynamicsMsgSubscriber
-  ${IARC_WAVE_GAZEBO_LIBRARIES_LIST}
+  ${ASV_WAVE_GAZEBO_LIBRARIES_LIST}
 )
 
-list(APPEND IARC_WAVE_GAZEBO_EXECUTABLES_LIST HydrodynamicsMsgSubscriber)
+list(APPEND ASV_WAVE_GAZEBO_EXECUTABLES_LIST HydrodynamicsMsgSubscriber)
 
 add_executable(WaveMsgPublisher
   src/WaveMsgPublisher.cc
@@ -233,13 +297,13 @@ add_executable(WaveMsgPublisher
 
 target_link_libraries(WaveMsgPublisher  
   ${GAZEBO_LIBRARIES}
-  ${IARC_WAVE_GAZEBO_LIBRARIES_LIST}
+  ${ASV_WAVE_GAZEBO_LIBRARIES_LIST}
 )
 
 target_compile_options(WaveMsgPublisher PRIVATE "-Wno-unknown-pragmas")
 
 add_dependencies(WaveMsgPublisher
-  ${IARC_WAVE_GAZEBO_LIBRARIES_LIST}
+  ${ASV_WAVE_GAZEBO_LIBRARIES_LIST}
 )
 
 add_executable(WaveMsgSubscriber
@@ -248,16 +312,16 @@ add_executable(WaveMsgSubscriber
 
 target_link_libraries(WaveMsgSubscriber  
   ${GAZEBO_LIBRARIES}
-  ${IARC_WAVE_GAZEBO_LIBRARIES_LIST}
+  ${ASV_WAVE_GAZEBO_LIBRARIES_LIST}
 )
 
 target_compile_options(WaveMsgSubscriber PRIVATE "-Wno-unknown-pragmas")
 
 add_dependencies(WaveMsgSubscriber
-  ${IARC_WAVE_GAZEBO_LIBRARIES_LIST}
+  ${ASV_WAVE_GAZEBO_LIBRARIES_LIST}
 )
 
-list(APPEND IARC_WAVE_GAZEBO_EXECUTABLES_LIST WaveMsgSubscriber)
+list(APPEND ASV_WAVE_GAZEBO_EXECUTABLES_LIST WaveMsgSubscriber)
 
 ############################################################################### 
 # Tests...
@@ -269,43 +333,55 @@ list(APPEND IARC_WAVE_GAZEBO_EXECUTABLES_LIST WaveMsgSubscriber)
 if(CATKIN_ENABLE_TESTING)
 
   catkin_add_gtest(UNIT_Algorithm_TEST src/Algorithm_TEST.cc)
-  target_link_libraries(UNIT_Algorithm_TEST ${IARC_WAVE_GAZEBO_LIBRARIES_LIST})
+  target_link_libraries(UNIT_Algorithm_TEST ${ASV_WAVE_GAZEBO_LIBRARIES_LIST})
   target_compile_options(UNIT_Algorithm_TEST PRIVATE "-Wno-unknown-pragmas")
 
+  catkin_add_gtest(UNIT_CGAL_TEST src/CGAL_TEST.cc)
+  target_link_libraries(UNIT_CGAL_TEST ${ASV_WAVE_GAZEBO_LIBRARIES_LIST})
+  target_compile_options(UNIT_CGAL_TEST PRIVATE "-Wno-unknown-pragmas")
+
   catkin_add_gtest(UNIT_Geometry_TEST src/Geometry_TEST.cc)
-  target_link_libraries(UNIT_Geometry_TEST ${IARC_WAVE_GAZEBO_LIBRARIES_LIST})
+  target_link_libraries(UNIT_Geometry_TEST ${ASV_WAVE_GAZEBO_LIBRARIES_LIST})
   target_compile_options(UNIT_Geometry_TEST PRIVATE "-Wno-unknown-pragmas")
 
   catkin_add_gtest(UNIT_Grid_TEST src/Grid_TEST.cc)
-  target_link_libraries(UNIT_Grid_TEST ${IARC_WAVE_GAZEBO_LIBRARIES_LIST})
+  target_link_libraries(UNIT_Grid_TEST ${ASV_WAVE_GAZEBO_LIBRARIES_LIST})
   target_compile_options(UNIT_Grid_TEST PRIVATE "-Wno-unknown-pragmas")
 
   catkin_add_gtest(UNIT_Physics_TEST src/Physics_TEST.cc)
-  target_link_libraries(UNIT_Physics_TEST ${IARC_WAVE_GAZEBO_LIBRARIES_LIST})
+  target_link_libraries(UNIT_Physics_TEST ${ASV_WAVE_GAZEBO_LIBRARIES_LIST})
   target_compile_options(UNIT_Physics_TEST PRIVATE "-Wno-unknown-pragmas")
 
+  catkin_add_gtest(UNIT_TriangulatedGrid_TEST src/TriangulatedGrid_TEST.cc)
+  target_link_libraries(UNIT_TriangulatedGrid_TEST ${ASV_WAVE_GAZEBO_LIBRARIES_LIST})
+  target_compile_options(UNIT_TriangulatedGrid_TEST PRIVATE "-Wno-unknown-pragmas")
+
   catkin_add_gtest(UNIT_Wavefield_TEST src/Wavefield_TEST.cc)
-  target_link_libraries(UNIT_Wavefield_TEST ${IARC_WAVE_GAZEBO_LIBRARIES_LIST})
+  target_link_libraries(UNIT_Wavefield_TEST ${ASV_WAVE_GAZEBO_LIBRARIES_LIST})
   target_compile_options(UNIT_Wavefield_TEST PRIVATE "-Wno-unknown-pragmas")
+
+  catkin_add_gtest(UNIT_WaveSimulation_TEST src/WaveSimulation_TEST.cc)
+  target_link_libraries(UNIT_WaveSimulation_TEST ${ASV_WAVE_GAZEBO_LIBRARIES_LIST})
+  target_compile_options(UNIT_WaveSimulation_TEST PRIVATE "-Wno-unknown-pragmas")
 
 endif()
 
 ############################################################################### 
 # Install
 
-install(TARGETS ${IARC_WAVE_GAZEBO_LIBRARIES_LIST}
+install(TARGETS ${ASV_WAVE_GAZEBO_LIBRARIES_LIST}
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-install(TARGETS ${IARC_WAVE_GAZEBO_PLUGINS_LIST}
+install(TARGETS ${ASV_WAVE_GAZEBO_PLUGINS_LIST}
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-install(TARGETS ${IARC_WAVE_GAZEBO_EXECUTABLES_LIST}
+install(TARGETS ${ASV_WAVE_GAZEBO_EXECUTABLES_LIST}
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

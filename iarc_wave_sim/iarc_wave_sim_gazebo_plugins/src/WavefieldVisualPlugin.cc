@@ -19,6 +19,7 @@
 #include "iarc_wave_sim_gazebo_plugins/Gazebo.hh"
 #include "iarc_wave_sim_gazebo_plugins/Grid.hh"
 #include "iarc_wave_sim_gazebo_plugins/Wavefield.hh"
+#include "iarc_wave_sim_gazebo_plugins/WaveParameters.hh"
 #include "iarc_wave_sim_gazebo_plugins/Utilities.hh"
 
 #include <gazebo/gazebo.hh>
@@ -204,7 +205,17 @@ namespace iarc
 // WavefieldVisualPlugin
 
   WavefieldVisualPlugin::~WavefieldVisualPlugin()
-  {
+  { 
+    // Clean up.
+    this->data->waveParams.reset();
+
+    // Reset connections and transport.
+    this->data->connection.reset();
+    this->data->statsSub.reset();
+    this->data->waveSub.reset();
+    this->data->responseSub.reset();
+    this->data->requestPub.reset();
+    this->data->gzNode.reset();
   }
 
   WavefieldVisualPlugin::WavefieldVisualPlugin() :
@@ -225,7 +236,7 @@ namespace iarc
     // gzmsg << "Load WavefieldVisualPlugin [thread: " << threadId << "]" << std::endl;
 
     // Capture visual and plugin SDF
-    GZ_ASSERT(_visual != nullptr, "Visual mus not be null");
+    GZ_ASSERT(_visual != nullptr, "Visual must not be null");
     GZ_ASSERT(_sdf != nullptr, "SDF Element must not be null");
 
     // Capture the visual and sdf.
@@ -352,8 +363,6 @@ namespace iarc
     std::lock_guard<std::recursive_mutex> lock(this->data->mutex);
 
     GZ_ASSERT(_msg != nullptr, "Wave message must not be null");
-
-    gzerr << _msg->GetDescriptor()->DebugString();
 
     // Update wave params and vertex shader 
     this->data->waveParams->SetFromMsg(*_msg);

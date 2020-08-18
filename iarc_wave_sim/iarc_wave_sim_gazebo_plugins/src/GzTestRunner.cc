@@ -33,7 +33,7 @@
 #include <chrono>
 #include <thread>
 
-gazebo::physics::WorldPtr LoadIARCWorld();
+gazebo::physics::WorldPtr LoadASVWorld();
 void GzRunPhysicsTests(gazebo::physics::WorldPtr world);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -55,7 +55,7 @@ int main(int _argc, char **_argv)
 
     // Load a world from SDF (See gazebo/gazebo.cc gazebo::loadWorld)
     // gazebo::physics::WorldPtr world = gazebo::loadWorld(str);
-    gazebo::physics::WorldPtr world = LoadIARCWorld();
+    gazebo::physics::WorldPtr world = LoadASVWorld();
     if (!world) 
     {
       std::cerr << "Could not load world: " + str << std::endl;

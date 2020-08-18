@@ -34,7 +34,7 @@
         <scale>2.5</scale>
         <angle>0.3</angle>
         <steepness>1.0</steepness>
-        <amplitude>0.0</amplitude>
+        <amplitude>1.0</amplitude>
         <period>8.0</period>
         <direction>1 1</direction>
       </wave>
@@ -55,7 +55,7 @@
         <material>
           <script>
             <uri>model://ocean_waves/materials/scripts/waves.material</uri>
-            <name>IARCWaveSim/GerstnerWaves</name>
+            <name>ASVWaveSim/GerstnerWaves</name>
           </script>
         </material>
       </visual>
@@ -69,7 +69,7 @@
         <material>
           <script>
             <uri>model://ocean_waves/materials/scripts/waves.material</uri>
-            <name>IARCWaveSim/GerstnerWaves</name>
+            <name>ASVWaveSim/GerstnerWaves</name>
           </script>
         </material>
       </visual>

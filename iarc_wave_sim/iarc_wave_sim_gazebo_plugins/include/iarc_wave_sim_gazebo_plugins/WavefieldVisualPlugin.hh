@@ -17,8 +17,8 @@
 /// \brief This file defines a Gazebo VisualPlugin used to render
 /// a wave field and keep it synchronised with the model used in the physics engine.
 
-#ifndef _IARC_WAVE_SIM_GAZEBO_PLUGINS_WAVEFIELD_VISUAL_PLUGIN_HH_
-#define _IARC_WAVE_SIM_GAZEBO_PLUGINS_WAVEFIELD_VISUAL_PLUGIN_HH_
+#ifndef _ASV_WAVE_SIM_GAZEBO_PLUGINS_WAVEFIELD_VISUAL_PLUGIN_HH_
+#define _ASV_WAVE_SIM_GAZEBO_PLUGINS_WAVEFIELD_VISUAL_PLUGIN_HH_
 
 #include <gazebo/common/Plugin.hh>
 #include <gazebo/msgs/msgs.hh>
@@ -160,4 +160,4 @@ namespace iarc
 
 } // namespace iarc
 
-#endif // _IARC_WAVE_SIM_GAZEBO_PLUGINS_WAVEFIELD_VISUAL_PLUGIN_HH_
+#endif // _ASV_WAVE_SIM_GAZEBO_PLUGINS_WAVEFIELD_VISUAL_PLUGIN_HH_

@@ -19,6 +19,7 @@
 #include "iarc_wave_sim_gazebo_plugins/Grid.hh"
 #include "iarc_wave_sim_gazebo_plugins/Wavefield.hh"
 #include "iarc_wave_sim_gazebo_plugins/WavefieldEntity.hh"
+#include "iarc_wave_sim_gazebo_plugins/WaveParameters.hh"
 #include "iarc_wave_sim_gazebo_plugins/Utilities.hh"
 
 #include <gazebo/common/Assert.hh>
@@ -103,7 +104,11 @@ namespace iarc
 
   WavefieldModelPlugin::~WavefieldModelPlugin()
   {
-    // Remove node from the topic manager.
+    // Clean up.
+    this->data->wavefieldEntity.reset();
+
+    // Reset connections and transport.
+    this->data->updateConnection.reset();
     this->data->requestSub.reset();
     this->data->waveSub.reset();
     this->data->responsePub.reset();

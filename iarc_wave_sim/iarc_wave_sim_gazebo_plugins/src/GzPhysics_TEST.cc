@@ -29,13 +29,12 @@
 using namespace ignition;
 using namespace math;
 using namespace gazebo;
-using namespace common;
 using namespace physics;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Utiltiies
 
-sdf::SDFPtr CreateIARCWorldSDF()
+sdf::SDFPtr CreateASVWorldSDF()
 {
   std::ostringstream sdfStr;
   sdfStr << "<sdf version ='" << SDF_VERSION << "'>"
@@ -76,7 +75,7 @@ sdf::SDFPtr CreateIARCWorldSDF()
   return sdf;
 }
 
-sdf::SDFPtr CreateIARCBoxSDF()
+sdf::SDFPtr CreateASVBoxSDF()
 {
   std::ostringstream sdfStr;
   sdfStr << "<sdf version='" << SDF_VERSION << "'>"
@@ -115,9 +114,9 @@ sdf::SDFPtr CreateIARCBoxSDF()
   return sdf;
 }
 
-gazebo::physics::WorldPtr LoadIARCWorld()
+gazebo::physics::WorldPtr LoadASVWorld()
 {
-  sdf::SDFPtr sdfWorld = CreateIARCWorldSDF();
+  sdf::SDFPtr sdfWorld = CreateASVWorldSDF();
   gazebo::physics::WorldPtr world = gazebo::physics::create_world();
   gazebo::physics::load_world(world, sdfWorld->Root()->GetElement("world"));
   gazebo::physics::init_world(world);
@@ -168,7 +167,7 @@ void TestLinkProperties(gazebo::physics::WorldPtr _world)
   // Mock up the box object... 
   // Mesh: 10 x 4 x 2 box
   std::string linkMeshName(modelName + "::" + linkName);
-  MeshManager::Instance()->CreateBox(
+  gazebo::common::MeshManager::Instance()->CreateBox(
     linkMeshName,
     ignition::math::Vector3d(10, 4, 2),
     ignition::math::Vector2d(1, 1));

@@ -52,7 +52,7 @@ T SdfParam(sdf::Element& _sdf, const std::string &_paramName, const T _defaultVa
 
 /// \brief Template function for extracting a value from a parameter message.
 template <typename T>
-T   MsgParamGetValue(const gazebo::msgs::Param& _msg)
+T MsgParamGetValue(const gazebo::msgs::Param& _msg)
 {
   gzwarn << "Using default template for MsgParamGetValue" << std::endl;
   return T();  
@@ -132,8 +132,8 @@ T MsgParam(const gazebo::msgs::Param_V& _msg, const std::string &_paramName, con
   if (it == std::end(_msg.param()))
   {
   // @DEBUG_INFO
-    gzmsg << "Parameter <" << _paramName << "> not found: " 
-      <<  "Using default value of <" << _defaultVal << ">." << std::endl;
+    // gzmsg << "Parameter <" << _paramName << "> not found: " 
+    //   <<  "Using default value of <" << _defaultVal << ">." << std::endl;
     return _defaultVal;
   }
 
@@ -142,8 +142,8 @@ T MsgParam(const gazebo::msgs::Param_V& _msg, const std::string &_paramName, con
   T val = MsgParamGetValue<T>(param);
 
   // @DEBUG_INFO
-  gzmsg << "Parameter found - setting <" << _paramName 
-    << "> to <" << val << ">." << std::endl;
+  // gzmsg << "Parameter found - setting <" << _paramName 
+  //   << "> to <" << val << ">." << std::endl;
   return val;
 }
 
