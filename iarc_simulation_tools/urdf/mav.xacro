@@ -59,7 +59,10 @@
   </xacro:rgbd_sensor_depth_macro>
 
   <xacro:gazebo_wind_plugin_macro
-    namespace="${namespace}"  >
+    namespace="${namespace}"
+    link_name="${namespace}/base_link"
+    windspeed = "5"
+    windangle = "0"  >
   </xacro:gazebo_wind_plugin_macro>
 
 </robot>
