@@ -1,6 +1,5 @@
 <sdf version='1.6'>
   <world name='default'>
-    <plugin name="ros_interface_plugin" filename="librotors_gazebo_ros_interface_plugin.so"/>
 
     <gravity>0 0 -9.8</gravity>
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
@@ -28,22 +27,14 @@
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
 
-    <gui fullscreen='0'>
-      <camera name='user_camera'>
-        <pose>3.96763 0.162096 2.03427 0 0.5378 -0.082796</pose>
-        <view_controller>orbit</view_controller>
-        <projection_type>perspective</projection_type>
-      </camera>
-    </gui>
-
     <include>
       <uri>model://ocean_waves</uri>
     </include>
 
-    <!-- <include>
-      <uri>model://ground_plane</uri>
-      <pose>0 0 -3 0 0 0</pose>
-    </include> -->
+    <include>
+      <uri>model://takeoff_base</uri>
+      <pose>-5 0 0.1 0 0 0</pose>
+    </include>
 
     <include>
       <uri>model://pylon</uri>
@@ -58,13 +49,13 @@
     </include>
 
     <include>
-      <uri>model://table</uri>
+      <uri>model://table_with_comm_block</uri>
       <pose>4.2756 0.063046 0 0 -0 3.14</pose>
     </include>
 
     <include>
       <uri>model://takeoff_zone</uri>
-      <pose>-5 0 0 0 0 0</pose>
+      <pose>-5 0 0.1 0 0 0</pose>
     </include>
 
     <!-- <include>
