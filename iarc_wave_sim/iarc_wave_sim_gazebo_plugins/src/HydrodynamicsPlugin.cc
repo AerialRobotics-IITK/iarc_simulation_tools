@@ -22,6 +22,7 @@
 #include "iarc_wave_sim_gazebo_plugins/Utilities.hh"
 #include "iarc_wave_sim_gazebo_plugins/Wavefield.hh"
 #include "iarc_wave_sim_gazebo_plugins/WavefieldEntity.hh"
+#include "iarc_wave_sim_gazebo_plugins/WavefieldSampler.hh"
 
 #include <gazebo/common/Assert.hh>
 #include <gazebo/physics/physics.hh>
@@ -286,6 +287,16 @@ namespace iarc
   /// for each link in a model.
   class HydrodynamicsLinkData
   {
+    /// \brief Destructor.
+    public: virtual ~HydrodynamicsLinkData()
+    {
+      for (auto&& ptr : this->hydrodynamics)
+        ptr.reset();
+      for (auto&& ptr : this->initLinkMeshes)
+        ptr.reset();
+      this->wavefieldSampler.reset();
+    }
+
     /// \brief A Link pointer.
     public: physics::LinkPtr link;
 
@@ -369,7 +380,17 @@ namespace iarc
 
   HydrodynamicsPlugin::~HydrodynamicsPlugin()
   {
+    // Clean up.
     this->Fini();
+    for (auto&& ptr : this->data->hydroData)
+      ptr.reset();
+    this->data->hydroParams.reset();
+    this->data->wavefield.reset();
+
+    // Reset connections and transport.
+    this->data->updateConnection.reset();
+    this->data->hydroSub.reset();
+    this->data->gzNode->Fini();
   }
 
   HydrodynamicsPlugin::HydrodynamicsPlugin() : 
@@ -643,8 +664,8 @@ namespace iarc
       ignition::math::Pose3d linkCoMPose = hd->link->WorldCoGPose();
 
       // Water patch grid
-      ignition::math::Box boundingBox = hd->link->CollisionBoundingBox();
-      double patchSize = 1.5 * boundingBox.Size().Length();
+      auto boundingBox = hd->link->CollisionBoundingBox();
+      double patchSize = 2.2 * boundingBox.Size().Length();
       gzmsg << "Water patch size: " << patchSize << std::endl;
       std::shared_ptr<Grid> initWaterPatch(new Grid({patchSize, patchSize}, { 4, 4 }));
 

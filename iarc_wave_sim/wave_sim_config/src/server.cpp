@@ -145,7 +145,7 @@ namespace wave_sim_config
           auto param = msg.add_param();
           param->set_name("number");
           param->mutable_value()->set_type(msgs::Any::INT32);
-          param->mutable_value()->set_int_value(1);
+          param->mutable_value()->set_int_value(config.number);
         }
         {
           auto param = msg.add_param();
@@ -175,14 +175,14 @@ namespace wave_sim_config
           auto param = msg.add_param();
           param->set_name("amplitude");
           param->mutable_value()->set_type(msgs::Any::DOUBLE);
-          param->mutable_value()->set_double_value(5);
+          param->mutable_value()->set_double_value(config.amplitude);
         }
         {
           auto param = msg.add_param();
           param->set_name("direction");
           param->mutable_value()->set_type(msgs::Any::VECTOR3D);
-          param->mutable_value()->mutable_vector3d_value()->set_x(1);
-          param->mutable_value()->mutable_vector3d_value()->set_y(0);
+          param->mutable_value()->mutable_vector3d_value()->set_x(config.groups.direction.x);
+          param->mutable_value()->mutable_vector3d_value()->set_y(config.groups.direction.y);
           param->mutable_value()->mutable_vector3d_value()->set_z(0);
         }
 
@@ -309,13 +309,13 @@ namespace wave_sim_config
           auto param = msg.add_param();
           param->set_name("wind_angle");
           param->mutable_value()->set_type(msgs::Any::DOUBLE);
-          param->mutable_value()->set_double_value(3.14);
+          param->mutable_value()->set_double_value(config.wind_angle);
         }
         {
           auto param = msg.add_param();
           param->set_name("wind_speed");
           param->mutable_value()->set_type(msgs::Any::DOUBLE);
-          param->mutable_value()->set_double_value(10);
+          param->mutable_value()->set_double_value(config.wind_speed);
         }
 
         // Don't block forever...

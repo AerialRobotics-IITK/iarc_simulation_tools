@@ -8,7 +8,6 @@
   </description>
   <maintainer email="rhys.mainwaring@me.com">Rhys Mainwaring</maintainer>
   <license>GPLv3</license>
-  <author email="rhys.mainwaring@me.com">Rhys Mainwaring</author>
   <buildtool_depend>catkin</buildtool_depend>
   <depend>cgal</depend>
   <depend>eigen</depend>

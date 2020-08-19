@@ -13,8 +13,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef _ASV_WAVE_SIM_GAZEBO_PLUGINS_WAVE_SIMULATION_TROCHOID_HH_
-#define _ASV_WAVE_SIM_GAZEBO_PLUGINS_WAVE_SIMULATION_TROCHOID_HH_
+#ifndef _IARC_WAVE_SIM_GAZEBO_PLUGINS_WAVE_SIMULATION_TROCHOID_HH_
+#define _IARC_WAVE_SIM_GAZEBO_PLUGINS_WAVE_SIMULATION_TROCHOID_HH_
 
 #include "WaveSimulation.hh"
 
@@ -71,4 +71,4 @@ namespace iarc
 
 }
 
-#endif // _ASV_WAVE_SIM_GAZEBO_PLUGINS_WAVE_SIMULATION_TROCHOID_HH_
+#endif // _IARC_WAVE_SIM_GAZEBO_PLUGINS_WAVE_SIMULATION_TROCHOID_HH_
