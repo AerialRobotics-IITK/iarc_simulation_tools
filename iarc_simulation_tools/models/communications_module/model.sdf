@@ -11,7 +11,7 @@
       <dipole_moment>0 0 0.739859</dipole_moment>
       <!-- Set to false if not using ROS -->
       <shouldPublish>true</shouldPublish>
-      <topicNs>magnetic_force/communicatios_module</topicNs>
+      <topicNs>magnetic_force/communications_module</topicNs>
       <updateRate>100</updateRate>
     </plugin>
     <link name='magnet'>
