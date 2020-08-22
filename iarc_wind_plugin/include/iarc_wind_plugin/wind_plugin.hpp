@@ -90,5 +90,6 @@ class CustomWindPlugin : public ModelPlugin {
     double wind_angle_;
 
     std::unordered_map<WindParams, DynParams, WindHasher> field_table_;
+    // std::unordered_map<WindParams, DynParams, WindHasher>::iterator low;
 };
 }  // namespace gazebo
