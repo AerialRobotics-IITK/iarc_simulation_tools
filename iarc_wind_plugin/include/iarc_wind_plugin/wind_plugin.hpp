@@ -1,6 +1,8 @@
 #pragma once
 
 #include <bits/stdc++.h>
+#include "ros/callback_queue.h"
+#include "ros/subscribe_options.h"
 #include <gazebo/common/Plugin.hh>
 #include <gazebo/common/common.hh>
 #include <gazebo/gazebo.hh>
@@ -10,6 +12,7 @@
 #include <string>
 #include <thread>
 #include <unordered_map>
+#include <nav_msgs/Odometry.h>
 
 namespace gazebo {
 
@@ -58,6 +61,8 @@ class CustomWindPlugin : public ModelPlugin {
     void Load(physics::ModelPtr model, sdf::ElementPtr sdf);
     void onUpdate(const common::UpdateInfo& _info);
     ignition::math::Vector3d interpolateWindDynamics(WindParams params);
+    void odometryCallback_(const nav_msgs::Odometry::ConstPtr msg);
+    void QueueThread();
 
   private:
     // hashing function for wind parameters
@@ -75,6 +80,10 @@ class CustomWindPlugin : public ModelPlugin {
     void initializeFieldTable();
 
     event::ConnectionPtr update_connection_;
+    std::unique_ptr<ros::NodeHandle> rosNode;
+    ros::Subscriber rosSub;
+    ros::CallbackQueue rosQueue;
+    std::thread rosQueueThread;
 
     physics::ModelPtr model_;
     sdf::ElementPtr sdf_;
