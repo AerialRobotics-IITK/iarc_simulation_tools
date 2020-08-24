@@ -94,10 +94,11 @@ class CustomWindPlugin : public ModelPlugin {
 
     ignition::math::Vector3d xyz_offset_;
     ignition::math::Vector3d force_direction_;
+    ignition::math::Vector3d interp_force_;
 
     double windspeed_;
     double wind_angle_;
-
+    double relative_angle_;
     std::unordered_map<WindParams, DynParams, WindHasher> field_table_;
     // std::unordered_map<WindParams, DynParams, WindHasher>::iterator low;
 };

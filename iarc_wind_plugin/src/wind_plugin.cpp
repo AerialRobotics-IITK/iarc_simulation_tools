@@ -36,7 +36,7 @@ void CustomWindPlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
   if (sdf->HasElement("windangle")) {
     wind_angle_ = sdf->GetElement("windangle")->Get<double>();
   } else {
-    wind_angle_ = 0;
+    wind_angle_ = 0; //in radians
   }
 
   link_ = model_->GetLink(link_name_);
@@ -51,15 +51,11 @@ void CustomWindPlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
   }
 
   this->rosNode.reset(new ros::NodeHandle("gazebo_client"));
-
-  // ros::SubscribeOptions so = ros::SubscribeOptions::subscribe(
-  //      "odom", 1, boost::bind(&CustomWindPlugin::OnRosMsg, this, _1), ros::VoidPtr(), &this->rosQueue);
   this->rosSub = this->rosNode->subscribe("/firefly/ground_truth/odometry", 1, &CustomWindPlugin::odometryCallback_, this);
-
   this->rosQueueThread = std::thread(std::bind(&CustomWindPlugin::QueueThread, this));
 
-  WindParams test_params(1.5, 2.5); // Input angle and speed
-  gzmsg << interpolateWindDynamics(test_params) << "\n";
+  WindParams test_params(wind_angle_, windspeed_); // Input angle and speed
+  gzmsg << interpolateWindDynamics(test_params) << "\n";  //this will be put in update function to get called repeatedly
 
   // force_direction_.Set(cos(wind_angle_), sin(wind_angle_), 0);
   update_connection_ = event::Events::ConnectWorldUpdateBegin(
@@ -76,8 +72,8 @@ void CustomWindPlugin::odometryCallback_(const nav_msgs::Odometry::ConstPtr msg)
     tf::Matrix3x3 m(q);
     double roll, pitch, yaw;
     m.getRPY(roll, pitch, yaw);
-
-    std::cout << std::setprecision(1) << yaw << std::endl;
+    relative_angle_ = yaw - wind_angle_;
+    // std::cout << std::setprecision(1) << yaw << std::endl;
 }
 
 void CustomWindPlugin::QueueThread() {
@@ -90,8 +86,6 @@ void CustomWindPlugin::QueueThread() {
 
 ignition::math::Vector3d
 CustomWindPlugin::interpolateWindDynamics(WindParams params) {
-  
-  ignition::math::Vector3d interp_force;
 
   double temp, sub_angle, sub_speed;
   sub_angle = modf(params.angle, &temp);
@@ -104,10 +98,6 @@ CustomWindPlugin::interpolateWindDynamics(WindParams params) {
   floor.angle -= sub_angle;
   floor.speed -= sub_speed;
 
-  // low = field_table_.lower_bound(params.angle);
-  // gzmsg << ceil.angle << "  " << ceil.speed << "  " << floor.angle <<"  "<<
-  // floor.speed << "\n"; gzmsg << low->angle << "\n";
-
   CustomWindPlugin::DynParams bot_left =
       field_table_[CustomWindPlugin::WindParams(floor.angle, floor.speed)];
   CustomWindPlugin::DynParams bot_right =
@@ -117,12 +107,8 @@ CustomWindPlugin::interpolateWindDynamics(WindParams params) {
   CustomWindPlugin::DynParams top_right =
       field_table_[CustomWindPlugin::WindParams(ceil.angle, ceil.speed)];
 
-  gzmsg << bot_left.force << "\n";
-  gzmsg << bot_right.force << "\n";
-  gzmsg << top_right.force << "\n";
-  gzmsg << top_left.force << "\n";
 
-  interp_force = (bot_left.force * (ceil.angle - params.angle) *
+  interp_force_ = (bot_left.force * (ceil.angle - params.angle) *
                       (ceil.speed - params.speed) +
                   bot_right.force * (params.angle - floor.angle) *
                       (ceil.speed - params.speed) +
@@ -130,14 +116,14 @@ CustomWindPlugin::interpolateWindDynamics(WindParams params) {
                       (params.speed - floor.speed) +
                   top_right.force * (params.angle - floor.angle) *
                       (params.speed - floor.speed));
-  interp_force /= (ceil.angle - floor.angle) * (ceil.speed - floor.speed);
+  interp_force_ /= (ceil.angle - floor.angle) * (ceil.speed - floor.speed);
 
-  return interp_force;
+  return interp_force_;
 };
 
 void CustomWindPlugin::onUpdate(const common::UpdateInfo &_info) {
   // link_->AddForce(windspeed_ * force_direction_);
-  // link->AddForce(interp_force);
+  // link->AddForce(interp_force_);
 }
 
 void CustomWindPlugin::initializeFieldTable() {
