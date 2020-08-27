@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:macro name="gazebo_wind_plugin_macro" params="namespace link_name windspeed windangle">
+  <xacro:macro name="gazebo_wind_plugin_macro" params="namespace link_name windspeed windangle precision">
     <gazebo>
       <plugin name="wind_plugin" filename="libiarc_wind_plugin.so">
         <namespace>${namespace}</namespace>
         <link_name>${namespace}/base_link</link_name>
         <windspeed>${windspeed}</windspeed>
         <windangle>${windangle}</windangle>
+        <precision>${precision}</precision>
       </plugin>
     </gazebo>
   </xacro:macro>

@@ -1,11 +1,11 @@
 #include <bits/stdc++.h>
 #include <cmath>
-#include <tf/tf.h>
 #include <cstdlib>
 #include <iarc_wind_plugin/wind_plugin.hpp>
-#include <nav_msgs/Odometry.h>
 #include <iostream>
 #include <math.h>
+#include <nav_msgs/Odometry.h>
+#include <tf/tf.h>
 
 namespace gazebo {
 
@@ -36,7 +36,13 @@ void CustomWindPlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
   if (sdf->HasElement("windangle")) {
     wind_angle_ = sdf->GetElement("windangle")->Get<double>();
   } else {
-    wind_angle_ = 0; //in radians
+    wind_angle_ = 0; // in radians
+  }
+  if (sdf->HasElement("precision")) {
+    precision_ = sdf->GetElement("precision")->Get<double>();
+  } else {
+    gzerr << "Precision is not set. Aborting.";
+    return;
   }
 
   link_ = model_->GetLink(link_name_);
@@ -45,47 +51,45 @@ void CustomWindPlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
   initializeFieldTable();
 
   if (!ros::isInitialized()) {
-      int argc = 0;
-      char** argv = NULL;
-      ros::init(argc, argv, "gazebo_client", ros::init_options::NoSigintHandler);
+    int argc = 0;
+    char **argv = NULL;
+    ros::init(argc, argv, "gazebo_client", ros::init_options::NoSigintHandler);
   }
 
   this->rosNode.reset(new ros::NodeHandle("gazebo_client"));
-  this->rosSub = this->rosNode->subscribe("/firefly/ground_truth/odometry", 1, &CustomWindPlugin::odometryCallback_, this);
-  this->rosQueueThread = std::thread(std::bind(&CustomWindPlugin::QueueThread, this));
-
-  WindParams test_params(wind_angle_, windspeed_); // Input angle and speed
-  gzmsg << interpolateWindDynamics(test_params) << "\n";  //this will be put in update function to get called repeatedly
+  this->rosSub =
+      this->rosNode->subscribe("/firefly/ground_truth/odometry", 1,
+                               &CustomWindPlugin::odometryCallback_, this);
+  this->rosQueueThread =
+      std::thread(std::bind(&CustomWindPlugin::QueueThread, this));
 
   // force_direction_.Set(cos(wind_angle_), sin(wind_angle_), 0);
   update_connection_ = event::Events::ConnectWorldUpdateBegin(
       boost::bind(&CustomWindPlugin::onUpdate, this, _1));
 }
 
-
-void CustomWindPlugin::odometryCallback_(const nav_msgs::Odometry::ConstPtr msg) {
-    tf::Quaternion q(
-        msg->pose.pose.orientation.x,
-        msg->pose.pose.orientation.y,
-        msg->pose.pose.orientation.z,
-        msg->pose.pose.orientation.w);
-    tf::Matrix3x3 m(q);
-    double roll, pitch, yaw;
-    m.getRPY(roll, pitch, yaw);
-    relative_angle_ = yaw - wind_angle_;
-    // std::cout << std::setprecision(1) << yaw << std::endl;
+void CustomWindPlugin::odometryCallback_(
+    const nav_msgs::Odometry::ConstPtr msg) {
+  tf::Quaternion q(msg->pose.pose.orientation.x, msg->pose.pose.orientation.y,
+                   msg->pose.pose.orientation.z, msg->pose.pose.orientation.w);
+  tf::Matrix3x3 m(q);
+  double roll, pitch, yaw;
+  m.getRPY(roll, pitch, yaw);
+  relative_angle_ = wind_angle_ - yaw;
 }
 
 void CustomWindPlugin::QueueThread() {
-    static const double timeout = 0.01;
-    while (this->rosNode->ok()) {
-        this->rosQueue.callAvailable(ros::WallDuration(timeout));
-    }
+  static const double timeout = 0.01;
+  while (this->rosNode->ok()) {
+    this->rosQueue.callAvailable(ros::WallDuration(timeout));
+  }
 }
-
 
 ignition::math::Vector3d
 CustomWindPlugin::interpolateWindDynamics(WindParams params) {
+
+  params.angle /= precision_;
+  params.speed /= precision_;
 
   double temp, sub_angle, sub_speed;
   sub_angle = modf(params.angle, &temp);
@@ -98,6 +102,13 @@ CustomWindPlugin::interpolateWindDynamics(WindParams params) {
   floor.angle -= sub_angle;
   floor.speed -= sub_speed;
 
+  ceil.angle *= precision_;
+  ceil.speed *= precision_;
+  floor.angle *= precision_;
+  floor.speed *= precision_;
+  params.angle *= precision_;
+  params.speed *= precision_;
+
   CustomWindPlugin::DynParams bot_left =
       field_table_[CustomWindPlugin::WindParams(floor.angle, floor.speed)];
   CustomWindPlugin::DynParams bot_right =
@@ -107,31 +118,36 @@ CustomWindPlugin::interpolateWindDynamics(WindParams params) {
   CustomWindPlugin::DynParams top_right =
       field_table_[CustomWindPlugin::WindParams(ceil.angle, ceil.speed)];
 
-
   interp_force_ = (bot_left.force * (ceil.angle - params.angle) *
-                      (ceil.speed - params.speed) +
-                  bot_right.force * (params.angle - floor.angle) *
-                      (ceil.speed - params.speed) +
-                  top_left.force * (ceil.angle - params.angle) *
-                      (params.speed - floor.speed) +
-                  top_right.force * (params.angle - floor.angle) *
-                      (params.speed - floor.speed));
+                       (ceil.speed - params.speed) +
+                   bot_right.force * (params.angle - floor.angle) *
+                       (ceil.speed - params.speed) +
+                   top_left.force * (ceil.angle - params.angle) *
+                       (params.speed - floor.speed) +
+                   top_right.force * (params.angle - floor.angle) *
+                       (params.speed - floor.speed));
   interp_force_ /= (ceil.angle - floor.angle) * (ceil.speed - floor.speed);
 
   return interp_force_;
 };
 
 void CustomWindPlugin::onUpdate(const common::UpdateInfo &_info) {
-  // link_->AddForce(windspeed_ * force_direction_);
-  // link->AddForce(interp_force_);
+
+  WindParams test_params(abs(relative_angle_), windspeed_); // Input angle and speed
+  interp_force_ = interpolateWindDynamics(test_params);
+  if (relative_angle_ < 0){
+    interp_force_ *= -1;
+  }
+  // link_->AddForce(windspeed_ * force_direction_);  // if want to apply gust of constant wind
+  link_->AddForce(interp_force_);  // considering the cfd analysis
 }
 
 void CustomWindPlugin::initializeFieldTable() {
   // dummy initialization for testing
-  for (int i = 0; i < 10; i++) {
-    for (int j = 0; j < 10; j++) {
-      field_table_[WindParams(i, j)] = CustomWindPlugin::DynParams(
-          ignition::math::Vector3d(i + j, i + j, i + j),
+  for (int i = 0; i < 6; i++) {
+    for (int j = 0; j < 6; j++) {
+      field_table_[WindParams(i / 2.0, j / 2.0)] = CustomWindPlugin::DynParams(
+          ignition::math::Vector3d((i + j)/3.0, (i + j)/3.0, 0),
           ignition::math::Vector3d(i + 2, i + 2, i + 2));
     }
   }
