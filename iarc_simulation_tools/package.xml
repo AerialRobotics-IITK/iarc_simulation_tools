@@ -19,8 +19,6 @@
     <depend>iarc_gripper_plugin</depend>
 
     <export>
-        <gazebo_ros gazebo_model_path="${prefix}/models"/>
-        <gazebo_ros gazebo_resource_path="${prefix}/models"/>
-	    <gazebo_ros gazebo_plugin_path="${prefix}/lib" gazebo_media_path="${prefix}"/>
+        <gazebo_ros plugin_path="${prefix}/../../lib" gazebo_media_path="${prefix}" />
     </export>
 </package>
