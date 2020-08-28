@@ -133,13 +133,15 @@ CustomWindPlugin::interpolateWindDynamics(WindParams params) {
 
 void CustomWindPlugin::onUpdate(const common::UpdateInfo &_info) {
 
-  WindParams test_params(abs(relative_angle_), windspeed_); // Input angle and speed
+  WindParams test_params(abs(relative_angle_),
+                         windspeed_); // Input angle and speed
   interp_force_ = interpolateWindDynamics(test_params);
-  if (relative_angle_ < 0){
+  if (relative_angle_ < 0) {
     interp_force_ *= -1;
   }
-  // link_->AddForce(windspeed_ * force_direction_);  // if want to apply gust of constant wind
-  link_->AddForce(interp_force_);  // considering the cfd analysis
+  // link_->AddForce(windspeed_ * force_direction_);  // if want to apply gust
+  // of constant wind
+  link_->AddForce(interp_force_); // considering the cfd analysis
 }
 
 void CustomWindPlugin::initializeFieldTable() {
@@ -147,7 +149,7 @@ void CustomWindPlugin::initializeFieldTable() {
   for (int i = 0; i < 6; i++) {
     for (int j = 0; j < 6; j++) {
       field_table_[WindParams(i / 2.0, j / 2.0)] = CustomWindPlugin::DynParams(
-          ignition::math::Vector3d((i + j)/3.0, (i + j)/3.0, 0),
+          ignition::math::Vector3d((i + j) / 3.0, (i + j) / 3.0, 0),
           ignition::math::Vector3d(i + 2, i + 2, i + 2));
     }
   }
