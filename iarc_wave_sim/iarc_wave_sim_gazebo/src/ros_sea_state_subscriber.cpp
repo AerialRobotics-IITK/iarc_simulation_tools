@@ -82,7 +82,7 @@ void RosBridge::publishWaveStateFFT() {
 
     nextParam->set_name("wind_angle");
     nextParam->mutable_value()->set_type(gazebo::msgs::Any::DOUBLE);
-    nextParam->mutable_value()->set_double_value(std::atan(direction_.y / direction_.x));
+    nextParam->mutable_value()->set_double_value(std::atan2(direction_.y , direction_.x));
 
     nextParam = fft_msg_.add_param();
     nextParam->set_name("wind_speed");

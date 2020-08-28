@@ -18,7 +18,6 @@
 <sdf version="1.6">
   <model name="box">        
     <static>false</static>
-
     <plugin name="hydrodynamics" filename="libHydrodynamicsPlugin.so">
       <!-- Wave Model -->
       <wave_model>ocean</wave_model>
@@ -27,6 +26,7 @@
       <damping_on>true</damping_on>
       <viscous_drag_on>true</viscous_drag_on>
       <pressure_drag_on>true</pressure_drag_on>
+      <link_name>base_link</link_name>
 
       <!-- Markers -->
       <markers>

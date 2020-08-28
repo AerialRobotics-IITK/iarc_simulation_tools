@@ -1,5 +1,5 @@
 <sdf version='1.6'>
-  <world name='default'>
+  <world name='static_comm_block'>
     <plugin name="ros_interface_plugin" filename="librotors_gazebo_ros_interface_plugin.so"/>
     
     <gravity>0 0 -9.8</gravity>
@@ -36,9 +36,9 @@
       </camera>
     </gui>
 
-    <include>
+    <!-- <include>
       <uri>model://ground_plane</uri>
-    </include>
+    </include> -->
 
     <include>
       <uri>model://pylon</uri>
@@ -52,6 +52,10 @@
       <pose>0 408.66 1.2192 0 -0 0</pose>
     </include>
 
+    <include>
+      <uri>model://ocean</uri>
+    </include>
+   
     <include>
       <uri>model://table_with_comm_block</uri>
       <pose>4.2756 0.063046 0.375 0 -0 3.14</pose>

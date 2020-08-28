@@ -55,6 +55,10 @@ namespace iarc
   /// \param[in]  _model    The model being processed. 
   /// \param[out] _links    A vector holding a copy of pointers to the the model's links. 
   /// \param[out] _meshes   A vector of vectors containing a surface mesh for each collision in a link.
+
+  /// \brief To specify on which link of model calculate hydrodynamic forces
+  std::string link_name;
+
   void CreateCollisionMeshes(
     physics::ModelPtr _model,
     std::vector<physics::LinkPtr>& _links,
@@ -70,6 +74,7 @@ namespace iarc
     for (auto&& link : _model->GetLinks())
     {
       GZ_ASSERT(link != nullptr, "Link must be valid");
+      if(link->GetName() != link_name) continue;
       _links.push_back(link);
       std::string linkName(link->GetName());
       std::vector<std::shared_ptr<Mesh>> linkMeshes;
@@ -320,6 +325,7 @@ namespace iarc
 
     /// \brief Marker messages for the underwater portion of the mesh.
     public: std::vector<ignition::msgs::Marker> underwaterSurfaceMsgs;
+
   };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -373,6 +379,7 @@ namespace iarc
 
     /// \brief Subscribe to gztopic "~/hydrodynamics".
     public: transport::SubscriberPtr hydroSub;
+
   };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -426,6 +433,9 @@ namespace iarc
 
     // Wave Model
     this->data->waveModelName = Utilities::SdfParamString(*_sdf, "wave_model", "");
+    link_name = Utilities::SdfParamString(*_sdf, "link_name", "");
+
+    gzmsg << "link_name: " << link_name << std::endl;
 
     // Hydrodynamics parameters
     this->data->hydroParams.reset(new HydrodynamicsParameters());
@@ -492,6 +502,8 @@ namespace iarc
         auto force = ToIgn(hd->hydrodynamics[j]->Force());
         if (force.IsFinite()) 
         {
+          force.X() = 0;
+          force.Y() = 0;
           hd->link->AddForce(force);
         }
 
@@ -499,6 +511,7 @@ namespace iarc
         auto torque = ToIgn(hd->hydrodynamics[j]->Torque());
         if (torque.IsFinite()) 
         {
+          torque.Z() = 0;
           hd->link->AddTorque(torque);
         }
 

@@ -5,6 +5,24 @@
       <joint_name>radar_mast</joint_name>
       <angular_speed>1</angular_speed>
     </plugin>
+    <plugin name="hydrodynamics" filename="libHydrodynamicsPlugin.so">
+      <!-- Wave Model -->
+      <wave_model>ocean</wave_model>
+
+      <!-- Hydrodynamics -->
+      <damping_on>true</damping_on>
+      <viscous_drag_on>true</viscous_drag_on>
+      <pressure_drag_on>true</pressure_drag_on>
+      <link_name>table</link_name>
+
+      <!-- Markers -->
+      <markers>
+        <update_rate>30</update_rate>
+        <water_patch>false</water_patch>
+        <waterline>false</waterline>
+        <underwater_surface>false</underwater_surface>
+      </markers>
+    </plugin>
     <plugin name="dipole_magnet_1" filename="libiarc_magnet_plugin.so">
       <bodyName>magnet_1</bodyName>
       <Id>1</Id>
@@ -113,7 +131,7 @@
         </geometry>
       </collision>
     </link>
-    <static>1</static>
+    <static>0</static>
     <link name='table'>
       <inertial>
         <mass>1</mass>
