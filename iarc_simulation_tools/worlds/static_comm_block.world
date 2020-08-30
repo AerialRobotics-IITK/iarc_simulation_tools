@@ -51,10 +51,6 @@
       <name>pylon_far</name>
       <pose>0 408.66 1.2192 0 -0 0</pose>
     </include>
-
-    <include>
-      <uri>model://ocean</uri>
-    </include>
    
     <include>
       <uri>model://table_with_comm_block</uri>

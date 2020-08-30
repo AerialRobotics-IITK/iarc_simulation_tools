@@ -6,7 +6,7 @@ int main(int argc, char **argv) {
   ros::init(argc, argv, "ros_bridge");
   ros::NodeHandle nh_;
 
-  class RosBridge bridge_;
+  class ROSBridge bridge_;
 
   ros::Rate rate(10);
 

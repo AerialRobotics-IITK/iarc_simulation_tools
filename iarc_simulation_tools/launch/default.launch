@@ -27,7 +27,7 @@
 		<arg name="extra_gazebo_args" value="$(arg extra_gazebo_args)" />
 		<arg name="verbose" value="$(arg verbose)"/>
 	</include>
-<!-- 
+
 	<group ns="$(arg mav_name)">
 		<include file="$(find rotors_gazebo)/launch/spawn_mav.launch">
 			<arg name="mav_name" value="$(arg mav_name)" />
@@ -61,6 +61,6 @@
 
 		<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 		<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-	</group> -->
+	</group>
 
   </launch>

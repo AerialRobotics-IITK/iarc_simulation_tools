@@ -52,6 +52,7 @@ public:
 
   // amplitude is in metres
   // values are taken from WOCE Upper Ocean Thermal Data
+  // https://www.nodc.noaa.gov/woce/woce_v3/wocedata_1/woce-uot/document/wmocode.htm
   double amplitude_[10] = {0,
                            random_number(0, 0.1),
                            random_number(0.1, 0.5),
@@ -65,7 +66,8 @@ public:
 
   // period is in seconds
   // values are taken from WOCE Upper Ocean Thermal Data
-  int period_[10] = {10, 11, 12, 13, rand() % 14 + 14, rand() % 5, 6, 7, 8, 9};
+  // https://www.nodc.noaa.gov/woce/woce_v3/wocedata_1/woce-uot/document/wmocode.htm
+  int period_[10] = {10, 11, 12, 13, rand() + 14, rand() % 5 + 1, 6, 7, 8, 9};
 
   std::vector<Params> make_sea_state(double *amplitude_, int *period_,
                                      int total_sea_states_) {

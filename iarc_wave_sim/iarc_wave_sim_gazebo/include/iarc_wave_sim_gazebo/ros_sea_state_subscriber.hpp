@@ -15,10 +15,10 @@
 #include <string.h>
 namespace iarc_simulation_tools {
 
-class RosBridge {
+class ROSBridge {
 public:
-  RosBridge() {}
-  ~RosBridge() {}
+  ROSBridge() {}
+  ~ROSBridge() {}
   void getSeaState(const std_msgs::Int32 &msg);
   void getSeaDirection(const geometry_msgs::Point &msg);
   void init(ros::NodeHandle &nh);
@@ -38,8 +38,6 @@ private:
   gazebo::transport::NodePtr node_;
   gazebo::transport::PublisherPtr wave_pub_;
   gazebo::transport::PublisherPtr fft_wave_pub_;
-  gazebo::msgs::Param_V wave_msg_;
-  gazebo::msgs::Param_V fft_msg_;
   int wave_type_;
   bool direction_changed_;
   bool state_changed_;

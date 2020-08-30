@@ -2,7 +2,7 @@
 
 This package contains plugins that support the simulation of waves and surface vessels in Gazebo.  
 
-![Wave Simulation](https://github.com/srmainwaring/asv_wave_sim/wiki/images/ocean_waves_rs750_fft.jpg)
+![Wave Simulation](https://github.com/srmainwaring/iarc_wave_sim/wiki/images/ocean_waves_rs750_fft.jpg)
 
 ## Notes
 
@@ -82,8 +82,8 @@ source /usr/local/share/gazebo-9/setup.bash
 Create a catkin workspace:
 
 ```bash
-mkdir -p asv_ws/src
-cd asv_ws
+mkdir -p iarc_ws/src
+cd iarc_ws
 catkin init
 ```
 
@@ -95,11 +95,11 @@ catkin config --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo
 
 ### Clone and build the package
 
-Clone the `asv_wave_sim` repository:
+Clone the `iarc_wave_sim` repository:
 
 ```bash
 cd src
-git clone https://github.com/srmainwaring/asv_wave_sim.git
+git clone https://github.com/srmainwaring/iarc_wave_sim.git
 ```
 
 Compile the packages:
@@ -118,36 +118,36 @@ catkin build --catkin-make-args run_tests
 
 The wiki has details about how to configure and use the plugins:
 
-- [WavefieldPlugin](https://github.com/srmainwaring/asv_wave_sim/wiki/WavefieldPlugin)
-- [WavefieldVisualPlugin](https://github.com/srmainwaring/asv_wave_sim/wiki/WavefieldVisualPlugin)
-- [HydrodynamicsPlugin](https://github.com/srmainwaring/asv_wave_sim/wiki/HydrodynamicsPlugin)
+- [WavefieldPlugin](https://github.com/srmainwaring/iarc_wave_sim/wiki/WavefieldPlugin)
+- [WavefieldVisualPlugin](https://github.com/srmainwaring/iarc_wave_sim/wiki/WavefieldVisualPlugin)
+- [HydrodynamicsPlugin](https://github.com/srmainwaring/iarc_wave_sim/wiki/HydrodynamicsPlugin)
 
 ## Tests
 
 Manually run the tests:
 
 ```bash
-./devel/lib/asv_wave_sim_gazebo_plugins/UNIT_Algorithm_TEST
-./devel/lib/asv_wave_sim_gazebo_plugins/UNIT_Geometry_TEST
-./devel/lib/asv_wave_sim_gazebo_plugins/UNIT_Grid_TEST
-./devel/lib/asv_wave_sim_gazebo_plugins/UNIT_Physics_TEST
-./devel/lib/asv_wave_sim_gazebo_plugins/UNIT_Wavefield_TEST
+./devel/lib/iarc_wave_sim_gazebo_plugins/UNIT_Algorithm_TEST
+./devel/lib/iarc_wave_sim_gazebo_plugins/UNIT_Geometry_TEST
+./devel/lib/iarc_wave_sim_gazebo_plugins/UNIT_Grid_TEST
+./devel/lib/iarc_wave_sim_gazebo_plugins/UNIT_Physics_TEST
+./devel/lib/iarc_wave_sim_gazebo_plugins/UNIT_Wavefield_TEST
 ```
 
 ## Examples
 
-![Wave Simulation](https://github.com/srmainwaring/asv_wave_sim/wiki/images/ocean_waves_box_example.gif)
+![Wave Simulation](https://github.com/srmainwaring/iarc_wave_sim/wiki/images/ocean_waves_box_example.gif)
 
 Launch a Gazebo session with `roslaunch`:
 
 ```bash
-roslaunch asv_wave_gazebo ocean_world.launch verbose:=true
+roslaunch iarc_wave_gazebo ocean_world.launch verbose:=true
 ```
 
 Publish a wave parameters message:
 
 ```bash
-./devel/lib/asv_wave_sim_gazebo_plugins/WaveMsgPublisher \
+./devel/lib/iarc_wave_sim_gazebo_plugins/WaveMsgPublisher \
   --number 3 \
   --amplitude 1 \
   --period 7 \
@@ -160,7 +160,7 @@ Publish a wave parameters message:
 Publish a hydrodynamics parameters message:
 
 ```bash
-./devel/lib/asv_wave_sim_gazebo_plugins/HydrodynamicsMsgPublisher \
+./devel/lib/iarc_wave_sim_gazebo_plugins/HydrodynamicsMsgPublisher \
   --model box \
   --damping_on true \
   --viscous_drag_on true \
