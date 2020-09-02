@@ -57,7 +57,8 @@ void CustomWindPlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
     // nh_private.getParam("force_x", forcex_list_);
     // nh_private.getParam("force_y", forcey_list_);
     std::cout << "CHECK";
-    YAML::Node config = YAML::LoadFile("./config/params.yaml");
+    std::string path = ros::package::getPath("iarc_wind_plugin");
+    YAML::Node config = YAML::LoadFile(path+"/config/params.yaml");
     forcex_list_ = config["force_x"].as<std::vector<double>>();
     forcey_list_ = config["force_y"].as<std::vector<double>>();
     std::cout << "FILE FOUND\n";

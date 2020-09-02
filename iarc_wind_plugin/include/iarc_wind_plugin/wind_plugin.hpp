@@ -13,6 +13,7 @@
 #include <string>
 #include <thread>
 #include <unordered_map>
+#include <ros/package.h>
 
 namespace gazebo {
 
