@@ -6,6 +6,7 @@
 #include <math.h>
 #include <nav_msgs/Odometry.h>
 #include <tf/tf.h>
+#include <yaml-cpp/yaml.h>
 
 namespace gazebo {
 
@@ -52,9 +53,16 @@ void CustomWindPlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
         char** argv = NULL;
         ros::init(argc, argv, "gazebo_client", ros::init_options::NoSigintHandler);
     }
-    ros::NodeHandle nh_private("~");
-    nh_private.getParam("force_x", forcex_list_);
-    nh_private.getParam("force_y", forcey_list_);
+    // ros::NodeHandle nh_private("~");
+    // nh_private.getParam("force_x", forcex_list_);
+    // nh_private.getParam("force_y", forcey_list_);
+    std::cout << "CHECK";
+    YAML::Node config = YAML::LoadFile("./config/params.yaml");
+    forcex_list_ = config["force_x"].as<std::vector<double>>();
+    forcey_list_ = config["force_y"].as<std::vector<double>>();
+    std::cout << "FILE FOUND\n";
+
+    std::cout << forcex_list_[2] << std::endl;
     // Input values from cfd analysis
     initializeFieldTable();
 
@@ -120,7 +128,6 @@ void CustomWindPlugin::onUpdate(const common::UpdateInfo& _info) {
     WindParams test_params(abs(relative_angle_), windspeed_);  // Input angle and speed
     interp_force_ = interpolateWindDynamics(test_params);
 
-    std::cout << forcex_list_[2] << std::endl;
 
     if (relative_angle_ < 0) {
         interp_force_ *= -1;

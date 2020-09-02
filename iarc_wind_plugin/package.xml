@@ -14,5 +14,6 @@
   <depend>gazebo</depend>
   <depend>xacro</depend>
   <depend>roscpp</depend>
+  <depend>yaml-cpp</depend>
 
 </package>
