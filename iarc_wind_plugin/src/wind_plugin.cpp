@@ -55,7 +55,7 @@ void CustomWindPlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
     }
 
     std::string path = ros::package::getPath("iarc_wind_plugin");
-    YAML::Node config = YAML::LoadFile(path+"/config/params.yaml");
+    YAML::Node config = YAML::LoadFile(path + "/config/params.yaml");
     forcex_list_ = config["force_x"].as<std::vector<double>>();
     forcey_list_ = config["force_y"].as<std::vector<double>>();
 
@@ -123,7 +123,7 @@ ignition::math::Vector3d CustomWindPlugin::interpolateWindDynamics(WindParams pa
 void CustomWindPlugin::onUpdate(const common::UpdateInfo& _info) {
     WindParams test_params(abs(relative_angle_), windspeed_);  // Input angle and speed
     interp_force_ = interpolateWindDynamics(test_params);
-    std::cout << test_params.angle <<std::endl;
+    std::cout << test_params.angle << std::endl;
     std::cout << interp_force_[0] << std::endl;
     if (relative_angle_ < 0) {
         interp_force_ *= -1;
@@ -136,7 +136,8 @@ void CustomWindPlugin::initializeFieldTable() {
     for (int i = 0; i < 6; i++) {
         for (int j = 0; j < 6; j++) {
             field_table_[WindParams(i / 2.0, j / 2.0)] =
-                CustomWindPlugin::DynParams(ignition::math::Vector3d(forcex_list_[i]+forcex_list_[j],forcey_list_[i]+forcey_list_[j], 0), ignition::math::Vector3d(i + 2, i + 2, i + 2));
+                CustomWindPlugin::DynParams(ignition::math::Vector3d(forcex_list_[i] + forcex_list_[j], forcey_list_[i] + forcey_list_[j], 0),
+                    ignition::math::Vector3d(i + 2, i + 2, i + 2));
         }
     }
 }
