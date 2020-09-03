@@ -9,11 +9,11 @@
 #include <gazebo/physics/physics.hh>
 #include <iarc_sim_test_tools/common.h>
 #include <nav_msgs/Odometry.h>
+#include <ros/package.h>
 #include <ros/ros.h>
 #include <string>
 #include <thread>
 #include <unordered_map>
-#include <ros/package.h>
 
 namespace gazebo {
 
@@ -21,89 +21,86 @@ static const std::string kDefualtFrameId = "world";
 static const std::string kDefaultLinkName = "base_link";
 
 class CustomWindPlugin : public ModelPlugin {
-  public:
-    CustomWindPlugin()
-        : ModelPlugin()
-        , namespace_(kDefaultNamespace)
-        , link_name_(kDefaultLinkName) {
+public:
+  CustomWindPlugin()
+      : ModelPlugin(), namespace_(kDefaultNamespace),
+        link_name_(kDefaultLinkName) {}
+
+  typedef struct WindParams {
+    double angle;
+    double speed;
+
+    WindParams(const double &angle, const double &speed)
+        : angle(angle), speed(speed){};
+
+    // comparison operator to check hash collisions
+    bool operator==(const WindParams &wind_params) const {
+      return (angle == wind_params.angle) && (speed == wind_params.speed);
     }
+  } WindParams;
 
-    typedef struct WindParams {
-        double angle;
-        double speed;
+  typedef struct DynParams {
+    ignition::math::Vector3d force;
+    ignition::math::Vector3d torque;
 
-        WindParams(const double& angle, const double& speed)
-            : angle(angle)
-            , speed(speed){};
+    DynParams(const ignition::math::Vector3d &force,
+              const ignition::math::Vector3d &torque)
+        : force(force), torque(torque){};
 
-        // comparison operator to check hash collisions
-        bool operator==(const WindParams& wind_params) const {
-            return (angle == wind_params.angle) && (speed == wind_params.speed);
-        }
-    } WindParams;
+    DynParams() {
+      force = ignition::math::Vector3d::Zero;
+      torque = ignition::math::Vector3d::Zero;
+    };
+  } DynParams;
 
-    typedef struct DynParams {
-        ignition::math::Vector3d force;
-        ignition::math::Vector3d torque;
+  virtual ~CustomWindPlugin(){};
 
-        DynParams(const ignition::math::Vector3d& force, const ignition::math::Vector3d& torque)
-            : force(force)
-            , torque(torque){};
+protected:
+  void Load(physics::ModelPtr model, sdf::ElementPtr sdf);
+  void onUpdate(const common::UpdateInfo &_info);
+  ignition::math::Vector3d interpolateWindDynamics(WindParams params);
+  void odometryCallback_(const nav_msgs::Odometry::ConstPtr msg);
+  void QueueThread();
 
-        DynParams() {
-            force = ignition::math::Vector3d::Zero;
-            torque = ignition::math::Vector3d::Zero;
-        };
-    } DynParams;
+private:
+  // hashing function for wind parameters
+  typedef struct WindHasher {
+    std::size_t operator()(const WindParams &params) const {
+      // Compute individual hash values for angle & speed then combine
+      // http://stackoverflow.com/a/1646913/126995
+      std::size_t hash = 1009;
+      hash = hash * 9176 + std::hash<double>()(params.angle);
+      hash = hash * 9176 + std::hash<double>()(params.speed);
+      return hash;
+    }
+  } WindHasher;
 
-    virtual ~CustomWindPlugin(){};
+  void initializeFieldTable();
 
-  protected:
-    void Load(physics::ModelPtr model, sdf::ElementPtr sdf);
-    void onUpdate(const common::UpdateInfo& _info);
-    ignition::math::Vector3d interpolateWindDynamics(WindParams params);
-    void odometryCallback_(const nav_msgs::Odometry::ConstPtr msg);
-    void QueueThread();
+  event::ConnectionPtr update_connection_;
+  std::unique_ptr<ros::NodeHandle> rosNode;
+  ros::Subscriber rosSub;
+  ros::CallbackQueue rosQueue;
+  std::thread rosQueueThread;
 
-  private:
-    // hashing function for wind parameters
-    typedef struct WindHasher {
-        std::size_t operator()(const WindParams& params) const {
-            // Compute individual hash values for angle & speed then combine
-            // http://stackoverflow.com/a/1646913/126995
-            std::size_t hash = 1009;
-            hash = hash * 9176 + std::hash<double>()(params.angle);
-            hash = hash * 9176 + std::hash<double>()(params.speed);
-            return hash;
-        }
-    } WindHasher;
+  physics::ModelPtr model_;
+  sdf::ElementPtr sdf_;
+  physics::LinkPtr link_;
 
-    void initializeFieldTable();
+  std::string namespace_;
+  std::string link_name_;
 
-    event::ConnectionPtr update_connection_;
-    std::unique_ptr<ros::NodeHandle> rosNode;
-    ros::Subscriber rosSub;
-    ros::CallbackQueue rosQueue;
-    std::thread rosQueueThread;
+  ignition::math::Vector3d xyz_offset_;
+  ignition::math::Vector3d force_direction_;
+  ignition::math::Vector3d interp_force_;
 
-    physics::ModelPtr model_;
-    sdf::ElementPtr sdf_;
-    physics::LinkPtr link_;
+  std::vector<double> forcex_list_;
+  std::vector<double> forcey_list_;
 
-    std::string namespace_;
-    std::string link_name_;
-
-    ignition::math::Vector3d xyz_offset_;
-    ignition::math::Vector3d force_direction_;
-    ignition::math::Vector3d interp_force_;
-
-    std::vector<double> forcex_list_;
-    std::vector<double> forcey_list_;
-    
-    double precision_;
-    double windspeed_;
-    double wind_angle_;
-    double relative_angle_;
-    std::unordered_map<WindParams, DynParams, WindHasher> field_table_;
+  double precision_;
+  double windspeed_;
+  double wind_angle_;
+  double relative_angle_;
+  std::unordered_map<WindParams, DynParams, WindHasher> field_table_;
 };
-}  // namespace gazebo
+} // namespace gazebo

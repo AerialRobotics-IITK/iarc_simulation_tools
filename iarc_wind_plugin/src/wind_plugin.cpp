@@ -53,17 +53,12 @@ void CustomWindPlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
         char** argv = NULL;
         ros::init(argc, argv, "gazebo_client", ros::init_options::NoSigintHandler);
     }
-    // ros::NodeHandle nh_private("~");
-    // nh_private.getParam("force_x", forcex_list_);
-    // nh_private.getParam("force_y", forcey_list_);
-    std::cout << "CHECK";
+
     std::string path = ros::package::getPath("iarc_wind_plugin");
     YAML::Node config = YAML::LoadFile(path+"/config/params.yaml");
     forcex_list_ = config["force_x"].as<std::vector<double>>();
     forcey_list_ = config["force_y"].as<std::vector<double>>();
-    std::cout << "FILE FOUND\n";
 
-    std::cout << forcex_list_[2] << std::endl;
     // Input values from cfd analysis
     initializeFieldTable();
 
@@ -128,21 +123,20 @@ ignition::math::Vector3d CustomWindPlugin::interpolateWindDynamics(WindParams pa
 void CustomWindPlugin::onUpdate(const common::UpdateInfo& _info) {
     WindParams test_params(abs(relative_angle_), windspeed_);  // Input angle and speed
     interp_force_ = interpolateWindDynamics(test_params);
-
-
+    std::cout << test_params.angle <<std::endl;
+    std::cout << interp_force_[0] << std::endl;
     if (relative_angle_ < 0) {
         interp_force_ *= -1;
     }
     // link_->AddForce(windspeed_ * force_direction_);  // if want to apply gust of constant wind
     link_->AddForce(interp_force_);  // considering the cfd analysis
 }
-
 void CustomWindPlugin::initializeFieldTable() {
-    // dummy initialization for testing
+    // dummy initialization for testing - filling of the hash table will change as per cfd data - also will be a function of precision sdf parameter
     for (int i = 0; i < 6; i++) {
         for (int j = 0; j < 6; j++) {
             field_table_[WindParams(i / 2.0, j / 2.0)] =
-                CustomWindPlugin::DynParams(ignition::math::Vector3d(forcex_list_[j], forcey_list_[j], 0), ignition::math::Vector3d(i + 2, i + 2, i + 2));
+                CustomWindPlugin::DynParams(ignition::math::Vector3d(forcex_list_[i]+forcex_list_[j],forcey_list_[i]+forcey_list_[j], 0), ignition::math::Vector3d(i + 2, i + 2, i + 2));
         }
     }
 }
