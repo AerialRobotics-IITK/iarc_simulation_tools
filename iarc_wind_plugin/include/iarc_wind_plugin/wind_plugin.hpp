@@ -99,7 +99,11 @@ class CustomWindPlugin : public ModelPlugin {
 
     std::vector<double> forcex_list_;
     std::vector<double> forcey_list_;
+    std::vector<double> wind_speeds_;
+    std::vector<double> wind_angles_;
 
+    int rows_;
+    int columns_;
     double precision_;
     double windspeed_;
     double wind_angle_;
