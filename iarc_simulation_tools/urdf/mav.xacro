@@ -24,8 +24,10 @@
   <xacro:include filename="$(find rotors_description)/urdf/mav_generic_odometry_sensor.gazebo" />  
   <xacro:include filename="$(find iarc_simulation_tools)/urdf/rgbd_camera.xacro"/>
   <xacro:include filename="$(find iarc_simulation_tools)/urdf/variable_load.xacro" />
+  <xacro:include filename="$(find iarc_simulation_tools)/urdf/gazebo_wind_plugin.xacro" />
+  
 
-  <xacro:wind_plugin_macro
+  <!-- <xacro:wind_plugin_macro
     namespace="${namespace}"
     xyz_offset="0 0 0"
     wind_direction="0 1 0"
@@ -37,7 +39,7 @@
     wind_speed_mean="10.0"
     use_custom_static_wind_field="true"
     custom_wind_field_path="$(find rotors_gazebo)/models/hemicyl/wind_field_hemicyl.txt">
-  </xacro:wind_plugin_macro>
+  </xacro:wind_plugin_macro> -->
 
   <xacro:variable_load_macro
     robot_namespace="${namespace}">
@@ -55,5 +57,13 @@
     min_range="0.195">
     <origin xyz="0.2 0.0 -0.05" rpy="0 0.1 0" />
   </xacro:rgbd_sensor_depth_macro>
+
+  <xacro:gazebo_wind_plugin_macro
+    namespace="${namespace}"
+    link_name="${namespace}/base_link"
+    windspeed = "2"
+    windangle = "1.57"
+    precision = "0.5"  >
+  </xacro:gazebo_wind_plugin_macro>
 
 </robot>
