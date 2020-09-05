@@ -3,6 +3,18 @@
   <model name="radar">
       <static>true</static>
       <link name='link'>
+      <inertial>
+        <pose>-0.000026 -0.000620 -0.0 0 0 0</pose>
+        <mass>63.49035</mass>
+        <inertia>
+          <ixx>1.00e-05</ixx>
+          <ixy>-0.00</ixy>
+          <ixz>0</ixz>
+          <iyy>6.57e-04</iyy>
+          <iyz>0</iyz>
+          <izz>6.57e-04</izz>
+        </inertia>
+      </inertial>
        <collision name="collision">
         <geometry>
             <mesh>
