@@ -1,25 +1,30 @@
 # git diff --name-only HEAD~2
 declare -a var
-var=($(git diff --name-only HEAD~4))
+var=($(git diff --name-only HEAD~10))
 # echo ${var[2]}
 
 len=${#var[@]}
 str="a"
 echo "$str"
 for((i=0;i<len;i++)); do
-    cpplint --filter=-legal/copyright,-readability/multiline_comment,-readability/braces,-build/include_order,-build/c++11,-build/include_what_you_use,-runtime/string,-whitespace/indent,-whitespace/comments,+build/namespace,+readability/constructors --linelength=160 ${var[$i]}
+    # cpplint --filter=-legal/copyright,-readability/multiline_comment,-readability/braces,-build/include_order,-build/c++11,-build/include_what_you_use,-runtime/string,-whitespace/indent,-whitespace/comments,+build/namespace,+readability/constructors --linelength=160 ${var[$i]}
 
     A="$(cut -d'/' -f1 <<<"${var[$i]}")"
     if [[ "$A" == *"iarc"* && "$A" != "$str" ]]; then
-        # if [[ "$A" != "$str" ]]; then
-            echo "$A"
+        if [[ "$A" != "$str" ]]; then
+            # echo "$A"
             str="$A"
-        # fi
+            catkin build "$A"
+        fi
     fi
 done
 
+for((i=0;i<len;i++)); do
+    cpplint --filter=-legal/copyright,-readability/multiline_comment,-readability/braces,-build/include_order,-build/c++11,-build/include_what_you_use,-runtime/string,-whitespace/indent,-whitespace/comments,+build/namespace,+readability/constructors --linelength=160 ${var[$i]}
 
-declare -a pkgs
+done
+
+# declare -a pkgs
 
 # for f in *; do
 #   if [ -d $f ]
