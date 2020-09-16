@@ -7,7 +7,7 @@ jobs:
       - run: |
           cd ../
           mkdir -p test_ws/src/$CIRCLE_PROJECT_REPONAME
-          yes | apt-get install libcgal-dev
+          yes | apt-get install libcgal-dev || true
       - checkout:
           path: /root/test_ws/src/$CIRCLE_PROJECT_REPONAME
       - run: |
