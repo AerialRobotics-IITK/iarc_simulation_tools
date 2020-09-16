@@ -8,9 +8,9 @@ jobs:
           cd ../
           mkdir -p test_ws/src/$CIRCLE_PROJECT_REPONAME
           yes | apt-get install libcgal-dev || true
-      - run: "apt-get update -y"
-      - run: "apt-get install -y python-pip"
-      - run: "python -m pip install cpplint"
+      # - run: "apt-get update -y"
+      # - run: "apt-get install -y python-pip"
+      # - run: "python -m pip install cpplint"
       - checkout:
           path: /root/test_ws/src/$CIRCLE_PROJECT_REPONAME
       - run: |
