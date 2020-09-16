@@ -6,6 +6,7 @@ jobs:
     steps:
       - run: |
           cd ../
+          apt-get install libcgal-dev
           mkdir -p test_ws/src/$CIRCLE_PROJECT_REPONAME
       - checkout:
           path: /root/test_ws/src/$CIRCLE_PROJECT_REPONAME
@@ -27,6 +28,7 @@ jobs:
           cd ../test_ws/
           source /opt/ros/melodic/setup.bash
           cd src
+          cd iarc_simulation_tools
           ls
           
 workflows:
