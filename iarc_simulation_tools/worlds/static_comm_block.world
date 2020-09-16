@@ -18,8 +18,6 @@
       <shadows>1</shadows>
     </scene>
 
-    <wind/>
-
     <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>
       <latitude_deg>0</latitude_deg>

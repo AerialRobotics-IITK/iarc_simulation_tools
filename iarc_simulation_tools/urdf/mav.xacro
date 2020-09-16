@@ -25,7 +25,7 @@
   <xacro:include filename="$(find iarc_simulation_tools)/urdf/rgbd_camera.xacro"/>
   <xacro:include filename="$(find iarc_simulation_tools)/urdf/variable_load.xacro" />
 
-  <xacro:wind_plugin_macro
+  <!-- <xacro:wind_plugin_macro
     namespace="${namespace}"
     xyz_offset="0 0 0"
     wind_direction="0 1 0"
@@ -37,7 +37,7 @@
     wind_speed_mean="10.0"
     use_custom_static_wind_field="true"
     custom_wind_field_path="$(find rotors_gazebo)/models/hemicyl/wind_field_hemicyl.txt">
-  </xacro:wind_plugin_macro>
+  </xacro:wind_plugin_macro> -->
 
   <xacro:variable_load_macro
     robot_namespace="${namespace}">
