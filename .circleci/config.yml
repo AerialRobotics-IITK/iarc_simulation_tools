@@ -30,6 +30,7 @@ jobs:
           cd src
           cd iarc_simulation_tools
           ls
+          . ./test_script.sh
           
 workflows:
   version: 2
