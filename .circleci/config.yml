@@ -6,7 +6,7 @@ jobs:
     steps:
       - run: |
           cd ../
-          mkdir -p test_ws/src/$CIRCLE_PROJECT_REPONAME
+          mkdir test_ws/src/$CIRCLE_PROJECT_REPONAME
           yes | apt-get install libcgal-dev || true
       # - run: "apt-get update -y"
       # - run: "apt-get install -y python-pip"
