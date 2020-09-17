@@ -8,10 +8,10 @@ jobs:
           cd ../
           mkdir -p test_ws/src/$CIRCLE_PROJECT_REPONAME
           yes | apt-get install libcgal-dev || true
+          apt-get update -y
           apt-get install ros-melodic-xacro
-      # - run: "apt-get update -y"
-      # - run: "apt-get install -y python-pip"
-      # - run: "python -m pip install cpplint"
+          apt-get install -y python-pip
+          python -m pip install cpplint
       - checkout:
           path: /root/test_ws/src/$CIRCLE_PROJECT_REPONAME
       - run: |
