@@ -20,7 +20,7 @@ for((i=0;i<len;i++)); do
         if [[ "$A" != "$str" ]]; then
             echo "$A"
             str="$A"
-            # catkin build "$A"
+            catkin build "$A"
         fi
     fi
 done

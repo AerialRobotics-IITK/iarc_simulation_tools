@@ -97,13 +97,18 @@ ignition::math::Vector3d CustomWindPlugin::interpolateWindDynamics(WindParams pa
     sub_speed = modf(params.speed, &temp);
 
     WindParams ceil = params;  // impl getUpperBounds
-    ceil.angle += 1 - sub_angle; ceil.speed += 1 - sub_speed;
+    ceil.angle += 1 - sub_angle;
+    ceil.speed += 1 - sub_speed;
     WindParams floor = params;  // impl getLowerBounds
-    floor.angle -= sub_angle; floor.speed -= sub_speed;
+    floor.angle -= sub_angle;
+    floor.speed -= sub_speed;
 
-    ceil.angle *= precision_; ceil.speed *= precision_;
-    floor.angle *= precision_; floor.speed *= precision_;
-    params.angle *= precision_; params.speed *= precision_;
+    ceil.angle *= precision_;
+    ceil.speed *= precision_;
+    floor.angle *= precision_;
+    floor.speed *= precision_;
+    params.angle *= precision_;
+    params.speed *= precision_;
 
     CustomWindPlugin::DynParams bot_left = field_table_[CustomWindPlugin::WindParams(floor.angle, floor.speed)];
     CustomWindPlugin::DynParams bot_right = field_table_[CustomWindPlugin::WindParams(ceil.angle, floor.speed)];
