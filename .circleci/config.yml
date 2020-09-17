@@ -6,16 +6,16 @@ jobs:
     steps:
       - run: |
           cd ../
-          mkdir test_ws/src/$CIRCLE_PROJECT_REPONAME
+          mkdir -p test_ws/src
           yes | apt-get install libcgal-dev || true
       # - run: "apt-get update -y"
       # - run: "apt-get install -y python-pip"
       # - run: "python -m pip install cpplint"
       - checkout:
-          path: /root/test_ws/src/$CIRCLE_PROJECT_REPONAME
+          path: /root/test_ws/src
       - run: |
           cd ../test_ws/
-          wstool init src src/$CIRCLE_PROJECT_REPONAME/install/install_https.rosinstall
+          wstool init src src/install/install_https.rosinstall
           wstool update -t src
       - persist_to_workspace:
           root: /root
