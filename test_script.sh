@@ -3,8 +3,8 @@
 cd src
 cd iarc_simulation_tools
 declare -a var
-var=($(git diff --name-only HEAD~10))
-# echo ${var[2]}
+var=($(git diff --name-only HEAD~4))
+echo ${var[2]}
 
 len=${#var[@]}
 str="a"
