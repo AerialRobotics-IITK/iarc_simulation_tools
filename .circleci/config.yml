@@ -31,7 +31,7 @@ jobs:
           cd ../test_ws/
           source /opt/ros/melodic/setup.bash
           cd src
-          cd iarc_simulation_tools
+          ls
           . ./test_script.sh
           
 workflows:
