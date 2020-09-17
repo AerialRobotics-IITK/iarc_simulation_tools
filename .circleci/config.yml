@@ -8,6 +8,7 @@ jobs:
           cd ../
           mkdir -p test_ws/src/$CIRCLE_PROJECT_REPONAME
           yes | apt-get install libcgal-dev || true
+          apt-get install ros-indigo-xacro
       # - run: "apt-get update -y"
       # - run: "apt-get install -y python-pip"
       # - run: "python -m pip install cpplint"

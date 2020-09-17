@@ -3,7 +3,7 @@
 cd src
 cd iarc_simulation_tools
 declare -a var
-var=($(git diff --name-only HEAD~4))
+var=($(git diff --name-only HEAD~6))
 echo ${var[2]}
 
 len=${#var[@]}
@@ -17,11 +17,11 @@ for((i=0;i<len;i++)); do
 
     A="$(cut -d'/' -f1 <<<"${var[$i]}")"
     if [[ "$A" == *"iarc"* && "$A" != "$str" ]]; then
-        if [[ "$A" != "$str" ]]; then
+        # if [[ "$A" != "$str" ]]; then
             echo "$A"
             str="$A"
             catkin build "$A"
-        fi
+        # fi
     fi
 done
 
