@@ -1,20 +1,26 @@
 # git diff --name-only HEAD~2
+
+cd src
+cd iarc_simulation_tools
 declare -a var
-var=($(git diff --name-only HEAD~2))
+var=($(git diff --name-only HEAD~10))
 # echo ${var[2]}
 
 len=${#var[@]}
 str="a"
 # echo "$str"
+
+cd ../..
+
 for((i=0;i<len;i++)); do
     # cpplint --filter=-legal/copyright,-readability/multiline_comment,-readability/braces,-build/include_order,-build/c++11,-build/include_what_you_use,-runtime/string,-whitespace/indent,-whitespace/comments,+build/namespace,+readability/constructors --linelength=160 ${var[$i]}
 
     A="$(cut -d'/' -f1 <<<"${var[$i]}")"
     if [[ "$A" == *"iarc"* && "$A" != "$str" ]]; then
         if [[ "$A" != "$str" ]]; then
-            # echo "$A"
+            echo "$A"
             str="$A"
-            catkin build "$A"
+            # catkin build "$A"
         fi
     fi
 done
