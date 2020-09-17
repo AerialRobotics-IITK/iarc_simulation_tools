@@ -1,6 +1,6 @@
 # git diff --name-only HEAD~2
 declare -a var
-var=($(git diff --name-only HEAD~10))
+var=($(git diff --name-only HEAD~2))
 # echo ${var[2]}
 
 len=${#var[@]}
