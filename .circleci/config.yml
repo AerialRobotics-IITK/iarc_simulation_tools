@@ -10,6 +10,7 @@ jobs:
           yes | apt-get install libcgal-dev || true
           apt-get update -y
           apt-get install ros-melodic-xacro
+          apt install libyaml-cpp-dev
           apt-get install -y python-pip
           python -m pip install cpplint
       - checkout:
