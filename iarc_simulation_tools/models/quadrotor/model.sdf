@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <sdf version="1.6">
   <model name='quadrotor'>
+    <!-- <self_collide>True</self_collide> -->
     <static>False</static>
     <!-- <link name ='pixhawk'>
       <pose>0 0 0 0 0 0</pose>
@@ -279,8 +280,8 @@
         </geometry>
       </visual>
     </link> -->
-    <link name ='top_cover'>
-      <pose>0 0 0 0 0 0</pose>
+    <!-- <link name ='top_cover'>
+      <pose>0 0 0.3 0 0 0</pose>
       <collision name="collision">
         <geometry>
           <mesh>
@@ -290,7 +291,7 @@
         </geometry>
         <surface>
           <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
+            <collide_bitmask>0x10</collide_bitmask>
           </contact>
           <friction>
             <ode>
@@ -308,7 +309,7 @@
           </mesh>
         </geometry>
       </visual>
-    </link>
+    </link> -->
     <link name ='comb'>
       <pose>0 0 0 0 0 0</pose>
       <collision name="collision">
@@ -346,6 +347,74 @@
         </geometry>
       </visual>
     </link>
+
+
+    <link name ='motor_mount3'>
+      <pose>0.209 -0.211 0.004 0 0 -0.785</pose>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://quadrotor/meshes/motor_mount.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://quadrotor/meshes/motor_mount.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name ='motor_mount4'>
+      <pose>-0.209 -0.211 0.004 0 0 3.9269</pose>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://quadrotor/meshes/motor_mount.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://quadrotor/meshes/motor_mount.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link> 
+
+
+
+
+
+
     <link name ='propeller1'>
       <pose>0.213078 0.211 0.05 0 0 0</pose>
       <collision name="collision">
@@ -494,66 +563,13 @@
         </geometry>
       </visual>
     </link>
-    <link name ='motor_mount1'>
-      <pose>0.209 -0.211 0.004 0 0 -0.785</pose>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor_mount.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor_mount.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name ='motor_mount2'>
-      <pose>-0.209 -0.211 0.004 0 0 3.9269</pose>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor_mount.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor_mount.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
+  
+
+
+
+
+
+
     <link name ='motor1'>
       <pose>0.215 0.210 0.022 0 0 0</pose>
       <collision name="collision">
@@ -675,15 +691,89 @@
       </visual>
     </link>
 
+    <joint name="fix_1" type="revolute">
+      <pose> 0 0 0 0 0 0</pose>
+      <parent>motor1</parent>
+      <child>comb</child>
+      <axis>
+        <limit>
+          <lower>-0</lower>
+          <upper>0</upper>
+        </limit>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint> 
+    <joint name="fix_2" type="revolute">
+      <pose> 0 0 0 0 0 0</pose>
+      <parent>motor2</parent>
+      <child>comb</child>
+      <axis>
+        <limit>
+          <lower>-0</lower>
+          <upper>0</upper>
+        </limit>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint> 
+    <joint name="fix_3" type="revolute">
+      <pose> 0 0 0 0 0 0</pose>
+      <parent>motor3</parent>
+      <child>motor_mount3</child>
+      <axis>
+        <limit>
+          <lower>-0</lower>
+          <upper>0</upper>
+        </limit>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint> 
+    <joint name="fix_4" type="revolute">
+      <pose> 0 0 0 0 0 0</pose>
+      <parent>motor4</parent>
+      <child>motor_mount4</child>
+      <axis>
+        <limit>
+          <lower>-0</lower>
+          <upper>0</upper>
+        </limit>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint> 
+    <joint name="fix_3.1" type="revolute">
+      <pose> 0 0 0 0 0 0</pose>
+      <parent>comb</parent>
+      <child>motor_mount3</child>
+      <axis>
+        <limit>
+          <lower>-0</lower>
+          <upper>0</upper>
+        </limit>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint> 
+    <joint name="fix_4.1" type="revolute">
+      <pose> 0 0 0 0 0 0</pose>
+      <parent>comb</parent>
+      <child>motor_mount4</child>
+      <axis>
+        <limit>
+          <lower>-0</lower>
+          <upper>0</upper>
+        </limit>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint> 
+
+
     <joint name="rev1" type="revolute">
       <pose> 0 0 0 0 0 0</pose>
       <parent>motor1</parent>
       <child>propeller1</child>
       <axis>
-        <limit>
+        <!-- <limit>
           <lower>-0.4</lower>
           <upper>0.4</upper>
-        </limit>
+        </limit> -->
         <xyz>0 0 1</xyz>
       </axis>
     </joint>  
@@ -692,22 +782,22 @@
       <parent>motor2</parent>
       <child>propeller2</child>
       <axis>
-        <limit>
+        <!-- <limit>
           <lower>-0.4</lower>
           <upper>0.4</upper>
-        </limit>
+        </limit> -->
         <xyz>0 0 1</xyz>
       </axis>
     </joint> 
-      <joint name="rev3" type="revolute">
+    <joint name="rev3" type="revolute">
       <pose> 0 0 0 0 0 0</pose>
       <parent>motor3</parent>
       <child>propeller3</child>
       <axis>
-        <limit>
+        <!-- <limit>
           <lower>-0.4</lower>
           <upper>0.4</upper>
-        </limit>
+        </limit> -->
         <xyz>0 0 1</xyz>
       </axis>
     </joint>  
@@ -716,13 +806,26 @@
       <parent>motor4</parent>
       <child>propeller4</child>
       <axis>
-        <limit>
+        <!-- <limit>
           <lower>-0.4</lower>
           <upper>0.4</upper>
+        </limit> -->
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>     
+
+    <!-- <joint name="fix3" type="revolute">
+      <pose> 0 0 0 0 0 0</pose>
+      <parent>comb</parent>
+      <child>motor_mount3</child>
+      <axis>
+        <limit>
+          <lower>-0</lower>
+          <upper>0</upper>
         </limit>
         <xyz>0 0 1</xyz>
       </axis>
-    </joint>   
+    </joint>  -->
 
   </model>
 </sdf>
