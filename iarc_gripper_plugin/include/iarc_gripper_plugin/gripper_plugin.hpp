@@ -16,7 +16,7 @@ namespace gazebo {
 class GripperPlugin : public ModelPlugin {
 public:
   void Load(physics::ModelPtr parent, sdf::ElementPtr sdf);
-  void onUpdate(const common::UpdateInfo & /*_info*/);
+  void onUpdate(const common::UpdateInfo &_info);
   bool serverCallback(iarc_gripper_plugin::GripperCmd::Request &req,
                       iarc_gripper_plugin::GripperCmd::Response &res);
 
@@ -33,7 +33,6 @@ private:
   ros::NodeHandle *rosnode_;
 
   double torque_magnitude_;
-  bool flag_ = true;
 
   ros::ServiceServer cmd_server_;
   boost::mutex lock_;

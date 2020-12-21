@@ -61,13 +61,13 @@ bool GripperPlugin::serverCallback(
 
   if (req.flag == 1) {
     torque_direction_.Set(0, 0, -1);
-    res.message = "Expanding gripper";
+    res.message = "Opening gripper";
   } else if (req.flag == 2) {
     torque_direction_.Set(0, 0, 0);
     res.message = "Pausing gripper";
   } else if (req.flag == 0) {
     torque_direction_.Set(0, 0, 1);
-    res.message = "Retracting gripper";
+    res.message = "Closing gripper";
   } else {
     res.message = "Choose from 0 to retract, 1 to expand or 2 to pause";
   }
