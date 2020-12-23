@@ -1,9 +1,10 @@
-<?xml version="1.0"?>
+<!-- <?xml version="1.0"?>
 <sdf version="1.6">
   <model name='grabber'>
-    <static>1</static>
-    <link name='main_body'>
-      <pose>0 0.25 0.019 -1.57 0 0</pose>
+    <selfCollide>1</selfCollide>
+    <static>False</static>
+    <link name='revolute_plate_left'>
+      <pose>0 0.75 0.019 0 0 0</pose>
       <inertial>
         <pose>-0.000104 -0.000077 -0.0 0 0 0</pose>
         <mass>0.3186</mass>
@@ -19,8 +20,8 @@
       <collision name="collision">
         <geometry>
           <mesh>
-            <uri>model://grabber/meshes/body.dae</uri>
-            <scale>1 1 1</scale>
+            <uri>model://grabber/meshes/revolute_plate.dae</uri>
+            <scale>5 5 5</scale>
           </mesh>
         </geometry>
         <surface>
@@ -38,11 +39,552 @@
       <visual name='visual'>
         <geometry>
           <mesh>
-            <uri>model://gripper/meshes/body.dae</uri>
-            <scale>1 1 1</scale>
+            <uri>model://grabber/meshes/revolute_plate.dae</uri>
+            <scale>5 5 5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name='revolute_plate_right'>
+      <pose>0.23 0.275 0.019 0 0 0</pose>
+      <inertial>
+        <pose>-0.000104 -0.000077 -0.0 0 0 0</pose>
+        <mass>0.3186</mass>
+        <inertia>
+          <ixx>7.938e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>3.3715e-04</iyy>
+          <iyz>0</iyz>
+          <izz>3.3664e-04</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://grabber/meshes/revolute_plate.dae</uri>
+            <scale>5 5 5</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://grabber/meshes/revolute_plate.dae</uri>
+            <scale>5 5 5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name='body'>
+      <pose>0 0.25 0 1.57 0 0</pose>
+      <inertial>
+        <pose>-0.000104 -0.000077 -0.0 0 0 0</pose>
+        <mass>0.3186</mass>
+        <inertia>
+          <ixx>7.938e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>3.3715e-04</iyy>
+          <iyz>0</iyz>
+          <izz>3.3664e-04</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://grabber/meshes/body.dae</uri>
+            <scale>5 5 5</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://grabber/meshes/body.dae</uri>
+            <scale>5 5 5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+   <link name='left_actuator'>
+      <pose>-0.10 0.25 0.1899 1.57 0 1.57</pose>
+      <inertial>
+        <pose>-0.000104 -0.000077 -0.0 0 0 0</pose>
+        <mass>0.3186</mass>
+        <inertia>
+          <ixx>7.938e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>3.3715e-04</iyy>
+          <iyz>0</iyz>
+          <izz>3.3664e-04</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://grabber/meshes/left_actuator.dae</uri>
+            <scale>5 5 5</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://grabber/meshes/left_actuator.dae</uri>
+            <scale>5 5 5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name='right_actuator'>
+      <pose>0.10 0.25 0.1899 1.57 0 -1.57</pose>
+      <inertial>
+        <pose>-0.000104 -0.000077 -0.0 0 0 0</pose>
+        <mass>0.3186</mass>
+        <inertia>
+          <ixx>7.938e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>3.3715e-04</iyy>
+          <iyz>0</iyz>
+          <izz>3.3664e-04</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://grabber/meshes/right_actuator.dae</uri>
+            <scale>5 5 5</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://grabber/meshes/right_actuator.dae</uri>
+            <scale>5 5 5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name='servo_plate'>
+      <pose>3.0 0.25 0.0 1.57 0 0</pose>
+      <inertial>
+        <pose>-0.000104 -0.000077 -0.0 0 0 0</pose>
+        <mass>0.3186</mass>
+        <inertia>
+          <ixx>7.938e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>3.3715e-04</iyy>
+          <iyz>0</iyz>
+          <izz>3.3664e-04</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://grabber/meshes/servoPlate.dae</uri>
+            <scale>5 5 5</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://grabber/meshes/servoPlate.dae</uri>
+            <scale>5 5 5</scale>
           </mesh>
         </geometry>
       </visual>
     </link>
   </model>
+</sdf> -->
+
+
+
+
+<?xml version="1.0"?>
+<sdf version="1.6">
+    <model name="grabber">
+    <!-- <link name="dummy">
+            <pose>0.45 0.0 0 0 0 0</pose>
+            <inertial>
+                <pose>0 0 -0.5 0 0 0</pose>
+                <inertia>
+                    <ixx>0.01</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.01</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.01</izz>
+                </inertia>
+                <mass>1.0</mass>
+            </inertial>
+            <collision name="collision">
+                <geometry>
+                    <box>
+                        <size>0.06 0.06 0.06</size>
+                    </box>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <geometry>
+                    <box>
+                        <size>0.06 0.06 0.06</size>
+                    </box>
+                </geometry>
+                <material>
+                    <script>Gazebo/Black</script>
+                </material>
+            </visual>
+        </link> -->
+        <!-- <link name="riser">
+            <pose>-0.15 0.0 0.5 0 0 0</pose>
+            <inertial>
+                <pose>0 0 -0.5 0 0 0</pose>
+                <inertia>
+                    <ixx>0.01</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.01</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.01</izz>
+                </inertia>
+                <mass>10.0</mass>
+            </inertial>
+            <collision name="collision">
+                <geometry>
+                    <box>
+                        <size>0.2 0.2 1.0</size>
+                    </box>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <geometry>
+                    <box>
+                        <size>0.2 0.2 1.0</size>
+                    </box>
+                </geometry>
+                <material>
+                    <script>Gazebo/Purple</script>
+                </material>
+            </visual>
+        </link> -->
+        <link name="palm">
+            <pose>0.0 0.0 0.05 0 0 0</pose>
+            <inertial>
+                <inertia>
+                    <ixx>0.000189</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.000010</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.000189</izz>
+                </inertia>
+                <mass>0.0985</mass>
+            </inertial>
+            <collision name="collision">
+                <geometry>
+                    <box>
+                        <size>0.025 0.15 0.025</size>
+                    </box>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <geometry>
+                    <box>
+                        <size>0.025 0.15 0.025</size>
+                    </box>
+                </geometry>
+                <material>
+                    <script>Gazebo/Red</script>
+                </material>
+            </visual>
+        </link>
+        <link name="left_finger">
+            <pose>0.06 0.05 0.05 0 0 -1.57</pose>
+            <inertial>
+                <inertia>
+                    <ixx>0.000020</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.0000008859</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.000020</izz>
+                </inertia>
+                <mass>0.023625</mass>
+            </inertial>
+            <collision name="collision">
+                <geometry>
+                    <box>
+                        <size>0.015 0.1 0.015</size>
+                    </box>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <geometry>
+                    <box>
+                        <size>0.015 0.1 0.015</size>
+                    </box>
+                </geometry>
+                <material>
+                    <script>Gazebo/Blue</script>
+                </material>
+            </visual>
+        </link>
+        <link name="right_finger">
+            <pose>0.06 -0.05 0.05 0 0 -1.57</pose>
+            <inertial>
+                <inertia>
+                    <ixx>0.000020</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.0000008859</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.000020</izz>
+                </inertia>
+                <mass>0.023625</mass>
+            </inertial>
+            <collision name="collision">
+                <geometry>
+                    <box>
+                        <size>0.015 0.1 0.015</size>
+                    </box>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <geometry>
+                    <box>
+                        <size>0.015 0.1 0.015</size>
+                    </box>
+                </geometry>
+                <material>
+                    <script>Gazebo/Blue</script>
+                </material>
+            </visual>
+        </link>
+        <!-- <link name="left_finger_tip">
+            <pose>0.168 0.15 0.05 0 0 1.5707</pose>
+            <inertial>
+                <inertia>
+                    <ixx>0.01</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.01</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.01</izz>
+                </inertia>
+                <mass>0.1</mass>
+            </inertial>
+            <collision name="collision">
+                <geometry>
+                    <box>
+                        <size>0.05 0.1 0.05</size>
+                    </box>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <geometry>
+                    <box>
+                        <size>0.05 0.1 0.05</size>
+                    </box>
+                </geometry>
+                <material>
+                    <script>Gazebo/Blue</script>
+                </material>
+            </visual>
+        </link>
+        <link name="right_finger">
+            <pose>0.05 -0.1 0.05 0 0 .78539</pose>
+            <inertial>
+                <inertia>
+                    <ixx>0.01</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.01</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.01</izz>
+                </inertia>
+                <mass>0.1</mass>
+            </inertial>
+            <collision name="collision">
+                <geometry>
+                    <box>
+                        <size>0.05 0.15 0.05</size>
+                    </box>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <geometry>
+                    <box>
+                        <size>0.05 0.15 0.05</size>
+                    </box>
+                </geometry>
+                <material>
+                    <script>Gazebo/Green</script>
+                </material>
+            </visual>
+        </link>
+        <link name="right_finger_tip">
+            <pose>0.168 -0.15 0.05 0 0 1.5707</pose>
+            <inertial>
+                <inertia>
+                    <ixx>0.01</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.01</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.01</izz>
+                </inertia>
+                <mass>0.1</mass>
+            </inertial>
+            <collision name="collision">
+                <geometry>
+                    <box>
+                        <size>0.05 0.1 0.05</size>
+                    </box>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <geometry>
+                    <box>
+                        <size>0.05 0.1 0.05</size>
+                    </box>
+                </geometry>
+                <material>
+                    <script>Gazebo/Green</script>
+                </material>
+            </visual>
+        </link> -->
+        <static>false</static>
+
+        <!-- <joint name="palm_left_finger" type="revolute">
+            <pose>0 -0.075 0 0 0 0</pose>
+            <child>left_finger</child>
+            <parent>palm</parent>
+            <axis>
+                <limit>
+                    <lower>-0.4</lower>
+                    <upper>0.4</upper>
+                </limit>
+                <xyz>0 0 1</xyz>
+            </axis>
+        </joint>
+        <joint name="left_finger_tip" type="revolute">
+            <pose>0 0.05 0 0 0 0</pose>
+            <child>left_finger_tip</child>
+            <parent>left_finger</parent>
+            <axis>
+                <limit>
+                    <lower>-0.4</lower>
+                    <upper>0.4</upper>
+                </limit>
+                <xyz>0 0 1</xyz>
+            </axis>
+        </joint>
+        <joint name="palm_right_finger" type="revolute">
+            <pose>0 0.075 0 0 0 0</pose>
+            <child>right_finger</child>
+            <parent>palm</parent>
+            <axis>
+                <limit>
+                    <lower>-0.4</lower>
+                    <upper>0.4</upper>
+                </limit>
+                <xyz>0 0 1</xyz>
+            </axis>
+        </joint>
+        <joint name="right_finger_tip" type="revolute">
+            <pose>0 0.05 0 0 0 0</pose>
+            <child>right_finger_tip</child>
+            <parent>right_finger</parent>
+            <axis>
+                <limit>
+                    <lower>-0.4</lower>
+                    <upper>0.4</upper>
+                </limit>
+                <xyz>0 0 1</xyz>
+            </axis>
+        </joint> -->
+        <joint name="right_hand" type="prismatic">
+            <child>palm</child>
+            <parent>right_finger</parent>
+            <axis>
+                <limit>
+                    <lower>0</lower>
+                    <upper>0.9</upper>
+                </limit>
+                <xyz>0 -1 0</xyz>
+            </axis>
+        </joint>
+        <joint name="left_hand" type="prismatic">
+            <child>palm</child>
+            <parent>left_finger</parent>
+            <axis>
+                <limit>
+                    <lower>0</lower>
+                    <upper>0.9</upper>
+                </limit>
+                <xyz>0 1 0</xyz>
+            </axis>
+        </joint>
+    </model>
 </sdf>
