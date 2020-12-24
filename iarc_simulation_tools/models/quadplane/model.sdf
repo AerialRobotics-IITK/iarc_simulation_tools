@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
   <model name="quadplane">
-    <static>true</static>
-      <!-- <link name='propeller'>
-        <pose>0 0.25 0.019 -1.57 0 0</pose>
-        <inertial>
+    <static>false</static>
+      <link name='front_propeller'>
+        <pose>0 0 0 -1.57 0 0</pose>
+        <!-- <inertial>
           <pose>-0.000104 -0.000077 -0.0 0 0 0</pose>
           <mass>0.3186</mass>
           <inertia>
@@ -15,11 +15,11 @@
             <iyz>0</iyz>
             <izz>3.3664e-04</izz>
           </inertia>
-        </inertial>
+        </inertial> -->
         <collision name="collision">
           <geometry>
             <mesh>
-              <uri>model://gripper/meshes/prop.dae</uri>
+              <uri>model://quadplane/meshes/front_prop.dae</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -38,63 +38,219 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>model://gripper/meshes/prop.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-        </visual>
-      </link> -->
-
-
-<!-- 
-      <link name='front_prop'>
-        <pose>0 0.25 0.019 -1.57 0 0</pose>
-        <inertial>
-          <pose>-0.000104 -0.000077 -0.0 0 0 0</pose>
-          <mass>0.3186</mass>
-          <inertia>
-            <ixx>7.938e-05</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>3.3715e-04</iyy>
-            <iyz>0</iyz>
-            <izz>3.3664e-04</izz>
-          </inertia>
-        </inertial>
-        <collision name="collision">
-          <geometry>
-            <mesh>
-              <uri>model://gripper/meshes/front_prop.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <collide_bitmask>0xffff</collide_bitmask>
-            </contact>
-            <friction>
-              <ode>
-                <mu>100</mu>
-                <mu2>50</mu2>
-              </ode>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://gripper/meshes/front_prop.dae</uri>
+              <uri>model://quadplane/meshes/front_prop.dae</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
         </visual>
       </link>
-       -->
 
+
+    <link name ='top_propeller1'>
+      <pose>1.4142 -0.4627 0.03 0 0 0</pose>
+        <inertial>
+          <pose>0.000102 0.000117 0.014206 0 0 0</pose>
+          <mass>0.3186</mass>
+          <inertia>
+            <ixx>7.1513e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>7.1522e-07</iyy>
+            <iyz>0</iyz>
+            <izz>1.42218e-06</izz>
+          </inertia>
+        </inertial>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://quadplane/meshes/top_props.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <material>
+          <script>
+            <name>Gazebo/Green</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <shader type='pixel'/>
+        </material>  
+        <geometry>
+          <mesh>
+            <uri>model://quadplane/meshes/top_props.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+
+    <link name ='top_propeller2'>
+      <pose>1.4142 0.4627 0.03 0 0 0</pose>
+        <inertial>
+          <pose>0.000102 0.000117 0.014206 0 0 0</pose>
+          <mass>0.3186</mass>
+          <inertia>
+            <ixx>7.1513e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>7.1522e-07</iyy>
+            <iyz>0</iyz>
+            <izz>1.42218e-06</izz>
+          </inertia>
+        </inertial>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://quadplane/meshes/top_props.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <material>
+          <script>
+            <name>Gazebo/Green</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <shader type='pixel'/>
+        </material>  
+        <geometry>
+          <mesh>
+            <uri>model://quadplane/meshes/top_props.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name ='top_propeller3'>
+      <pose>0.37 -0.4627 0.03 0 0 0</pose>
+        <inertial>
+          <pose>0.000102 0.000117 0.014206 0 0 0</pose>
+          <mass>0.3186</mass>
+          <inertia>
+            <ixx>7.1513e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>7.1522e-07</iyy>
+            <iyz>0</iyz>
+            <izz>1.42218e-06</izz>
+          </inertia>
+        </inertial>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://quadplane/meshes/top_props.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <material>
+          <script>
+            <name>Gazebo/Green</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <shader type='pixel'/>
+        </material>  
+        <geometry>
+          <mesh>
+            <uri>model://quadplane/meshes/top_props.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name ='top_propeller4'>
+      <pose>0.37 0.4627 0.03 0 0 0</pose>
+        <inertial>
+          <pose>0.000102 0.000117 0.014206 0 0 0</pose>
+          <mass>0.3186</mass>
+          <inertia>
+            <ixx>7.1513e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>7.1522e-07</iyy>
+            <iyz>0</iyz>
+            <izz>1.42218e-06</izz>
+          </inertia>
+        </inertial>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://quadplane/meshes/top_props.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0xffff</collide_bitmask>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <material>
+          <script>
+            <name>Gazebo/Green</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <shader type='pixel'/>
+        </material>  
+        <geometry>
+          <mesh>
+            <uri>model://quadplane/meshes/top_props.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
 
 
     <link name ='plane'>
       <pose>0 0 0 0 0 0</pose>
+      <!-- <mass>10</mass> -->
       <collision name="collision">
         <geometry>
           <mesh>
@@ -131,6 +287,70 @@
       </visual>
     </link>
 
+    <joint name="front" type="revolute">
+      <pose> 0 0 0 0 0 0</pose>
+      <parent>plane</parent>
+      <child>front_propeller</child>
+      <axis>
+        <!-- <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit> -->
+        <xyz>0 1 </xyz>
+      </axis>
+    </joint> 
+
+    <joint name="top4" type="revolute">
+      <pose> 0 0 0 0 0 0</pose>
+      <parent>plane</parent>
+      <child>top_propeller4</child>
+      <axis>
+        <!-- <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit> -->
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint> 
+
+    <joint name="top1" type="revolute">
+      <pose> 0 0 0 0 0 0</pose>
+      <parent>plane</parent>
+      <child>top_propeller1</child>
+      <axis>
+        <!-- <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit> -->
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint> 
+
+    <joint name="top2" type="revolute">
+      <pose> 0 0 0 0 0 0</pose>
+      <parent>plane</parent>
+      <child>top_propeller2</child>
+      <axis>
+        <!-- <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit> -->
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint> 
+
+    <joint name="top3" type="revolute">
+      <pose> 0 0 0 0 0 0</pose>
+      <parent>plane</parent>
+      <child>top_propeller3</child>
+      <axis>
+        <!-- <limit>
+          <lower>-0.4</lower>
+          <upper>0.4</upper>
+        </limit> -->
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>     
 
 
   </model>
