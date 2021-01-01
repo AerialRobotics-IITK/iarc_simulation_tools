@@ -1,4 +1,3 @@
-#include <iarc_gripper_plugin/GripperCmd.h>
 #include <iarc_gripper_plugin/gripper_plugin.hpp>
 #include <ros/ros.h>
 #include <std_srvs/Trigger.h>
@@ -55,8 +54,8 @@ void GripperPlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
 }
 
 bool GripperPlugin::serverCallback(
-    iarc_gripper_plugin::GripperCmd::Request &req,
-    iarc_gripper_plugin::GripperCmd::Response &res) {
+    iarc_simulation_msgs::GripperCmd::Request &req,
+    iarc_simulation_msgs::GripperCmd::Response &res) {
   boost::mutex::scoped_lock scoped_lock(lock_);
 
   if (req.flag == 1) {
