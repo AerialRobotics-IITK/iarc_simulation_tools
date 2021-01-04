@@ -90,6 +90,6 @@
         <falloff>0</falloff>
       </spot>
     </light>
-
+    <plugin name="ros_link_attacher_plugin" filename="libgazebo_ros_link_attacher.so"/>
   </world>
 </sdf>
