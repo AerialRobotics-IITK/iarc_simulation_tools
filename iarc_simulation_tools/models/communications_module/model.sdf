@@ -14,16 +14,16 @@
         <topicNs>magnetic_force/communicatios_module</topicNs>
         <updateRate>100</updateRate>
       </plugin>
-      <!-- <link name='magnet'>
+      <link name='magnet'>
         <inertial>
-          <mass>1</mass>
+          <mass>0.00471</mass>
           <inertia>
-            <ixx>0.000017377</ixx>
+            <ixx>0.00000008185</ixx>
             <ixy>0</ixy>
             <ixz>0</ixz>
-            <iyy>0.000017377</iyy>
+            <iyy>0.00000008185</iyy>
             <iyz>0</iyz>
-            <izz>0.000007873</izz>
+            <izz>0.00000003708</izz>
           </inertia>
           <pose>0 0 0 0 -0 0</pose>
         </inertial>
@@ -56,17 +56,17 @@
             </cylinder>
           </geometry>
         </collision>
-      </link> -->
+      </link>
       <link name='link'>
       <inertial>
         <mass>2</mass>
         <inertia>
-                    <ixx>0.001233</ixx>
-                    <ixy>0</ixy>
-                    <ixz>0</ixz>
-                    <iyy>0.001233</iyy>
-                    <iyz>0</iyz>
-                    <izz>0.00083</izz>
+          <ixx>0.001233</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.001233</iyy>
+          <iyz>0</iyz>
+          <izz>0.00083</izz>
         </inertia>
         <pose>0 0 0 0 0 0</pose>
       </inertial>

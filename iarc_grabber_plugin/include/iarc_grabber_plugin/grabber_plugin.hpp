@@ -17,8 +17,7 @@ class GrabberPlugin : public ModelPlugin {
   public:
     void Load(physics::ModelPtr parent, sdf::ElementPtr sdf);
     void onUpdate(const common::UpdateInfo& _info);
-    bool serverCallback(iarc_grabber_plugin::GrabberCmd::Request &req,
-                      iarc_grabber_plugin::GrabberCmd::Response &res);
+    bool serverCallback(iarc_grabber_plugin::GrabberCmd::Request& req, iarc_grabber_plugin::GrabberCmd::Response& res);
 
   private:
     physics::ModelPtr model_;
@@ -26,7 +25,7 @@ class GrabberPlugin : public ModelPlugin {
     event::ConnectionPtr updateConnection_;
     physics::LinkPtr link1_;
     physics::LinkPtr link2_;
-    
+
     std::string link_name1_;
     std::string link_name2_;
     std::string namespace_;
@@ -35,7 +34,7 @@ class GrabberPlugin : public ModelPlugin {
     ros::NodeHandle* rosnode_;
 
     double force_magnitude_;
-  ros::ServiceServer cmd_server_;
-  boost::mutex lock_;
+    ros::ServiceServer cmd_server_;
+    boost::mutex lock_;
 };
 }  // namespace gazebo
