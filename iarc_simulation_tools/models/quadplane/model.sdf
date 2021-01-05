@@ -251,15 +251,15 @@
     <link name ='plane'>
       <pose>0 0 0 0 0 0</pose>
         <inertial>
-          <pose>0.148 0 0.004 0 0 0</pose>
+          <pose>-0.000015 0.878954 0.013308 0 0 0</pose>
           <mass>10.58</mass>
           <inertia>
-            <ixx>0.521</ixx>
-            <ixy>0</ixy>
-            <ixz>-0.01906</ixz>
-            <iyy>0.77</iyy>
-            <iyz>0</iyz>
-            <izz>1.28636</izz>
+            <ixx>0.015947</ixx>
+            <ixy>0.000003</ixy>
+            <ixz>0</ixz>
+            <iyy>0.013663</iyy>
+            <iyz>-0.000276</iyz>
+            <izz>0.029280 </izz>
           </inertia>
         </inertial>
       <collision name="collision">
