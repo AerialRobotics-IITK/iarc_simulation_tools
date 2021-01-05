@@ -312,10 +312,22 @@
     </link> -->
     <link name ='comb'>
       <pose>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.000181 -0.000000 0.100769 0 0 0</pose>
+        <mass>2</mass>
+        <inertia>
+          <ixx>1.592824e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.593967e-05</iyy>
+          <iyz>0</iyz>
+          <izz>3.077924e-05</izz>
+        </inertia>
+      </inertial>
       <collision name="collision">
         <geometry>
           <mesh>
-            <uri>model://quadrotor/meshes/PLATE_3.1.dae</uri>
+            <uri>model://quadrotor/meshes/simple_quadrotorV1.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -341,15 +353,14 @@
         </material>   -->
         <geometry>
           <mesh>
-            <uri>model://quadrotor/meshes/PLATE_3.1.dae</uri>
+            <uri>model://quadrotor/meshes/simple_quadrotorV1.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
       </visual>
     </link>
 
-
-    <link name ='motor_mount3'>
+    <!-- <link name ='motor_mount3'>
       <pose>0.209 -0.211 0.004 0 0 -0.785</pose>
       <collision name="collision">
         <geometry>
@@ -410,13 +421,25 @@
       </visual>
     </link> 
 
-
+ -->
 
 
 
 
     <link name ='propeller1'>
       <pose>0.213078 0.211 0.05 0 0 0</pose>
+      <inertial>
+        <pose>-0.004298 -0.002432 0.026196 0 0 0</pose>
+        <mass>0.0105</mass>
+        <inertia>
+          <ixx>3.5613e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>3.5611e-07</iyy>
+          <iyz>0</iyz>
+          <izz>7.0817e-07</izz>
+        </inertia>
+      </inertial>
       <collision name="collision">
         <geometry>
           <mesh>
@@ -454,6 +477,18 @@
     </link>
     <link name ='propeller2'>
       <pose>-0.213078 0.211 0.05 0 0 0</pose>
+      <inertial>
+        <pose>-0.004298 -0.002432 0.026196 0 0 0</pose>
+        <mass>0.0105</mass>
+        <inertia>
+          <ixx>3.5613e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>3.5611e-07</iyy>
+          <iyz>0</iyz>
+          <izz>7.0817e-07</izz>
+        </inertia>
+      </inertial>
       <collision name="collision">
         <geometry>
           <mesh>
@@ -491,6 +526,18 @@
     </link>
     <link name ='propeller3'>
       <pose>-0.213078 -0.211 0.05 0 0 0</pose>
+      <inertial>
+        <pose>-0.004298 -0.002432 0.026196 0 0 0</pose>
+        <mass>0.0105</mass>
+        <inertia>
+          <ixx>3.5613e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>3.5611e-07</iyy>
+          <iyz>0</iyz>
+          <izz>7.0817e-07</izz>
+        </inertia>
+      </inertial>
       <collision name="collision">
         <geometry>
           <mesh>
@@ -528,6 +575,18 @@
     </link>
     <link name ='propeller4'>
       <pose>0.213078 -0.211 0.05 0 0 0</pose>
+      <inertial>
+        <pose>-0.004298 -0.002432 0.026196 0 0 0</pose>
+        <mass>0.0105</mass>
+        <inertia>
+          <ixx>3.5613e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>3.5611e-07</iyy>
+          <iyz>0</iyz>
+          <izz>7.0817e-07</izz>
+        </inertia>
+      </inertial>
       <collision name="collision">
         <geometry>
           <mesh>
@@ -572,6 +631,18 @@
 
     <link name ='motor1'>
       <pose>0.215 0.210 0.022 0 0 0</pose>
+      <inertial>
+        <pose>0.008860 0.000173 0.098252 0 0 0</pose>
+        <mass>0.053</mass>
+        <inertia>
+          <ixx>6.8e-10</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.8e-10</iyy>
+          <iyz>0</iyz>
+          <izz>9.9e-10</izz>
+        </inertia>
+      </inertial>
       <collision name="collision">
         <geometry>
           <mesh>
@@ -602,6 +673,18 @@
     </link>
     <link name ='motor2'>
       <pose>-0.215 0.210 0.022 0 0 0</pose>
+      <inertial>
+        <pose>0.008860 0.000173 0.098252 0 0 0</pose>
+        <mass>0.053</mass>
+        <inertia>
+          <ixx>6.8e-10</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.8e-10</iyy>
+          <iyz>0</iyz>
+          <izz>9.9e-10</izz>
+        </inertia>
+      </inertial>
       <collision name="collision">
         <geometry>
           <mesh>
@@ -632,6 +715,18 @@
     </link>
     <link name ='motor3'>
       <pose>0.215 -0.210 0.022 0 0 0</pose>
+      <inertial>
+        <pose>0.008860 0.000173 0.098252 0 0 0</pose>
+        <mass>0.053</mass>
+        <inertia>
+          <ixx>6.8e-10</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.8e-10</iyy>
+          <iyz>0</iyz>
+          <izz>9.9e-10</izz>
+        </inertia>
+      </inertial>
       <collision name="collision">
         <geometry>
           <mesh>
@@ -662,6 +757,18 @@
     </link>
     <link name ='motor4'>
       <pose>-0.215 -0.210 0.022 0 0 0</pose>
+      <inertial>
+        <pose>0.008860 0.000173 0.098252 0 0 0</pose>
+        <mass>0.053</mass>
+        <inertia>
+          <ixx>6.8e-10</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.8e-10</iyy>
+          <iyz>0</iyz>
+          <izz>9.9e-10</izz>
+        </inertia>
+      </inertial>
       <collision name="collision">
         <geometry>
           <mesh>
@@ -690,6 +797,13 @@
         </geometry>
       </visual>
     </link>
+
+
+
+
+
+
+
 
     <joint name="fix_1" type="revolute">
       <pose> 0 0 0 0 0 0</pose>
