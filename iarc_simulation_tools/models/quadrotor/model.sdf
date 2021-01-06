@@ -2,7 +2,7 @@
 <sdf version="1.6">
   <model name='quadrotor'>
     <!-- motor plugin for first motor -->
-    <plugin name="quadrotor_0_motor_model" filename="librotors_gazebo_motor_model.so">
+    <!-- <plugin name="quadrotor_0_motor_model" filename="librotors_gazebo_motor_model.so">
       <robotNamespace>quadrotor</robotNamespace>
       <jointName>rev1</jointName>
       <linkName>propeller1</linkName>
@@ -18,9 +18,9 @@
       <rollingMomentCoefficient>0.000001</rollingMomentCoefficient>
       <motorSpeedPubTopic>motor_speed/0</motorSpeedPubTopic>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin>
+    </plugin> -->
     <!-- motor plugin for second model -->
-    <plugin name="quadrotor_1_motor_model" filename="librotors_gazebo_motor_model.so">
+    <!-- <plugin name="quadrotor_1_motor_model" filename="librotors_gazebo_motor_model.so">
       <robotNamespace>quadrotor</robotNamespace>
       <jointName>rev2</jointName>
       <linkName>propeller2</linkName>
@@ -36,9 +36,9 @@
       <rollingMomentCoefficient>0.000001</rollingMomentCoefficient>
       <motorSpeedPubTopic>motor_speed/1</motorSpeedPubTopic>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin>
+    </plugin> -->
     <!-- motor plugin for third motor -->
-    <plugin name="quadrotor_2_motor_model" filename="librotors_gazebo_motor_model.so">
+    <!-- <plugin name="quadrotor_2_motor_model" filename="librotors_gazebo_motor_model.so">
       <robotNamespace>quadrotor</robotNamespace>
       <jointName>rev3</jointName>
       <linkName>propeller3</linkName>
@@ -54,9 +54,9 @@
       <rollingMomentCoefficient>0.000001</rollingMomentCoefficient>
       <motorSpeedPubTopic>motor_speed/2</motorSpeedPubTopic>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin>
+    </plugin> -->
     <!-- motor plugin for fourth motor -->
-    <plugin name="quadrotor_3_motor_model" filename="librotors_gazebo_motor_model.so">
+    <!-- <plugin name="quadrotor_3_motor_model" filename="librotors_gazebo_motor_model.so">
       <robotNamespace>quadrotor</robotNamespace>
       <jointName>rev4</jointName>
       <linkName>propeller4</linkName>
@@ -72,7 +72,7 @@
       <rollingMomentCoefficient>0.000001</rollingMomentCoefficient>
       <motorSpeedPubTopic>motor_speed/3</motorSpeedPubTopic>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin>
+    </plugin> -->
     <!-- <self_collide>True</self_collide> -->
     <static>False</static>
     <!-- <link name ='pixhawk'>
@@ -385,15 +385,15 @@
     <link name ='comb'>
       <pose>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>-0.000181 -0.000000 0.100769 0 0 0</pose>
+        <pose>-0.000181 -0.000000 0.005 0 0 0</pose>
         <mass>2</mass>
         <inertia>
-          <ixx>1.592824e-05</ixx>
+          <ixx>7.96412e-04</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>1.593967e-05</iyy>
+          <iyy>7.969835e-04</iyy>
           <iyz>0</iyz>
-          <izz>3.077924e-05</izz>
+          <izz>1.538962e-03</izz>
         </inertia>
       </inertial>
       <collision name="collision">
@@ -425,7 +425,7 @@
         </material>   -->
         <geometry>
           <mesh>
-            <uri>model://quadrotor/meshes/simple_quadrotorV1.dae</uri>
+            <uri>model://quadrotor/meshes/simple_quadrotorV0.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -501,15 +501,15 @@
     <link name ='propeller1'>
       <pose>0.213078 0.211 0.05 0 0 0</pose>
       <inertial>
-        <pose>-0.004298 -0.002432 0.026196 0 0 0</pose>
+        <pose>-0.004298 -0.002432 0.010196 0 0 0</pose>
         <mass>0.0105</mass>
         <inertia>
-          <ixx>3.5613e-07</ixx>
+          <ixx>4.4516e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>3.5611e-07</iyy>
+          <iyy>4.4514e-07</iyy>
           <iyz>0</iyz>
-          <izz>7.0817e-07</izz>
+          <izz>8.8587e-07</izz>
         </inertia>
       </inertial>
       <collision name="collision">
@@ -550,15 +550,15 @@
     <link name ='propeller2'>
       <pose>-0.213078 0.211 0.05 0 0 0</pose>
       <inertial>
-        <pose>-0.004298 -0.002432 0.026196 0 0 0</pose>
+        <pose>-0.004298 -0.002432 0.010196 0 0 0</pose>
         <mass>0.0105</mass>
         <inertia>
-          <ixx>3.5613e-07</ixx>
+          <ixx>4.4516e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>3.5611e-07</iyy>
+          <iyy>4.4514e-07</iyy>
           <iyz>0</iyz>
-          <izz>7.0817e-07</izz>
+          <izz>8.8587e-07</izz>
         </inertia>
       </inertial>
       <collision name="collision">
@@ -599,15 +599,15 @@
     <link name ='propeller3'>
       <pose>-0.213078 -0.211 0.05 0 0 0</pose>
       <inertial>
-        <pose>-0.004298 -0.002432 0.026196 0 0 0</pose>
+        <pose>-0.004298 -0.002432 0.010196 0 0 0</pose>
         <mass>0.0105</mass>
         <inertia>
-          <ixx>3.5613e-07</ixx>
+          <ixx>4.4516e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>3.5611e-07</iyy>
+          <iyy>4.4514e-07</iyy>
           <iyz>0</iyz>
-          <izz>7.0817e-07</izz>
+          <izz>8.8587e-07</izz>
         </inertia>
       </inertial>
       <collision name="collision">
@@ -648,15 +648,15 @@
     <link name ='propeller4'>
       <pose>0.213078 -0.211 0.05 0 0 0</pose>
       <inertial>
-        <pose>-0.004298 -0.002432 0.026196 0 0 0</pose>
+        <pose>-0.004298 -0.002432 0.010196 0 0 0</pose>
         <mass>0.0105</mass>
         <inertia>
-          <ixx>3.5613e-07</ixx>
+          <ixx>4.4516e-07</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>3.5611e-07</iyy>
+          <iyy>4.4514e-07</iyy>
           <iyz>0</iyz>
-          <izz>7.0817e-07</izz>
+          <izz>8.8587e-07</izz>
         </inertia>
       </inertial>
       <collision name="collision">
@@ -701,18 +701,18 @@
 
 
 
-    <link name ='motor1'>
+    <!-- <link name ='motor1'>
       <pose>0.215 0.210 0.022 0 0 0</pose>
       <inertial>
         <pose>0.008860 0.000173 0.098252 0 0 0</pose>
         <mass>0.053</mass>
         <inertia>
-          <ixx>6.8e-10</ixx>
+          <ixx>1.836e-9</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>6.8e-10</iyy>
+          <iyy>1.836e-9</iyy>
           <iyz>0</iyz>
-          <izz>9.9e-10</izz>
+          <izz>2.673e-9</izz>
         </inertia>
       </inertial>
       <collision name="collision">
@@ -749,12 +749,12 @@
         <pose>0.008860 0.000173 0.098252 0 0 0</pose>
         <mass>0.053</mass>
         <inertia>
-          <ixx>6.8e-10</ixx>
+          <ixx>1.836e-9</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>6.8e-10</iyy>
+          <iyy>1.836e-9</iyy>
           <iyz>0</iyz>
-          <izz>9.9e-10</izz>
+          <izz>2.673e-9</izz>
         </inertia>
       </inertial>
       <collision name="collision">
@@ -791,12 +791,12 @@
         <pose>0.008860 0.000173 0.098252 0 0 0</pose>
         <mass>0.053</mass>
         <inertia>
-          <ixx>6.8e-10</ixx>
+          <ixx>1.836e-9</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>6.8e-10</iyy>
+          <iyy>1.836e-9</iyy>
           <iyz>0</iyz>
-          <izz>9.9e-10</izz>
+          <izz>2.673e-9</izz>
         </inertia>
       </inertial>
       <collision name="collision">
@@ -833,12 +833,12 @@
         <pose>0.008860 0.000173 0.098252 0 0 0</pose>
         <mass>0.053</mass>
         <inertia>
-          <ixx>6.8e-10</ixx>
+          <ixx>1.836e-9</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>6.8e-10</iyy>
+          <iyy>1.836e-9</iyy>
           <iyz>0</iyz>
-          <izz>9.9e-10</izz>
+          <izz>2.673e-9</izz>
         </inertia>
       </inertial>
       <collision name="collision">
@@ -868,9 +868,14 @@
           </mesh>
         </geometry>
       </visual>
-    </link>
+    </link> -->
 
-    <joint name="fix_1" type="revolute">
+
+
+
+
+
+    <!-- <joint name="fix_1" type="revolute">
       <pose> 0 0 0 0 0 0</pose>
       <parent>motor1</parent>
       <child>comb</child>
@@ -941,12 +946,17 @@
         </limit>
         <xyz>0 0 1</xyz>
       </axis>
-    </joint> 
+    </joint>  -->
+
+
+
+
+
 
 
     <joint name="rev1" type="revolute">
       <pose> 0 0 0 0 0 0</pose>
-      <parent>motor1</parent>
+      <parent>comb</parent>
       <child>propeller1</child>
       <axis>
         <!-- <limit>
@@ -958,7 +968,7 @@
     </joint>  
     <joint name="rev2" type="revolute">
       <pose> 0 0 0 0 0 0</pose>
-      <parent>motor2</parent>
+      <parent>comb</parent>
       <child>propeller2</child>
       <axis>
         <!-- <limit>
@@ -970,7 +980,7 @@
     </joint> 
     <joint name="rev3" type="revolute">
       <pose> 0 0 0 0 0 0</pose>
-      <parent>motor3</parent>
+      <parent>comb</parent>
       <child>propeller3</child>
       <axis>
         <!-- <limit>
@@ -982,7 +992,7 @@
     </joint>  
     <joint name="rev4" type="revolute">
       <pose> 0 0 0 0 0 0</pose>
-      <parent>motor4</parent>
+      <parent>comb</parent>
       <child>propeller4</child>
       <axis>
         <!-- <limit>
