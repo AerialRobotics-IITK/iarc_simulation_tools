@@ -17,7 +17,7 @@
 	<arg name="start_y" default="0.0"/>
 	<arg name="start_z" default="2.0"/>
 
-	<env name="GAZEBO_MODEL_PATH" value="$(optenv GAZEBO_MODEL_PATH):$(find rotors_gazebo)/models:$(find iarc_simulation_tools)/models:$(find iarc_wave_sim_gazebo)/models"/>
+	<env name="GAZEBO_MODEL_PATH" value="$(optenv GAZEBO_MODEL_PATH):$(find rotors_gazebo)/models:$(find iarc_simulation_tools)/models"/>
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">
 		<arg name="world_name" value="$(find iarc_simulation_tools)/worlds/$(arg world_name).world" />
 		<arg name="debug" value="$(arg debug)"/>

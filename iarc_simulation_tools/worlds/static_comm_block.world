@@ -61,7 +61,11 @@
       <uri>model://takeoff_zone</uri>
       <pose>-5 0 0 0 0 0</pose>
     </include>
-
+   <include>
+     <uri>model://quadrotor</uri>
+     <pose>-5 5 0 0 0 0</pose>
+   </include>
+ 
     <!-- <include>
       <uri>model://communications_module</uri>
         <pose>4.280454 0.23 1.782488 0.0 0.0 -1.57079632679</pose>

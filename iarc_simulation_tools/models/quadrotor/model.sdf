@@ -1,6 +1,78 @@
 <?xml version="1.0"?>
 <sdf version="1.6">
   <model name='quadrotor'>
+    <!-- motor plugin for first motor -->
+    <plugin name="quadrotor_0_motor_model" filename="librotors_gazebo_motor_model.so">
+      <robotNamespace>quadrotor</robotNamespace>
+      <jointName>rev1</jointName>
+      <linkName>propeller1</linkName>
+      <turningDirection>ccw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>838</maxRotVelocity>
+      <motorConstant>8.54858e-06</motorConstant>
+      <momentConstant>0.016</momentConstant>
+      <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
+      <motorNumber>0</motorNumber>
+      <rotorDragCoefficient>8.05428e-05</rotorDragCoefficient>
+      <rollingMomentCoefficient>0.000001</rollingMomentCoefficient>
+      <motorSpeedPubTopic>motor_speed/0</motorSpeedPubTopic>
+      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+    </plugin>
+    <!-- motor plugin for second model -->
+    <plugin name="quadrotor_1_motor_model" filename="librotors_gazebo_motor_model.so">
+      <robotNamespace>quadrotor</robotNamespace>
+      <jointName>rev2</jointName>
+      <linkName>propeller2</linkName>
+      <turningDirection>cw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>838</maxRotVelocity>
+      <motorConstant>8.54858e-06</motorConstant>
+      <momentConstant>0.016</momentConstant>
+      <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
+      <motorNumber>1</motorNumber>
+      <rotorDragCoefficient>8.05428e-05</rotorDragCoefficient>
+      <rollingMomentCoefficient>0.000001</rollingMomentCoefficient>
+      <motorSpeedPubTopic>motor_speed/1</motorSpeedPubTopic>
+      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+    </plugin>
+    <!-- motor plugin for third motor -->
+    <plugin name="quadrotor_2_motor_model" filename="librotors_gazebo_motor_model.so">
+      <robotNamespace>quadrotor</robotNamespace>
+      <jointName>rev3</jointName>
+      <linkName>propeller3</linkName>
+      <turningDirection>ccw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>838</maxRotVelocity>
+      <motorConstant>8.54858e-06</motorConstant>
+      <momentConstant>0.016</momentConstant>
+      <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
+      <motorNumber>2</motorNumber>
+      <rotorDragCoefficient>8.05428e-05</rotorDragCoefficient>
+      <rollingMomentCoefficient>0.000001</rollingMomentCoefficient>
+      <motorSpeedPubTopic>motor_speed/2</motorSpeedPubTopic>
+      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+    </plugin>
+    <!-- motor plugin for fourth motor -->
+    <plugin name="quadrotor_3_motor_model" filename="librotors_gazebo_motor_model.so">
+      <robotNamespace>quadrotor</robotNamespace>
+      <jointName>rev4</jointName>
+      <linkName>propeller4</linkName>
+      <turningDirection>cw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>838</maxRotVelocity>
+      <motorConstant>8.54858e-06</motorConstant>
+      <momentConstant>0.016</momentConstant>
+      <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
+      <motorNumber>3</motorNumber>
+      <rotorDragCoefficient>8.05428e-05</rotorDragCoefficient>
+      <rollingMomentCoefficient>0.000001</rollingMomentCoefficient>
+      <motorSpeedPubTopic>motor_speed/3</motorSpeedPubTopic>
+      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+    </plugin>
     <!-- <self_collide>True</self_collide> -->
     <static>False</static>
     <!-- <link name ='pixhawk'>
@@ -797,13 +869,6 @@
         </geometry>
       </visual>
     </link>
-
-
-
-
-
-
-
 
     <joint name="fix_1" type="revolute">
       <pose> 0 0 0 0 0 0</pose>
