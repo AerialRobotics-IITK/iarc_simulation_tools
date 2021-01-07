@@ -34,13 +34,13 @@ class GazeboRosLinkAttacher : public WorldPlugin {
     virtual ~GazeboRosLinkAttacher();
 
     /// \brief Load the controller
-    void Load(physics::WorldPtr _world, sdf::ElementPtr /*_sdf*/);
+    void Load(physics::WorldPtr _world, sdf::ElementPtr sdf);
 
     /// \brief Attach with a revolute joint
-    bool attach(std::string model1, std::string link1, std::string model2, std::string link2);
+    bool attach();
 
     /// \brief Detach
-    bool detach(std::string model1, std::string link1, std::string model2, std::string link2);
+    bool detach();
 
     /// \brief Internal representation of a fixed joint
     struct fixedJoint {
@@ -54,6 +54,11 @@ class GazeboRosLinkAttacher : public WorldPlugin {
         physics::LinkPtr l2;
         physics::JointPtr joint;
     };
+
+    std::string model1_; 
+    std::string link1_;
+    std::string model2_;
+    std::string link2_;
 
     bool getJoint(std::string model1, std::string link1, std::string model2, std::string link2, fixedJoint& joint);
 
