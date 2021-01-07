@@ -55,7 +55,7 @@ class GazeboRosLinkAttacher : public WorldPlugin {
         physics::JointPtr joint;
     };
 
-    std::string model1_; 
+    std::string model1_;
     std::string link1_;
     std::string model2_;
     std::string link2_;

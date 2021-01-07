@@ -27,38 +27,37 @@ void GazeboRosLinkAttacher::Load(physics::WorldPtr _world, sdf::ElementPtr sdf) 
         return;
     }
 
-  if (sdf->HasElement("model1")) {
-    model1_ = sdf->GetElement("model1")->Get<std::string>();
-    gzmsg << model1_ << std::endl;
-  } else {
-    gzerr << "Element <model1>> is not specified. Aborting.";
-    return;
-  }
+    if (sdf->HasElement("model1")) {
+        model1_ = sdf->GetElement("model1")->Get<std::string>();
+        gzmsg << model1_ << std::endl;
+    } else {
+        gzerr << "Element <model1>> is not specified. Aborting.";
+        return;
+    }
 
-  if (sdf->HasElement("link1")) {
-    link1_ = sdf->GetElement("link1")->Get<std::string>();
-    gzmsg << link1_ << std::endl;
-  } else {
-    gzerr << "Element <link1>> is not specified. Aborting.";
-    return;
-  }
+    if (sdf->HasElement("link1")) {
+        link1_ = sdf->GetElement("link1")->Get<std::string>();
+        gzmsg << link1_ << std::endl;
+    } else {
+        gzerr << "Element <link1>> is not specified. Aborting.";
+        return;
+    }
 
-  if (sdf->HasElement("model2")) {
-    model2_ = sdf->GetElement("model2")->Get<std::string>();
-    gzmsg << model2_ << std::endl;
-  } else {
-    gzerr << "Element <model2>> is not specified. Aborting.";
-    return;
-  }
+    if (sdf->HasElement("model2")) {
+        model2_ = sdf->GetElement("model2")->Get<std::string>();
+        gzmsg << model2_ << std::endl;
+    } else {
+        gzerr << "Element <model2>> is not specified. Aborting.";
+        return;
+    }
 
-  if (sdf->HasElement("link2")) {
-    link2_ = sdf->GetElement("link2")->Get<std::string>();
-    gzmsg << link2_ << std::endl;
-  } else {
-    gzerr << "Element <link2>> is not specified. Aborting.";
-    return;
-  }
-
+    if (sdf->HasElement("link2")) {
+        link2_ = sdf->GetElement("link2")->Get<std::string>();
+        gzmsg << link2_ << std::endl;
+    } else {
+        gzerr << "Element <link2>> is not specified. Aborting.";
+        return;
+    }
 
     this->world = _world;
     this->physics = this->world->Physics();
@@ -190,7 +189,8 @@ bool GazeboRosLinkAttacher::getJoint(std::string model1, std::string link1, std:
 }
 
 bool GazeboRosLinkAttacher::attach_callback(gazebo_ros_link_attacher::Attach::Request& req, gazebo_ros_link_attacher::Attach::Response& res) {
-    // ROS_INFO_STREAM("Received request to attach model: '" << req.model_name_1 << "' using link: '" << req.link_name_1 << "' with model: '" << req.model_name_2
+    // ROS_INFO_STREAM("Received request to attach model: '" << req.model_name_1 << "' using link: '" << req.link_name_1 << "' with model: '" <<
+    // req.model_name_2
     //                                                       << "' using link: '" << req.link_name_2 << "'");
     if (!this->attach()) {
         ROS_ERROR_STREAM("Could not make the attach.");
@@ -203,7 +203,8 @@ bool GazeboRosLinkAttacher::attach_callback(gazebo_ros_link_attacher::Attach::Re
 }
 
 bool GazeboRosLinkAttacher::detach_callback(gazebo_ros_link_attacher::Attach::Request& req, gazebo_ros_link_attacher::Attach::Response& res) {
-    // ROS_INFO_STREAM("Received request to detach model: '" << req.model_name_1 << "' using link: '" << req.link_name_1 << "' with model: '" << req.model_name_2
+    // ROS_INFO_STREAM("Received request to detach model: '" << req.model_name_1 << "' using link: '" << req.link_name_1 << "' with model: '" <<
+    // req.model_name_2
     //                                                       << "' using link: '" << req.link_name_2 << "'");
     if (!this->detach()) {
         ROS_ERROR_STREAM("Could not make the detach.");
