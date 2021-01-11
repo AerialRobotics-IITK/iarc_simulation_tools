@@ -2,7 +2,7 @@
 <sdf version="1.6">
   <model name='quadrotor'>
     <!-- motor plugin for first motor -->
-    <!-- <plugin name="quadrotor_0_motor_model" filename="librotors_gazebo_motor_model.so">
+    <plugin name="quadrotor_0_motor_model" filename="librotors_gazebo_motor_model.so">
       <robotNamespace>quadrotor</robotNamespace>
       <jointName>rev1</jointName>
       <linkName>propeller1</linkName>
@@ -18,9 +18,9 @@
       <rollingMomentCoefficient>0.000001</rollingMomentCoefficient>
       <motorSpeedPubTopic>motor_speed/0</motorSpeedPubTopic>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin> -->
+    </plugin>
     <!-- motor plugin for second model -->
-    <!-- <plugin name="quadrotor_1_motor_model" filename="librotors_gazebo_motor_model.so">
+    <plugin name="quadrotor_1_motor_model" filename="librotors_gazebo_motor_model.so">
       <robotNamespace>quadrotor</robotNamespace>
       <jointName>rev2</jointName>
       <linkName>propeller2</linkName>
@@ -36,9 +36,9 @@
       <rollingMomentCoefficient>0.000001</rollingMomentCoefficient>
       <motorSpeedPubTopic>motor_speed/1</motorSpeedPubTopic>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin> -->
+    </plugin>
     <!-- motor plugin for third motor -->
-    <!-- <plugin name="quadrotor_2_motor_model" filename="librotors_gazebo_motor_model.so">
+    <plugin name="quadrotor_2_motor_model" filename="librotors_gazebo_motor_model.so">
       <robotNamespace>quadrotor</robotNamespace>
       <jointName>rev3</jointName>
       <linkName>propeller3</linkName>
@@ -54,9 +54,9 @@
       <rollingMomentCoefficient>0.000001</rollingMomentCoefficient>
       <motorSpeedPubTopic>motor_speed/2</motorSpeedPubTopic>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin> -->
+    </plugin>
     <!-- motor plugin for fourth motor -->
-    <!-- <plugin name="quadrotor_3_motor_model" filename="librotors_gazebo_motor_model.so">
+    <plugin name="quadrotor_3_motor_model" filename="librotors_gazebo_motor_model.so">
       <robotNamespace>quadrotor</robotNamespace>
       <jointName>rev4</jointName>
       <linkName>propeller4</linkName>
@@ -72,881 +72,914 @@
       <rollingMomentCoefficient>0.000001</rollingMomentCoefficient>
       <motorSpeedPubTopic>motor_speed/3</motorSpeedPubTopic>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin> -->
-    <!-- <self_collide>True</self_collide> -->
-    <static>False</static>
-    <!-- <link name ='pixhawk'>
-      <pose>0 0 0 0 0 0</pose>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/pixhawk.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/pixhawk.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name ='base_plate'>
-      <pose>0.5 0 0 0 0 0</pose>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/plate.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/plate.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name ='battery'>
-      <pose>0.5 1 0 0 0 0</pose>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/battery_pack.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/battery_pack.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name ='jetson'>
-      <pose>1 0 0 0 0 0</pose>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/jetson.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/jetson.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name ='propeller'>
-      <pose>1.5 0 0 0 0 0</pose>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/prop.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <material>
-          <script>
-            <name>Gazebo/Yellow</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-          <shader type='pixel'/>
-        </material>
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/prop.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name ='struct_rod'>
-      <pose>2.0 0 0 0 0 0</pose>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/Struct_rod.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/Struct_rod.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name ='top_cover'>
-      <pose>2.5 0 0 0 0 0</pose>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/top_cover.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/top_cover.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name ='motor1'>
-      <pose>3.5 0 0 0 0 0</pose>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name ='motor_mount1'>
-      <pose>3 0 0 0 0 0</pose>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor_mount.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor_mount.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link> -->
-    <!-- <link name ='top_cover'>
-      <pose>0 0 0.3 0 0 0</pose>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/top_cover.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0x10</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/top_cover.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link> -->
-    <link name ='comb'>
-      <pose>0 0 0 0 0 0</pose>
-      <inertial>
-        <pose>-0.000181 -0.000000 0.005 0 0 0</pose>
-        <mass>2</mass>
-        <inertia>
-          <ixx>7.96412e-04</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>7.969835e-04</iyy>
-          <iyz>0</iyz>
-          <izz>1.538962e-03</izz>
-        </inertia>
-      </inertial>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/simple_quadrotorV1.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <!-- <material>
-          <script>
-            <name>Gazebo/Black</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-          <shader type='pixel'/>
-        </material>   -->
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/simple_quadrotorV0.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
+    </plugin>
+    <!-- controller-interface plugin -->
+    <plugin name="controller_interface" filename="librotors_gazebo_controller_interface.so">
+      <robotNamespace>quadrotor</robotNamespace>
+      <commandAttitudeThrustSubTopic>command/attitude</commandAttitudeThrustSubTopic>
+      <commandRateThrustSubTopic>command/rate</commandRateThrustSubTopic>
+      <commandMotorSpeedSubTopic>command/motor_speed</commandMotorSpeedSubTopic>
+      <imuSubTopic>imu</imuSubTopic>
+      <motorSpeedCommandPubTopic>gazebo/command/motor_speed</motorSpeedCommandPubTopic>
+    </plugin>
+    <!-- odometry plugin -->
+    <plugin filename="librotors_gazebo_odometry_plugin.so" name="odometry_sensor_1">
+      <linkName>comb</linkName>
+      <robotNamespace>quadrotor</robotNamespace>
+      <poseTopic>ground_truth/pose</poseTopic>
+      <poseWithCovarianceTopic>ground_truth/pose_with_covariance</poseWithCovarianceTopic>
+      <positionTopic>ground_truth/position</positionTopic>
+      <transformTopic>ground_truth/transform</transformTopic>
+      <odometryTopic>ground_truth/odometry</odometryTopic>
+      <parentFrameId>world</parentFrameId> <!-- Use the scoped link name here. e.g. Model::link. -->
+      <childFrameId>quadrotor/odometry_sensor1</childFrameId>
+      <measurementDivisor>10</measurementDivisor> <!-- only every (seq % measurementDivisor) == 0 measurement is published [int] -->
+      <measurementDelay>10</measurementDelay> <!-- time that measurement gets held back before it's published in [simulation cycles (int)] -->
+      <unknownDelay>0.0</unknownDelay> <!-- additional delay, that just gets added to the timestamp [s] -->
+      <noiseNormalPosition>0.01 0.01 0.01</noiseNormalPosition> <!-- standard deviation of additive white gaussian noise [m] -->
+      <noiseNormalQuaternion>0.017 0.017 0.017</noiseNormalQuaternion> <!-- standard deviation white gaussian noise [rad]: q_m = q*quaternionFromSmallAngleApproximation(noise      NormalQ) -->
+      <noiseNormalLinearVelocity>0 0 0</noiseNormalLinearVelocity> <!-- standard deviation of additive white gaussian noise [m/s] -->
+      <noiseNormalAngularVelocity>0 0 0</noiseNormalAngularVelocity> <!-- standard deviation of additive white gaussian noise [rad/s] -->
+      <noiseUniformPosition>0 0 0</noiseUniformPosition> <!-- symmetric bounds of uniform noise [m] -->
+      <noiseUniformQuaternion>0 0 0</noiseUniformQuaternion> <!-- symmetric bounds of uniform noise [rad], computation see above -->
+      <noiseUniformLinearVelocity>0 0 0</noiseUniformLinearVelocity> <!-- symmetric bounds of uniform noise [m/s] -->
+      <noiseUniformAngularVelocity>0 0 0</noiseUniformAngularVelocity> <!-- symmetric bounds of uniform noise [rad/s] -->
+    </plugin>
+    
+   <!-- <self_collide>True</self_collide> -->
+   <static>False</static>
+   <!-- <link name ='pixhawk'>
+     <pose>0 0 0 0 0 0</pose>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/pixhawk.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/pixhawk.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link>
+   <link name ='base_plate'>
+     <pose>0.5 0 0 0 0 0</pose>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/plate.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/plate.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link>
+   <link name ='battery'>
+     <pose>0.5 1 0 0 0 0</pose>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/battery_pack.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/battery_pack.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link>
+   <link name ='jetson'>
+     <pose>1 0 0 0 0 0</pose>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/jetson.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/jetson.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link>
+   <link name ='propeller'>
+     <pose>1.5 0 0 0 0 0</pose>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/prop.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <material>
+         <script>
+           <name>Gazebo/Yellow</name>
+           <uri>file://media/materials/scripts/gazebo.material</uri>
+         </script>
+         <shader type='pixel'/>
+       </material>
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/prop.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link>
+   <link name ='struct_rod'>
+     <pose>2.0 0 0 0 0 0</pose>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/Struct_rod.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/Struct_rod.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link>
+   <link name ='top_cover'>
+     <pose>2.5 0 0 0 0 0</pose>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/top_cover.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/top_cover.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link>
+   <link name ='motor1'>
+     <pose>3.5 0 0 0 0 0</pose>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/motor.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/motor.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link>
+   <link name ='motor_mount1'>
+     <pose>3 0 0 0 0 0</pose>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/motor_mount.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/motor_mount.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link> -->
+   <!-- <link name ='top_cover'>
+     <pose>0 0 0.3 0 0 0</pose>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/top_cover.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0x10</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/top_cover.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link> -->
+   <link name ='comb'>
+     <pose>0 0 0 0 0 0</pose>
+     <inertial>
+       <pose>-0.000181 -0.000000 0.005 0 0 0</pose>
+       <mass>2</mass>
+       <inertia>
+         <ixx>7.96412e-03</ixx>
+         <ixy>0</ixy>
+         <ixz>0</ixz>
+         <iyy>7.969835e-03</iyy>
+         <iyz>0</iyz>
+         <izz>1.538962e-02</izz>
+       </inertia>
+     </inertial>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/simple_quadrotorV1.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <!-- <material>
+         <script>
+           <name>Gazebo/Black</name>
+           <uri>file://media/materials/scripts/gazebo.material</uri>
+         </script>
+         <shader type='pixel'/>
+       </material>   -->
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/simple_quadrotorV0.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link>
 
-    <!-- <link name ='motor_mount3'>
-      <pose>0.209 -0.211 0.004 0 0 -0.785</pose>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor_mount.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor_mount.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name ='motor_mount4'>
-      <pose>-0.209 -0.211 0.004 0 0 3.9269</pose>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor_mount.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor_mount.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link> 
+   <!-- <link name ='motor_mount3'>
+     <pose>0.209 -0.211 0.004 0 0 -0.785</pose>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/motor_mount.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/motor_mount.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link>
+   <link name ='motor_mount4'>
+     <pose>-0.209 -0.211 0.004 0 0 3.9269</pose>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/motor_mount.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/motor_mount.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link> 
 
- -->
-
-
-
-
-    <link name ='propeller1'>
-      <pose>0.213078 0.211 0.05 0 0 0</pose>
-      <inertial>
-        <pose>-0.004298 -0.002432 0.010196 0 0 0</pose>
-        <mass>0.0105</mass>
-        <inertia>
-          <ixx>4.4516e-07</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>4.4514e-07</iyy>
-          <iyz>0</iyz>
-          <izz>8.8587e-07</izz>
-        </inertia>
-      </inertial>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/prop.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <material>
-          <script>
-            <name>Gazebo/Green</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-          <shader type='pixel'/>
-        </material>
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/prop.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name ='propeller2'>
-      <pose>-0.213078 0.211 0.05 0 0 0</pose>
-      <inertial>
-        <pose>-0.004298 -0.002432 0.010196 0 0 0</pose>
-        <mass>0.0105</mass>
-        <inertia>
-          <ixx>4.4516e-07</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>4.4514e-07</iyy>
-          <iyz>0</iyz>
-          <izz>8.8587e-07</izz>
-        </inertia>
-      </inertial>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/prop.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <material>
-          <script>
-            <name>Gazebo/Red</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-          <shader type='pixel'/>
-        </material>
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/prop.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name ='propeller3'>
-      <pose>-0.213078 -0.211 0.05 0 0 0</pose>
-      <inertial>
-        <pose>-0.004298 -0.002432 0.010196 0 0 0</pose>
-        <mass>0.0105</mass>
-        <inertia>
-          <ixx>4.4516e-07</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>4.4514e-07</iyy>
-          <iyz>0</iyz>
-          <izz>8.8587e-07</izz>
-        </inertia>
-      </inertial>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/prop.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <material>
-          <script>
-            <name>Gazebo/Blue</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-          <shader type='pixel'/>
-        </material>
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/prop.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name ='propeller4'>
-      <pose>0.213078 -0.211 0.05 0 0 0</pose>
-      <inertial>
-        <pose>-0.004298 -0.002432 0.010196 0 0 0</pose>
-        <mass>0.0105</mass>
-        <inertia>
-          <ixx>4.4516e-07</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>4.4514e-07</iyy>
-          <iyz>0</iyz>
-          <izz>8.8587e-07</izz>
-        </inertia>
-      </inertial>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/prop.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <material>
-          <script>
-            <name>Gazebo/Yellow</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-          <shader type='pixel'/>
-        </material>
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/prop.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-  
+-->
 
 
 
 
-
-
-    <!-- <link name ='motor1'>
-      <pose>0.215 0.210 0.022 0 0 0</pose>
-      <inertial>
-        <pose>0.008860 0.000173 0.098252 0 0 0</pose>
-        <mass>0.053</mass>
-        <inertia>
-          <ixx>1.836e-9</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>1.836e-9</iyy>
-          <iyz>0</iyz>
-          <izz>2.673e-9</izz>
-        </inertia>
-      </inertial>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name ='motor2'>
-      <pose>-0.215 0.210 0.022 0 0 0</pose>
-      <inertial>
-        <pose>0.008860 0.000173 0.098252 0 0 0</pose>
-        <mass>0.053</mass>
-        <inertia>
-          <ixx>1.836e-9</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>1.836e-9</iyy>
-          <iyz>0</iyz>
-          <izz>2.673e-9</izz>
-        </inertia>
-      </inertial>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name ='motor3'>
-      <pose>0.215 -0.210 0.022 0 0 0</pose>
-      <inertial>
-        <pose>0.008860 0.000173 0.098252 0 0 0</pose>
-        <mass>0.053</mass>
-        <inertia>
-          <ixx>1.836e-9</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>1.836e-9</iyy>
-          <iyz>0</iyz>
-          <izz>2.673e-9</izz>
-        </inertia>
-      </inertial>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <link name ='motor4'>
-      <pose>-0.215 -0.210 0.022 0 0 0</pose>
-      <inertial>
-        <pose>0.008860 0.000173 0.098252 0 0 0</pose>
-        <mass>0.053</mass>
-        <inertia>
-          <ixx>1.836e-9</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>1.836e-9</iyy>
-          <iyz>0</iyz>
-          <izz>2.673e-9</izz>
-        </inertia>
-      </inertial>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
-          <friction>
-            <ode>
-              <mu>100</mu>
-              <mu2>50</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://quadrotor/meshes/motor.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link> -->
+   <link name ='propeller1'>
+     <pose>0.213078 0.211 0.05 0 0 0</pose>
+     <inertial>
+       <pose>-0.004298 -0.002432 0.010196 0 0 0</pose>
+       <mass>0.0105</mass>
+       <inertia>
+         <ixx>4.4516e-06</ixx>
+         <ixy>0</ixy>
+         <ixz>0</ixz>
+         <iyy>4.4514e-06</iyy>
+         <iyz>0</iyz>
+         <izz>8.8587e-06</izz>
+       </inertia>
+     </inertial>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/prop.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <material>
+         <script>
+           <name>Gazebo/Green</name>
+           <uri>file://media/materials/scripts/gazebo.material</uri>
+         </script>
+         <shader type='pixel'/>
+       </material>
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/prop.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link>
+   <link name ='propeller2'>
+     <pose>-0.213078 0.211 0.05 0 0 0</pose>
+     <inertial>
+       <pose>-0.004298 -0.002432 0.010196 0 0 0</pose>
+       <mass>0.0105</mass>
+       <inertia>
+         <ixx>4.4516e-06</ixx>
+         <ixy>0</ixy>
+         <ixz>0</ixz>
+         <iyy>4.4514e-06</iyy>
+         <iyz>0</iyz>
+         <izz>8.8587e-06</izz>
+       </inertia>
+     </inertial>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/prop.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <material>
+         <script>
+           <name>Gazebo/Red</name>
+           <uri>file://media/materials/scripts/gazebo.material</uri>
+         </script>
+         <shader type='pixel'/>
+       </material>
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/prop.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link>
+   <link name ='propeller3'>
+     <pose>-0.213078 -0.211 0.05 0 0 0</pose>
+     <inertial>
+       <pose>-0.004298 -0.002432 0.010196 0 0 0</pose>
+       <mass>0.0105</mass>
+       <inertia>
+         <ixx>4.4516e-06</ixx>
+         <ixy>0</ixy>
+         <ixz>0</ixz>
+         <iyy>4.4514e-06</iyy>
+         <iyz>0</iyz>
+         <izz>8.8587e-06</izz>
+       </inertia>
+     </inertial>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/prop.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <material>
+         <script>
+           <name>Gazebo/Blue</name>
+           <uri>file://media/materials/scripts/gazebo.material</uri>
+         </script>
+         <shader type='pixel'/>
+       </material>
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/prop.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link>
+   <link name ='propeller4'>
+     <pose>0.213078 -0.211 0.05 0 0 0</pose>
+     <inertial>
+       <pose>-0.004298 -0.002432 0.010196 0 0 0</pose>
+       <mass>0.0105</mass>
+       <inertia>
+         <ixx>4.4516e-06</ixx>
+         <ixy>0</ixy>
+         <ixz>0</ixz>
+         <iyy>4.4514e-06</iyy>
+         <iyz>0</iyz>
+         <izz>8.8587e-06</izz>
+       </inertia>
+     </inertial>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/prop.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <material>
+         <script>
+           <name>Gazebo/Yellow</name>
+           <uri>file://media/materials/scripts/gazebo.material</uri>
+         </script>
+         <shader type='pixel'/>
+       </material>
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/prop.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link>
+ 
 
 
 
 
 
 
-    <!-- <joint name="fix_1" type="revolute">
-      <pose> 0 0 0 0 0 0</pose>
-      <parent>motor1</parent>
-      <child>comb</child>
-      <axis>
-        <limit>
-          <lower>-0</lower>
-          <upper>0</upper>
-        </limit>
-        <xyz>0 0 1</xyz>
-      </axis>
-    </joint> 
-    <joint name="fix_2" type="revolute">
-      <pose> 0 0 0 0 0 0</pose>
-      <parent>motor2</parent>
-      <child>comb</child>
-      <axis>
-        <limit>
-          <lower>-0</lower>
-          <upper>0</upper>
-        </limit>
-        <xyz>0 0 1</xyz>
-      </axis>
-    </joint> 
-    <joint name="fix_3" type="revolute">
-      <pose> 0 0 0 0 0 0</pose>
-      <parent>motor3</parent>
-      <child>motor_mount3</child>
-      <axis>
-        <limit>
-          <lower>-0</lower>
-          <upper>0</upper>
-        </limit>
-        <xyz>0 0 1</xyz>
-      </axis>
-    </joint> 
-    <joint name="fix_4" type="revolute">
-      <pose> 0 0 0 0 0 0</pose>
-      <parent>motor4</parent>
-      <child>motor_mount4</child>
-      <axis>
-        <limit>
-          <lower>-0</lower>
-          <upper>0</upper>
-        </limit>
-        <xyz>0 0 1</xyz>
-      </axis>
-    </joint> 
-    <joint name="fix_3.1" type="revolute">
-      <pose> 0 0 0 0 0 0</pose>
-      <parent>comb</parent>
-      <child>motor_mount3</child>
-      <axis>
-        <limit>
-          <lower>-0</lower>
-          <upper>0</upper>
-        </limit>
-        <xyz>0 0 1</xyz>
-      </axis>
-    </joint> 
-    <joint name="fix_4.1" type="revolute">
-      <pose> 0 0 0 0 0 0</pose>
-      <parent>comb</parent>
-      <child>motor_mount4</child>
-      <axis>
-        <limit>
-          <lower>-0</lower>
-          <upper>0</upper>
-        </limit>
-        <xyz>0 0 1</xyz>
-      </axis>
-    </joint>  -->
+   <!-- <link name ='motor1'>
+     <pose>0.215 0.210 0.022 0 0 0</pose>
+     <inertial>
+       <pose>0.008860 0.000173 0.098252 0 0 0</pose>
+       <mass>0.053</mass>
+       <inertia>
+         <ixx>1.836e-9</ixx>
+         <ixy>0</ixy>
+         <ixz>0</ixz>
+         <iyy>1.836e-9</iyy>
+         <iyz>0</iyz>
+         <izz>2.673e-9</izz>
+       </inertia>
+     </inertial>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/motor.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/motor.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link>
+   <link name ='motor2'>
+     <pose>-0.215 0.210 0.022 0 0 0</pose>
+     <inertial>
+       <pose>0.008860 0.000173 0.098252 0 0 0</pose>
+       <mass>0.053</mass>
+       <inertia>
+         <ixx>1.836e-9</ixx>
+         <ixy>0</ixy>
+         <ixz>0</ixz>
+         <iyy>1.836e-9</iyy>
+         <iyz>0</iyz>
+         <izz>2.673e-9</izz>
+       </inertia>
+     </inertial>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/motor.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/motor.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link>
+   <link name ='motor3'>
+     <pose>0.215 -0.210 0.022 0 0 0</pose>
+     <inertial>
+       <pose>0.008860 0.000173 0.098252 0 0 0</pose>
+       <mass>0.053</mass>
+       <inertia>
+         <ixx>1.836e-9</ixx>
+         <ixy>0</ixy>
+         <ixz>0</ixz>
+         <iyy>1.836e-9</iyy>
+         <iyz>0</iyz>
+         <izz>2.673e-9</izz>
+       </inertia>
+     </inertial>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/motor.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/motor.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link>
+   <link name ='motor4'>
+     <pose>-0.215 -0.210 0.022 0 0 0</pose>
+     <inertial>
+       <pose>0.008860 0.000173 0.098252 0 0 0</pose>
+       <mass>0.053</mass>
+       <inertia>
+         <ixx>1.836e-9</ixx>
+         <ixy>0</ixy>
+         <ixz>0</ixz>
+         <iyy>1.836e-9</iyy>
+         <iyz>0</iyz>
+         <izz>2.673e-9</izz>
+       </inertia>
+     </inertial>
+     <collision name="collision">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/motor.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+       <surface>
+         <contact>
+           <collide_bitmask>0xffff</collide_bitmask>
+         </contact>
+         <friction>
+           <ode>
+             <mu>100</mu>
+             <mu2>50</mu2>
+           </ode>
+         </friction>
+       </surface>
+     </collision>
+     <visual name="visual">
+       <geometry>
+         <mesh>
+           <uri>model://quadrotor/meshes/motor.dae</uri>
+           <scale>1 1 1</scale>
+         </mesh>
+       </geometry>
+     </visual>
+   </link> -->
+
+
+
+
+
+
+   <!-- <joint name="fix_1" type="revolute">
+     <pose> 0 0 0 0 0 0</pose>
+     <parent>motor1</parent>
+     <child>comb</child>
+     <axis>
+       <limit>
+         <lower>-0</lower>
+         <upper>0</upper>
+       </limit>
+       <xyz>0 0 1</xyz>
+     </axis>
+   </joint> 
+   <joint name="fix_2" type="revolute">
+     <pose> 0 0 0 0 0 0</pose>
+     <parent>motor2</parent>
+     <child>comb</child>
+     <axis>
+       <limit>
+         <lower>-0</lower>
+         <upper>0</upper>
+       </limit>
+       <xyz>0 0 1</xyz>
+     </axis>
+   </joint> 
+   <joint name="fix_3" type="revolute">
+     <pose> 0 0 0 0 0 0</pose>
+     <parent>motor3</parent>
+     <child>motor_mount3</child>
+     <axis>
+       <limit>
+         <lower>-0</lower>
+         <upper>0</upper>
+       </limit>
+       <xyz>0 0 1</xyz>
+     </axis>
+   </joint> 
+   <joint name="fix_4" type="revolute">
+     <pose> 0 0 0 0 0 0</pose>
+     <parent>motor4</parent>
+     <child>motor_mount4</child>
+     <axis>
+       <limit>
+         <lower>-0</lower>
+         <upper>0</upper>
+       </limit>
+       <xyz>0 0 1</xyz>
+     </axis>
+   </joint> 
+   <joint name="fix_3.1" type="revolute">
+     <pose> 0 0 0 0 0 0</pose>
+     <parent>comb</parent>
+     <child>motor_mount3</child>
+     <axis>
+       <limit>
+         <lower>-0</lower>
+         <upper>0</upper>
+       </limit>
+       <xyz>0 0 1</xyz>
+     </axis>
+   </joint> 
+   <joint name="fix_4.1" type="revolute">
+     <pose> 0 0 0 0 0 0</pose>
+     <parent>comb</parent>
+     <child>motor_mount4</child>
+     <axis>
+       <limit>
+         <lower>-0</lower>
+         <upper>0</upper>
+       </limit>
+       <xyz>0 0 1</xyz>
+     </axis>
+   </joint>  -->
 
 
 
@@ -954,67 +987,67 @@
 
 
 
-    <joint name="rev1" type="revolute">
-      <pose> 0 0 0 0 0 0</pose>
-      <parent>comb</parent>
-      <child>propeller1</child>
-      <axis>
-        <!-- <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
-        </limit> -->
-        <xyz>0 0 1</xyz>
-      </axis>
-    </joint>  
-    <joint name="rev2" type="revolute">
-      <pose> 0 0 0 0 0 0</pose>
-      <parent>comb</parent>
-      <child>propeller2</child>
-      <axis>
-        <!-- <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
-        </limit> -->
-        <xyz>0 0 1</xyz>
-      </axis>
-    </joint> 
-    <joint name="rev3" type="revolute">
-      <pose> 0 0 0 0 0 0</pose>
-      <parent>comb</parent>
-      <child>propeller3</child>
-      <axis>
-        <!-- <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
-        </limit> -->
-        <xyz>0 0 1</xyz>
-      </axis>
-    </joint>  
-    <joint name="rev4" type="revolute">
-      <pose> 0 0 0 0 0 0</pose>
-      <parent>comb</parent>
-      <child>propeller4</child>
-      <axis>
-        <!-- <limit>
-          <lower>-0.4</lower>
-          <upper>0.4</upper>
-        </limit> -->
-        <xyz>0 0 1</xyz>
-      </axis>
-    </joint>     
+   <joint name="rev1" type="revolute">
+     <pose> 0 0 0 0 0 0</pose>
+     <parent>comb</parent>
+     <child>propeller1</child>
+     <axis>
+       <!-- <limit>
+         <lower>-0.4</lower>
+         <upper>0.4</upper>
+       </limit> -->
+       <xyz>0 0 1</xyz>
+     </axis>
+   </joint>  
+   <joint name="rev2" type="revolute">
+     <pose> 0 0 0 0 0 0</pose>
+     <parent>comb</parent>
+     <child>propeller2</child>
+     <axis>
+       <!-- <limit>
+         <lower>-0.4</lower>
+         <upper>0.4</upper>
+       </limit> -->
+       <xyz>0 0 1</xyz>
+     </axis>
+   </joint> 
+   <joint name="rev3" type="revolute">
+     <pose> 0 0 0 0 0 0</pose>
+     <parent>comb</parent>
+     <child>propeller3</child>
+     <axis>
+       <!-- <limit>
+         <lower>-0.4</lower>
+         <upper>0.4</upper>
+       </limit> -->
+       <xyz>0 0 1</xyz>
+     </axis>
+   </joint>  
+   <joint name="rev4" type="revolute">
+     <pose> 0 0 0 0 0 0</pose>
+     <parent>comb</parent>
+     <child>propeller4</child>
+     <axis>
+       <!-- <limit>
+         <lower>-0.4</lower>
+         <upper>0.4</upper>
+       </limit> -->
+       <xyz>0 0 1</xyz>
+     </axis>
+   </joint>     
 
-    <!-- <joint name="fix3" type="revolute">
-      <pose> 0 0 0 0 0 0</pose>
-      <parent>comb</parent>
-      <child>motor_mount3</child>
-      <axis>
-        <limit>
-          <lower>-0</lower>
-          <upper>0</upper>
-        </limit>
-        <xyz>0 0 1</xyz>
-      </axis>
-    </joint>  -->
+   <!-- <joint name="fix3" type="revolute">
+     <pose> 0 0 0 0 0 0</pose>
+     <parent>comb</parent>
+     <child>motor_mount3</child>
+     <axis>
+       <limit>
+         <lower>-0</lower>
+         <upper>0</upper>
+       </limit>
+       <xyz>0 0 1</xyz>
+     </axis>
+   </joint>  -->
 
-  </model>
+ </model>
 </sdf>
