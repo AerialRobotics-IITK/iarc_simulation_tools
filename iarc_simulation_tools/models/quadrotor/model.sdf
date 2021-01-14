@@ -86,11 +86,11 @@
     <plugin filename="librotors_gazebo_odometry_plugin.so" name="odometry_sensor_1">
       <linkName>comb</linkName>
       <robotNamespace>quadrotor</robotNamespace>
-      <poseTopic>ground_truth/pose</poseTopic>
-      <poseWithCovarianceTopic>ground_truth/pose_with_covariance</poseWithCovarianceTopic>
-      <positionTopic>ground_truth/position</positionTopic>
-      <transformTopic>ground_truth/transform</transformTopic>
-      <odometryTopic>ground_truth/odometry</odometryTopic>
+      <poseTopic>odometry_sensor_1/pose</poseTopic>
+      <poseWithCovarianceTopic>odometry_sensor_1/pose_with_covariance</poseWithCovarianceTopic>
+      <positionTopic>odometry_sensor_1/position</positionTopic>
+      <transformTopic>odometry_sensor_1/transform</transformTopic>
+      <odometryTopic>odometry_sensor_1/odometry</odometryTopic>
       <parentFrameId>world</parentFrameId> <!-- Use the scoped link name here. e.g. Model::link. -->
       <childFrameId>quadrotor/odometry_sensor1</childFrameId>
       <measurementDivisor>10</measurementDivisor> <!-- only every (seq % measurementDivisor) == 0 measurement is published [int] -->
@@ -105,6 +105,29 @@
       <noiseUniformLinearVelocity>0 0 0</noiseUniformLinearVelocity> <!-- symmetric bounds of uniform noise [m/s] -->
       <noiseUniformAngularVelocity>0 0 0</noiseUniformAngularVelocity> <!-- symmetric bounds of uniform noise [rad/s] -->
     </plugin>
+
+    <!-- ros_interface_plugin -->
+    <!-- <plugin name="ros_interface_plugin" filename="librotors_gazebo_ros_interface_plugin.so">
+      <robotNamespace>quadrotor</robotNamespace>
+    </plugin>
+     -->
+     <!-- imu_plugin -->
+    <plugin filename="librotors_gazebo_imu_plugin.so" name="rotors_gazebo_imu_plugin">
+        <!-- A good description of the IMU parameters can be found in the kalibr documentation:
+        https://github.com/ethz-asl/kalibr/wiki/IMU-Noise-Model-and-Intrinsics -->
+      <robotNamespace>quadrotor</robotNamespace> <!-- (string, required): ros namespace in which the messages are published -->
+      <linkName>comb</linkName> <!-- (string, required): name of the body which holds the IMU sensor -->
+      <imuTopic>ground_truth/imu</imuTopic> <!-- (string): name of the sensor output topic and prefix of service names (defaults to imu) -->
+      <gyroscopeNoiseDensity>0.0</gyroscopeNoiseDensity> <!-- Gyroscope noise density (two-sided spectrum) [rad/s/sqrt(Hz)] -->
+      <gyroscopeRandomWalk>0.0</gyroscopeRandomWalk> <!-- Gyroscope bias random walk [rad/s/s/sqrt(Hz)] -->
+      <gyroscopeBiasCorrelationTime>1000.0</gyroscopeBiasCorrelationTime> <!-- Gyroscope bias correlation time constant [s] -->
+      <gyroscopeTurnOnBiasSigma>0.0</gyroscopeTurnOnBiasSigma> <!-- Gyroscope turn on bias standard deviation [rad/s] -->
+      <accelerometerNoiseDensity>0.0</accelerometerNoiseDensity> <!-- Accelerometer noise density (two-sided spectrum) [m/s^2/sqrt(Hz)] -->
+      <accelerometerRandomWalk>0.0</accelerometerRandomWalk> <!-- Accelerometer bias random walk. [m/s^2/s/sqrt(Hz)] -->
+      <accelerometerBiasCorrelationTime>300.0</accelerometerBiasCorrelationTime> <!-- Accelerometer bias correlation time constant [s] -->
+      <accelerometerTurnOnBiasSigma>0.0</accelerometerTurnOnBiasSigma> <!-- Accelerometer turn on bias standard deviation [m/s^2] -->
+    </plugin>
+    
     
    <!-- <self_collide>True</self_collide> -->
    <static>False</static>
