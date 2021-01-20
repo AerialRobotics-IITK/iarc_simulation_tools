@@ -18,9 +18,9 @@
       <!-- Markers -->
       <markers>
         <update_rate>30</update_rate>
-        <water_patch>true</water_patch>
+        <water_patch>false</water_patch>
         <waterline>false</waterline>
-        <underwater_surface>false</underwater_surface>
+        <underwater_surface>true</underwater_surface>
       </markers>
     </plugin>
 
@@ -40,14 +40,14 @@
 
     <link name='table'>
       <inertial>
-        <mass>3000</mass>
+        <mass>1</mass>
         <inertia>
-          <ixx>2271</ixx>
+          <ixx>0.567708</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>8521</iyy>
+          <iyy>2.13020</iyy>
           <iyz>0</iyz>
-          <izz>10417</izz>
+          <izz>2.604166</izz>
         </inertia>
         <pose>0 0 0 0 -0 0.0</pose>
       </inertial>

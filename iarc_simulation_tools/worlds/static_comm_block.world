@@ -36,9 +36,9 @@
       </camera>
     </gui>
 
-    <!-- <include>
+    <include>
       <uri>model://ground_plane</uri>
-    </include> -->
+    </include>
 
     <include>
       <uri>model://pylon</uri>
