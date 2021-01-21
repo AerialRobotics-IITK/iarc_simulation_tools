@@ -6,6 +6,18 @@
       </plugin>
       <static>true</static>
       <link name='link'>
+        <inertial>
+          <pose>0.001491 -0.097034 1.021744 0 0 0</pose>
+          <mass>63.49035</mass>
+          <inertia>
+            <ixx>0.023110</ixx>
+            <ixy>0.000315</ixy>
+            <ixz>-0.000028</ixz>
+            <iyy>0.024224</iyy>
+            <iyz>-0.002126</iyz>
+            <izz>0.002825</izz>
+          </inertia>
+        </inertial>
        <collision name="collision">
         <geometry>
             <mesh>
