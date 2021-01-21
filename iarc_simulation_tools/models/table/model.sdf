@@ -3,7 +3,7 @@
   <model name='table'>
     <!-- <plugin name='joint_plugin' filename='libiarc_state_plugins_joint_plugin.so' >
       <joint_name>radar_mast</joint_name>
-      <angular_speed>1</angular_speed>
+      <angular_speed>2.5</angular_speed>
     </plugin> -->
     <plugin name="hydrodynamics" filename="libHydrodynamicsPlugin.so">
       <!-- Wave Model -->
@@ -150,9 +150,9 @@
     <!-- <include>
       <uri>model://radar</uri>
       <pose>-0.0075 0.505 1.925 0 -0 0</pose>
-    </include> -->
-<!-- 
-    <joint name='radar_mast' type='fixed' >
+    </include>
+
+    <joint name='radar_mast' type='revolute' >
       <parent>mast::link</parent>
       <child>radar::link</child>
       <pose>0 -0.500 0 0 0 0</pose>

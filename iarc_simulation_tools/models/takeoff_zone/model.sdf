@@ -1,25 +1,7 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
   <model name="takeoff_zone">
-    <plugin name="hydrodynamics" filename="libHydrodynamicsPlugin.so">
-      <!-- Wave Model -->
-      <wave_model>ocean</wave_model>
-
-      <!-- Hydrodynamics -->
-      <damping_on>true</damping_on>
-      <viscous_drag_on>true</viscous_drag_on>
-      <pressure_drag_on>true</pressure_drag_on>
-      <link_name>link</link_name>
-
-      <!-- Markers -->
-      <markers>
-        <update_rate>30</update_rate>
-        <water_patch>false</water_patch>
-        <waterline>false</waterline>
-        <underwater_surface>true</underwater_surface>
-      </markers>
-    </plugin>
-      <static>false</static>
+      <static>true</static>
       <link name='link'>
        <collision name="collision">
         <geometry>
