@@ -6,19 +6,19 @@
       <joint_name>radar_mast</joint_name>
       <angular_speed>1</angular_speed>
     </plugin>
-    <static>0</static>    
+    <static>false</static>
     <link name='table'>
       <inertial>
         <mass>1</mass>
         <inertia>
-          <ixx>0.166667</ixx>
+          <ixx>0.567708</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.166667</iyy>
+          <iyy>2.13020</iyy>
           <iyz>0</iyz>
-          <izz>0.166667</izz>
+          <izz>2.604166</izz>
         </inertia>
-        <pose>0 0 2 0 -0 0.0</pose>
+        <pose>0 0 0 0 -0 0.0</pose>
       </inertial>
       <self_collide>0</self_collide>
       <enable_wind>0</enable_wind>

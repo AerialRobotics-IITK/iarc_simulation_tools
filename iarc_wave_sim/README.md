@@ -2,7 +2,42 @@
 
 This package contains plugins that support the simulation of waves and surface vessels in Gazebo.  
 
-![Wave Simulation](https://github.com/srmainwaring/iarc_wave_sim/wiki/images/ocean_waves_rs750.jpg)
+![Wave Simulation](https://github.com/srmainwaring/iarc_wave_sim/wiki/images/ocean_waves_rs750_fft.jpg)
+
+## Notes
+
+This is a prototype branch `feature/fft_waves` which contains an updated wave engine
+that uses FFTs to generate the wavefield physics and visuals.
+
+There are changes in the way that the wave parameters need to be set, and it may
+not be possible to avoid breaking the existing interface used to specify trochoidal waves.
+This is still work in progress, and the current version has a fixed set of wave parameters.
+
+The library has additional dependencies on two FFT libraries:
+
+- [clMathLibraries/clFFT](https://github.com/clMathLibraries/clFFT)
+- [fftw](http://www.fftw.org/)
+
+These can be installed on linux with:
+
+```bash
+sudo apt-get update && apt-get install fftw clfft
+```
+
+Check this link to install fftw in ubuntu properly -> https://stackoverflow.com/questions/45321342/how-to-build-fftw-in-ubuntu
+And on macOS with:
+
+```bash
+brew fftw3 libclfft-dev libfftw3-dev
+```
+
+Aside from adding the option to use a FFT generated wavefield, the major change is
+in the way that the visuals are generated. Previously the wave displacements for visuals
+were generated in the shader code, the visual plugin was used to update shader parameters for wave amplitudes and frequency. Now the entire mesh for the visual is dynamically
+updated in the the library then pushed into the rendering engine. This means there is no
+need to maintain various sized meshes in the media files, however it does require working
+around Gazebos requirement for static meshes and there is a custom Visual that implements
+this. The OpenCL FFT library allows this work to be offloaded to the GPU when configured.
 
 ## Dependencies
 
@@ -136,42 +171,5 @@ Publish a hydrodynamics parameters message:
   --cDampR2 1
 ```
 
-For more detail see the [Example](https://github.com/srmainwaring/iarc_wave_sim/wiki/Example) page in the wiki.
+For more detail see the [Example](https://github.com/srmainwaring/asv_wave_sim/wiki/Example) page in the wiki.
 
-## Build Status
-
-### Develop Job Status
-
-|    | Melodic |
-|--- |--- |
-| iarc_wave_sim | [![Build Status](https://travis-ci.org/srmainwaring/iarc_wave_sim.svg?branch=feature%2Ffft_waves)](https://travis-ci.org/srmainwaring/iarc_wave_sim) |
-
-
-### Release Job Status
-
-|    | Melodic |
-|--- |--- |
-| iarc_wave_sim | [![Build Status](https://travis-ci.org/srmainwaring/iarc_wave_sim.svg?branch=master)](https://travis-ci.org/srmainwaring/iarc_wave_sim) |
-
-## License
-
-This is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This software is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-[GNU General Public License](LICENSE) for more details.
-
-This project makes use of other open source software, for full details see the
-file [LICENSE_THIRDPARTY](LICENSE_THIRDPARTY).
-
-## Acknowledgments
-
-- Jacques Kerner's two part blog describing boat physics for games: [Water interaction model for boats in video games](https://www.gamasutra.com/view/news/237528/Water_interaction_model_for_boats_in_video_games.php) and [Water interaction model for boats in video games: Part 2](https://www.gamasutra.com/view/news/263237/Water_interaction_model_for_boats_in_video_games_Part_2.php).
-- The [CGAL](https://doc.cgal.org) libraries are used for the wave field and model meshes.
-- The [UUV Simulator](https://github.com/uuvsimulator/uuv_simulator) package for the orginal vertex shaders used in the wave field visuals.
-- The [VMRC](https://bitbucket.org/osrf/vmrc) package for textures and meshes used
-in the wave field visuals.

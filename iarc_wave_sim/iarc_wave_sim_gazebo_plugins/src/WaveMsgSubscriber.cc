@@ -56,7 +56,7 @@ int main(int _argc, char **_argv)
   {
     // Copyright notice.
     std::cout
-      << "IARC Wave Simulator: wave parameter subscriber.\n"
+      << "ASV Wave Simulator: wave parameter subscriber.\n"
       << "Copyright (C) 2019  Rhys Mainwaring.\n"
       << "Released under the GNU General Public License.\n\n";
 

@@ -22,15 +22,10 @@
 
 #include "iarc_wave_sim_gazebo_plugins/CGALTypes.hh"
 
-#include <memory>
+#include <gazebo/gazebo.hh>
+#include <gazebo/common/common.hh>
 
-namespace gazebo
-{
-  namespace common
-  {
-    class Mesh; 
-  }
-}
+#include <memory>
 
 namespace iarc
 {

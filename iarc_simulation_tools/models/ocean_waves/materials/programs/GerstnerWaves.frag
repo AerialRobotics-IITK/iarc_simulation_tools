@@ -13,83 +13,45 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-////////// Input parameters //////////
-// Textures
+// Input parameters
 uniform sampler2D bumpMap;
 uniform samplerCube cubeMap;
-uniform sampler2D reflectMap;
-uniform sampler2D refractMap;
-
-// Colors
 uniform vec4 deepColor;
 uniform vec4 shallowColor;
 uniform float fresnelPower;
 uniform float hdrMultiplier;
 
-// Reflect/refract amount
-uniform float refractOpacity;
-uniform float reflectOpacity;
-
-// Temp fix for camera sensors rendering upsidedown
-uniform int flipAcrossY;
-
-// Noise
-uniform float rttNoise;
-
-////////// Input computed in vertex shader //////////
+// Input computed in vertex shader
 varying mat3 rotMatrix;
 varying vec3 eyeVec;
 varying vec2 bumpCoord;
 
-varying vec4 projectionCoord;
-
 void main(void)
 {
-  // Do the tex projection manually so we can distort _after_
-  vec2 final = projectionCoord.xy / projectionCoord.w;
+    // Apply bump mapping to normal vector to make waves look more detailed:
+    vec4 bump = texture2D(bumpMap, bumpCoord)*2.0 - 1.0;
+    vec3 N = normalize(rotMatrix * bump.xyz);
 
-  // Noise
-  vec3 noiseNormal = (texture2D(bumpMap, (bumpCoord.xy / 5.0)).rgb - 0.5).rbg * rttNoise;
-  final = final + noiseNormal.xz;
+    // Reflected ray:
+    vec3 E = normalize(eyeVec);
+    vec3 R = reflect(E, N);
+    // Gazebo requires rotated cube map lookup.
+    R = vec3(R.x, R.z, R.y);
 
-  // Temp fix for camera sensors rendering upsidedown
-  if (flipAcrossY == 1)
-  {
-    final = vec2(final.x, 1.0-final.y);
-  }
+    // Get environment color of reflected ray:
+    vec4 envColor = textureCube(cubeMap, R, 0.0);
 
-  // Reflection / refraction
-  vec4 reflectionColor = texture2D(reflectMap, final);
-  vec4 refractionColor = texture2D(refractMap, final);
+	// Cheap hdr effect:
+    envColor.rgb *= (envColor.r+envColor.g+envColor.b)*hdrMultiplier;
 
-  // Apply bump mapping to normal vector to make waves look more detailed:
-  vec4 bump = texture2D(bumpMap, bumpCoord)*2.0 - 1.0;
-  vec3 N = normalize(rotMatrix * bump.xyz);
+	// Compute refraction ratio (Fresnel):
+    float facing = 1.0 - dot(-E, N);
+    float refractionRatio = clamp(pow(facing, fresnelPower), 0.0, 1.0);
 
-  // Reflected ray:
-  vec3 E = normalize(eyeVec);
-  vec3 R = reflect(E, N);
-  // Gazebo requires rotated cube map lookup.
-  R = vec3(R.x, R.z, R.y);
+    // Refracted ray only considers deep and shallow water colors:
+    vec4 waterColor = mix(shallowColor, deepColor, facing);
 
-  // Get environment color of reflected ray:
-  vec4 envColor = textureCube(cubeMap, R, 0.0);
-
-  // Cheap hdr effect:
-  envColor.rgb *= (envColor.r+envColor.g+envColor.b)*hdrMultiplier;
-
-  // Compute refraction ratio (Fresnel):
-  float facing = 1.0 - dot(-E, N);
-  float waterEnvRatio = clamp(pow(facing, fresnelPower), 0.0, 1.0);
-
-  // Water color is mix of refraction color, shallow color, and deep color
-  vec4 realShallowColor = mix(shallowColor, refractionColor, refractOpacity);
-  vec4 waterColor = mix(realShallowColor, deepColor, facing);
-
-  // Environment color is mix of clouds and reflection
-  vec4 realEnvColor = mix(envColor, reflectionColor, reflectOpacity);
-
-  // Perform linear interpolation between reflection and refraction.
-  vec4 color = mix(waterColor, realEnvColor, waterEnvRatio);
-  gl_FragColor = vec4(color.xyz, 0.9);
+    // Perform linear interpolation between reflection and refraction.
+    vec4 color = mix(waterColor, envColor, refractionRatio);
+    gl_FragColor = vec4(color.xyz, 0.9);
 }
