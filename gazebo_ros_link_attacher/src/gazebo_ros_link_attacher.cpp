@@ -73,7 +73,7 @@ bool GazeboRosLinkAttacher::attach() {
     // if we try to create a joint in between two links
     // more than once (even deleting any reference to the first one)
     // gazebo hangs/crashes
-    fixedJoint j;
+    Prismatic j;
     if (this->getJoint(model1_, link1_, model2_, link2_, j)) {
         ROS_INFO_STREAM("Joint already existed, reusing it.");
         j.joint->Attach(j.l1, j.l2);
@@ -131,7 +131,7 @@ bool GazeboRosLinkAttacher::attach() {
     ROS_DEBUG_STREAM("Links are: " << l1->GetName() << " and " << l2->GetName());
 
     ROS_DEBUG_STREAM("Creating revolute joint on model: '" << model1_ << "'");
-    j.joint = this->physics->CreateJoint("revolute", m1);
+    j.joint = this->physics->CreateJoint("prismatic", m1);
     this->joints.push_back(j);
 
     ROS_DEBUG_STREAM("Attach");
@@ -155,9 +155,9 @@ bool GazeboRosLinkAttacher::attach() {
      */
 
     ROS_DEBUG_STREAM("SetHightstop");
-    j.joint->SetUpperLimit(0, 0);
+    j.joint->SetUpperLimit(0, 1);
     ROS_DEBUG_STREAM("SetLowStop");
-    j.joint->SetLowerLimit(0, 0);
+    j.joint->SetLowerLimit(0, -1);
     ROS_DEBUG_STREAM("Init");
     j.joint->Init();
     ROS_INFO_STREAM("Attach finished.");
@@ -167,7 +167,7 @@ bool GazeboRosLinkAttacher::attach() {
 
 bool GazeboRosLinkAttacher::detach() {
     // search for the instance of joint and do detach
-    fixedJoint j;
+    Prismatic j;
     if (this->getJoint(model1_, link1_, model2_, link2_, j)) {
         j.joint->Detach();
         return true;
@@ -176,9 +176,9 @@ bool GazeboRosLinkAttacher::detach() {
     return false;
 }
 
-bool GazeboRosLinkAttacher::getJoint(std::string model1, std::string link1, std::string model2, std::string link2, fixedJoint& joint) {
-    fixedJoint j;
-    for (std::vector<fixedJoint>::iterator it = this->joints.begin(); it != this->joints.end(); ++it) {
+bool GazeboRosLinkAttacher::getJoint(std::string model1, std::string link1, std::string model2, std::string link2, Prismatic& joint) {
+    Prismatic j;
+    for (std::vector<Prismatic>::iterator it = this->joints.begin(); it != this->joints.end(); ++it) {
         j = *it;
         if ((j.model1.compare(model1) == 0) && (j.model2.compare(model2) == 0) && (j.link1.compare(link1) == 0) && (j.link2.compare(link2) == 0)) {
             joint = j;
