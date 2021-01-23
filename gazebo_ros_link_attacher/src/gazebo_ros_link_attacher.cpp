@@ -59,6 +59,14 @@ void GazeboRosLinkAttacher::Load(physics::WorldPtr _world, sdf::ElementPtr sdf) 
         return;
     }
 
+    if (sdf->HasElement("model_e")) {
+        model_e_ = sdf->GetElement("model_e")->Get<std::string>();
+        gzmsg << model_e_ << std::endl;
+    } else {
+        gzerr << "Element <model_e>> is not specified. Aborting.";
+        return;
+    }
+
     this->world = _world;
     this->physics = this->world->Physics();
     this->attach_service_ = this->nh_.advertiseService("attach", &GazeboRosLinkAttacher::attach_callback, this);
@@ -66,6 +74,9 @@ void GazeboRosLinkAttacher::Load(physics::WorldPtr _world, sdf::ElementPtr sdf) 
     this->detach_service_ = this->nh_.advertiseService("detach", &GazeboRosLinkAttacher::detach_callback, this);
     ROS_INFO_STREAM("Detach service at: " << this->nh_.resolveName("detach"));
     ROS_INFO("Link attacher node initialized.");
+
+    me_ = _world->ModelByName(model_e_);
+    joint_e = me_->GetJoint("j1");
 }
 
 bool GazeboRosLinkAttacher::attach() {
@@ -167,13 +178,17 @@ bool GazeboRosLinkAttacher::attach() {
 
 bool GazeboRosLinkAttacher::detach() {
     // search for the instance of joint and do detach
-    Prismatic j;
-    if (this->getJoint(model1_, link1_, model2_, link2_, j)) {
-        j.joint->Detach();
-        return true;
-    }
 
-    return false;
+    // ROS_INFO_STREAM(joint_e);
+    joint_e->Detach();
+    return true;
+    // Prismatic j;
+    // if (this->getJoint(model1_, link1_, model2_, link2_, j)) {
+    //     j.joint->Detach();
+    //     return true;
+    // }
+
+    // return false;
 }
 
 bool GazeboRosLinkAttacher::getJoint(std::string model1, std::string link1, std::string model2, std::string link2, Prismatic& joint) {

@@ -56,8 +56,8 @@
       <uri>model://table_with_comm_block</uri>
       <pose>4.2756 0.063046 0.375 0 -0 3.14</pose>
     </include>
-<!-- 
-    <include>
+
+    <!-- <include>
       <uri>model://table</uri>
       <pose>4.2756 0.063046 0.375 0 -0 3.14</pose>
     </include> -->
@@ -76,6 +76,12 @@
       <parent>table::mast</parent>
       <child>communications_module::link</child>
     </joint> -->
+
+    <include>
+      <uri>model://gripper</uri>
+      <!-- <name>pylon_near</name> -->
+      <pose>8 10 0 0 -0 0</pose>
+    </include>
 
     <light name='sun' type='directional'>
       <pose>0 0 10 0 0 0</pose>
@@ -101,6 +107,7 @@
       <link1>link</link1>
       <model2>communications_module</model2>
       <link2>link</link2>
+      <model_e>gripper</model_e>
     </plugin>
 
   </world>

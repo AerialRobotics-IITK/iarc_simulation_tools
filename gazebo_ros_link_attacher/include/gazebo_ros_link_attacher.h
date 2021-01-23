@@ -60,6 +60,10 @@ class GazeboRosLinkAttacher : public WorldPlugin {
     std::string model2_;
     std::string link2_;
 
+    physics::ModelPtr me_;
+    std::string model_e_;
+    physics::JointPtr joint_e;
+
     bool getJoint(std::string model1, std::string link1, std::string model2, std::string link2, Prismatic& joint);
 
   private:
