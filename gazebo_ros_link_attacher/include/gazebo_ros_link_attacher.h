@@ -42,6 +42,9 @@ class GazeboRosLinkAttacher : public WorldPlugin {
     /// \brief Detach
     bool detach();
 
+    /// \brief Detach a existing joint
+    bool detach_existing();
+
     /// \brief Internal representation of a fixed joint
     struct Prismatic {
         std::string model1;
@@ -62,6 +65,7 @@ class GazeboRosLinkAttacher : public WorldPlugin {
 
     physics::ModelPtr me_;
     std::string model_e_;
+    std::string link_e_;
     physics::JointPtr joint_e;
 
     bool getJoint(std::string model1, std::string link1, std::string model2, std::string link2, Prismatic& joint);
@@ -70,10 +74,12 @@ class GazeboRosLinkAttacher : public WorldPlugin {
     ros::NodeHandle nh_;
     ros::ServiceServer attach_service_;
     ros::ServiceServer detach_service_;
+    // ros::ServiceServer detach_existing_service_;
 
     bool attach_callback(gazebo_ros_link_attacher::Attach::Request& req, gazebo_ros_link_attacher::Attach::Response& res);
     bool detach_callback(gazebo_ros_link_attacher::Attach::Request& req, gazebo_ros_link_attacher::Attach::Response& res);
-
+    // bool detach_existing_callback(gazebo_ros_link_attacher::Attach::Request& req, gazebo_ros_link_attacher::Attach::Response& res);
+    
     std::vector<Prismatic> joints;
 
     /// \brief The physics engine.

@@ -109,7 +109,8 @@
       <link1>link</link1>
       <model2>communications_module</model2>
       <link2>link</link2>
-      <model_e>gripper</model_e>
+      <model_e>table_with_comm_block</model_e>
+      <link_e>link_JOINT_1</link_e>
     </plugin>
 
     
