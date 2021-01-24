@@ -5,6 +5,7 @@
 #include <gazebo/common/Plugin.hh>
 #include <ignition/math/Pose3.hh>
 #include <ros/ros.h>
+// #include <gazebo/plugins/events/JointEventSource.hh>
 
 namespace gazebo {
 // Register this plugin with the simulator
@@ -83,11 +84,14 @@ void GazeboRosLinkAttacher::Load(physics::WorldPtr _world, sdf::ElementPtr sdf) 
     ROS_INFO_STREAM("Detach service at: " << this->nh_.resolveName("detach"));
     ROS_INFO("Link attacher node initialized.");
 
-    // this->detach_existing_service_ = this->nh_.advertiseService("detach_existing", &GazeboRosLinkAttacher::detach_existing_callback, this);
-    // ROS_INFO_STREAM("Detach_existing service at: " << this->nh_.resolveName("detach_existing"));
+    this->detach_existing_service_ = this->nh_.advertiseService("detach_existing", &GazeboRosLinkAttacher::detach_existing_callback, this);
+    ROS_INFO_STREAM("Detach_existing service at: " << this->nh_.resolveName("detach_existing"));
 
     me_ = _world->ModelByName(model_e_);
     joint_e = me_->GetJoint(link_e_);
+
+    updateConnection_ = event::Events::ConnectWorldUpdateBegin(
+    boost::bind(&GazeboRosLinkAttacher::onUpdate, this, _1));
 }
 
 bool GazeboRosLinkAttacher::attach() {
@@ -199,18 +203,18 @@ bool GazeboRosLinkAttacher::detach() {
     return false;
 }
 
-// bool GazeboRosLinkAttacher::detach_existing() {
-//     // search for the instance of joint and do detach
+bool GazeboRosLinkAttacher::detach_existing() {
+    // search for the instance of joint and do detach
 
-//     // ROS_INFO_STREAM(joint_e);
-//     if (joint_e){
-//         joint_e->Detach();
-//         return true;
-//     }
+    // ROS_INFO_STREAM(joint_e);
+    // if (joint_e){
+    joint_e->Detach();
+    return true;
+    // }
 
-//     return false;
+    // return false;
 
-// }
+}
 
 bool GazeboRosLinkAttacher::getJoint(std::string model1, std::string link1, std::string model2, std::string link2, Prismatic& joint) {
     Prismatic j;
@@ -252,17 +256,27 @@ bool GazeboRosLinkAttacher::detach_callback(gazebo_ros_link_attacher::Attach::Re
     return true;
 }
 
-// bool GazeboRosLinkAttacher::detach_existing_callback(gazebo_ros_link_attacher::Attach::Request& req, gazebo_ros_link_attacher::Attach::Response& res) {
-//     // ROS_INFO_STREAM("Received request to detach model: '" << req.model_name_1 << "' using link: '" << req.link_name_1 << "' with model: '" <<
-//     // req.model_name_2
-//     //                                                       << "' using link: '" << req.link_name_2 << "'");
-//     if (!this->detach_existing()) {
-//         ROS_ERROR_STREAM("Could not make the detach.");
-//         res.ok = false;
-//     } else {
-//         ROS_INFO_STREAM("Detach was succesful");
-//         res.ok = true;
-//     }
-//     return true;
-// }
+bool GazeboRosLinkAttacher::detach_existing_callback(gazebo_ros_link_attacher::Attach::Request& req, gazebo_ros_link_attacher::Attach::Response& res) {
+    // ROS_INFO_STREAM("Received request to detach model: '" << req.model_name_1 << "' using link: '" << req.link_name_1 << "' with model: '" <<
+    // req.model_name_2
+    //                                                       << "' using link: '" << req.link_name_2 << "'");
+    if (!this->detach_existing()) {
+        ROS_ERROR_STREAM("Could not make the detach.");
+        res.ok = false;
+    } else {
+        ROS_INFO_STREAM("Detach was succesful");
+        res.ok = true;
+    }
+    return true;
+}
+
+
+void GazeboRosLinkAttacher::onUpdate(const common::UpdateInfo &_info) {
+
+//   link_->AddRelativeTorque(torque_direction_ * torque_magnitude_);
+
+
+}
+
+
 }  // namespace gazebo

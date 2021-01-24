@@ -9,6 +9,7 @@
 
 #include <ros/ros.h>
 
+#include <boost/thread/mutex.hpp>
 #include "gazebo/gazebo.hh"
 #include "gazebo/msgs/msgs.hh"
 #include "gazebo/physics/PhysicsTypes.hh"
@@ -35,7 +36,7 @@ class GazeboRosLinkAttacher : public WorldPlugin {
 
     /// \brief Load the controller
     void Load(physics::WorldPtr _world, sdf::ElementPtr sdf);
-
+    void onUpdate(const common::UpdateInfo &_info);
     /// \brief Attach with a revolute joint
     bool attach();
 
@@ -67,18 +68,18 @@ class GazeboRosLinkAttacher : public WorldPlugin {
     std::string model_e_;
     std::string link_e_;
     physics::JointPtr joint_e;
-
+  event::ConnectionPtr updateConnection_;
     bool getJoint(std::string model1, std::string link1, std::string model2, std::string link2, Prismatic& joint);
 
   private:
     ros::NodeHandle nh_;
     ros::ServiceServer attach_service_;
     ros::ServiceServer detach_service_;
-    // ros::ServiceServer detach_existing_service_;
+    ros::ServiceServer detach_existing_service_;
 
     bool attach_callback(gazebo_ros_link_attacher::Attach::Request& req, gazebo_ros_link_attacher::Attach::Response& res);
     bool detach_callback(gazebo_ros_link_attacher::Attach::Request& req, gazebo_ros_link_attacher::Attach::Response& res);
-    // bool detach_existing_callback(gazebo_ros_link_attacher::Attach::Request& req, gazebo_ros_link_attacher::Attach::Response& res);
+    bool detach_existing_callback(gazebo_ros_link_attacher::Attach::Request& req, gazebo_ros_link_attacher::Attach::Response& res);
     
     std::vector<Prismatic> joints;
 
@@ -87,6 +88,8 @@ class GazeboRosLinkAttacher : public WorldPlugin {
 
     /// \brief Pointer to the world.
     physics::WorldPtr world;
+
+    boost::mutex lock_;
 };
 
 }  // namespace gazebo
