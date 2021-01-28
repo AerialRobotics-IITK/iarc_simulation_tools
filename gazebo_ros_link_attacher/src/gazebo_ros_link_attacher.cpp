@@ -89,6 +89,7 @@ void GazeboRosLinkAttacher::Load(physics::WorldPtr _world, sdf::ElementPtr sdf) 
 
     me_ = _world->ModelByName(model_e_);
     joint_e = me_->GetJoint(link_e_);
+    // joint_e = me_->GetJoint("j1");
 
     updateConnection_ = event::Events::ConnectWorldUpdateBegin(
     boost::bind(&GazeboRosLinkAttacher::onUpdate, this, _1));

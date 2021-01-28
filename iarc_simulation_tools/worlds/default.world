@@ -62,22 +62,15 @@
       <pose>-5 0 0 0 0 0</pose>
     </include>
 
+    <include>
+      <uri>model://dummy</uri>
+      <pose>-10 -10 0 0 0 0</pose>
+    </include>
+
     <!-- <include>
       <uri>model://communications_module</uri>
       <pose>4.280454 0.23 1.782488 0.0 0.0 -1.57079632679</pose>
     </include> -->
-
-    <joint name='mast_comm_block' type='fixed'>
-      <parent>table::mast</parent>
-      <child>communications_module::link</child>
-      <!-- <axis>
-        <limit>
-          <lower>0</lower>
-          <upper>0.5</upper>
-        </limit>
-        <xyz>0 1 0</xyz>
-      </axis> -->
-    </joint> 
 
     <include>
       <uri>model://gripper</uri>
@@ -110,7 +103,7 @@
       <model2>communications_module</model2>
       <link2>link</link2>
       <model_e>table_with_comm_block</model_e>
-      <link_e>table_with_comm_block::link_JOINT_1</link_e>
+      <link_e>table_with_comm_block::pseudo_slider</link_e>
     </plugin>
 
     

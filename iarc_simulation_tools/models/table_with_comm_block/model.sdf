@@ -180,7 +180,7 @@
       <child>communications_module::link</child>
     </joint> -->
 
-    <joint name='link_JOINT_1' type='prismatic'>
+    <!-- <joint name='slider' type='prismatic'>
       <parent>mast::link</parent>
       <child>communications_module::link</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
@@ -190,28 +190,26 @@
         <limit>
           <lower>-0.9</lower>
           <upper>0</upper>
-          <!-- <effort>-1</effort>
-          <velocity>-1</velocity> -->
         </limit>
-        <!-- <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-          <damping>0</damping>
-        </dynamics> -->
       </axis>
-      <!-- <physics>
-        <ode>
-          <limit>
-            <cfm>0</cfm>
-            <erp>0.2</erp>
-          </limit>
-          <suspension>
-            <cfm>0</cfm>
-            <erp>0.2</erp>
-          </suspension>
-        </ode>
-      </physics> -->
-    </joint>
+    </joint> -->
+
+    <joint name='pseudo_slider' type='revolute'>
+      <pose> 0 5 0.3 0 0 0</pose>
+      <child>communications_module::link</child>
+      <parent>mast::link</parent>
+      <axis>
+        <limit>
+          <lower>-0.1</lower>
+          <upper>0</upper>
+        </limit>
+        <xyz>0 0 1</xyz>
+      </axis>
+      <dynamics>
+        <damping>0.7</damping>
+        <friction>1</friction>
+      </dynamics>
+    </joint>      
 
 
     <joint name='mast_table' type='fixed' >
