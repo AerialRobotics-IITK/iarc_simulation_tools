@@ -9,7 +9,6 @@
 
 #include <ros/ros.h>
 
-#include <boost/thread/mutex.hpp>
 #include "gazebo/gazebo.hh"
 #include "gazebo/msgs/msgs.hh"
 #include "gazebo/physics/PhysicsTypes.hh"
@@ -17,6 +16,7 @@
 #include "gazebo_ros_link_attacher/Attach.h"
 #include "gazebo_ros_link_attacher/AttachRequest.h"
 #include "gazebo_ros_link_attacher/AttachResponse.h"
+#include <boost/thread/mutex.hpp>
 #include <gazebo/common/Events.hh>
 #include <gazebo/common/Plugin.hh>
 #include <gazebo/common/Time.hh>
@@ -36,18 +36,18 @@ class GazeboRosLinkAttacher : public WorldPlugin {
 
     /// \brief Load the controller
     void Load(physics::WorldPtr _world, sdf::ElementPtr sdf);
-    void onUpdate(const common::UpdateInfo &_info);
+    void onUpdate(const common::UpdateInfo& _info);
     /// \brief Attach with a revolute joint
-    bool attach();
+    bool attach(std::string model1, std::string link1, std::string model2, std::string link2);
 
     /// \brief Detach
-    bool detach();
+    bool detach(std::string model1, std::string link1, std::string model2, std::string link2);
 
     /// \brief Detach a existing joint
-    bool detach_existing();
+    bool detach_existing(std::string model, std::string joint);
 
     /// \brief Internal representation of a fixed joint
-    struct Prismatic {
+    struct fixedJoint {
         std::string model1;
         physics::ModelPtr m1;
         std::string link1;
@@ -59,17 +59,17 @@ class GazeboRosLinkAttacher : public WorldPlugin {
         physics::JointPtr joint;
     };
 
-    std::string model1_;
-    std::string link1_;
-    std::string model2_;
-    std::string link2_;
+    // std::string model1_;
+    // std::string link1_;
+    // std::string model2_;
+    // std::string link2_;
 
     physics::ModelPtr me_;
     std::string model_e_;
-    std::string link_e_;
+    std::string joint_e_;
     physics::JointPtr joint_e;
-  event::ConnectionPtr updateConnection_;
-    bool getJoint(std::string model1, std::string link1, std::string model2, std::string link2, Prismatic& joint);
+    event::ConnectionPtr updateConnection_;
+    bool getJoint(std::string model1, std::string link1, std::string model2, std::string link2, fixedJoint& joint);
 
   private:
     ros::NodeHandle nh_;
@@ -80,8 +80,8 @@ class GazeboRosLinkAttacher : public WorldPlugin {
     bool attach_callback(gazebo_ros_link_attacher::Attach::Request& req, gazebo_ros_link_attacher::Attach::Response& res);
     bool detach_callback(gazebo_ros_link_attacher::Attach::Request& req, gazebo_ros_link_attacher::Attach::Response& res);
     bool detach_existing_callback(gazebo_ros_link_attacher::Attach::Request& req, gazebo_ros_link_attacher::Attach::Response& res);
-    
-    std::vector<Prismatic> joints;
+
+    std::vector<fixedJoint> joints;
 
     /// \brief The physics engine.
     physics::PhysicsEnginePtr physics;
