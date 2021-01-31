@@ -62,10 +62,10 @@
       <pose>-5 0 0 0 0 0</pose>
     </include>
 
-    <include>
+    <!-- <include>
       <uri>model://dummy</uri>
       <pose>-10 -10 0 0 0 0</pose>
-    </include>
+    </include> -->
 
     <!-- <include>
       <uri>model://communications_module</uri>
@@ -103,7 +103,7 @@
       <model2>communications_module</model2>
       <link2>link</link2> -->
       <!-- <model_e>table_with_comm_block</model_e>
-      <link_e>table_with_comm_block::pseudo_slider</link_e> -->
+      <joint_e>table_with_comm_block::pseudo_slider</joint_e> -->
     </plugin>
 
     
