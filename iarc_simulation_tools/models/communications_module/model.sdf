@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
-  <model name="communications_module">
-      <plugin name="link_states" filename="libiarc_state_plugins_link_plugin.so">
+   <model name="communications_module">
+     <!-- <plugin name="link_states" filename="libiarc_state_plugins_link_plugin.so">
         <link_name>link</link_name>
       </plugin>
       <static>0</static>
@@ -9,7 +9,7 @@
         <bodyName>magnet</bodyName>
         <Id>3</Id>
         <dipole_moment>0 0 0.739859</dipole_moment>
-        <!-- Set to false if not using ROS -->
+        Set to false if not using ROS
         <shouldPublish>true</shouldPublish>
         <topicNs>magnetic_force/communicatios_module</topicNs>
         <updateRate>100</updateRate>
@@ -56,9 +56,10 @@
             </cylinder>
           </geometry>
         </collision>
-      </link>
+      </link> -->
       <link name='link'>
-      <inertial>
+        <self_collide>1</self_collide>
+        <inertial>
         <mass>2</mass>
         <inertia>
           <ixx>0.001233</ixx>
@@ -72,39 +73,60 @@
       </inertial>
        <collision name="collision">
         <geometry>
-            <mesh>
-              <uri>model://communications_module/meshes/communications_module.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
+          <box>
+            <size>0.0762 0.0508 0.0762</size>
+          </box>
         </geometry>
         <surface>
           <contact>
-             <collide_bitmask>0xffff</collide_bitmask>
-             <ode>
+             <!-- <collide_bitmask>0xffff</collide_bitmask> -->
+             <!-- <ode>
                <max_vel>1</max_vel>
                <min_depth>0.001</min_depth>
-             </ode>
+             </ode> -->
+             <!-- <collide_without_contact>true</collide_without_contact> -->
+             <ode>
+              <!-- <kp>1e+07</kp> -->
+              <!-- <kd>1000000</kd> -->
+              <max_vel>0</max_vel>
+              <min_depth>0.00000001</min_depth>
+              <!-- <soft_cfm>1</soft_cfm> -->
+            </ode>
           </contact>
-          <friction>
+          <!-- <friction>
             <ode>
               <mu>100</mu>
               <mu2>50</mu2>
             </ode>
           </friction>
+          <bounce>
+            <restitution_coefficient>0.4</restitution_coefficient>
+            <threshold>1</threshold>
+          </bounce> -->
         </surface>
       </collision>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://communications_module/meshes/communications_module.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-        </visual>
+      <visual name='visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.0762 0.0508 0.0762</size>
+          </box>
+        </geometry>
+        <material>
+          <lighting>1</lighting>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Grey</name>
+          </script>
+          <shader type='pixel'/>
+        </material>
+        <transparency>0</transparency>
+        <cast_shadows>1</cast_shadows>
+      </visual>
       </link>
-    <joint name='comm_module_magnet' type='fixed' >
+    <!-- <joint name='comm_module_magnet' type='fixed' >
       <parent>link</parent>
       <child>magnet</child>
-    </joint>
+    </joint> -->
   </model>
 </sdf>
