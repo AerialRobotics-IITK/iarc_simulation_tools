@@ -128,7 +128,13 @@
       <accelerometerTurnOnBiasSigma>0.0</accelerometerTurnOnBiasSigma> <!-- Accelerometer turn on bias standard deviation [m/s^2] -->
     </plugin>
     
-    
+    <!-- battery_plugin -->
+    <plugin name="quadrotor_battery_plugin" filename="libiarc_battery_plugin.so">
+      <namespace>quadrotor</namespace>
+      <topic_name>quadrotor/command/motor_speed</topic_name>
+      <time_limit>9</time_limit>
+    </plugin>
+
    <!-- <self_collide>True</self_collide> -->
    <static>False</static>
    <!-- <link name ='pixhawk'>
