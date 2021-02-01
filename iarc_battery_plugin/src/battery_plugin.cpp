@@ -4,9 +4,7 @@ namespace gazebo {
 void BatteryPlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
   model_ = parent;
   sdf_ = sdf;
-
-  std::cout <<"fuck you"<<std::endl;
-
+  
   gzmsg << "Battery plugin loaded for " << model_->GetName() << std::endl;
   if (sdf->HasElement("namespace")) {
     namespace_ = sdf->GetElement("namespace")->Get<std::string>();
