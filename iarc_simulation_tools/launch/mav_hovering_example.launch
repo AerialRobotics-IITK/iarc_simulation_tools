@@ -6,7 +6,7 @@
   <arg name="log_file" default="$(arg mav_name)" />
   <arg name="debug" default="false"/>
   <arg name="gui" default="true"/>
-  <arg name="paused" default="false"/>
+  <arg name="paused" default="true"/>
 
   <arg name="start_x" default="-5.0"/>
 	<arg name="start_y" default="0.0"/>
@@ -28,7 +28,7 @@
   </include>
 
   <group ns="$(arg mav_name)">
-    <include file="$(find rotors_gazebo)/launch/spawn_mav.launch">
+    <!-- <include file="$(find rotors_gazebo)/launch/spawn_mav.launch">
       <arg name="mav_name" value="$(arg mav_name)" />
       <arg name="model" value="$(find iarc_simulation_tools)/urdf/quadrotor_base.xacro" />
       <arg name="enable_logging" value="$(arg enable_logging)" />
@@ -36,11 +36,11 @@
       <arg name="log_file" value="$(arg log_file)"/>
       <arg name="x" default="$(arg start_x)"/>
       <arg name="y" default="$(arg start_y)"/>
-    </include>
+    </include> -->
     <node name="lee_position_controller_node" pkg="rotors_control" type="lee_position_controller_node" output="screen">
       <rosparam command="load" file="$(find iarc_simulation_tools)/resources/rotor_control/lee_controller_$(arg mav_name).yaml" />
       <rosparam command="load" file="$(find iarc_simulation_tools)/resources/rotor_control/$(arg mav_name).yaml" />
-      <remap from="odometry" to="ground_truth/odometry" />
+      <remap from="odometry" to="odometry_sensor_1/odometry" />
     </node>
     <node name="hovering_example" pkg="rotors_gazebo" type="hovering_example" output="screen"/>
     <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> -->
