@@ -97,15 +97,7 @@
       </spot>
     </light>
 
-    <plugin name="ros_link_attacher_plugin" filename="libgazebo_ros_link_attacher.so">
-      <!-- <model1>gripper</model1>
-      <link1>left_short_joint</link1>
-      <model2>communications_module</model2>
-      <link2>link</link2> -->
-      <!-- <model_e>table_with_comm_block</model_e>
-      <joint_e>table_with_comm_block::pseudo_slider</joint_e> -->
-    </plugin>
-
+    <plugin name="ros_link_attacher_plugin" filename="libgazebo_ros_link_attacher.so"/>
     
   </world>
 </sdf>
