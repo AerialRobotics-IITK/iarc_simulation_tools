@@ -27,6 +27,7 @@ class ServicePlugin : public ModelPlugin {
     transport::SubscriberPtr comm_pose_sub_;
 
     // std::string led_color_;
+    bool flag_;
 
     ignition::math::Pose3d desired_relative_pose_;
 

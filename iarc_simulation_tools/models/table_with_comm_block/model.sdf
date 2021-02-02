@@ -230,6 +230,10 @@
       <child>led_light_green::link</child>
     </joint>
 
+    <plugin name="iarc_service_plugin" filename="libiarc_service_plugin.so">
+      <desired_relative_pose>0 0 0</desired_relative_pose>
+    </plugin>
+
   </model>
 
 </sdf>

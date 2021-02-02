@@ -3,12 +3,6 @@
 namespace gazebo {
 
 void ServicePlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
-    // if (sdf->HasElement("led_color")) {
-    //     led_color_ = sdf->GetElement("led_color")->Get<std::string>();
-    // } else {
-    //     gzerr << "<led_color> tag missing. Aborting.";
-    //     return;
-    // }
 
     if (sdf->HasElement("desired_relative_pose")) {
         desired_relative_pose_ = sdf->GetElement("desired_relative_pose")->Get<ignition::math::Pose3d>();
@@ -30,12 +24,11 @@ void ServicePlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf) {
     // gzmsg << "Light plugin loaded for " << led_color_ << " light" << std::endl;
 
     model_ = parent;
-
+    flag_ = false;
     node_ = transport::NodePtr(new transport::Node);
     node_->Init();
     comm_pose_sub_ = node_->Subscribe("~/communications_module/link/pose/info", &ServicePlugin::commPoseCallback, this);
     mast_pose_sub_ = node_->Subscribe("~/table/mast::link/pose/info", &ServicePlugin::mastPoseCallback, this);
-
     updateConnection = event::Events::ConnectPreRender(std::bind(&ServicePlugin::OnUpdate, this));
 }
 
@@ -52,8 +45,10 @@ void ServicePlugin::OnUpdate() {
     // gzmsg << "correct_orientation: " << orientation_match
     //           << " Angular Distance:" << comm_wrt_mast_orientation_.angularDistance(desired_relative_orientation_) << std::endl;
 
-    // if (orientation_match && position_match)
-    //     ROS_INFO_STREAM("Threshold reached");
+    if (orientation_match && position_match){
+        flag_ = true;
+        // std::cout << flag_ << "TESTINGGG";
+    }
     
         // model_visual_->SetMaterial("Gazebo/" + led_color_ + "Transparent");
 }
