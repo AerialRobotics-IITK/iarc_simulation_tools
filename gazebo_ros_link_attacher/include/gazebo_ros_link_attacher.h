@@ -36,7 +36,7 @@ class GazeboRosLinkAttacher : public WorldPlugin {
 
     /// \brief Load the controller
     void Load(physics::WorldPtr _world, sdf::ElementPtr sdf);
-    void onUpdate(const common::UpdateInfo& _info);
+    // void onUpdate(const common::UpdateInfo& _info);
     /// \brief Attach with a revolute joint
     bool attach(std::string model1, std::string link1, std::string model2, std::string link2);
 
@@ -68,7 +68,6 @@ class GazeboRosLinkAttacher : public WorldPlugin {
     std::string model_e_;
     std::string joint_e_;
     physics::JointPtr joint_e;
-    event::ConnectionPtr updateConnection_;
     bool getJoint(std::string model1, std::string link1, std::string model2, std::string link2, fixedJoint& joint);
 
   private:

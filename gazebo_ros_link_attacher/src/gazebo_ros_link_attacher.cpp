@@ -27,6 +27,8 @@ void GazeboRosLinkAttacher::Load(physics::WorldPtr _world, sdf::ElementPtr sdf) 
                          << "Load the Gazebo system plugin 'libgazebo_ros_api_plugin.so' in the gazebo_ros package)");
         return;
     }
+    
+    // SDF params if want to take the parameters about models and joints directly from the sdf file
 
     // if (sdf->HasElement("model1")) {
     //     model1_ = sdf->GetElement("model1")->Get<std::string>();
@@ -208,18 +210,15 @@ bool GazeboRosLinkAttacher::detach(std::string model1, std::string link1, std::s
 }
 
 bool GazeboRosLinkAttacher::detach_existing(std::string model, std::string joint) {
-    // search for the instance of joint and do detach
+    // get the existing joint and do detach
 
-    // if (joint_e){
     me_ = world->ModelByName(model);
     joint_e = me_->GetJoint(joint);
-    // ROS_INFO_STREAM(joint_e);
-    // joint_e = world->ModelByName(model)->GetJoint(joint);
-    joint_e->Detach();
-    return true;
-    // }
-
-    // return false;
+    if(joint_e != NULL){
+        joint_e->Detach();
+        return true;
+    }
+    return false;
 
 }
 
@@ -266,9 +265,8 @@ bool GazeboRosLinkAttacher::detach_callback(gazebo_ros_link_attacher::Attach::Re
 }
 
 bool GazeboRosLinkAttacher::detach_existing_callback(gazebo_ros_link_attacher::Attach::Request& req, gazebo_ros_link_attacher::Attach::Response& res) {
-    // ROS_INFO_STREAM("Received request to detach model: '" << req.model_name_1 << "' using link: '" << req.link_name_1 << "' with model: '" <<
-    // req.model_name_2
-    //                                                       << "' using link: '" << req.link_name_2 << "'");
+    ROS_INFO_STREAM("Received request to detach joint: '" << req.existing_joint << "' of model: '" <<
+    req.model << "'");
     if (!this->detach_existing(req.model, req.existing_joint)) {
         ROS_ERROR_STREAM("Could not make the detach.");
         res.ok = false;
@@ -278,14 +276,6 @@ bool GazeboRosLinkAttacher::detach_existing_callback(gazebo_ros_link_attacher::A
     }
     return true;
 }
-
-
-// void GazeboRosLinkAttacher::onUpdate(const common::UpdateInfo &_info) {
-
-// //   link_->AddRelativeTorque(torque_direction_ * torque_magnitude_);
-
-
-// }
 
 
 }  // namespace gazebo
