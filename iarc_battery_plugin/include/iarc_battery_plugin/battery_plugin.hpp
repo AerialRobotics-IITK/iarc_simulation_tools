@@ -5,10 +5,14 @@
 #include <gazebo/common/common.hh>
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
-#include<std_msgs/Float32.h>
+#include <gazebo/msgs/msgs.hh>
+#include <mav_msgs/Actuators.h>
+#include <std_msgs/Float32.h>
 #include <ros/ros.h>
 #include <string>
 #include <thread>
+
+
 
 namespace gazebo {
 
@@ -21,14 +25,23 @@ public:
 
 private:
     physics::ModelPtr model_;
+    physics::WorldPtr world_;
     sdf::ElementPtr sdf_;
     event::ConnectionPtr updateConnection_;
     ros::NodeHandle *rosnode_;
+    gazebo::transport::NodePtr node_handle_;
+    // gazebo::transport::PublisherPtr motor_speed_pub_;
     ros::Subscriber set_time_limit_;
     ros::Publisher battery_status_;
+    ros::Publisher motor_speed_pub_;
+    common::Time now;
+    mav_msgs::Actuators motor_speeds_;
     std::string namespace_;
+    std::string node_name_;
     std::string topic_name_;
     float time_limit_;
+    int total_motors_;
+    int count_ = 0;
 };
 
 } // namespace gazebo

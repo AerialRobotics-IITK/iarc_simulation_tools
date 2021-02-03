@@ -131,8 +131,10 @@
     <!-- battery_plugin -->
     <plugin name="quadrotor_battery_plugin" filename="libiarc_battery_plugin.so">
       <namespace>quadrotor</namespace>
-      <topic_name>quadrotor/command/motor_speed</topic_name>
+      <topic_name>/quadrotor/command/motor_speed</topic_name>
       <time_limit>9</time_limit>
+      <total_motors>4</total_motors>
+      <node_name>/quadrotor/lee_position_controller_node</node_name>
     </plugin>
 
    <!-- <self_collide>True</self_collide> -->
