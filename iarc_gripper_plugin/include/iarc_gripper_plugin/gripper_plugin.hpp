@@ -5,7 +5,7 @@
 #include <gazebo/common/common.hh>
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
-#include <iarc_gripper_plugin/GripperCmd.h>
+#include <iarc_simulation_msgs/GripperCmd.h>
 #include <ros/ros.h>
 #include <std_srvs/Trigger.h>
 #include <string>
@@ -17,8 +17,8 @@ class GripperPlugin : public ModelPlugin {
 public:
   void Load(physics::ModelPtr parent, sdf::ElementPtr sdf);
   void onUpdate(const common::UpdateInfo &_info);
-  bool serverCallback(iarc_gripper_plugin::GripperCmd::Request &req,
-                      iarc_gripper_plugin::GripperCmd::Response &res);
+  bool serverCallback(iarc_simulation_msgs::GripperCmd::Request &req,
+                      iarc_simulation_msgs::GripperCmd::Response &res);
 
 private:
   physics::ModelPtr model_;

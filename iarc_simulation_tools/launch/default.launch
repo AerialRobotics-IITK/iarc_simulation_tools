@@ -8,7 +8,7 @@
 	<arg name="paused" default="false"/>
 	<arg name="extra_gazebo_args" default=""/>
 
-	<arg name="world_name" default="static_comm_block"/>
+	<arg name="world_name" default="default"/>
 	<arg name="enable_logging" default="false" />
 	<arg name="enable_ground_truth" default="true" />
 	<arg name="log_file" default="$(arg mav_name)" />

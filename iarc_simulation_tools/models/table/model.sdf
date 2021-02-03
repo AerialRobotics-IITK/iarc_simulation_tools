@@ -25,14 +25,14 @@
     </plugin>
     <link name='magnet_1'>
       <inertial>
-        <mass>1</mass>
+        <mass>0.00471</mass>
         <inertia>
-          <ixx>0.145833</ixx>
+          <ixx>0.00000008185</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.145833</iyy>
+          <iyy>0.00000008185</iyy>
           <iyz>0</iyz>
-          <izz>0.125</izz>
+          <izz>0.00000003708</izz>
         </inertia>
         <pose>0 0 0 0 -0 0</pose>
       </inertial>
@@ -70,14 +70,14 @@
     </link>
     <link name='magnet_2'>
       <inertial>
-        <mass>1</mass>
+        <mass>0.00471</mass>
         <inertia>
-          <ixx>0.145833</ixx>
+          <ixx>0.00000008185</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.145833</iyy>
+          <iyy>0.00000008185</iyy>
           <iyz>0</iyz>
-          <izz>0.125</izz>
+          <izz>0.00000003708</izz>
         </inertia>
         <pose>0 0 0 0 -0 0</pose>
       </inertial>
