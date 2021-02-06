@@ -21,14 +21,14 @@
       <visual name='visual'>
         <geometry>
           <mesh>
-            <uri>model://mast/meshes/kshitizzzz.dae</uri>
-            <scale>0.1 0.1 0.1</scale>
+            <uri>model://mast/meshes/textured_visual_mast_finalV9Parivesh.dae</uri>
+            <scale>1 1 1</scale>
           </mesh>
         </geometry>
         <material>
           <shader type='pixel'/>
         </material>
-        <pose frame=''>0 0 0 0 -0 0</pose>
+        <pose frame=''>0.0017 -0.0065 0.0025 0 -0 -1.5708</pose>
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
       </visual>
@@ -38,7 +38,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://mast/meshes/mast_thin_box.dae</uri>
+            <uri>model://mast/meshes/Collision_mast_noBox.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
