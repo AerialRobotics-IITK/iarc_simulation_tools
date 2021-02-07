@@ -1,6 +1,8 @@
-# string model_name_1
-# string link_name_1
-# string model_name_2
-# string link_name_2
+string model_name_1
+string link_name_1
+string model_name_2
+string link_name_2
+string model
+string existing_joint
 ---
 bool ok

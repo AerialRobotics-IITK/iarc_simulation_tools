@@ -16,6 +16,7 @@
 #include "gazebo_ros_link_attacher/Attach.h"
 #include "gazebo_ros_link_attacher/AttachRequest.h"
 #include "gazebo_ros_link_attacher/AttachResponse.h"
+#include <boost/thread/mutex.hpp>
 #include <gazebo/common/Events.hh>
 #include <gazebo/common/Plugin.hh>
 #include <gazebo/common/Time.hh>
@@ -35,12 +36,14 @@ class GazeboRosLinkAttacher : public WorldPlugin {
 
     /// \brief Load the controller
     void Load(physics::WorldPtr _world, sdf::ElementPtr sdf);
-
     /// \brief Attach with a revolute joint
-    bool attach();
+    bool attach(std::string model1, std::string link1, std::string model2, std::string link2);
 
     /// \brief Detach
-    bool detach();
+    bool detach(std::string model1, std::string link1, std::string model2, std::string link2);
+
+    /// \brief Detach a existing joint
+    bool detach_existing(std::string model, std::string joint);
 
     /// \brief Internal representation of a fixed joint
     struct fixedJoint {
@@ -55,20 +58,21 @@ class GazeboRosLinkAttacher : public WorldPlugin {
         physics::JointPtr joint;
     };
 
-    std::string model1_;
-    std::string link1_;
-    std::string model2_;
-    std::string link2_;
-
+    physics::ModelPtr me_;
+    std::string model_e_;
+    std::string joint_e_;
+    physics::JointPtr joint_e;
     bool getJoint(std::string model1, std::string link1, std::string model2, std::string link2, fixedJoint& joint);
 
   private:
     ros::NodeHandle nh_;
     ros::ServiceServer attach_service_;
     ros::ServiceServer detach_service_;
+    ros::ServiceServer detach_existing_service_;
 
     bool attach_callback(gazebo_ros_link_attacher::Attach::Request& req, gazebo_ros_link_attacher::Attach::Response& res);
     bool detach_callback(gazebo_ros_link_attacher::Attach::Request& req, gazebo_ros_link_attacher::Attach::Response& res);
+    bool detach_existing_callback(gazebo_ros_link_attacher::Attach::Request& req, gazebo_ros_link_attacher::Attach::Response& res);
 
     std::vector<fixedJoint> joints;
 
@@ -77,6 +81,8 @@ class GazeboRosLinkAttacher : public WorldPlugin {
 
     /// \brief Pointer to the world.
     physics::WorldPtr world;
+
+    boost::mutex lock_;
 };
 
 }  // namespace gazebo
