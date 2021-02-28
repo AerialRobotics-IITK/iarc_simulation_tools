@@ -1,6 +1,6 @@
 <launch>
   <arg name="mav_name" default="quadrotor"/>
-  <arg name="world_name" default="static_comm_block"/>
+  <arg name="world_name" default="waves_and_table"/>
   <arg name="enable_logging" default="false" />
   <arg name="enable_ground_truth" default="true" />
   <arg name="log_file" default="$(arg mav_name)" />
@@ -42,7 +42,12 @@
       <rosparam command="load" file="$(find iarc_simulation_tools)/resources/rotor_control/$(arg mav_name).yaml" />
       <remap from="odometry" to="odometry_sensor_1/odometry" />
     </node>
-    <node name="hovering_example" pkg="rotors_gazebo" type="hovering_example" output="screen"/>
+    <!-- <node name="hovering_example" pkg="rotors_gazebo" type="hovering_example" output="screen"/> -->
+    <node name="hovering_example" pkg="rotors_gazebo" type="hovering_example" output="screen">
+			<param name="x" value="$(arg start_x)"/>
+			<param name="y" value="$(arg start_y)"/>
+			<param name="z" value="$(arg start_z)"/>
+		</node>
     <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> -->
     <!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" /> -->
   </group>
