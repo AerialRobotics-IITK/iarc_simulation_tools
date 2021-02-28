@@ -92,11 +92,11 @@
                 <updateRate>${frame_rate}</updateRate>
                 <cameraName>camera_${camera_suffix}</cameraName>
                 <horizontal_fov>${fov}</horizontal_fov>
-            <depthNoiseModelName>D435</depthNoiseModelName>
-            <depthNoiseMinDist>0.02</depthNoiseMinDist>
-            <depthNoiseMaxDist>50.0</depthNoiseMaxDist>
-            <D435NoiseSubpixelErr>0.25</D435NoiseSubpixelErr>
-            <D435MaxStdev>3</D435MaxStdev>
+                <depthNoiseModelName>D435</depthNoiseModelName>
+                <depthNoiseMinDist>0.02</depthNoiseMinDist>
+                <depthNoiseMaxDist>50.0</depthNoiseMaxDist>
+                <D435NoiseSubpixelErr>0.25</D435NoiseSubpixelErr>
+                <D435MaxStdev>3</D435MaxStdev>
                 <imageTopicName>camera/image_raw</imageTopicName>
                 <cameraInfoTopicName>camera/camera_info</cameraInfoTopicName>
                 <depthImageTopicName>depth/image_raw</depthImageTopicName>

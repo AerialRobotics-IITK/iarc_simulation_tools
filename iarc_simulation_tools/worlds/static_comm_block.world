@@ -66,7 +66,12 @@
       <uri>model://takeoff_zone</uri>
       <pose>-5 0 0 0 0 0</pose>
     </include>
-
+    
+   <include>
+     <uri>model://quadrotor</uri>
+     <pose>0 0 0 0 0 0</pose>
+   </include>
+ 
     <!-- <include>
       <uri>model://communications_module</uri>
         <pose>4.280454 0.23 1.782488 0.0 0.0 -1.57079632679</pose>
@@ -109,6 +114,25 @@
       <link2>link</link2>
       <model_e>gripper</model_e>
     </plugin>
+    
+    <light name='user_spot_light_0' type='spot'>
+      <pose frame=''>4.5 3 3 5 -0 0</pose>
+      <diffuse>0.5 0.5 0.5 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <direction>0 0 -1</direction>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>0</cast_shadows>
+      <spot>
+        <inner_angle>0.6</inner_angle>
+        <outer_angle>1</outer_angle>
+        <falloff>1</falloff>
+      </spot>
+    </light>
 
   </world>
 </sdf>

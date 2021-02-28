@@ -16,7 +16,7 @@
     <depend>iarc_state_plugins</depend>
     <!-- <depend>iarc_wave_sim_gazebo</depend> -->
     <!-- <depend>iarc_wave_sim_gazebo_plugins</depend> -->
-    <depend>iarc_gripper_plugin</depend>
+    <!-- <depend>iarc_gripper_plugin</depend> -->
 
     <export>
         <gazebo_ros plugin_path="${prefix}/../../lib" gazebo_media_path="${prefix}" />
