@@ -8,16 +8,16 @@
 	<arg name="paused" default="false"/>
 	<arg name="extra_gazebo_args" default=""/>
 
-	<arg name="world_name" default="default"/>
+	<arg name="world_name" default="waves_and_table"/>
 	<arg name="enable_logging" default="false" />
 	<arg name="enable_ground_truth" default="true" />
 	<arg name="log_file" default="$(arg mav_name)" />
 
 	<arg name="start_x" default="-5.0"/>
 	<arg name="start_y" default="0.0"/>
-	<arg name="start_z" default="2.0"/>
-
-	<env name="GAZEBO_MODEL_PATH" value="$(optenv GAZEBO_MODEL_PATH):$(find rotors_gazebo)/models:$(find iarc_simulation_tools)/models"/>
+	<arg name="start_z" default="4.0"/>
+  
+	<env name="GAZEBO_MODEL_PATH" value="$(optenv GAZEBO_MODEL_PATH):$(find rotors_gazebo)/models:$(find iarc_simulation_tools)/models:$(find iarc_wave_sim_gazebo)/models"/>
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">
 		<arg name="world_name" value="$(find iarc_simulation_tools)/worlds/$(arg world_name).world" />
 		<arg name="debug" value="$(arg debug)"/>

@@ -22,6 +22,7 @@
 #include "iarc_wave_sim_gazebo_plugins/Utilities.hh"
 #include "iarc_wave_sim_gazebo_plugins/Wavefield.hh"
 #include "iarc_wave_sim_gazebo_plugins/WavefieldEntity.hh"
+#include "iarc_wave_sim_gazebo_plugins/WavefieldSampler.hh"
 
 #include <gazebo/common/Assert.hh>
 #include <gazebo/physics/physics.hh>
@@ -54,6 +55,10 @@ namespace iarc
   /// \param[in]  _model    The model being processed. 
   /// \param[out] _links    A vector holding a copy of pointers to the the model's links. 
   /// \param[out] _meshes   A vector of vectors containing a surface mesh for each collision in a link.
+
+  /// \brief To specify on which link of model calculate hydrodynamic forces
+  std::string link_name;
+
   void CreateCollisionMeshes(
     physics::ModelPtr _model,
     std::vector<physics::LinkPtr>& _links,
@@ -69,6 +74,7 @@ namespace iarc
     for (auto&& link : _model->GetLinks())
     {
       GZ_ASSERT(link != nullptr, "Link must be valid");
+      if(link->GetName() != link_name) continue;
       _links.push_back(link);
       std::string linkName(link->GetName());
       std::vector<std::shared_ptr<Mesh>> linkMeshes;
@@ -286,6 +292,16 @@ namespace iarc
   /// for each link in a model.
   class HydrodynamicsLinkData
   {
+    /// \brief Destructor.
+    public: virtual ~HydrodynamicsLinkData()
+    {
+      for (auto&& ptr : this->hydrodynamics)
+        ptr.reset();
+      for (auto&& ptr : this->initLinkMeshes)
+        ptr.reset();
+      this->wavefieldSampler.reset();
+    }
+
     /// \brief A Link pointer.
     public: physics::LinkPtr link;
 
@@ -309,6 +325,7 @@ namespace iarc
 
     /// \brief Marker messages for the underwater portion of the mesh.
     public: std::vector<ignition::msgs::Marker> underwaterSurfaceMsgs;
+
   };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -362,6 +379,7 @@ namespace iarc
 
     /// \brief Subscribe to gztopic "~/hydrodynamics".
     public: transport::SubscriberPtr hydroSub;
+
   };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -369,7 +387,17 @@ namespace iarc
 
   HydrodynamicsPlugin::~HydrodynamicsPlugin()
   {
+    // Clean up.
     this->Fini();
+    for (auto&& ptr : this->data->hydroData)
+      ptr.reset();
+    this->data->hydroParams.reset();
+    this->data->wavefield.reset();
+
+    // Reset connections and transport.
+    this->data->updateConnection.reset();
+    this->data->hydroSub.reset();
+    this->data->gzNode->Fini();
   }
 
   HydrodynamicsPlugin::HydrodynamicsPlugin() : 
@@ -405,6 +433,9 @@ namespace iarc
 
     // Wave Model
     this->data->waveModelName = Utilities::SdfParamString(*_sdf, "wave_model", "");
+    link_name = Utilities::SdfParamString(*_sdf, "link_name", "");
+
+    gzmsg << "link_name: " << link_name << std::endl;
 
     // Hydrodynamics parameters
     this->data->hydroParams.reset(new HydrodynamicsParameters());
@@ -471,6 +502,8 @@ namespace iarc
         auto force = ToIgn(hd->hydrodynamics[j]->Force());
         if (force.IsFinite()) 
         {
+          force.X() = 0;
+          force.Y() = 0;
           hd->link->AddForce(force);
         }
 
@@ -478,6 +511,7 @@ namespace iarc
         auto torque = ToIgn(hd->hydrodynamics[j]->Torque());
         if (torque.IsFinite()) 
         {
+          torque.Z() = 0;
           hd->link->AddTorque(torque);
         }
 
@@ -643,8 +677,8 @@ namespace iarc
       ignition::math::Pose3d linkCoMPose = hd->link->WorldCoGPose();
 
       // Water patch grid
-      ignition::math::Box boundingBox = hd->link->CollisionBoundingBox();
-      double patchSize = 1.5 * boundingBox.Size().Length();
+      auto boundingBox = hd->link->CollisionBoundingBox();
+      double patchSize = 2.2 * boundingBox.Size().Length();
       gzmsg << "Water patch size: " << patchSize << std::endl;
       std::shared_ptr<Grid> initWaterPatch(new Grid({patchSize, patchSize}, { 4, 4 }));
 

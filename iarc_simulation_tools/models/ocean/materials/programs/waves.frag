@@ -13,6 +13,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Copyright (c) 2019 Rhys Mainwaring.
+//
+// Modified for use with FFT generated waves:
+// 1. Remove inputs for trochoid waves.
+// 2. The vertex shader forwards: vNormal, vBumpCoord, vEyeVec to the fragment shader. 
+// 3. Replace the rotation matrix with the input normal. 
+
 // Input parameters
 uniform sampler2D bumpMap;
 uniform samplerCube cubeMap;
@@ -22,18 +29,25 @@ uniform float fresnelPower;
 uniform float hdrMultiplier;
 
 // Input computed in vertex shader
-varying mat3 rotMatrix;
-varying vec3 eyeVec;
-varying vec2 bumpCoord;
+varying vec3 vNormal;
+varying vec3 vEyeVec;
+varying vec2 vBumpCoordxy;
+varying vec2 vBumpCoordzw;
+varying vec4 vVertex;
 
 void main(void)
 {
+    // osgOcean noise normal calculation...
+    vec3 noiseNormal = vec3(texture2D(bumpMap, vBumpCoordxy) * 2.0 - 1.0);
+    noiseNormal += vec3(texture2D(bumpMap, vBumpCoordzw) * 2.0 - 1.0);
+
     // Apply bump mapping to normal vector to make waves look more detailed:
-    vec4 bump = texture2D(bumpMap, bumpCoord)*2.0 - 1.0;
-    vec3 N = normalize(rotMatrix * bump.xyz);
+    // vec4 bump = texture2D(bumpMap, vBumpCoord) * 2.0 - 1.0;
+    // vec3 N = vNormal;    
+    vec3 N = normalize(vNormal + noiseNormal);
 
     // Reflected ray:
-    vec3 E = normalize(eyeVec);
+    vec3 E = normalize(vEyeVec);
     vec3 R = reflect(E, N);
     // Gazebo requires rotated cube map lookup.
     R = vec3(R.x, R.z, R.y);
@@ -41,10 +55,10 @@ void main(void)
     // Get environment color of reflected ray:
     vec4 envColor = textureCube(cubeMap, R, 0.0);
 
-	// Cheap hdr effect:
-    envColor.rgb *= (envColor.r+envColor.g+envColor.b)*hdrMultiplier;
+    // Cheap hdr effect:
+    envColor.rgb *= (envColor.r + envColor.g + envColor.b) * hdrMultiplier;
 
-	// Compute refraction ratio (Fresnel):
+    // Compute refraction ratio (Fresnel):
     float facing = 1.0 - dot(-E, N);
     float refractionRatio = clamp(pow(facing, fresnelPower), 0.0, 1.0);
 
@@ -53,5 +67,7 @@ void main(void)
 
     // Perform linear interpolation between reflection and refraction.
     vec4 color = mix(waterColor, envColor, refractionRatio);
-    gl_FragColor = vec4(color.xyz, 0.9);
+    vec4 final_color = vec4(color.xyz, 0.9);
+
+    gl_FragColor = final_color;
 }

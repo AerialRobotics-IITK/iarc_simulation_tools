@@ -1,5 +1,5 @@
 <sdf version='1.6'>
-  <world name='default'>
+  <world name='static_comm_block'>
     <plugin name="ros_interface_plugin" filename="librotors_gazebo_ros_interface_plugin.so"/>
     
     <gravity>0 0 -9.8</gravity>
@@ -51,7 +51,7 @@
       <name>pylon_far</name>
       <pose>0 408.66 1.2192 0 -0 0</pose>
     </include>
-
+   
     <include>
       <uri>model://table_with_comm_block</uri>
       <pose>4.2756 0.063046 0.375 0 -0 3.14</pose>

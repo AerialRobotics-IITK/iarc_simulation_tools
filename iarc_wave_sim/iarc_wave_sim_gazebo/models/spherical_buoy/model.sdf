@@ -21,7 +21,7 @@
 
     <plugin name="hydrodynamics" filename="libHydrodynamicsPlugin.so">
       <!-- Wave Model -->
-      <wave_model>ocean_waves</wave_model>
+      <wave_model>ocean</wave_model>
 
       <!-- Hydrodynamics -->
       <damping_on>true</damping_on>
@@ -77,14 +77,14 @@
     <!-- Chain -->
     <!-- <include>
       <pose>0 0 -0.25 0 0 0</pose>
-      <uri>model://iarc_chain</uri>
-      <name>iarc_chain_0</name>
+      <uri>model://asv_chain</uri>
+      <name>asv_chain_0</name>
     </include>
     
-    <joint type="ball" name="iarc_chain_link01_joint">
+    <joint type="ball" name="asv_chain_link01_joint">
       <pose>0.05 0 0 0 0 0</pose>
       <parent>base_link</parent>
-      <child>iarc_chain_0::base_link</child>
+      <child>asv_chain_0::base_link</child>
     </joint> -->
 
 

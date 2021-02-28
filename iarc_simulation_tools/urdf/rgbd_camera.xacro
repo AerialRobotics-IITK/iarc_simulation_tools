@@ -46,6 +46,9 @@
             <limit upper="0" lower="0" effort="0" velocity="0" />
         </joint>
 
+	<!-- <xacro:include filename="$(find iarc_simulation_tools)/models/ocean_waves/model.xacro"/> -->
+    	<!-- <xacro:ocean_waves/> -->
+
         <!-- Call rgb sensor macro-->
         <!-- RGB sensor has "unlimited ranges"-->
         <xacro:camera_macro

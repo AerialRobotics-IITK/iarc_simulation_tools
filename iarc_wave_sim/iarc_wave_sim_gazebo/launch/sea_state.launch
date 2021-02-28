@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+	<node name="iarc_wave_sim_gazebo_sea_state_node" pkg="iarc_wave_sim_gazebo" type="iarc_wave_sim_gazebo_sea_state_node" output="screen" >
+            <remap from="sea_state" to="/sea_state" />
+            <remap from="sea_direction" to="/sea_direction" />
+      </node>
+</launch>
